@@ -6,11 +6,11 @@
 
 ## À propos de ce document {-}
 
-Ce document est la version 2024 du cours de Data Mining dispensé aux étudiants de deuxième année de l’option Data du master MECI parcours PISE et CCESE. Ce cours est partagé avec Claude Grasland, dont vous trouverez la partie à l’adresse suivante : https://claudegrasland.github.io/datamining2024/.
+Ce document est la version 2025 du cours de Data Mining dispensé aux étudiants de deuxième année de l’option Data du master MECI parcours PISE et CCESE. Ce cours est partagé avec Claude Grasland, dont vous trouverez la partie à l’adresse suivante : https://claudegrasland.github.io/datamining2025/.
 
 Ce document est régulièrement corrigé et mis à jour. La version de référence est disponible en ligne à l’adresse suivante :
 
-- [https://github.com/Camille-Sisi/Data-Mining-2024](https://github.com/Camille-Sisi/Data-Mining-2024).
+- [https://github.com/Camille-Sisi/Data-Mining-2025](https://github.com/Camille-Sisi/Data-Mining-2025).
 
 Pour toute suggestion ou correction, n'hésitez pas à me contacter [par mail](mailto:camille.signoretto@u-paris.fr).
 

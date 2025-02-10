@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>DATA MINING</title>
   <meta name="description" content="Titre du cours" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="DATA MINING" />
   <meta property="og:type" content="book" />
@@ -51,82 +51,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    background-color: #ffffff;
-    color: #a0a0a0;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-div.sourceCode
-  { color: #1f1c1b; background-color: #ffffff; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span { color: #1f1c1b; } /* Normal */
-code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-code span.an { color: #ca60ca; } /* Annotation */
-code span.at { color: #0057ae; } /* Attribute */
-code span.bn { color: #b08000; } /* BaseN */
-code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #924c9d; } /* Char */
-code span.cn { color: #aa5500; } /* Constant */
-code span.co { color: #898887; } /* Comment */
-code span.cv { color: #0095ff; } /* CommentVar */
-code span.do { color: #607880; } /* Documentation */
-code span.dt { color: #0057ae; } /* DataType */
-code span.dv { color: #b08000; } /* DecVal */
-code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-code span.fl { color: #b08000; } /* Float */
-code span.fu { color: #644a9b; } /* Function */
-code span.im { color: #ff5500; } /* Import */
-code span.in { color: #b08000; } /* Information */
-code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-code span.op { color: #1f1c1b; } /* Operator */
-code span.ot { color: #006e28; } /* Other */
-code span.pp { color: #006e28; } /* Preprocessor */
-code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #ff5500; } /* SpecialString */
-code span.st { color: #bf0303; } /* String */
-code span.va { color: #0057ae; } /* Variable */
-code span.vs { color: #bf0303; } /* VerbatimString */
-code span.wa { color: #bf0303; } /* Warning */
-</style>
 
 <style type="text/css">
   
@@ -156,136 +82,6 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html#remerciements"><i class="fa fa-check"></i>Remerciements</a></li>
 <li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html#licence"><i class="fa fa-check"></i>Licence</a></li>
 </ul></li>
-<li class="part"><span><b>Séance 1 : Data Wrangling</b></span></li>
-<li class="chapter" data-level="1" data-path="01-Base-de-donnees.html"><a href="01-Base-de-donnees.html"><i class="fa fa-check"></i><b>1</b> Récupération de la base de données</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="01-Base-de-donnees.html"><a href="01-Base-de-donnees.html#les-données-du-recensement-de-la-population-rp"><i class="fa fa-check"></i><b>1.1</b> Les données du Recensement de la Population (RP)</a></li>
-<li class="chapter" data-level="1.2" data-path="01-Base-de-donnees.html"><a href="01-Base-de-donnees.html#quelles-informations-intéressantes-dans-cette-base"><i class="fa fa-check"></i><b>1.2</b> Quelles informations intéressantes dans cette base ?</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="02-Manipulation-base.html"><a href="02-Manipulation-base.html"><i class="fa fa-check"></i><b>2</b> Manipulation de la base</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="02-Manipulation-base.html"><a href="02-Manipulation-base.html#format-des-données---wide-ou-long"><i class="fa fa-check"></i><b>2.1</b> Format des données - WIDE ou LONG</a></li>
-<li class="chapter" data-level="2.2" data-path="02-Manipulation-base.html"><a href="02-Manipulation-base.html#sélectionner-un-champ-réduit-de-la-base-séparer-les-données"><i class="fa fa-check"></i><b>2.2</b> Sélectionner un champ réduit de la base, séparer les données</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="03-Manipulation-variables.html"><a href="03-Manipulation-variables.html"><i class="fa fa-check"></i><b>3</b> Manipulation des variables</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="03-Manipulation-variables.html"><a href="03-Manipulation-variables.html#manipulation-des-variables-qualitatives"><i class="fa fa-check"></i><b>3.1</b> Manipulation des variables qualitatives</a></li>
-<li class="chapter" data-level="3.2" data-path="03-Manipulation-variables.html"><a href="03-Manipulation-variables.html#manipulation-des-variables-quantitatives"><i class="fa fa-check"></i><b>3.2</b> Manipulation des variables quantitatives</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="03-Manipulation-variables.html"><a href="03-Manipulation-variables.html#détecter-et-visualiser-les-valeurs-manquantes"><i class="fa fa-check"></i><b>3.2.1</b> Détecter et “visualiser” les valeurs manquantes</a></li>
-<li class="chapter" data-level="3.2.2" data-path="03-Manipulation-variables.html"><a href="03-Manipulation-variables.html#gérer-les-valeurs-manquantes"><i class="fa fa-check"></i><b>3.2.2</b> Gérer les valeurs manquantes</a></li>
-<li class="chapter" data-level="3.2.3" data-path="03-Manipulation-variables.html"><a href="03-Manipulation-variables.html#détecter-et-visualiser-les-valeurs-aberrantes"><i class="fa fa-check"></i><b>3.2.3</b> Détecter et “visualiser” les valeurs aberrantes</a></li>
-<li class="chapter" data-level="3.2.4" data-path="03-Manipulation-variables.html"><a href="03-Manipulation-variables.html#découper-en-classes-une-variable-quantitative"><i class="fa fa-check"></i><b>3.2.4</b> Découper en classes une variable quantitative</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="04-Récapitulatif.html"><a href="04-Récapitulatif.html"><i class="fa fa-check"></i><b>4</b> Récapitulatig séance 1 - Data Wrangling</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="04-Récapitulatif.html"><a href="04-Récapitulatif.html#ce-quon-a-appris"><i class="fa fa-check"></i><b>4.1</b> Ce qu’on a appris</a></li>
-<li class="chapter" data-level="4.2" data-path="04-Récapitulatif.html"><a href="04-Récapitulatif.html#enregistrement-des-tables"><i class="fa fa-check"></i><b>4.2</b> Enregistrement des tables</a></li>
-</ul></li>
-<li class="part"><span><b>Séance 2 : Data Mining - Analyse descriptive</b></span></li>
-<li class="chapter" data-level="5" data-path="05-Questions-fouille-donnees.html"><a href="05-Questions-fouille-donnees.html"><i class="fa fa-check"></i><b>5</b> Quelles questions intéressantes pour une “fouille de données” sur cette base ?</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="05-Questions-fouille-donnees.html"><a href="05-Questions-fouille-donnees.html#caractéristiques-de-la-population-résidant-à-paris"><i class="fa fa-check"></i><b>5.1</b> Caractéristiques de la population résidant à Paris</a></li>
-<li class="chapter" data-level="5.2" data-path="05-Questions-fouille-donnees.html"><a href="05-Questions-fouille-donnees.html#caractéristiques-de-la-population-active-résidant-à-paris"><i class="fa fa-check"></i><b>5.2</b> Caractéristiques de la population active résidant à Paris</a></li>
-<li class="chapter" data-level="5.3" data-path="05-Questions-fouille-donnees.html"><a href="05-Questions-fouille-donnees.html#caractéristiques-des-logements-parisiens"><i class="fa fa-check"></i><b>5.3</b> Caractéristiques des logements parisiens</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="06-Fonctions.html"><a href="06-Fonctions.html"><i class="fa fa-check"></i><b>6</b> Systématiser nos procédures : construire une fonction</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="06-Fonctions.html"><a href="06-Fonctions.html#principes-généraux-dune-fonction"><i class="fa fa-check"></i><b>6.1</b> Principes généraux d’une fonction</a></li>
-<li class="chapter" data-level="6.2" data-path="06-Fonctions.html"><a href="06-Fonctions.html#exemples-de-fonctions"><i class="fa fa-check"></i><b>6.2</b> Exemples de fonctions</a></li>
-</ul></li>
-<li class="part"><span><b>Séance 3 : Data Mining - Data Visualization</b></span></li>
-<li class="chapter" data-level="7" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html"><i class="fa fa-check"></i><b>7</b> Data Visualization et Ggplot2 : aspects théoriques</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#présentation-générale-de-ggplot2"><i class="fa fa-check"></i><b>7.1</b> Présentation générale de Ggplot2</a>
-<ul>
-<li class="chapter" data-level="7.1.1" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#les-aesthetics-ou-arguments-esthétiques"><i class="fa fa-check"></i><b>7.1.1</b> Les “aesthetics” ou arguments esthétiques</a></li>
-<li class="chapter" data-level="7.1.2" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#les-géométries"><i class="fa fa-check"></i><b>7.1.2</b> Les géométries</a></li>
-<li class="chapter" data-level="7.1.3" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#les-facettes"><i class="fa fa-check"></i><b>7.1.3</b> Les facettes</a></li>
-<li class="chapter" data-level="7.1.4" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#les-statistiques"><i class="fa fa-check"></i><b>7.1.4</b> Les statistiques</a></li>
-<li class="chapter" data-level="7.1.5" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#les-coordonnées"><i class="fa fa-check"></i><b>7.1.5</b> Les coordonnées</a></li>
-<li class="chapter" data-level="7.1.6" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#les-thèmes"><i class="fa fa-check"></i><b>7.1.6</b> Les thèmes</a></li>
-<li class="chapter" data-level="7.1.7" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#les-autres-options-graphiques-titres-échelles-des-axes-etc."><i class="fa fa-check"></i><b>7.1.7</b> Les autres options graphiques : titres, échelles des axes, etc.</a></li>
-<li class="chapter" data-level="7.1.8" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#code-minimal"><i class="fa fa-check"></i><b>7.1.8</b> Code minimal</a></li>
-<li class="chapter" data-level="7.1.9" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#liens-utiles-pour-aller-plus-loin"><i class="fa fa-check"></i><b>7.1.9</b> Liens utiles pour aller plus loin</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="07-Ggplot-theorique.html"><a href="07-Ggplot-theorique.html#les-grands-principes-de-data-visualization"><i class="fa fa-check"></i><b>7.2</b> Les grands principes de data visualization</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="08-Ggplot-pratique.html"><a href="08-Ggplot-pratique.html"><i class="fa fa-check"></i><b>8</b> Data Mining et Data Visualization en pratique</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="08-Ggplot-pratique.html"><a href="08-Ggplot-pratique.html#exemple-de-la-construction-dun-graphique-pas-à-pas"><i class="fa fa-check"></i><b>8.1</b> Exemple de la construction d’un graphique pas à pas</a></li>
-<li class="chapter" data-level="8.2" data-path="08-Ggplot-pratique.html"><a href="08-Ggplot-pratique.html#dautres-exemples-à-travers-des-exercices"><i class="fa fa-check"></i><b>8.2</b> D’autres exemples à travers des exercices</a>
-<ul>
-<li class="chapter" data-level="8.2.1" data-path="08-Ggplot-pratique.html"><a href="08-Ggplot-pratique.html#distribution-du-prix-au-m2-pour-les-appartements-parisiens-selon-lannée"><i class="fa fa-check"></i><b>8.2.1</b> Distribution du prix au m2 pour les appartements parisiens, selon l’année</a></li>
-<li class="chapter" data-level="8.2.2" data-path="08-Ggplot-pratique.html"><a href="08-Ggplot-pratique.html#comparaison-des-montants-moyen-et-médian-du-prix-au-m2-par-arrondissement-de-paris"><i class="fa fa-check"></i><b>8.2.2</b> Comparaison des montants moyen et médian du prix au m2, par arrondissement de Paris</a></li>
-<li class="chapter" data-level="8.2.3" data-path="08-Ggplot-pratique.html"><a href="08-Ggplot-pratique.html#evolution-du-prix-médian-au-m2-des-ventes-dappartements-à-paris"><i class="fa fa-check"></i><b>8.2.3</b> Evolution du prix médian au m2 des ventes d’appartements à Paris</a></li>
-<li class="chapter" data-level="8.2.4" data-path="08-Ggplot-pratique.html"><a href="08-Ggplot-pratique.html#top-5-du-prix-au-m2-des-ventes-dappartements-selon-les-arrondissements"><i class="fa fa-check"></i><b>8.2.4</b> Top 5 du prix au m2 des ventes d’appartements selon les arrondissements</a></li>
-<li class="chapter" data-level="8.2.5" data-path="08-Ggplot-pratique.html"><a href="08-Ggplot-pratique.html#à-vous-de-jouer"><i class="fa fa-check"></i><b>8.2.5</b> À vous de “jouer” !</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>Séances 4 et 5 : Data Visualization - Introduction à ShinyApp</b></span></li>
-<li class="chapter" data-level="9" data-path="09-Intro-a-Shiny-theorique.html"><a href="09-Intro-a-Shiny-theorique.html"><i class="fa fa-check"></i><b>9</b> Les applications interactives avec Shiny App</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="09-Intro-a-Shiny-theorique.html"><a href="09-Intro-a-Shiny-theorique.html#la-structure-générale-dune-application-shiny"><i class="fa fa-check"></i><b>9.1</b> La structure générale d’une application Shiny</a>
-<ul>
-<li class="chapter" data-level="9.1.1" data-path="09-Intro-a-Shiny-theorique.html"><a href="09-Intro-a-Shiny-theorique.html#la-partie-ui"><i class="fa fa-check"></i><b>9.1.1</b> La partie “UI”</a></li>
-<li class="chapter" data-level="9.1.2" data-path="09-Intro-a-Shiny-theorique.html"><a href="09-Intro-a-Shiny-theorique.html#la-partie-server"><i class="fa fa-check"></i><b>9.1.2</b> La partie “Server”</a></li>
-</ul></li>
-<li class="chapter" data-level="9.2" data-path="09-Intro-a-Shiny-theorique.html"><a href="09-Intro-a-Shiny-theorique.html#la-réactivité"><i class="fa fa-check"></i><b>9.2</b> La réactivité</a></li>
-<li class="chapter" data-level="9.3" data-path="09-Intro-a-Shiny-theorique.html"><a href="09-Intro-a-Shiny-theorique.html#un-exemple-avec-le-code-du-script-par-défaut"><i class="fa fa-check"></i><b>9.3</b> Un exemple avec le code du script par défaut</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="10-Intro-a-Shiny-exemples.html"><a href="10-Intro-a-Shiny-exemples.html"><i class="fa fa-check"></i><b>10</b> La création d’une application Shiny “pas à pas” avec l’une de nos bases de données</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="10-Intro-a-Shiny-exemples.html"><a href="10-Intro-a-Shiny-exemples.html#application-vide"><i class="fa fa-check"></i><b>10.1</b> Application vide</a></li>
-<li class="chapter" data-level="10.2" data-path="10-Intro-a-Shiny-exemples.html"><a href="10-Intro-a-Shiny-exemples.html#ajout-dun-titre-et-dun-widget"><i class="fa fa-check"></i><b>10.2</b> Ajout d’un titre et d’un widget</a></li>
-<li class="chapter" data-level="10.3" data-path="10-Intro-a-Shiny-exemples.html"><a href="10-Intro-a-Shiny-exemples.html#ajout-dun-graphique"><i class="fa fa-check"></i><b>10.3</b> Ajout d’un graphique</a></li>
-<li class="chapter" data-level="10.4" data-path="10-Intro-a-Shiny-exemples.html"><a href="10-Intro-a-Shiny-exemples.html#modification-du-graphique-filtrer-selon-une-variable"><i class="fa fa-check"></i><b>10.4</b> Modification du graphique : filtrer selon une variable</a></li>
-<li class="chapter" data-level="10.5" data-path="10-Intro-a-Shiny-exemples.html"><a href="10-Intro-a-Shiny-exemples.html#modification-du-graphique-selon-une-variable-au-choix-parmi-deux"><i class="fa fa-check"></i><b>10.5</b> Modification du graphique : selon une variable au choix parmi deux</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="10-Intro-a-Shiny-exemples.html"><a href="10-Intro-a-Shiny-exemples.html#applications-plus-poussées-sur-shiny"><i class="fa fa-check"></i><b>11</b> Applications plus poussées sur Shiny</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="10-Intro-a-Shiny-exemples.html"><a href="10-Intro-a-Shiny-exemples.html#application-avec-un-tableau-et-un-graphique-sur-une-autre-base-de-données"><i class="fa fa-check"></i><b>11.1</b> Application avec un tableau et un graphique sur une autre base de données</a></li>
-<li class="chapter" data-level="11.2" data-path="10-Intro-a-Shiny-exemples.html"><a href="10-Intro-a-Shiny-exemples.html#introduction-dune-réactivité-appliquée-à-la-table-de-données"><i class="fa fa-check"></i><b>11.2</b> Introduction d’une réactivité appliquée à la table de données</a></li>
-<li class="chapter" data-level="11.3" data-path="10-Intro-a-Shiny-exemples.html"><a href="10-Intro-a-Shiny-exemples.html#introduction-dune-réactivité-sur-les-inputs-contexte-réactif"><i class="fa fa-check"></i><b>11.3</b> Introduction d’une réactivité sur les inputs (contexte réactif)</a></li>
-</ul></li>
-<li class="part"><span><b>Séance 6 : Data Mining - Clustering</b></span></li>
-<li class="chapter" data-level="12" data-path="11-Clustering-theorique.html"><a href="11-Clustering-theorique.html"><i class="fa fa-check"></i><b>12</b> Clustering : aspects théoriques</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="11-Clustering-theorique.html"><a href="11-Clustering-theorique.html#la-classification-ascendante-hiérarchique-cah"><i class="fa fa-check"></i><b>12.1</b> La classification ascendante hiérarchique (CAH)</a></li>
-<li class="chapter" data-level="12.2" data-path="11-Clustering-theorique.html"><a href="11-Clustering-theorique.html#la-méthode-des-centres-mobiles-et-sa-variante-les-k-means"><i class="fa fa-check"></i><b>12.2</b> La méthode des centres mobiles et sa variante, <em>les K-means</em></a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="12-Clustering-application.html"><a href="12-Clustering-application.html"><i class="fa fa-check"></i><b>13</b> Clustering : application sur le RP 2019</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="12-Clustering-application.html"><a href="12-Clustering-application.html#choix-des-variables-et-préparation-du-tableau-final"><i class="fa fa-check"></i><b>13.1</b> Choix des variables et préparation du tableau final</a>
-<ul>
-<li class="chapter" data-level="13.1.1" data-path="12-Clustering-application.html"><a href="12-Clustering-application.html#variable-socio-professionnelle-caractérisant-la-personne-de-référence-du-ménage"><i class="fa fa-check"></i><b>13.1.1</b> Variable socio-professionnelle caractérisant la personne de référence du ménage</a></li>
-<li class="chapter" data-level="13.1.2" data-path="12-Clustering-application.html"><a href="12-Clustering-application.html#création-du-tableau-de-contingence"><i class="fa fa-check"></i><b>13.1.2</b> Création du tableau de contingence</a></li>
-</ul></li>
-<li class="chapter" data-level="13.2" data-path="12-Clustering-application.html"><a href="12-Clustering-application.html#la-méthode-de-la-cah-appliquée-à-nos-données"><i class="fa fa-check"></i><b>13.2</b> La méthode de la CAH appliquée à nos données</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="12-Clustering-application.html"><a href="12-Clustering-application.html#constitution-des-classes"><i class="fa fa-check"></i><b>13.2.1</b> Constitution des classes</a></li>
-<li class="chapter" data-level="13.2.2" data-path="12-Clustering-application.html"><a href="12-Clustering-application.html#visualisation-sur-la-carte-des-communes-et-départements"><i class="fa fa-check"></i><b>13.2.2</b> Visualisation sur la carte des communes et départements</a></li>
-<li class="chapter" data-level="13.2.3" data-path="12-Clustering-application.html"><a href="12-Clustering-application.html#interprétation"><i class="fa fa-check"></i><b>13.2.3</b> Interprétation</a></li>
-</ul></li>
-<li class="chapter" data-level="13.3" data-path="12-Clustering-application.html"><a href="12-Clustering-application.html#la-méthode-des-k-means-appliquée-à-nos-données"><i class="fa fa-check"></i><b>13.3</b> La méthode des <em>k-means</em> appliquée à nos données</a></li>
-</ul></li>
-<li class="part"><span><b>Séance 7 : Régressions/Prédictions</b></span></li>
-<li class="chapter" data-level="14" data-path="13-Modeles-regression.html"><a href="13-Modeles-regression.html"><i class="fa fa-check"></i><b>14</b> Modèles de régression : application sur le RP 2019</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="13-Modeles-regression.html"><a href="13-Modeles-regression.html#la-création-des-bases-dapprentissage-et-de-test"><i class="fa fa-check"></i><b>14.1</b> La création des bases d’apprentissage et de test</a></li>
-<li class="chapter" data-level="14.2" data-path="13-Modeles-regression.html"><a href="13-Modeles-regression.html#un-modèle-à-visée-principale-explicative-la-régression-logistique"><i class="fa fa-check"></i><b>14.2</b> Un modèle à visée principale explicative : la régression logistique</a>
-<ul>
-<li class="chapter" data-level="14.2.1" data-path="13-Modeles-regression.html"><a href="13-Modeles-regression.html#le-modèle-initial"><i class="fa fa-check"></i><b>14.2.1</b> Le modèle initial</a></li>
-<li class="chapter" data-level="14.2.2" data-path="13-Modeles-regression.html"><a href="13-Modeles-regression.html#lévaluation-du-modèle-et-la-recherche-éventuelle-dun-meilleur-modèle"><i class="fa fa-check"></i><b>14.2.2</b> L’évaluation du modèle et la recherche éventuelle d’un “meilleur” modèle</a></li>
-<li class="chapter" data-level="14.2.3" data-path="13-Modeles-regression.html"><a href="13-Modeles-regression.html#le-modèle-final-et-linterprétation-des-résultats"><i class="fa fa-check"></i><b>14.2.3</b> Le modèle final et l’interprétation des résultats</a></li>
-</ul></li>
-<li class="chapter" data-level="14.3" data-path="13-Modeles-regression.html"><a href="13-Modeles-regression.html#un-modèle-à-visée-principale-prédictive-labre-de-décision"><i class="fa fa-check"></i><b>14.3</b> Un modèle à visée principale prédictive : l’abre de décision</a>
-<ul>
-<li class="chapter" data-level="14.3.1" data-path="13-Modeles-regression.html"><a href="13-Modeles-regression.html#le-modèle-initial-1"><i class="fa fa-check"></i><b>14.3.1</b> Le modèle initial</a></li>
-<li class="chapter" data-level="14.3.2" data-path="13-Modeles-regression.html"><a href="13-Modeles-regression.html#lévaluation-du-modèle"><i class="fa fa-check"></i><b>14.3.2</b> L’évaluation du modèle</a></li>
-</ul></li>
-</ul></li>
 </ul>
 
       </nav>
@@ -307,7 +103,7 @@ code span.wa { color: #bf0303; } /* Warning */
 <h1 class="title">DATA MINING</h1>
 <h2 class="subtitle"><em>Master Meci - Parcours PISE et CCESE - Option Data</em></h2>
 <p class="author"><em>Camille Signoretto, Maîtresse de conférences en économie, Université Paris Cité</em></p>
-<p class="date"><em>Février-juin 2024</em></p>
+<p class="date"><em>Février-juin 2025</em></p>
 </div>
 
 <script src="js/tidyverse.js"></script>
@@ -372,20 +168,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
