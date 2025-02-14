@@ -1,8 +1,8 @@
 book_filename: "Data Mining"
-repo: https://github.com/Camille-Sisi/Data-Mining-2024
+repo: https://github.com/Camille-Sisi/Data-Mining-2025
 delete_merged_file: true
 output_dir: "docs"
-edit: https://github.com/Camille-Sisi/Data-Mining-2024/master/%s
+edit: https://github.com/Camille-Sisi/Data-Mining-2025/master/%s
 language:
   ui:
     chapter_name: "Section "

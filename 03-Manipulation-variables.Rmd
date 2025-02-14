@@ -1,0 +1,182 @@
+
+# Manipulation des variables {#c03-Manipulation-variables}
+
+<div align="justify">
+
+Dans la manipulation des variables, l'une des premières choses à réaliser est de les définir dans le bon format, variables quantitatives/continues ou variables qualitatives/catégorielles.
+
+On l'a vu dans la section précédente, certaines variables sont encore codées comme des nombres entiers ("integer") alors que ce sont des variables catégorielles. On va donc corriger cela en regardant d'abord quelles variables sont concernées, en les sélectionnant avec `select_if()` ou `select(where())` :
+
+```{r}
+RP_final %>% 
+  select_if(is.numeric) %>%
+  names()
+```
+
+A part les variables d'âge `AGED` et `AGEREV`, de date de naissance `ANAI` et de pondération `IPONDI`, toutes les autres variables devraient en format "factor". Deux façons de les transformer, soit vous changer les variables une à une en utilisant les fonctions `mutate()` et `as.factor()` ; soit vous créer une liste avec le nom des variables dont le format doit être transformer et vous utilisez la fonction `lapply()` en l'appliquant à cette liste de variables :
+```{r}
+# 1ère méthode
+# RP_final <- RP_final %>% mutate(AGER20=as.factor(AGER20),
+#                                 AGEREVQ=as.factor(AGEREVQ),
+#                                 CATPC=as.factor(CATPC),
+#                                 COUPLE=as.factor(COUPLE),
+#                                 CS1=as.factor(CS1),
+#                                 DEPT=as.factor(DEPT),
+#                                 ETUD=as.factor(ETUD),
+#                                 IMMI=as.factor(IMMI),
+#                                 INAI=as.factor(INAI),
+#                                 INATC=as.factor(INATC),
+#                                 MOCO=as.factor(MOCO),
+#                                 MODV=as.factor(MODV),
+#                                 NAIDT=as.factor(NAIDT),
+#                                 ORIDT=as.factor(ORIDT),
+#                                 REGION=as.factor(REGION),
+#                                 SEXE=as.factor(SEXE),
+#                                 STAT_CONJ=as.factor(STAT_CONJ),
+#                                 TACT=as.factor(TACT),
+#                                 TACTD16=as.factor(TACTD16))
+
+# 2nde méthode
+list_var <- c("AGER20", "AGEREVQ", "CATPC", "COUPLE", "CS1", "DEPT", "ETUD", "IMMI", "INAI", "INATC",
+              "MOCO", "MODV", "NAIDT", "ORIDT", "REGION", "SEXE", "STAT_CONJ", "TACT", "TACTD16")
+RP_final[, list_var] <- lapply(RP_final[, list_var], factor)
+```
+
+On peut ensuite vérifier que ces variables sont bien des variables facteurs en regardant combien de modalités elles ont et quelles sont-elles. Par exemple, pour la variable `CATPC` :
+
+```{r}
+nlevels(RP_final$CATPC)
+levels(RP_final$CATPC)
+```
+
+Si nous n'avions pas mis l'option transformant les variables caractères en variables facteurs lors du chargement des données, nous pourrions le faire maintenant en utilisant la fonction `mutate_if` ou la combinaison de `mutate` et `across(where())` comme ceci `RP %>% mutate_if(is.character, as.factor)` ou `RP %>% mutate(across(where(is.character), as.factor))`.
+
+On peut enfin vérifier quelles sont les variables numériques qui restent :
+
+```{r}
+# RP_final %>% select_if(is.numeric) %>% head() %>% gt()
+RP_final %>% select(where(is.numeric)) %>% head() %>% gt()
+
+```
+
+Plus généralement, il est souvent d'usage d'utiliser la fonction `summary()` pour donner un aperçu de l'ensemble des variables, soit de leur distribution pour les variables quantitatives, soit de leur répartition par modalités pour les variables qualitatives ; la fonction permet également de nous donner l'information sur l'existence et le nombre de valeurs manquantes pour chaque variable.
+
+```{r}
+summary(RP_final)
+```
+
+Mais attention, le problème ici est que cela nous donne des fréquences non pondérées pour l'ensemble de nos variables qualitatives, donc qui n'ont finalement pas grand sens.
+
+## Manipulation des variables qualitatives
+
+On peut d'abord travailler sur les variables qualitatives qui correspondent ici à l'essentiel de nos variables.
+
+Comme on le sait, on peut regarder les différents niveaux pour chacune d'entre elles, avec la fonction `levels()`. Si on veut appliquer la fonction à l'ensemble de nos variables facteurs sans avoir donc à les indiquer une par une, on peut avoir recours à la fonction `sapply()` qui permet d'appliquer la fonction indiquée entre parenthèses (ici `levels()`) à tous les éléments de notre table de données.
+
+```{r eval=FALSE}
+# Pour info, ici cela s'écrirait : 
+RP_final %>% select(where(is.factor)) %>% sapply(levels)
+# on peut même se passer de la sélection sur les variables :
+# RP %>% sapply(levels)
+```
+
+On peut ensuite vouloir retravailler les modalités de ces variables, car par exemple les modalités ne sont pas parlantes puisque nommées par des codes chiffres, ou parce que les modalités sont trop nombreuses et qu'on souhaiterait les rassembler pour une analyse ultérieure.
+
+Par exemple, si l'on veut étudier la répartition de la population francilienne selon leur statut d'activité, on peut utiliser la variable `TACT`:
+
+```{r}
+levels(RP_final$TACT)
+```
+
+Mais le moins qu'on puisse dire c'est que les 7 modalités de cette variable ne sont pas parlantes, on peut donc recoder les modalités de cette variable dans une étape préalable *DATA* comme ici ; on pourra bien sûr enchaîner plus tard les lignes de codes et réaliser cette étape dans une même procédure avec le tableau ou le graphique représentant cette variable.\
+Commençons ici par l'étape *DATA* :
+
+```{r}
+# On cherche à quoi correspondent les modalités chiffrées de cette variable
+# dans le fichier "meta"
+meta %>% filter(COD_VAR=="TACT") %>% select(COD_MOD, LIB_MOD)
+```
+
+```{r}
+# On recode à partir de ces libellés, tout en regroupant certaines modalités
+# qui sont très spécifiques et nous intéressent moins :
+RP_final <- RP_final %>% mutate(TACT_moda = as.factor(
+  case_when(TACT == "11" ~ "Actifs en emploi",
+            TACT == "12" ~ "Chômeurs",
+            TACT == "21" ~ "Retraités",
+            TACT %in% c("22","23","24","25") ~ "Autres inactifs")))
+levels(RP_final$TACT_moda)
+```
+
+Si l'on veut changer l'ordre des modalités, qui s'afficheront comme ci-dessus dans un tableau ou un graphique, on peut utiliser la fonction `fct_relevel()` du package **`forcats`** (à installer avant puis à appeler avant de l'utiliser) :
+
+```{r}
+# install.package("forcats")
+library(forcats)
+RP_final <- RP_final %>% mutate(TACT_moda = 
+                                  fct_relevel(TACT_moda, 
+                                              c("Actifs en emploi","Chômeurs",
+                                                "Retraités", "Autres inactifs")))
+levels(RP_final$TACT_moda)
+```
+
+Plus largement, pour travailler sur des variables qualitatives en particulier lorsqu'elles sont en format facteur, le package **`forcats`** est très utile. Outre une fonction de transformation d'une variable caractère en facteur (`as_factor()` proche de la version de baseR `as.factor()` utilisée en début de section), elle contient plein d'autres fonctions : `fct_collapse()` utilisée pour renommer ou regrouper des modalités d'une variable (au lieu de la double fonction `as.factor()` et `case_when()`) ; `fct_relevel()` utilisée également au-dessus pour trier les modalités comme on le souhaite ; `fct_drop()` pour enlever des niveaux de facteurs vides/sans effectifs ; `fct_explicit_na()` pour rendre les NA explicites en créant une modalité "(missing)" ; `fct_reorder()` et `fct_reorder2()` pour réordonner les modalités d'une variable, très utile pour les graphiques car utilisables directement dans `ggplot()` ; `fct_lump()` pour regrouper les modalités les plus communes (ou au contraire les moins communes) en lui indiquant entre parenthèses le nombre `n=` de modalités souhaitées ou la proportion minimum souhaitée `prop=`, et en sélectionnant la variable avec la fonction `pull()` avant car elle doit être en format vecteur et non data.frame ; ou encore `fct_recode()` pour changer le niveau des facteurs ; `fct_other()` ; `fct_infreq()` et `fct_inorder()` ; etc. Un bon récapitulatif de ces fonctions est présenté <a href="https://thinkr.fr/forcats-forcats-vous-avez-dit-forcats/" target="_blank">ici</a>.
+
+## Manipulation des variables quantitatives
+
+Comme nous l'avons vu plus haut, il y a peu de variables quantitatives dans cette base et l'une d'entre elles est la pondération, donc on va regarder plus précisément la variable `AGED`. Cependant, celle-ci aussi est particulière car c'est une variable numérique constituée d'entiers naturels (et non de valeurs réelles) qui vont de 0 à 120 ; dans le fichier des métadonnées (ou le dictionnaire des variables disponible également sur le site de l'Insee), on se rend compte que la variable a été pensée comme catégorielle avec des modalités d'abord codées comme "000", "001", etc.
+
+```{r}
+meta %>% filter(COD_VAR=="AGED") %>% select(COD_MOD, LIB_MOD) %>% tail()
+```
+
+On peut alors regarder rapidement la distribution de cette variable.
+
+```{r}
+summary(RP_final$AGED)
+```
+
+On peut aussi construire des variables continues en agrégeant certaines informations au niveau des communes par exemple. Reprenons la variable d'activité dont nous avons recoder et regrouper les modalités et calculons-là pour avoir le nombre de chaque modalité par commune. Il faut pour cela créer la variable de commune, qu'on appelera `COM`, à partir de l'IRIS :
+
+```{r}
+RP_final <- RP_final %>% mutate(COM=substr(IRIS, 1, 5))
+```
+
+On va ensuite sommer chaque modalité de la variable `TACT_moda` en utilisant la pondération en groupant par commune.
+
+**EXERCICE** :\
+Créer donc un tableau qui aura 3 colonnes `COM`, `TACT_moda` et `n`. Vous pouvez utiliser les fonctions `group_by` suivi soit de `count`, soit de `summarise` ; on cherchera finalement à arrondir ces valeurs à l'unité avec la fonction `round()`. Vous devez obtenir le tableau suivant :
+
+```{r echo=FALSE, include=FALSE}
+Tab_com_TACT <- RP_final %>% group_by(COM) %>%
+  count(TACT_moda, wt=IPONDI) %>% 
+  mutate(n=round(n))
+
+Tab_com_TACT
+```
+
+::: solution-exo
+```{r eval = FALSE}
+Tab_com_TACT <- RP_final %>% group_by(COM) %>%
+  count(TACT_moda, wt=IPONDI) %>% 
+  mutate(n=round(n))
+
+# RP_final %>% group_by(COM, TACT_moda) %>% 
+#   summarise(n=sum(IPONDI)) %>% 
+#   mutate(n=round(n))
+```
+:::
+
+\fi
+
+On voit qu'on a un tableau dans un format "long" puisqu'il y a plusieurs observations pour une seule commune. On va utiliser la fonction `pivot_wider()` mentionnée précédemment pour n'avoir qu'une ligne par commune et en colonne les types de statut avec leur nombre respectif.
+
+```{r}
+Tab_com_TACT <- Tab_com_TACT %>% 
+                   pivot_wider(names_from = TACT_moda, values_from = n)
+Tab_com_TACT
+```
+   
+  
+
+

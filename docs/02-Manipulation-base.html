@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 2 Manipulation de la base | DATA MINING</title>
+  <meta name="description" content="Titre du cours" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 2 Manipulation de la base | DATA MINING" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Titre du cours" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 2 Manipulation de la base | DATA MINING" />
+  
+  <meta name="twitter:description" content="Titre du cours" />
+  
+
+<meta name="author" content="Camille Signoretto, Maîtresse de conférences en économie, Université Paris Cité" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="01-Base-de-donnees.html"/>
+<link rel="next" href="03-Manipulation-variables.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/tidyverse.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DATA MINING</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="c02-Manipulation-base" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Section 2</span> Manipulation de la base<a href="02-Manipulation-base.html#c02-Manipulation-base" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div align="justify">
+<p>On peut maintenant regarder à quoi ressemble la table principale, celle des données.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="02-Manipulation-base.html#cb11-1" tabindex="-1"></a>RP <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div>
+<div id="rwftgafmbv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rwftgafmbv table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rwftgafmbv thead, #rwftgafmbv tbody, #rwftgafmbv tfoot, #rwftgafmbv tr, #rwftgafmbv td, #rwftgafmbv th {
+  border-style: none;
+}
+
+#rwftgafmbv p {
+  margin: 0;
+  padding: 0;
+}
+
+#rwftgafmbv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rwftgafmbv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rwftgafmbv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rwftgafmbv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rwftgafmbv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rwftgafmbv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rwftgafmbv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rwftgafmbv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rwftgafmbv .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rwftgafmbv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rwftgafmbv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rwftgafmbv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rwftgafmbv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rwftgafmbv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rwftgafmbv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwftgafmbv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rwftgafmbv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rwftgafmbv .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rwftgafmbv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwftgafmbv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rwftgafmbv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwftgafmbv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rwftgafmbv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwftgafmbv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rwftgafmbv .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwftgafmbv .gt_left {
+  text-align: left;
+}
+
+#rwftgafmbv .gt_center {
+  text-align: center;
+}
+
+#rwftgafmbv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rwftgafmbv .gt_font_normal {
+  font-weight: normal;
+}
+
+#rwftgafmbv .gt_font_bold {
+  font-weight: bold;
+}
+
+#rwftgafmbv .gt_font_italic {
+  font-style: italic;
+}
+
+#rwftgafmbv .gt_super {
+  font-size: 65%;
+}
+
+#rwftgafmbv .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rwftgafmbv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rwftgafmbv .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rwftgafmbv .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rwftgafmbv .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rwftgafmbv .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rwftgafmbv .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rwftgafmbv .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rwftgafmbv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CANTVILLE">CANTVILLE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NUMMI">NUMMI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ACHLR">ACHLR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="AEMMR">AEMMR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="AGED">AGED</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="AGER20">AGER20</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="AGEREV">AGEREV</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="AGEREVQ">AGEREVQ</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ANAI">ANAI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ANEMR">ANEMR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="APAF">APAF</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ARM">ARM</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ASCEN">ASCEN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="BAIN">BAIN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="BATI">BATI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CATIRIS">CATIRIS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CATL">CATL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="CATPC">CATPC</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CHAU">CHAU</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CHFL">CHFL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CHOS">CHOS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CLIM">CLIM</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CMBL">CMBL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="COUPLE">COUPLE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="CS1">CS1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CUIS">CUIS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="DEPT">DEPT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="DEROU">DEROU</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="DIPL">DIPL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="DNAI">DNAI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="EAU">EAU</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="EGOUL">EGOUL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ELEC">ELEC</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="EMPL">EMPL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ETUD">ETUD</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="GARL">GARL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="HLML">HLML</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ILETUD">ILETUD</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ILT">ILT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="IMMI">IMMI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="INAI">INAI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="INATC">INATC</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="INFAM">INFAM</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="INPER">INPER</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="INPERF">INPERF</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="IPONDI">IPONDI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="IRAN">IRAN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="IRIS">IRIS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="LIENF">LIENF</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="LPRF">LPRF</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="LPRM">LPRM</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="METRODOM">METRODOM</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="MOCO">MOCO</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="MODV">MODV</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NA17">NA17</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NA5">NA5</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="NAIDT">NAIDT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NBPI">NBPI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NE17FR">NE17FR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NE24FR">NE24FR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NE3FR">NE3FR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NE5FR">NE5FR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NENFR">NENFR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NPERR">NPERR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NUMF">NUMF</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ORIDT">ORIDT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="RECH">RECH</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="REGION">REGION</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="SANI">SANI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="SANIDOM">SANIDOM</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="SEXE">SEXE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="SFM">SFM</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="STAT_CONJ">STAT_CONJ</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="STATR">STATR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="STOCD">STOCD</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="SURF">SURF</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="TACT">TACT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="TACTD16">TACTD16</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="TP">TP</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="TRANS">TRANS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="TRIRIS">TRIRIS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="TYPC">TYPC</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="TYPFC">TYPFC</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="TYPL">TYPL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="TYPMC">TYPMC</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="TYPMR">TYPMR</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="VOIT">VOIT</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="WC">WC</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="CANTVILLE" class="gt_row gt_center">75ZZ</td>
+<td headers="NUMMI" class="gt_row gt_center">1</td>
+<td headers="ACHLR" class="gt_row gt_center">1</td>
+<td headers="AEMMR" class="gt_row gt_center">9</td>
+<td headers="AGED" class="gt_row gt_right">72</td>
+<td headers="AGER20" class="gt_row gt_right">79</td>
+<td headers="AGEREV" class="gt_row gt_right">72</td>
+<td headers="AGEREVQ" class="gt_row gt_right">70</td>
+<td headers="ANAI" class="gt_row gt_right">1944</td>
+<td headers="ANEMR" class="gt_row gt_center">02</td>
+<td headers="APAF" class="gt_row gt_center">0</td>
+<td headers="ARM" class="gt_row gt_center">75115</td>
+<td headers="ASCEN" class="gt_row gt_center">1</td>
+<td headers="BAIN" class="gt_row gt_center">Z</td>
+<td headers="BATI" class="gt_row gt_center">Z</td>
+<td headers="CATIRIS" class="gt_row gt_center">H</td>
+<td headers="CATL" class="gt_row gt_center">1</td>
+<td headers="CATPC" class="gt_row gt_right">0</td>
+<td headers="CHAU" class="gt_row gt_center">Z</td>
+<td headers="CHFL" class="gt_row gt_center">2</td>
+<td headers="CHOS" class="gt_row gt_center">Z</td>
+<td headers="CLIM" class="gt_row gt_center">Z</td>
+<td headers="CMBL" class="gt_row gt_center">2</td>
+<td headers="COUPLE" class="gt_row gt_right">2</td>
+<td headers="CS1" class="gt_row gt_right">7</td>
+<td headers="CUIS" class="gt_row gt_center">Z</td>
+<td headers="DEPT" class="gt_row gt_right">75</td>
+<td headers="DEROU" class="gt_row gt_center">Z</td>
+<td headers="DIPL" class="gt_row gt_center">19</td>
+<td headers="DNAI" class="gt_row gt_center">2B</td>
+<td headers="EAU" class="gt_row gt_center">Z</td>
+<td headers="EGOUL" class="gt_row gt_center">Z</td>
+<td headers="ELEC" class="gt_row gt_center">Z</td>
+<td headers="EMPL" class="gt_row gt_center">ZZ</td>
+<td headers="ETUD" class="gt_row gt_right">2</td>
+<td headers="GARL" class="gt_row gt_center">1</td>
+<td headers="HLML" class="gt_row gt_center">2</td>
+<td headers="ILETUD" class="gt_row gt_center">Z</td>
+<td headers="ILT" class="gt_row gt_center">Z</td>
+<td headers="IMMI" class="gt_row gt_right">2</td>
+<td headers="INAI" class="gt_row gt_right">3</td>
+<td headers="INATC" class="gt_row gt_right">1</td>
+<td headers="INFAM" class="gt_row gt_center">0</td>
+<td headers="INPER" class="gt_row gt_center">1</td>
+<td headers="INPERF" class="gt_row gt_center">Z</td>
+<td headers="IPONDI" class="gt_row gt_right">3.360730</td>
+<td headers="IRAN" class="gt_row gt_center">1</td>
+<td headers="IRIS" class="gt_row gt_center">751155817</td>
+<td headers="LIENF" class="gt_row gt_center">0</td>
+<td headers="LPRF" class="gt_row gt_center">0</td>
+<td headers="LPRM" class="gt_row gt_center">1</td>
+<td headers="METRODOM" class="gt_row gt_center">M</td>
+<td headers="MOCO" class="gt_row gt_right">32</td>
+<td headers="MODV" class="gt_row gt_right">50</td>
+<td headers="NA17" class="gt_row gt_center">ZZ</td>
+<td headers="NA5" class="gt_row gt_center">ZZ</td>
+<td headers="NAIDT" class="gt_row gt_right">0</td>
+<td headers="NBPI" class="gt_row gt_center">04</td>
+<td headers="NE17FR" class="gt_row gt_center">Z</td>
+<td headers="NE24FR" class="gt_row gt_center">Z</td>
+<td headers="NE3FR" class="gt_row gt_center">Z</td>
+<td headers="NE5FR" class="gt_row gt_center">Z</td>
+<td headers="NENFR" class="gt_row gt_center">Z</td>
+<td headers="NPERR" class="gt_row gt_center">1</td>
+<td headers="NUMF" class="gt_row gt_center">Z</td>
+<td headers="ORIDT" class="gt_row gt_right">0</td>
+<td headers="RECH" class="gt_row gt_center">0</td>
+<td headers="REGION" class="gt_row gt_right">11</td>
+<td headers="SANI" class="gt_row gt_center">2</td>
+<td headers="SANIDOM" class="gt_row gt_center">ZZ</td>
+<td headers="SEXE" class="gt_row gt_right">2</td>
+<td headers="SFM" class="gt_row gt_center">12</td>
+<td headers="STAT_CONJ" class="gt_row gt_right">6</td>
+<td headers="STATR" class="gt_row gt_center">Z</td>
+<td headers="STOCD" class="gt_row gt_center">10</td>
+<td headers="SURF" class="gt_row gt_center">4</td>
+<td headers="TACT" class="gt_row gt_right">21</td>
+<td headers="TACTD16" class="gt_row gt_right">210</td>
+<td headers="TP" class="gt_row gt_center">Z</td>
+<td headers="TRANS" class="gt_row gt_center">Z</td>
+<td headers="TRIRIS" class="gt_row gt_center">751501</td>
+<td headers="TYPC" class="gt_row gt_center">3</td>
+<td headers="TYPFC" class="gt_row gt_center">Z</td>
+<td headers="TYPL" class="gt_row gt_center">1</td>
+<td headers="TYPMC" class="gt_row gt_center">1</td>
+<td headers="TYPMR" class="gt_row gt_center">12</td>
+<td headers="VOIT" class="gt_row gt_center">1</td>
+<td headers="WC" class="gt_row gt_center">Z</td></tr>
+    <tr><td headers="CANTVILLE" class="gt_row gt_center">75ZZ</td>
+<td headers="NUMMI" class="gt_row gt_center">2</td>
+<td headers="ACHLR" class="gt_row gt_center">2</td>
+<td headers="AEMMR" class="gt_row gt_center">9</td>
+<td headers="AGED" class="gt_row gt_right">59</td>
+<td headers="AGER20" class="gt_row gt_right">64</td>
+<td headers="AGEREV" class="gt_row gt_right">58</td>
+<td headers="AGEREVQ" class="gt_row gt_right">55</td>
+<td headers="ANAI" class="gt_row gt_right">1958</td>
+<td headers="ANEMR" class="gt_row gt_center">03</td>
+<td headers="APAF" class="gt_row gt_center">1</td>
+<td headers="ARM" class="gt_row gt_center">75112</td>
+<td headers="ASCEN" class="gt_row gt_center">2</td>
+<td headers="BAIN" class="gt_row gt_center">Z</td>
+<td headers="BATI" class="gt_row gt_center">Z</td>
+<td headers="CATIRIS" class="gt_row gt_center">H</td>
+<td headers="CATL" class="gt_row gt_center">1</td>
+<td headers="CATPC" class="gt_row gt_right">0</td>
+<td headers="CHAU" class="gt_row gt_center">Z</td>
+<td headers="CHFL" class="gt_row gt_center">3</td>
+<td headers="CHOS" class="gt_row gt_center">Z</td>
+<td headers="CLIM" class="gt_row gt_center">Z</td>
+<td headers="CMBL" class="gt_row gt_center">4</td>
+<td headers="COUPLE" class="gt_row gt_right">1</td>
+<td headers="CS1" class="gt_row gt_right">3</td>
+<td headers="CUIS" class="gt_row gt_center">Z</td>
+<td headers="DEPT" class="gt_row gt_right">75</td>
+<td headers="DEROU" class="gt_row gt_center">Z</td>
+<td headers="DIPL" class="gt_row gt_center">17</td>
+<td headers="DNAI" class="gt_row gt_center">99</td>
+<td headers="EAU" class="gt_row gt_center">Z</td>
+<td headers="EGOUL" class="gt_row gt_center">Z</td>
+<td headers="ELEC" class="gt_row gt_center">Z</td>
+<td headers="EMPL" class="gt_row gt_center">21</td>
+<td headers="ETUD" class="gt_row gt_right">2</td>
+<td headers="GARL" class="gt_row gt_center">2</td>
+<td headers="HLML" class="gt_row gt_center">2</td>
+<td headers="ILETUD" class="gt_row gt_center">Z</td>
+<td headers="ILT" class="gt_row gt_center">1</td>
+<td headers="IMMI" class="gt_row gt_right">1</td>
+<td headers="INAI" class="gt_row gt_right">6</td>
+<td headers="INATC" class="gt_row gt_right">1</td>
+<td headers="INFAM" class="gt_row gt_center">1</td>
+<td headers="INPER" class="gt_row gt_center">2</td>
+<td headers="INPERF" class="gt_row gt_center">2</td>
+<td headers="IPONDI" class="gt_row gt_right">3.668459</td>
+<td headers="IRAN" class="gt_row gt_center">1</td>
+<td headers="IRIS" class="gt_row gt_center">751124512</td>
+<td headers="LIENF" class="gt_row gt_center">1</td>
+<td headers="LPRF" class="gt_row gt_center">1</td>
+<td headers="LPRM" class="gt_row gt_center">1</td>
+<td headers="METRODOM" class="gt_row gt_center">M</td>
+<td headers="MOCO" class="gt_row gt_right">21</td>
+<td headers="MODV" class="gt_row gt_right">40</td>
+<td headers="NA17" class="gt_row gt_center">FZ</td>
+<td headers="NA5" class="gt_row gt_center">FZ</td>
+<td headers="NAIDT" class="gt_row gt_right">30</td>
+<td headers="NBPI" class="gt_row gt_center">01</td>
+<td headers="NE17FR" class="gt_row gt_center">0</td>
+<td headers="NE24FR" class="gt_row gt_center">0</td>
+<td headers="NE3FR" class="gt_row gt_center">0</td>
+<td headers="NE5FR" class="gt_row gt_center">0</td>
+<td headers="NENFR" class="gt_row gt_center">0</td>
+<td headers="NPERR" class="gt_row gt_center">2</td>
+<td headers="NUMF" class="gt_row gt_center">1</td>
+<td headers="ORIDT" class="gt_row gt_right">0</td>
+<td headers="RECH" class="gt_row gt_center">Z</td>
+<td headers="REGION" class="gt_row gt_right">11</td>
+<td headers="SANI" class="gt_row gt_center">1</td>
+<td headers="SANIDOM" class="gt_row gt_center">ZZ</td>
+<td headers="SEXE" class="gt_row gt_right">1</td>
+<td headers="SFM" class="gt_row gt_center">30</td>
+<td headers="STAT_CONJ" class="gt_row gt_right">3</td>
+<td headers="STATR" class="gt_row gt_center">2</td>
+<td headers="STOCD" class="gt_row gt_center">21</td>
+<td headers="SURF" class="gt_row gt_center">1</td>
+<td headers="TACT" class="gt_row gt_right">11</td>
+<td headers="TACTD16" class="gt_row gt_right">116</td>
+<td headers="TP" class="gt_row gt_center">1</td>
+<td headers="TRANS" class="gt_row gt_center">5</td>
+<td headers="TRIRIS" class="gt_row gt_center">750901</td>
+<td headers="TYPC" class="gt_row gt_center">3</td>
+<td headers="TYPFC" class="gt_row gt_center">2</td>
+<td headers="TYPL" class="gt_row gt_center">6</td>
+<td headers="TYPMC" class="gt_row gt_center">4</td>
+<td headers="TYPMR" class="gt_row gt_center">41</td>
+<td headers="VOIT" class="gt_row gt_center">0</td>
+<td headers="WC" class="gt_row gt_center">Z</td></tr>
+    <tr><td headers="CANTVILLE" class="gt_row gt_center">75ZZ</td>
+<td headers="NUMMI" class="gt_row gt_center">2</td>
+<td headers="ACHLR" class="gt_row gt_center">2</td>
+<td headers="AEMMR" class="gt_row gt_center">9</td>
+<td headers="AGED" class="gt_row gt_right">30</td>
+<td headers="AGER20" class="gt_row gt_right">29</td>
+<td headers="AGEREV" class="gt_row gt_right">29</td>
+<td headers="AGEREVQ" class="gt_row gt_right">25</td>
+<td headers="ANAI" class="gt_row gt_right">1987</td>
+<td headers="ANEMR" class="gt_row gt_center">03</td>
+<td headers="APAF" class="gt_row gt_center">1</td>
+<td headers="ARM" class="gt_row gt_center">75112</td>
+<td headers="ASCEN" class="gt_row gt_center">2</td>
+<td headers="BAIN" class="gt_row gt_center">Z</td>
+<td headers="BATI" class="gt_row gt_center">Z</td>
+<td headers="CATIRIS" class="gt_row gt_center">H</td>
+<td headers="CATL" class="gt_row gt_center">1</td>
+<td headers="CATPC" class="gt_row gt_right">0</td>
+<td headers="CHAU" class="gt_row gt_center">Z</td>
+<td headers="CHFL" class="gt_row gt_center">3</td>
+<td headers="CHOS" class="gt_row gt_center">Z</td>
+<td headers="CLIM" class="gt_row gt_center">Z</td>
+<td headers="CMBL" class="gt_row gt_center">4</td>
+<td headers="COUPLE" class="gt_row gt_right">1</td>
+<td headers="CS1" class="gt_row gt_right">3</td>
+<td headers="CUIS" class="gt_row gt_center">Z</td>
+<td headers="DEPT" class="gt_row gt_right">75</td>
+<td headers="DEROU" class="gt_row gt_center">Z</td>
+<td headers="DIPL" class="gt_row gt_center">16</td>
+<td headers="DNAI" class="gt_row gt_center">99</td>
+<td headers="EAU" class="gt_row gt_center">Z</td>
+<td headers="EGOUL" class="gt_row gt_center">Z</td>
+<td headers="ELEC" class="gt_row gt_center">Z</td>
+<td headers="EMPL" class="gt_row gt_center">21</td>
+<td headers="ETUD" class="gt_row gt_right">2</td>
+<td headers="GARL" class="gt_row gt_center">2</td>
+<td headers="HLML" class="gt_row gt_center">2</td>
+<td headers="ILETUD" class="gt_row gt_center">Z</td>
+<td headers="ILT" class="gt_row gt_center">3</td>
+<td headers="IMMI" class="gt_row gt_right">1</td>
+<td headers="INAI" class="gt_row gt_right">6</td>
+<td headers="INATC" class="gt_row gt_right">2</td>
+<td headers="INFAM" class="gt_row gt_center">1</td>
+<td headers="INPER" class="gt_row gt_center">2</td>
+<td headers="INPERF" class="gt_row gt_center">2</td>
+<td headers="IPONDI" class="gt_row gt_right">3.668459</td>
+<td headers="IRAN" class="gt_row gt_center">1</td>
+<td headers="IRIS" class="gt_row gt_center">751124512</td>
+<td headers="LIENF" class="gt_row gt_center">1</td>
+<td headers="LPRF" class="gt_row gt_center">2</td>
+<td headers="LPRM" class="gt_row gt_center">2</td>
+<td headers="METRODOM" class="gt_row gt_center">M</td>
+<td headers="MOCO" class="gt_row gt_right">21</td>
+<td headers="MODV" class="gt_row gt_right">31</td>
+<td headers="NA17" class="gt_row gt_center">MN</td>
+<td headers="NA5" class="gt_row gt_center">GU</td>
+<td headers="NAIDT" class="gt_row gt_right">30</td>
+<td headers="NBPI" class="gt_row gt_center">01</td>
+<td headers="NE17FR" class="gt_row gt_center">0</td>
+<td headers="NE24FR" class="gt_row gt_center">0</td>
+<td headers="NE3FR" class="gt_row gt_center">0</td>
+<td headers="NE5FR" class="gt_row gt_center">0</td>
+<td headers="NENFR" class="gt_row gt_center">0</td>
+<td headers="NPERR" class="gt_row gt_center">2</td>
+<td headers="NUMF" class="gt_row gt_center">1</td>
+<td headers="ORIDT" class="gt_row gt_right">0</td>
+<td headers="RECH" class="gt_row gt_center">Z</td>
+<td headers="REGION" class="gt_row gt_right">11</td>
+<td headers="SANI" class="gt_row gt_center">1</td>
+<td headers="SANIDOM" class="gt_row gt_center">ZZ</td>
+<td headers="SEXE" class="gt_row gt_right">1</td>
+<td headers="SFM" class="gt_row gt_center">30</td>
+<td headers="STAT_CONJ" class="gt_row gt_right">3</td>
+<td headers="STATR" class="gt_row gt_center">2</td>
+<td headers="STOCD" class="gt_row gt_center">21</td>
+<td headers="SURF" class="gt_row gt_center">1</td>
+<td headers="TACT" class="gt_row gt_right">11</td>
+<td headers="TACTD16" class="gt_row gt_right">111</td>
+<td headers="TP" class="gt_row gt_center">1</td>
+<td headers="TRANS" class="gt_row gt_center">6</td>
+<td headers="TRIRIS" class="gt_row gt_center">750901</td>
+<td headers="TYPC" class="gt_row gt_center">3</td>
+<td headers="TYPFC" class="gt_row gt_center">2</td>
+<td headers="TYPL" class="gt_row gt_center">6</td>
+<td headers="TYPMC" class="gt_row gt_center">4</td>
+<td headers="TYPMR" class="gt_row gt_center">41</td>
+<td headers="VOIT" class="gt_row gt_center">0</td>
+<td headers="WC" class="gt_row gt_center">Z</td></tr>
+    <tr><td headers="CANTVILLE" class="gt_row gt_center">75ZZ</td>
+<td headers="NUMMI" class="gt_row gt_center">3</td>
+<td headers="ACHLR" class="gt_row gt_center">1</td>
+<td headers="AEMMR" class="gt_row gt_center">7</td>
+<td headers="AGED" class="gt_row gt_right">82</td>
+<td headers="AGER20" class="gt_row gt_right">80</td>
+<td headers="AGEREV" class="gt_row gt_right">81</td>
+<td headers="AGEREVQ" class="gt_row gt_right">80</td>
+<td headers="ANAI" class="gt_row gt_right">1938</td>
+<td headers="ANEMR" class="gt_row gt_center">05</td>
+<td headers="APAF" class="gt_row gt_center">2</td>
+<td headers="ARM" class="gt_row gt_center">75115</td>
+<td headers="ASCEN" class="gt_row gt_center">1</td>
+<td headers="BAIN" class="gt_row gt_center">Z</td>
+<td headers="BATI" class="gt_row gt_center">Z</td>
+<td headers="CATIRIS" class="gt_row gt_center">H</td>
+<td headers="CATL" class="gt_row gt_center">1</td>
+<td headers="CATPC" class="gt_row gt_right">0</td>
+<td headers="CHAU" class="gt_row gt_center">Z</td>
+<td headers="CHFL" class="gt_row gt_center">2</td>
+<td headers="CHOS" class="gt_row gt_center">Z</td>
+<td headers="CLIM" class="gt_row gt_center">Z</td>
+<td headers="CMBL" class="gt_row gt_center">2</td>
+<td headers="COUPLE" class="gt_row gt_right">1</td>
+<td headers="CS1" class="gt_row gt_right">7</td>
+<td headers="CUIS" class="gt_row gt_center">Z</td>
+<td headers="DEPT" class="gt_row gt_right">75</td>
+<td headers="DEROU" class="gt_row gt_center">Z</td>
+<td headers="DIPL" class="gt_row gt_center">14</td>
+<td headers="DNAI" class="gt_row gt_center">92</td>
+<td headers="EAU" class="gt_row gt_center">Z</td>
+<td headers="EGOUL" class="gt_row gt_center">Z</td>
+<td headers="ELEC" class="gt_row gt_center">Z</td>
+<td headers="EMPL" class="gt_row gt_center">ZZ</td>
+<td headers="ETUD" class="gt_row gt_right">2</td>
+<td headers="GARL" class="gt_row gt_center">1</td>
+<td headers="HLML" class="gt_row gt_center">2</td>
+<td headers="ILETUD" class="gt_row gt_center">Z</td>
+<td headers="ILT" class="gt_row gt_center">Z</td>
+<td headers="IMMI" class="gt_row gt_right">2</td>
+<td headers="INAI" class="gt_row gt_right">2</td>
+<td headers="INATC" class="gt_row gt_right">1</td>
+<td headers="INFAM" class="gt_row gt_center">1</td>
+<td headers="INPER" class="gt_row gt_center">2</td>
+<td headers="INPERF" class="gt_row gt_center">2</td>
+<td headers="IPONDI" class="gt_row gt_right">3.478821</td>
+<td headers="IRAN" class="gt_row gt_center">1</td>
+<td headers="IRIS" class="gt_row gt_center">751155907</td>
+<td headers="LIENF" class="gt_row gt_center">2</td>
+<td headers="LPRF" class="gt_row gt_center">2</td>
+<td headers="LPRM" class="gt_row gt_center">2</td>
+<td headers="METRODOM" class="gt_row gt_center">M</td>
+<td headers="MOCO" class="gt_row gt_right">21</td>
+<td headers="MODV" class="gt_row gt_right">40</td>
+<td headers="NA17" class="gt_row gt_center">ZZ</td>
+<td headers="NA5" class="gt_row gt_center">ZZ</td>
+<td headers="NAIDT" class="gt_row gt_right">0</td>
+<td headers="NBPI" class="gt_row gt_center">03</td>
+<td headers="NE17FR" class="gt_row gt_center">0</td>
+<td headers="NE24FR" class="gt_row gt_center">0</td>
+<td headers="NE3FR" class="gt_row gt_center">0</td>
+<td headers="NE5FR" class="gt_row gt_center">0</td>
+<td headers="NENFR" class="gt_row gt_center">0</td>
+<td headers="NPERR" class="gt_row gt_center">2</td>
+<td headers="NUMF" class="gt_row gt_center">1</td>
+<td headers="ORIDT" class="gt_row gt_right">0</td>
+<td headers="RECH" class="gt_row gt_center">9</td>
+<td headers="REGION" class="gt_row gt_right">11</td>
+<td headers="SANI" class="gt_row gt_center">2</td>
+<td headers="SANIDOM" class="gt_row gt_center">ZZ</td>
+<td headers="SEXE" class="gt_row gt_right">2</td>
+<td headers="SFM" class="gt_row gt_center">30</td>
+<td headers="STAT_CONJ" class="gt_row gt_right">1</td>
+<td headers="STATR" class="gt_row gt_center">Z</td>
+<td headers="STOCD" class="gt_row gt_center">10</td>
+<td headers="SURF" class="gt_row gt_center">4</td>
+<td headers="TACT" class="gt_row gt_right">21</td>
+<td headers="TACTD16" class="gt_row gt_right">210</td>
+<td headers="TP" class="gt_row gt_center">Z</td>
+<td headers="TRANS" class="gt_row gt_center">Z</td>
+<td headers="TRIRIS" class="gt_row gt_center">751431</td>
+<td headers="TYPC" class="gt_row gt_center">3</td>
+<td headers="TYPFC" class="gt_row gt_center">2</td>
+<td headers="TYPL" class="gt_row gt_center">2</td>
+<td headers="TYPMC" class="gt_row gt_center">4</td>
+<td headers="TYPMR" class="gt_row gt_center">44</td>
+<td headers="VOIT" class="gt_row gt_center">1</td>
+<td headers="WC" class="gt_row gt_center">Z</td></tr>
+    <tr><td headers="CANTVILLE" class="gt_row gt_center">75ZZ</td>
+<td headers="NUMMI" class="gt_row gt_center">3</td>
+<td headers="ACHLR" class="gt_row gt_center">1</td>
+<td headers="AEMMR" class="gt_row gt_center">7</td>
+<td headers="AGED" class="gt_row gt_right">86</td>
+<td headers="AGER20" class="gt_row gt_right">80</td>
+<td headers="AGEREV" class="gt_row gt_right">85</td>
+<td headers="AGEREVQ" class="gt_row gt_right">85</td>
+<td headers="ANAI" class="gt_row gt_right">1934</td>
+<td headers="ANEMR" class="gt_row gt_center">05</td>
+<td headers="APAF" class="gt_row gt_center">1</td>
+<td headers="ARM" class="gt_row gt_center">75115</td>
+<td headers="ASCEN" class="gt_row gt_center">1</td>
+<td headers="BAIN" class="gt_row gt_center">Z</td>
+<td headers="BATI" class="gt_row gt_center">Z</td>
+<td headers="CATIRIS" class="gt_row gt_center">H</td>
+<td headers="CATL" class="gt_row gt_center">1</td>
+<td headers="CATPC" class="gt_row gt_right">0</td>
+<td headers="CHAU" class="gt_row gt_center">Z</td>
+<td headers="CHFL" class="gt_row gt_center">2</td>
+<td headers="CHOS" class="gt_row gt_center">Z</td>
+<td headers="CLIM" class="gt_row gt_center">Z</td>
+<td headers="CMBL" class="gt_row gt_center">2</td>
+<td headers="COUPLE" class="gt_row gt_right">1</td>
+<td headers="CS1" class="gt_row gt_right">7</td>
+<td headers="CUIS" class="gt_row gt_center">Z</td>
+<td headers="DEPT" class="gt_row gt_right">75</td>
+<td headers="DEROU" class="gt_row gt_center">Z</td>
+<td headers="DIPL" class="gt_row gt_center">14</td>
+<td headers="DNAI" class="gt_row gt_center">75</td>
+<td headers="EAU" class="gt_row gt_center">Z</td>
+<td headers="EGOUL" class="gt_row gt_center">Z</td>
+<td headers="ELEC" class="gt_row gt_center">Z</td>
+<td headers="EMPL" class="gt_row gt_center">ZZ</td>
+<td headers="ETUD" class="gt_row gt_right">2</td>
+<td headers="GARL" class="gt_row gt_center">1</td>
+<td headers="HLML" class="gt_row gt_center">2</td>
+<td headers="ILETUD" class="gt_row gt_center">Z</td>
+<td headers="ILT" class="gt_row gt_center">Z</td>
+<td headers="IMMI" class="gt_row gt_right">2</td>
+<td headers="INAI" class="gt_row gt_right">1</td>
+<td headers="INATC" class="gt_row gt_right">1</td>
+<td headers="INFAM" class="gt_row gt_center">1</td>
+<td headers="INPER" class="gt_row gt_center">2</td>
+<td headers="INPERF" class="gt_row gt_center">2</td>
+<td headers="IPONDI" class="gt_row gt_right">3.478821</td>
+<td headers="IRAN" class="gt_row gt_center">1</td>
+<td headers="IRIS" class="gt_row gt_center">751155907</td>
+<td headers="LIENF" class="gt_row gt_center">1</td>
+<td headers="LPRF" class="gt_row gt_center">1</td>
+<td headers="LPRM" class="gt_row gt_center">1</td>
+<td headers="METRODOM" class="gt_row gt_center">M</td>
+<td headers="MOCO" class="gt_row gt_right">21</td>
+<td headers="MODV" class="gt_row gt_right">40</td>
+<td headers="NA17" class="gt_row gt_center">ZZ</td>
+<td headers="NA5" class="gt_row gt_center">ZZ</td>
+<td headers="NAIDT" class="gt_row gt_right">0</td>
+<td headers="NBPI" class="gt_row gt_center">03</td>
+<td headers="NE17FR" class="gt_row gt_center">0</td>
+<td headers="NE24FR" class="gt_row gt_center">0</td>
+<td headers="NE3FR" class="gt_row gt_center">0</td>
+<td headers="NE5FR" class="gt_row gt_center">0</td>
+<td headers="NENFR" class="gt_row gt_center">0</td>
+<td headers="NPERR" class="gt_row gt_center">2</td>
+<td headers="NUMF" class="gt_row gt_center">1</td>
+<td headers="ORIDT" class="gt_row gt_right">0</td>
+<td headers="RECH" class="gt_row gt_center">9</td>
+<td headers="REGION" class="gt_row gt_right">11</td>
+<td headers="SANI" class="gt_row gt_center">2</td>
+<td headers="SANIDOM" class="gt_row gt_center">ZZ</td>
+<td headers="SEXE" class="gt_row gt_right">1</td>
+<td headers="SFM" class="gt_row gt_center">30</td>
+<td headers="STAT_CONJ" class="gt_row gt_right">1</td>
+<td headers="STATR" class="gt_row gt_center">Z</td>
+<td headers="STOCD" class="gt_row gt_center">10</td>
+<td headers="SURF" class="gt_row gt_center">4</td>
+<td headers="TACT" class="gt_row gt_right">21</td>
+<td headers="TACTD16" class="gt_row gt_right">210</td>
+<td headers="TP" class="gt_row gt_center">Z</td>
+<td headers="TRANS" class="gt_row gt_center">Z</td>
+<td headers="TRIRIS" class="gt_row gt_center">751431</td>
+<td headers="TYPC" class="gt_row gt_center">3</td>
+<td headers="TYPFC" class="gt_row gt_center">2</td>
+<td headers="TYPL" class="gt_row gt_center">2</td>
+<td headers="TYPMC" class="gt_row gt_center">4</td>
+<td headers="TYPMR" class="gt_row gt_center">44</td>
+<td headers="VOIT" class="gt_row gt_center">1</td>
+<td headers="WC" class="gt_row gt_center">Z</td></tr>
+    <tr><td headers="CANTVILLE" class="gt_row gt_center">75ZZ</td>
+<td headers="NUMMI" class="gt_row gt_center">4</td>
+<td headers="ACHLR" class="gt_row gt_center">2</td>
+<td headers="AEMMR" class="gt_row gt_center">9</td>
+<td headers="AGED" class="gt_row gt_right">1</td>
+<td headers="AGER20" class="gt_row gt_right">2</td>
+<td headers="AGEREV" class="gt_row gt_right">0</td>
+<td headers="AGEREVQ" class="gt_row gt_right">0</td>
+<td headers="ANAI" class="gt_row gt_right">2019</td>
+<td headers="ANEMR" class="gt_row gt_center">01</td>
+<td headers="APAF" class="gt_row gt_center">3</td>
+<td headers="ARM" class="gt_row gt_center">75116</td>
+<td headers="ASCEN" class="gt_row gt_center">1</td>
+<td headers="BAIN" class="gt_row gt_center">Z</td>
+<td headers="BATI" class="gt_row gt_center">Z</td>
+<td headers="CATIRIS" class="gt_row gt_center">H</td>
+<td headers="CATL" class="gt_row gt_center">1</td>
+<td headers="CATPC" class="gt_row gt_right">0</td>
+<td headers="CHAU" class="gt_row gt_center">Z</td>
+<td headers="CHFL" class="gt_row gt_center">2</td>
+<td headers="CHOS" class="gt_row gt_center">Z</td>
+<td headers="CLIM" class="gt_row gt_center">Z</td>
+<td headers="CMBL" class="gt_row gt_center">2</td>
+<td headers="COUPLE" class="gt_row gt_right">2</td>
+<td headers="CS1" class="gt_row gt_right">8</td>
+<td headers="CUIS" class="gt_row gt_center">Z</td>
+<td headers="DEPT" class="gt_row gt_right">75</td>
+<td headers="DEROU" class="gt_row gt_center">Z</td>
+<td headers="DIPL" class="gt_row gt_center">ZZ</td>
+<td headers="DNAI" class="gt_row gt_center">92</td>
+<td headers="EAU" class="gt_row gt_center">Z</td>
+<td headers="EGOUL" class="gt_row gt_center">Z</td>
+<td headers="ELEC" class="gt_row gt_center">Z</td>
+<td headers="EMPL" class="gt_row gt_center">ZZ</td>
+<td headers="ETUD" class="gt_row gt_right">2</td>
+<td headers="GARL" class="gt_row gt_center">1</td>
+<td headers="HLML" class="gt_row gt_center">2</td>
+<td headers="ILETUD" class="gt_row gt_center">Z</td>
+<td headers="ILT" class="gt_row gt_center">Z</td>
+<td headers="IMMI" class="gt_row gt_right">2</td>
+<td headers="INAI" class="gt_row gt_right">2</td>
+<td headers="INATC" class="gt_row gt_right">1</td>
+<td headers="INFAM" class="gt_row gt_center">1</td>
+<td headers="INPER" class="gt_row gt_center">3</td>
+<td headers="INPERF" class="gt_row gt_center">3</td>
+<td headers="IPONDI" class="gt_row gt_right">2.776887</td>
+<td headers="IRAN" class="gt_row gt_center">Z</td>
+<td headers="IRIS" class="gt_row gt_center">751166301</td>
+<td headers="LIENF" class="gt_row gt_center">3</td>
+<td headers="LPRF" class="gt_row gt_center">3</td>
+<td headers="LPRM" class="gt_row gt_center">3</td>
+<td headers="METRODOM" class="gt_row gt_center">M</td>
+<td headers="MOCO" class="gt_row gt_right">12</td>
+<td headers="MODV" class="gt_row gt_right">12</td>
+<td headers="NA17" class="gt_row gt_center">ZZ</td>
+<td headers="NA5" class="gt_row gt_center">ZZ</td>
+<td headers="NAIDT" class="gt_row gt_right">0</td>
+<td headers="NBPI" class="gt_row gt_center">04</td>
+<td headers="NE17FR" class="gt_row gt_center">2</td>
+<td headers="NE24FR" class="gt_row gt_center">2</td>
+<td headers="NE3FR" class="gt_row gt_center">2</td>
+<td headers="NE5FR" class="gt_row gt_center">2</td>
+<td headers="NENFR" class="gt_row gt_center">2</td>
+<td headers="NPERR" class="gt_row gt_center">3</td>
+<td headers="NUMF" class="gt_row gt_center">1</td>
+<td headers="ORIDT" class="gt_row gt_right">0</td>
+<td headers="RECH" class="gt_row gt_center">Z</td>
+<td headers="REGION" class="gt_row gt_right">11</td>
+<td headers="SANI" class="gt_row gt_center">2</td>
+<td headers="SANIDOM" class="gt_row gt_center">ZZ</td>
+<td headers="SEXE" class="gt_row gt_right">1</td>
+<td headers="SFM" class="gt_row gt_center">22</td>
+<td headers="STAT_CONJ" class="gt_row gt_right">6</td>
+<td headers="STATR" class="gt_row gt_center">Z</td>
+<td headers="STOCD" class="gt_row gt_center">30</td>
+<td headers="SURF" class="gt_row gt_center">6</td>
+<td headers="TACT" class="gt_row gt_right">23</td>
+<td headers="TACTD16" class="gt_row gt_right">230</td>
+<td headers="TP" class="gt_row gt_center">Z</td>
+<td headers="TRANS" class="gt_row gt_center">Z</td>
+<td headers="TRIRIS" class="gt_row gt_center">751741</td>
+<td headers="TYPC" class="gt_row gt_center">3</td>
+<td headers="TYPFC" class="gt_row gt_center">1</td>
+<td headers="TYPL" class="gt_row gt_center">2</td>
+<td headers="TYPMC" class="gt_row gt_center">3</td>
+<td headers="TYPMR" class="gt_row gt_center">32</td>
+<td headers="VOIT" class="gt_row gt_center">1</td>
+<td headers="WC" class="gt_row gt_center">Z</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<p>La fonction <code>str()</code> ou son équivalent en langage <code>dplyr</code> la fonction <code>glimpse</code> nous donne la liste des variables avec cette fois leur format et leurs modalités (les premières seulement s’il y en a beaucoup).</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="02-Manipulation-base.html#cb12-1" tabindex="-1"></a><span class="co"># str(RP)</span></span>
+<span id="cb12-2"><a href="02-Manipulation-base.html#cb12-2" tabindex="-1"></a>RP <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<pre><code>Rows: 4,354,518
+Columns: 88
+$ CANTVILLE &lt;fct&gt; 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, …
+$ NUMMI     &lt;fct&gt; 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 7, 7, 7, 7, 8, 9, 10, 10, 1…
+$ ACHLR     &lt;fct&gt; 1, 2, 2, 1, 1, 2, 2, 2, 1, 1, 4, 3, 3, 3, 3, 4, 3, 4, 4, 4, …
+$ AEMMR     &lt;fct&gt; 9, 9, 9, 7, 7, 9, 9, 9, 6, 6, 9, 9, 9, 9, 9, 7, 6, 9, 9, 9, …
+$ AGED      &lt;int&gt; 72, 59, 30, 82, 86, 1, 34, 3, 67, 67, 34, 51, 48, 17, 13, 82…
+$ AGER20    &lt;int&gt; 79, 64, 29, 80, 80, 2, 39, 2, 79, 79, 39, 54, 54, 17, 14, 80…
+$ AGEREV    &lt;int&gt; 72, 58, 29, 81, 85, 0, 33, 2, 67, 66, 33, 50, 47, 16, 12, 81…
+$ AGEREVQ   &lt;int&gt; 70, 55, 25, 80, 85, 0, 30, 0, 65, 65, 30, 50, 45, 15, 10, 80…
+$ ANAI      &lt;int&gt; 1944, 1958, 1987, 1938, 1934, 2019, 1986, 2017, 1950, 1950, …
+$ ANEMR     &lt;fct&gt; 02, 03, 03, 05, 05, 01, 01, 01, 06, 06, 01, 03, 03, 03, 03, …
+$ APAF      &lt;fct&gt; 0, 1, 1, 2, 1, 3, 2, 3, 1, 2, 0, 1, 2, 3, 3, 0, 0, 3, 2, 3, …
+$ ARM       &lt;fct&gt; 75115, 75112, 75112, 75115, 75115, 75116, 75116, 75116, 7511…
+$ ASCEN     &lt;fct&gt; 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, …
+$ BAIN      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ BATI      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ CATIRIS   &lt;fct&gt; H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, …
+$ CATL      &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ CATPC     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ CHAU      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ CHFL      &lt;fct&gt; 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, …
+$ CHOS      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ CLIM      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ CMBL      &lt;fct&gt; 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 1, 1, 1, 1, …
+$ COUPLE    &lt;int&gt; 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, …
+$ CS1       &lt;int&gt; 7, 3, 3, 7, 7, 8, 8, 8, 7, 7, 3, 5, 5, 8, 8, 7, 7, 5, 4, 4, …
+$ CUIS      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ DEPT      &lt;int&gt; 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, …
+$ DEROU     &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ DIPL      &lt;fct&gt; 19, 17, 16, 14, 14, ZZ, 18, ZZ, 17, 16, 18, 03, 13, 03, ZZ, …
+$ DNAI      &lt;fct&gt; 2B, 99, 99, 92, 75, 92, 92, 92, 92, 92, 49, 99, 99, 93, 75, …
+$ EAU       &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ EGOUL     &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ ELEC      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ EMPL      &lt;fct&gt; ZZ, 21, 21, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, 16, 16, 16, ZZ, ZZ, …
+$ ETUD      &lt;int&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, …
+$ GARL      &lt;fct&gt; 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, …
+$ HLML      &lt;fct&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, …
+$ ILETUD    &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, 1, 1, Z, Z, Z, Z, Z, …
+$ ILT       &lt;fct&gt; Z, 1, 3, Z, Z, Z, Z, Z, Z, Z, 3, 1, 1, Z, Z, Z, Z, 1, 1, Z, …
+$ IMMI      &lt;int&gt; 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, …
+$ INAI      &lt;int&gt; 3, 6, 6, 2, 1, 2, 2, 2, 2, 2, 3, 6, 6, 2, 1, 1, 2, 3, 3, 3, …
+$ INATC     &lt;int&gt; 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ INFAM     &lt;fct&gt; 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, …
+$ INPER     &lt;fct&gt; 1, 2, 2, 2, 2, 3, 3, 3, 2, 2, 1, 4, 4, 4, 4, 1, 1, 3, 3, 3, …
+$ INPERF    &lt;fct&gt; Z, 2, 2, 2, 2, 3, 3, 3, 2, 2, Z, 4, 4, 4, 4, Z, Z, 3, 3, 3, …
+$ IPONDI    &lt;dbl&gt; 3.360730, 3.668459, 3.668459, 3.478821, 3.478821, 2.776887, …
+$ IRAN      &lt;fct&gt; 1, 1, 1, 1, 1, Z, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ IRIS      &lt;fct&gt; 751155817, 751124512, 751124512, 751155907, 751155907, 75116…
+$ LIENF     &lt;fct&gt; 0, 1, 1, 2, 1, 3, 2, 3, 1, 2, 0, 1, 2, 3, 3, 0, 0, 3, 2, 3, …
+$ LPRF      &lt;fct&gt; 0, 1, 2, 2, 1, 3, 1, 3, 1, 2, 0, 1, 2, 3, 3, 0, 0, 3, 1, 3, …
+$ LPRM      &lt;fct&gt; 1, 1, 2, 2, 1, 3, 1, 3, 1, 2, 1, 1, 2, 3, 3, 1, 1, 3, 1, 3, …
+$ METRODOM  &lt;fct&gt; M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, …
+$ MOCO      &lt;int&gt; 32, 21, 21, 21, 21, 12, 23, 12, 21, 21, 32, 22, 22, 11, 11, …
+$ MODV      &lt;int&gt; 50, 40, 31, 40, 40, 12, 33, 12, 40, 40, 20, 32, 32, 11, 11, …
+$ NA17      &lt;fct&gt; ZZ, FZ, MN, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, OQ, MN, MN, ZZ, ZZ, …
+$ NA5       &lt;fct&gt; ZZ, FZ, GU, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, OQ, GU, GU, ZZ, ZZ, …
+$ NAIDT     &lt;int&gt; 0, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 0, 0,…
+$ NBPI      &lt;fct&gt; 04, 01, 01, 03, 03, 04, 04, 04, 08, 08, 01, 03, 03, 03, 03, …
+$ NE17FR    &lt;fct&gt; Z, 0, 0, 0, 0, 2, 2, 2, 0, 0, Z, 2, 2, 2, 2, Z, Z, 0, 0, 0, …
+$ NE24FR    &lt;fct&gt; Z, 0, 0, 0, 0, 2, 2, 2, 0, 0, Z, 2, 2, 2, 2, Z, Z, 1, 1, 1, …
+$ NE3FR     &lt;fct&gt; Z, 0, 0, 0, 0, 2, 2, 2, 0, 0, Z, 0, 0, 0, 0, Z, Z, 0, 0, 0, …
+$ NE5FR     &lt;fct&gt; Z, 0, 0, 0, 0, 2, 2, 2, 0, 0, Z, 0, 0, 0, 0, Z, Z, 0, 0, 0, …
+$ NENFR     &lt;fct&gt; Z, 0, 0, 0, 0, 2, 2, 2, 0, 0, Z, 2, 2, 2, 2, Z, Z, 2, 2, 2, …
+$ NPERR     &lt;fct&gt; 1, 2, 2, 2, 2, 3, 3, 3, 2, 2, 1, 4, 4, 4, 4, 1, 1, 3, 3, 3, …
+$ NUMF      &lt;fct&gt; Z, 1, 1, 1, 1, 1, 1, 1, 1, 1, Z, 1, 1, 1, 1, Z, Z, 1, 1, 1, …
+$ ORIDT     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ RECH      &lt;fct&gt; 0, Z, Z, 9, 9, Z, 0, Z, 0, 0, Z, Z, Z, 0, Z, 9, 0, Z, Z, 1, …
+$ REGION    &lt;int&gt; 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, …
+$ SANI      &lt;fct&gt; 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+$ SANIDOM   &lt;fct&gt; ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, …
+$ SEXE      &lt;int&gt; 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, …
+$ SFM       &lt;fct&gt; 12, 30, 30, 30, 30, 22, 22, 22, 30, 30, 12, 32, 32, 32, 32, …
+$ STAT_CONJ &lt;int&gt; 6, 3, 3, 1, 1, 6, 1, 6, 1, 1, 6, 3, 3, 6, 6, 4, 5, 6, 6, 6, …
+$ STATR     &lt;fct&gt; Z, 2, 2, Z, Z, Z, Z, Z, Z, Z, 1, 1, 1, Z, Z, Z, Z, 1, 1, Z, …
+$ STOCD     &lt;fct&gt; 10, 21, 21, 10, 10, 30, 30, 30, 10, 10, 21, 30, 30, 30, 30, …
+$ SURF      &lt;fct&gt; 4, 1, 1, 4, 4, 6, 6, 6, 7, 7, 1, 4, 4, 4, 4, 3, 3, 6, 6, 6, …
+$ TACT      &lt;int&gt; 21, 11, 11, 21, 21, 23, 24, 23, 21, 21, 11, 11, 11, 22, 23, …
+$ TACTD16   &lt;int&gt; 210, 116, 111, 210, 210, 230, 240, 230, 210, 210, 111, 111, …
+$ TP        &lt;fct&gt; Z, 1, 1, Z, Z, Z, Z, Z, Z, Z, 2, 1, 1, Z, Z, Z, Z, 1, 1, Z, …
+$ TRANS     &lt;fct&gt; Z, 5, 6, Z, Z, Z, Z, Z, Z, Z, 6, 6, 6, Z, Z, Z, Z, 6, 1, Z, …
+$ TRIRIS    &lt;fct&gt; 751501, 750901, 750901, 751431, 751431, 751741, 751741, 7517…
+$ TYPC      &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, …
+$ TYPFC     &lt;fct&gt; Z, 2, 2, 2, 2, 1, 1, 1, 2, 2, Z, 2, 2, 2, 2, Z, Z, 1, 1, 1, …
+$ TYPL      &lt;fct&gt; 1, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+$ TYPMC     &lt;fct&gt; 1, 4, 4, 4, 4, 3, 3, 3, 4, 4, 1, 4, 4, 4, 4, 1, 1, 3, 3, 3, …
+$ TYPMR     &lt;fct&gt; 12, 41, 41, 44, 44, 32, 32, 32, 44, 44, 12, 41, 41, 41, 41, …
+$ VOIT      &lt;fct&gt; 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, …
+$ WC        &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …</code></pre>
+<p>Les variables sont en format, soit ‘int’ (“integer” - nombres entiers), soit ‘fct’ (“factor”), ou encore ‘dbl’ (“double” - nombres réels).<br />
+On remarque que la plupart des variables ont des modalités en chiffres et/ou lettres, ce qui signifie qu’il faudra probablement recoder ces modalités pour leur donner des libellés dans nos analyses descriptives (tableaux ou graphiques).</p>
+<p>Par ailleurs, certaines variables ont été laissées en format ‘integer’ bien que l’on avait mis l’option <code>stringsAsFactors=TRUE</code> lors du chargement des données, or ces chiffres correspondent bien à des modalités d’une variable catégorielle, il faudra donc le corriger ultérieurement.</p>
+<p>Dernière remarque, si on avait eu des valeurs manquantes sur certaines variables, elles se seraient ici affichées avec la modalité <code>NA</code>, cela ne semble pas le cas, à vérifier par la suite. En revanche, on voit parfois des modalités “z” ou “zz”, il faudra vérifier ce qu’elles indiquent.</p>
+<div id="format-des-données---wide-ou-long" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Format des données - WIDE ou LONG<a href="02-Manipulation-base.html#format-des-données---wide-ou-long" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La question du <strong>format de la table de données</strong> est importante, on distingue généralement le format <em>wide</em> du format <em>long</em> :</p>
+<ul>
+<li>le premier renvoie au cas où chaque ligne correspond a un et un seul individu (ou autre niveau de l’analyse : une entreprise, un ménage, un logement, etc.), et toutes les informations le concernant sont données en colonnes (ce qui peut augmenter rapidement le nombre de colonnes), c’est l’exemple d’une information que l’on a sur plusieurs années, chaque colonne correspondant à l’information de l’année en question ;</li>
+<li>le second, au contraire, multiplie les lignes pour un seul individu, mais il y a alors moins de colonnes, à partir du même exemple précédent, il y aura cette fois une colonne indiquant l’année et une colonne contenant l’information.</li>
+</ul>
+<p>Ici, chaque ligne correspond à un <strong>individu</strong> auquel est associé un <strong>logement</strong>, un <strong>ménage</strong> ou encore une <strong>famille</strong> ; on est bien dans un format <code>wide</code>. L’unité statistique de base est donc l’individu, mais on peut vouloir choisir de se mettre au niveau logement ou ménage ou famille, pour étudier les caractéristiques de ces unités. Autre exemple, on peut aussi considérer que notre niveau d’analyse est la commune, on verra alors qu’on dispose de plusieurs lignes par commune et si l’on veut garder quelques informations à ce niveau en n’ayant plus qu’une ligne par commune, il faudra sommer ces informations.</p>
+<p>Le package <code>tidyverse</code> contient deux fonctions qui permettent de passer d’un format à un autre : <code>pivot_longer()</code> et <code>pivot_wider()</code> présentés en détails <a href="https://tidyr.tidyverse.org/articles/pivot.html" target="_blank">ici</a>. Nous aurons l’occasion de les utiliser ultérieurement dans ce cours.</p>
+</div>
+<div id="sélectionner-un-champ-réduit-de-la-base-séparer-les-données" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Sélectionner un champ réduit de la base, séparer les données<a href="02-Manipulation-base.html#sélectionner-un-champ-réduit-de-la-base-séparer-les-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Manipuler une base de données, c’est aussi travailler ou créer une table réduite, surtout quand on a des données volumineuses comme ici : c’est donc choisir un champ particulier de la base.</p>
+<p>On peut par exemple choisir un champ géographique plus réduit au sein de l’Île-de-France, à partir de la commune : Paris et sa petite couronne.</p>
+<p>On peut aussi choisir de séparer les données en créant 2 tables selon l’unité statistique : l’individu ; ou le logement avec la seule personne de référence du ménage.</p>
+<p>Comme vous le savez très probablement, dans le langage <code>tidyverse</code>, pour faire des sélections sur les lignes ou observations dans une table de données, on utilise la fonction <code>filter()</code> ; pour faire des sélections sur les colonnes ou variables, on utilise la fonction <code>select()</code> ; pour supprimer des variables, on utilise également <code>select()</code> avec un “-” devant la (ou les) variable(s) à supprimer (dans le langage <code>R</code> de base, on peut aussi utiliser la fonction <code>subset()</code>).</p>
+<p><strong>EXERCICES</strong> :<br />
+Créer trois nouvelles bases selon les indications suivantes :</p>
+<ul>
+<li>la première que vous nommerez “RP_Paris” et qui rassemblera les données pour le seul département de Paris ;</li>
+<li>la deuxième que nous nommerez “RP_indiv” et qui comprendra les données pour les seules variables décrivant l’individu (et ce sera celle de la personne de référence du ménage) ;</li>
+<li>la troisième que vous nommerez “RP_final”, qui rassemblera les données pour les départements de Paris et de sa petite couronne, et qui comprendra toutes les variables décrivant l’individu, le logement et enfin les variables géographiques.</li>
+</ul>
+<!-- Les premières lignes de ces trois tables devront ressembler à cela : -->
+<div class="solution-exo">
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="02-Manipulation-base.html#cb14-1" tabindex="-1"></a>RP_Paris <span class="ot">&lt;-</span> RP <span class="sc">%&gt;%</span> <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">&quot;75&quot;</span>)</span>
+<span id="cb14-2"><a href="02-Manipulation-base.html#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="02-Manipulation-base.html#cb14-3" tabindex="-1"></a>RP_indiv <span class="ot">&lt;-</span> RP <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">&quot;AEMMR&quot;</span>, <span class="st">&quot;AGED&quot;</span>, <span class="st">&quot;AGER20&quot;</span>, <span class="st">&quot;AGEREV&quot;</span>,<span class="st">&quot;AGEREVQ&quot;</span>,<span class="st">&quot;ANAI&quot;</span>,</span>
+<span id="cb14-4"><a href="02-Manipulation-base.html#cb14-4" tabindex="-1"></a>                          <span class="st">&quot;ANEMR&quot;</span>,<span class="st">&quot;APAF&quot;</span>,<span class="st">&quot;COUPLE&quot;</span>,<span class="st">&quot;CS1&quot;</span>,<span class="st">&quot;DIPL&quot;</span>,<span class="st">&quot;DNAI&quot;</span>,<span class="st">&quot;EMPL&quot;</span>,</span>
+<span id="cb14-5"><a href="02-Manipulation-base.html#cb14-5" tabindex="-1"></a>                          <span class="st">&quot;ETUD&quot;</span>,<span class="st">&quot;ILETUD&quot;</span>,<span class="st">&quot;ILT&quot;</span>,<span class="st">&quot;IMMI&quot;</span>,<span class="st">&quot;INAI&quot;</span>,<span class="st">&quot;INATC&quot;</span>,<span class="st">&quot;IPONDI&quot;</span>,</span>
+<span id="cb14-6"><a href="02-Manipulation-base.html#cb14-6" tabindex="-1"></a>                          <span class="st">&quot;IRAN&quot;</span>,<span class="st">&quot;LPRF&quot;</span>,<span class="st">&quot;LPRM&quot;</span>,<span class="st">&quot;MOCO&quot;</span>,<span class="st">&quot;MODV&quot;</span>,<span class="st">&quot;NA17&quot;</span>,</span>
+<span id="cb14-7"><a href="02-Manipulation-base.html#cb14-7" tabindex="-1"></a>                          <span class="st">&quot;NA5&quot;</span>,<span class="st">&quot;NAIDT&quot;</span>,<span class="st">&quot;ORIDT&quot;</span>,<span class="st">&quot;RECH&quot;</span>,<span class="st">&quot;SEXE&quot;</span>,<span class="st">&quot;STAT_CONJ&quot;</span>,</span>
+<span id="cb14-8"><a href="02-Manipulation-base.html#cb14-8" tabindex="-1"></a>                          <span class="st">&quot;STATR&quot;</span>,<span class="st">&quot;TACT&quot;</span>,<span class="st">&quot;TACTD16&quot;</span>,<span class="st">&quot;TP&quot;</span>,<span class="st">&quot;TRANS&quot;</span>)</span>
+<span id="cb14-9"><a href="02-Manipulation-base.html#cb14-9" tabindex="-1"></a>  </span>
+<span id="cb14-10"><a href="02-Manipulation-base.html#cb14-10" tabindex="-1"></a>RP_final  <span class="ot">&lt;-</span> RP <span class="sc">%&gt;%</span> <span class="fu">filter</span>(DEPT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;75&quot;</span>,<span class="st">&quot;92&quot;</span>,<span class="st">&quot;93&quot;</span>,<span class="st">&quot;94&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-11"><a href="02-Manipulation-base.html#cb14-11" tabindex="-1"></a>                        <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;NUMMI&quot;</span>,<span class="st">&quot;INPERF&quot;</span>,<span class="st">&quot;DEROU&quot;</span>,<span class="st">&quot;LIENF&quot;</span>,<span class="st">&quot;INFAM&quot;</span>,</span>
+<span id="cb14-12"><a href="02-Manipulation-base.html#cb14-12" tabindex="-1"></a>                                  <span class="st">&quot;NE17FR&quot;</span>,<span class="st">&quot;INPER&quot;</span>, <span class="st">&quot;NE24FR&quot;</span>,<span class="st">&quot;NPERR&quot;</span>,   <span class="st">&quot;NE3FR&quot;</span>,</span>
+<span id="cb14-13"><a href="02-Manipulation-base.html#cb14-13" tabindex="-1"></a>                                  <span class="st">&quot;SFM&quot;</span>,    <span class="st">&quot;NE5FR&quot;</span>, <span class="st">&quot;TYPMC&quot;</span>,   <span class="st">&quot;NENFR&quot;</span>,<span class="st">&quot;TYPMR&quot;</span>,</span>
+<span id="cb14-14"><a href="02-Manipulation-base.html#cb14-14" tabindex="-1"></a>                                  <span class="st">&quot;NUMF&quot;</span>,<span class="st">&quot;VOIT&quot;</span>,    <span class="st">&quot;TYPFC&quot;</span>))</span></code></pre></div>
+</div>
+<p>On va dorénavant travailler sur cette dernière table <code>RP_final</code>, on l’enregistre donc dans notre dossier “data”, ainsi que le fichier <code>meta</code> que nous avons modifié précédemments :</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="02-Manipulation-base.html#cb15-1" tabindex="-1"></a><span class="co"># Enregistrement des fichiers</span></span>
+<span id="cb15-2"><a href="02-Manipulation-base.html#cb15-2" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> RP_final , <span class="at">file =</span> <span class="st">&quot;data/RP_final.Rdata&quot;</span>) </span>
+<span id="cb15-3"><a href="02-Manipulation-base.html#cb15-3" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> meta, <span class="at">file =</span> <span class="st">&quot;data/meta.Rdata&quot;</span>)</span></code></pre></div>
+<!-- This line is commented, won't show in the document -->
+
+</div>
+<script src="js/tidyverse.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="01-Base-de-donnees.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="03-Manipulation-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
+"instapper": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Camille-Sisi/Data-Mining-2025/master/02-Manipulation-base.Rmd",
+"text": "Source"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

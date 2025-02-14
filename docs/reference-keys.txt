@@ -1,0 +1,9 @@
+c01-Base-de-donnees
+les-données-du-recensement-de-la-population-rp
+quelles-informations-intéressantes-dans-cette-base
+c02-Manipulation-base
+format-des-données---wide-ou-long
+sélectionner-un-champ-réduit-de-la-base-séparer-les-données
+c03-Manipulation-variables
+manipulation-des-variables-qualitatives
+manipulation-des-variables-quantitatives
