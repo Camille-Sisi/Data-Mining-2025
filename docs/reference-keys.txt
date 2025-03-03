@@ -7,3 +7,14 @@ sélectionner-un-champ-réduit-de-la-base-séparer-les-données
 c03-Manipulation-variables
 manipulation-des-variables-qualitatives
 manipulation-des-variables-quantitatives
+détecter-et-visualiser-les-valeurs-manquantes
+gérer-les-valeurs-manquantes
+détecter-et-visualiser-les-valeurs-aberrantes
+découper-une-variable-quantitative-en-classes
+c04-Récapitulatif
+ce-quon-a-appris
+enregistrement-des-tables
+c05-Questions-fouille-donnees
+caractéristiques-de-la-population-résidant-à-paris
+caractéristiques-de-la-population-active-résidant-à-paris
+caractéristiques-des-logements-parisiens

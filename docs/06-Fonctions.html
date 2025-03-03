@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section6 Systématiser nos procédures : construire une fonction | DATA MINING</title>
+  <meta name="description" content="Titre du cours" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section6 Systématiser nos procédures : construire une fonction | DATA MINING" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Titre du cours" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section6 Systématiser nos procédures : construire une fonction | DATA MINING" />
+  
+  <meta name="twitter:description" content="Titre du cours" />
+  
+
+<meta name="author" content="Camille Signoretto, Maîtresse de conférences en économie, Université Paris Cité" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="05-Questions-fouille-donnees.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/tidyverse.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Mining :  <em>Camille Signoretto</em></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html"><i class="fa fa-check"></i>Présentation</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DATA MINING</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="c06-Fonctions" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Section6</span> Systématiser nos procédures : construire une fonction<a href="06-Fonctions.html#c06-Fonctions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div align="justify">
+<p>Pour ré-utiliser un code de façon plus automatique, créer des fonctions est très utile (et on peut même les stocker dans un fichier <code>.r</code> pour les réutiliser plus tard pour une autre étude).</p>
+<div id="principes-généraux-dune-fonction" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Principes généraux d’une fonction<a href="06-Fonctions.html#principes-généraux-dune-fonction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>L’idée est qu’à partir d’un bloc d’instructions ou de lignes de codes, on l’intègre dans une fonction qui portera un nom et qui pourra être appliquée sur les paramètres que l’on veut (table/objet différent, variables différentes) et qui nous retournera une valeur en sortie (qu’il faut préciser donc). Par exemple :</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="06-Fonctions.html#cb89-1" tabindex="-1"></a><span class="co"># Exemple fonction avec 3 arguments</span></span>
+<span id="cb89-2"><a href="06-Fonctions.html#cb89-2" tabindex="-1"></a>nom_fonction <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var1, var2) {</span>
+<span id="cb89-3"><a href="06-Fonctions.html#cb89-3" tabindex="-1"></a>  </span>
+<span id="cb89-4"><a href="06-Fonctions.html#cb89-4" tabindex="-1"></a>  expression...  <span class="co"># Ce que la fonction fait</span></span>
+<span id="cb89-5"><a href="06-Fonctions.html#cb89-5" tabindex="-1"></a>  </span>
+<span id="cb89-6"><a href="06-Fonctions.html#cb89-6" tabindex="-1"></a>  <span class="fu">return</span>()  <span class="co"># Optionnel, mais la plupart du temps utilisé (!), </span></span>
+<span id="cb89-7"><a href="06-Fonctions.html#cb89-7" tabindex="-1"></a>               <span class="co"># pour sortir le résultat de la fonction</span></span>
+<span id="cb89-8"><a href="06-Fonctions.html#cb89-8" tabindex="-1"></a>  </span>
+<span id="cb89-9"><a href="06-Fonctions.html#cb89-9" tabindex="-1"></a>}</span>
+<span id="cb89-10"><a href="06-Fonctions.html#cb89-10" tabindex="-1"></a></span>
+<span id="cb89-11"><a href="06-Fonctions.html#cb89-11" tabindex="-1"></a><span class="co"># L&#39;appel de la fonction devra ainsi préciser la table de données sur laquelle </span></span>
+<span id="cb89-12"><a href="06-Fonctions.html#cb89-12" tabindex="-1"></a><span class="co"># l&#39;appliquer et les autres arguments : </span></span>
+<span id="cb89-13"><a href="06-Fonctions.html#cb89-13" tabindex="-1"></a><span class="fu">nom_fonction</span>(<span class="at">data =</span> nom_de_ma_table , <span class="at">var1 =</span> nom_de_ma_variable1,  </span>
+<span id="cb89-14"><a href="06-Fonctions.html#cb89-14" tabindex="-1"></a>             <span class="at">var2 =</span> nom_de_ma_variable2)</span>
+<span id="cb89-15"><a href="06-Fonctions.html#cb89-15" tabindex="-1"></a></span>
+<span id="cb89-16"><a href="06-Fonctions.html#cb89-16" tabindex="-1"></a><span class="co"># De plus, on pourra créer un nouvel objet (ici &quot;tab_var&quot;) pour stocker la table </span></span>
+<span id="cb89-17"><a href="06-Fonctions.html#cb89-17" tabindex="-1"></a><span class="co"># qui est en valeur de sortie de la fonction : </span></span>
+<span id="cb89-18"><a href="06-Fonctions.html#cb89-18" tabindex="-1"></a>tab_var <span class="ot">&lt;-</span> <span class="fu">nom_fonction</span>(<span class="at">data =</span> nom_de_ma_table , <span class="at">var1 =</span> nom_de_ma_variable1,</span>
+<span id="cb89-19"><a href="06-Fonctions.html#cb89-19" tabindex="-1"></a>                        <span class="at">var2 =</span> nom_de_ma_variable2)</span></code></pre></div>
+<p>Les arguments doivent donc être précisés en entrée de notre fonction, si on ne les précise pas cela nous retournera une erreur… à moins que l’on ait spécifié des valeurs par défaut (ce qui peut être utile si on utilise souvent les mêmes paramètres, par exemple la même base de données) ; il peut y avoir autant d’arguments que l’on souhaite.</p>
+<p>Si l’on utilise le langage tidyverse, il faut connaître quelques petits “trucs” pour écrire une fonction. Le schéma suivant réalisé par Julien Barnier du CNRS nous sera très utile.</p>
+<div class="float">
+<img src="images/Sch%C3%A9ma%20tidyverse%20functions_Julien%20Barnier.jpg" alt="Pour une fonction utilisant le langage tidyverse" />
+<div class="figcaption">Pour une fonction utilisant le langage tidyverse</div>
+</div>
+<div align="center">
+<p><em>Source</em> : Julien Barnier, <a href="https://twitter.com/lapply/status/1493908215796535296?s=20&t=p4aYIEV4GsGS3TGftPa0Nw" target="_blank">https://twitter.com/lapply/status/1493908215796535296?s=20&amp;t=p4aYIEV4GsGS3TGftPa0Nw</a>.</p>
+<div align="justify">
+<p>Vous trouverez également des informations utiles <a href="https://thinkr.fr/comment-creer-des-fonctions-dans-le-tidyverse-avec-la-tidyeval-et-le-stash-stash/" target="_blank">ici</a> ou <a href="https://www.vishalkatti.com/posts/2021-07-17-programmingwithdplyr/" target="_blank">là</a>.</p>
+<div id="exemples-de-fonctions" class="section level2 hasAnchor" align="justify" number="6.2">
+<h2><span class="header-section-number">6.2</span> Exemples de fonctions<a href="06-Fonctions.html#exemples-de-fonctions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On peut d’abord créer une fonction reprenant le code de la section précédente pour la construction de tableau. On l’appelle <code>tableau</code>, et on lui donne comme arguments “data”, “filtre_com”, “var_quali”, “pond” et “nom_var_quali”.</p>
+<p>Dans le langage tidyverse, au sein d’une fonction, il faut appeler une variable avec des doubles-accolades <code>{{  }}</code>.</p>
+<p>Si l’on utilise une fonction <code>summarise()</code>, une autre subtilité à connaître est que cette syntaxe <code>summarise({{ nom_var }} = mean({{ var }}, na.rm=TRUE))</code> ne sera pas reconnue, car il faut indiquer non pas un <code>=</code> mais un <code>:=</code> pour que la fonction puisse être lue lorsque le nom donné à la variable est de type caractère ou “string”.</p>
+<p>Enfin, il ne faut pas oublier de retourner un objet en sortie avec <code>return()</code>.</p>
+<p>Essayez donc de créer une fonction <code>tableau()</code>, reprenant le premier code de la section précédente et remise ci-dessous pour information :</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="06-Fonctions.html#cb90-1" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="06-Fonctions.html#cb90-2" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">&quot;75&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-3"><a href="06-Fonctions.html#cb90-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SEXE_moda=</span><span class="fu">case_when</span>(SEXE<span class="sc">==</span><span class="st">&quot;1&quot;</span> <span class="sc">~</span> <span class="st">&quot;Hommes&quot;</span>, SEXE<span class="sc">==</span><span class="st">&quot;2&quot;</span> <span class="sc">~</span> <span class="st">&quot;Femmes&quot;</span>)) <span class="sc">%&gt;%</span> <span class="co">#ne pas mettre cette ligne dans la fonction</span></span>
+<span id="cb90-4"><a href="06-Fonctions.html#cb90-4" tabindex="-1"></a>  <span class="fu">count</span>(SEXE_moda, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-5"><a href="06-Fonctions.html#cb90-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-6"><a href="06-Fonctions.html#cb90-6" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-7"><a href="06-Fonctions.html#cb90-7" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Effectif=</span>n, <span class="st">&#39;Sexe&#39;</span><span class="ot">=</span>SEXE_moda) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-8"><a href="06-Fonctions.html#cb90-8" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb90-9"><a href="06-Fonctions.html#cb90-9" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">&quot; &quot;</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-10"><a href="06-Fonctions.html#cb90-10" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">&quot;Population par sexe en 2019&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-11"><a href="06-Fonctions.html#cb90-11" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">&quot;Source : Insee, RP 2019 ; Champ : Paris.&quot;</span>)</span></code></pre></div>
+<div class="solution-exo">
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="06-Fonctions.html#cb91-1" tabindex="-1"></a>tableau <span class="ot">&lt;-</span> <span class="cf">function</span>(data, filtre_dept, var_quali, <span class="at">pond=</span>IPONDI, nom_var_quali){</span>
+<span id="cb91-2"><a href="06-Fonctions.html#cb91-2" tabindex="-1"></a>  </span>
+<span id="cb91-3"><a href="06-Fonctions.html#cb91-3" tabindex="-1"></a>  tab <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb91-4"><a href="06-Fonctions.html#cb91-4" tabindex="-1"></a>    <span class="fu">filter</span>(DEPT <span class="sc">==</span> filtre_dept) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-5"><a href="06-Fonctions.html#cb91-5" tabindex="-1"></a>    <span class="fu">count</span>({{ var_quali }}, <span class="at">wt=</span>{{ pond }}) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-6"><a href="06-Fonctions.html#cb91-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-7"><a href="06-Fonctions.html#cb91-7" tabindex="-1"></a>    <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-8"><a href="06-Fonctions.html#cb91-8" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Effectif=</span>n, {{nom_var_quali}}<span class="sc">:=</span>{{ var_quali }}) </span>
+<span id="cb91-9"><a href="06-Fonctions.html#cb91-9" tabindex="-1"></a>  </span>
+<span id="cb91-10"><a href="06-Fonctions.html#cb91-10" tabindex="-1"></a>  <span class="fu">return</span>(tab)</span>
+<span id="cb91-11"><a href="06-Fonctions.html#cb91-11" tabindex="-1"></a>  </span>
+<span id="cb91-12"><a href="06-Fonctions.html#cb91-12" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<p>On peut vérifier qu’on obtient bien la même chose :</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="06-Fonctions.html#cb92-1" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="06-Fonctions.html#cb92-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SEXE_moda=</span><span class="fu">case_when</span>(SEXE<span class="sc">==</span><span class="st">&quot;1&quot;</span> <span class="sc">~</span> <span class="st">&quot;Hommes&quot;</span>, SEXE<span class="sc">==</span><span class="st">&quot;2&quot;</span> <span class="sc">~</span> <span class="st">&quot;Femmes&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-3"><a href="06-Fonctions.html#cb92-3" tabindex="-1"></a>  <span class="fu">tableau</span>(<span class="at">filtre_dept=</span><span class="st">&quot;75&quot;</span>, <span class="at">var_quali=</span>SEXE_moda, <span class="at">nom_var_quali=</span><span class="st">&quot;Sexe&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-4"><a href="06-Fonctions.html#cb92-4" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb92-5"><a href="06-Fonctions.html#cb92-5" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">&quot; &quot;</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-6"><a href="06-Fonctions.html#cb92-6" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">&quot;Population par sexe en 2019&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-7"><a href="06-Fonctions.html#cb92-7" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">&quot;Source : Insee, RP 2019 ; Champ : Paris.&quot;</span>)</span></code></pre></div>
+<div id="wkeogwbkho" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wkeogwbkho table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#wkeogwbkho thead, #wkeogwbkho tbody, #wkeogwbkho tfoot, #wkeogwbkho tr, #wkeogwbkho td, #wkeogwbkho th {
+  border-style: none;
+}
+
+#wkeogwbkho p {
+  margin: 0;
+  padding: 0;
+}
+
+#wkeogwbkho .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#wkeogwbkho .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wkeogwbkho .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wkeogwbkho .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wkeogwbkho .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wkeogwbkho .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wkeogwbkho .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wkeogwbkho .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wkeogwbkho .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#wkeogwbkho .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#wkeogwbkho .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wkeogwbkho .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wkeogwbkho .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wkeogwbkho .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wkeogwbkho .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wkeogwbkho .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wkeogwbkho .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wkeogwbkho .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#wkeogwbkho .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wkeogwbkho .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wkeogwbkho .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wkeogwbkho .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wkeogwbkho .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wkeogwbkho .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wkeogwbkho .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wkeogwbkho .gt_left {
+  text-align: left;
+}
+
+#wkeogwbkho .gt_center {
+  text-align: center;
+}
+
+#wkeogwbkho .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wkeogwbkho .gt_font_normal {
+  font-weight: normal;
+}
+
+#wkeogwbkho .gt_font_bold {
+  font-weight: bold;
+}
+
+#wkeogwbkho .gt_font_italic {
+  font-style: italic;
+}
+
+#wkeogwbkho .gt_super {
+  font-size: 65%;
+}
+
+#wkeogwbkho .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#wkeogwbkho .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wkeogwbkho .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wkeogwbkho .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wkeogwbkho .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wkeogwbkho .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wkeogwbkho .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#wkeogwbkho .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#wkeogwbkho div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Population par sexe en 2019</td>
+    </tr>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Sexe">Sexe</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Effectif">Effectif</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Pourcentage">Pourcentage</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Sexe" class="gt_row gt_left">Femmes</td>
+<td headers="Effectif" class="gt_row gt_right">1 146 436</td>
+<td headers="Pourcentage" class="gt_row gt_right">52.9</td></tr>
+    <tr><td headers="Sexe" class="gt_row gt_left">Hommes</td>
+<td headers="Effectif" class="gt_row gt_right">1 019 195</td>
+<td headers="Pourcentage" class="gt_row gt_right">47.1</td></tr>
+    <tr><td headers="Sexe" class="gt_row gt_left">Total</td>
+<td headers="Effectif" class="gt_row gt_right">2 165 631</td>
+<td headers="Pourcentage" class="gt_row gt_right">100.0</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="3">Source : Insee, RP 2019 ; Champ : Paris.</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+<p>On a gagné 5 lignes de codes !</p>
+<p>Si on a plusieurs filtres à mettre, comme on a pu le voir avec le 2nd tableau, on peut utiliser l’argument “…” (lire “dot”) : cet argument est très pratique si l’on ne sait pas combien il y aura de variable(s) dans la fonction à laquelle elle s’applique, c’est-à-dire autant 0 variable, 1 variable ou plus d’une variable ; mais elle peut aussi être “dangereuse” si on ne se souvient plus qu’on l’a créée et/ou si on ne fait pas attention à bien remplir les autres arguments avec les noms correspondants. Si on réécrit la fonction tableau et qu’on l’applique au 2nd tableau créé précédemment, cela donnerait ceci :</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="06-Fonctions.html#cb93-1" tabindex="-1"></a>tableau <span class="ot">&lt;-</span> <span class="cf">function</span>(data, ..., var_quali, <span class="at">pond=</span>IPONDI, nom_var_quali){</span>
+<span id="cb93-2"><a href="06-Fonctions.html#cb93-2" tabindex="-1"></a>  </span>
+<span id="cb93-3"><a href="06-Fonctions.html#cb93-3" tabindex="-1"></a>  tab <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb93-4"><a href="06-Fonctions.html#cb93-4" tabindex="-1"></a>    <span class="fu">filter</span>(...) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-5"><a href="06-Fonctions.html#cb93-5" tabindex="-1"></a>    <span class="fu">count</span>({{ var_quali }}, <span class="at">wt=</span>{{ pond }}) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-6"><a href="06-Fonctions.html#cb93-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-7"><a href="06-Fonctions.html#cb93-7" tabindex="-1"></a>    <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-8"><a href="06-Fonctions.html#cb93-8" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Effectif=</span>n, {{nom_var_quali}}<span class="sc">:=</span>{{ var_quali }}) </span>
+<span id="cb93-9"><a href="06-Fonctions.html#cb93-9" tabindex="-1"></a>  </span>
+<span id="cb93-10"><a href="06-Fonctions.html#cb93-10" tabindex="-1"></a>  <span class="fu">return</span>(tab)</span>
+<span id="cb93-11"><a href="06-Fonctions.html#cb93-11" tabindex="-1"></a>  </span>
+<span id="cb93-12"><a href="06-Fonctions.html#cb93-12" tabindex="-1"></a>}</span>
+<span id="cb93-13"><a href="06-Fonctions.html#cb93-13" tabindex="-1"></a></span>
+<span id="cb93-14"><a href="06-Fonctions.html#cb93-14" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb93-15"><a href="06-Fonctions.html#cb93-15" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TACT_moda1=</span><span class="fu">case_when</span>(TACT <span class="sc">==</span> <span class="st">&quot;11&quot;</span> <span class="sc">~</span> <span class="st">&quot;Actifs ayant un emploi&quot;</span>,</span>
+<span id="cb93-16"><a href="06-Fonctions.html#cb93-16" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">&quot;12&quot;</span> <span class="sc">~</span> <span class="st">&quot;Chômeurs&quot;</span>,</span>
+<span id="cb93-17"><a href="06-Fonctions.html#cb93-17" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">&quot;22&quot;</span> <span class="sc">~</span> <span class="st">&quot;Élèves, étudiants et stagiaires non rémunérés&quot;</span>,</span>
+<span id="cb93-18"><a href="06-Fonctions.html#cb93-18" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">&quot;21&quot;</span> <span class="sc">~</span> <span class="st">&quot;Retraités ou préretraités&quot;</span>,</span>
+<span id="cb93-19"><a href="06-Fonctions.html#cb93-19" tabindex="-1"></a>                             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Autres inactifs&quot;</span>),</span>
+<span id="cb93-20"><a href="06-Fonctions.html#cb93-20" tabindex="-1"></a>         <span class="at">TACT_moda1=</span><span class="fu">fct_relevel</span>(TACT_moda1, <span class="fu">c</span>(<span class="st">&quot;Actifs ayant un emploi&quot;</span>, <span class="st">&quot;Chômeurs&quot;</span>,</span>
+<span id="cb93-21"><a href="06-Fonctions.html#cb93-21" tabindex="-1"></a>                                            <span class="st">&quot;Élèves, étudiants et stagiaires non rémunérés&quot;</span>, </span>
+<span id="cb93-22"><a href="06-Fonctions.html#cb93-22" tabindex="-1"></a>                                            <span class="st">&quot;Retraités ou préretraités&quot;</span>, <span class="st">&quot;Autres inactifs&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-23"><a href="06-Fonctions.html#cb93-23" tabindex="-1"></a>  <span class="fu">tableau</span>(DEPT <span class="sc">==</span> <span class="st">&quot;75&quot;</span> <span class="sc">&amp;</span> <span class="sc">!</span>AGEREVQ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;65&quot;</span>, <span class="st">&quot;70&quot;</span>, <span class="st">&quot;75&quot;</span>, <span class="st">&quot;80&quot;</span>, <span class="st">&quot;85&quot;</span>, <span class="st">&quot;90&quot;</span>, <span class="st">&quot;95&quot;</span>, </span>
+<span id="cb93-24"><a href="06-Fonctions.html#cb93-24" tabindex="-1"></a>                                        <span class="st">&quot;100&quot;</span>, <span class="st">&quot;105&quot;</span>, <span class="st">&quot;110&quot;</span>, <span class="st">&quot;115&quot;</span>, <span class="st">&quot;120&quot;</span>),</span>
+<span id="cb93-25"><a href="06-Fonctions.html#cb93-25" tabindex="-1"></a>          <span class="at">var_quali=</span>TACT_moda1, <span class="at">nom_var_quali=</span><span class="st">&quot;Type d&#39;activité&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-26"><a href="06-Fonctions.html#cb93-26" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb93-27"><a href="06-Fonctions.html#cb93-27" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">&quot; &quot;</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-28"><a href="06-Fonctions.html#cb93-28" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">&quot;Population de 15-64 ans par type d&#39;activité en 2019&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-29"><a href="06-Fonctions.html#cb93-29" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">&quot;Source : Insee, RP 2019 ; Champ : Paris.&quot;</span>)</span></code></pre></div>
+<div id="zglwwqjrko" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zglwwqjrko table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#zglwwqjrko thead, #zglwwqjrko tbody, #zglwwqjrko tfoot, #zglwwqjrko tr, #zglwwqjrko td, #zglwwqjrko th {
+  border-style: none;
+}
+
+#zglwwqjrko p {
+  margin: 0;
+  padding: 0;
+}
+
+#zglwwqjrko .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#zglwwqjrko .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zglwwqjrko .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zglwwqjrko .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zglwwqjrko .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zglwwqjrko .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zglwwqjrko .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zglwwqjrko .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zglwwqjrko .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#zglwwqjrko .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#zglwwqjrko .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zglwwqjrko .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zglwwqjrko .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zglwwqjrko .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zglwwqjrko .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zglwwqjrko .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zglwwqjrko .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zglwwqjrko .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#zglwwqjrko .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zglwwqjrko .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zglwwqjrko .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zglwwqjrko .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zglwwqjrko .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zglwwqjrko .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zglwwqjrko .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zglwwqjrko .gt_left {
+  text-align: left;
+}
+
+#zglwwqjrko .gt_center {
+  text-align: center;
+}
+
+#zglwwqjrko .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zglwwqjrko .gt_font_normal {
+  font-weight: normal;
+}
+
+#zglwwqjrko .gt_font_bold {
+  font-weight: bold;
+}
+
+#zglwwqjrko .gt_font_italic {
+  font-style: italic;
+}
+
+#zglwwqjrko .gt_super {
+  font-size: 65%;
+}
+
+#zglwwqjrko .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#zglwwqjrko .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zglwwqjrko .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#zglwwqjrko .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#zglwwqjrko .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#zglwwqjrko .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#zglwwqjrko .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#zglwwqjrko .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#zglwwqjrko div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Population de 15-64 ans par type d'activité en 2019</td>
+    </tr>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Type-d'activité">Type d'activité</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Effectif">Effectif</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Pourcentage">Pourcentage</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Actifs ayant un emploi</td>
+<td headers="Effectif" class="gt_row gt_right">1 042 588</td>
+<td headers="Pourcentage" class="gt_row gt_right">69.3</td></tr>
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Chômeurs</td>
+<td headers="Effectif" class="gt_row gt_right">135 014</td>
+<td headers="Pourcentage" class="gt_row gt_right">9.0</td></tr>
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Élèves, étudiants et stagiaires non rémunérés</td>
+<td headers="Effectif" class="gt_row gt_right">192 205</td>
+<td headers="Pourcentage" class="gt_row gt_right">12.8</td></tr>
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Retraités ou préretraités</td>
+<td headers="Effectif" class="gt_row gt_right">38 512</td>
+<td headers="Pourcentage" class="gt_row gt_right">2.6</td></tr>
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Autres inactifs</td>
+<td headers="Effectif" class="gt_row gt_right">95 944</td>
+<td headers="Pourcentage" class="gt_row gt_right">6.4</td></tr>
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Total</td>
+<td headers="Effectif" class="gt_row gt_right">1 504 263</td>
+<td headers="Pourcentage" class="gt_row gt_right">100.1</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="3">Source : Insee, RP 2019 ; Champ : Paris.</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+<p>Une autre façon de faire serait de créer un vecteur qui contiendrait ces différents filtres mais qu’il faudrait combiner dans une chaîne de caractères, ce qui est possible avec la fonction <code>paste0()</code>, et l’insérer ensuite dans la ligne de code <code>dplir</code> en utilisant <code>eval(parse(text=))</code> pour convertir cette chaîne de caractéres en une expression (<code>parse(text=)</code>) pour que <code>R</code> puisse l’évaluer/le calculer avec la fonction <code>eval()</code>.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="06-Fonctions.html#cb94-1" tabindex="-1"></a>tableau_bis <span class="ot">&lt;-</span> <span class="cf">function</span>(data, vars_filtre, var_quali, <span class="at">pond=</span>IPONDI, nom_var_quali){</span>
+<span id="cb94-2"><a href="06-Fonctions.html#cb94-2" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="06-Fonctions.html#cb94-3" tabindex="-1"></a>  text_filtre <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;(&quot;</span>, vars_filtre, <span class="st">&quot;)&quot;</span>, <span class="at">collapse =</span> <span class="st">&quot; &amp; &quot;</span>)</span>
+<span id="cb94-4"><a href="06-Fonctions.html#cb94-4" tabindex="-1"></a></span>
+<span id="cb94-5"><a href="06-Fonctions.html#cb94-5" tabindex="-1"></a>  tab1 <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb94-6"><a href="06-Fonctions.html#cb94-6" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> text_filtre))) <span class="sc">%&gt;%</span></span>
+<span id="cb94-7"><a href="06-Fonctions.html#cb94-7" tabindex="-1"></a>    <span class="fu">count</span>({{ var_quali }}, <span class="at">wt=</span>{{ pond }}) <span class="sc">%&gt;%</span></span>
+<span id="cb94-8"><a href="06-Fonctions.html#cb94-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb94-9"><a href="06-Fonctions.html#cb94-9" tabindex="-1"></a>    <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb94-10"><a href="06-Fonctions.html#cb94-10" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Effectif=</span>n, {{nom_var_quali}}<span class="sc">:=</span>{{ var_quali }}) </span>
+<span id="cb94-11"><a href="06-Fonctions.html#cb94-11" tabindex="-1"></a></span>
+<span id="cb94-12"><a href="06-Fonctions.html#cb94-12" tabindex="-1"></a>  <span class="fu">return</span>(tab1)</span>
+<span id="cb94-13"><a href="06-Fonctions.html#cb94-13" tabindex="-1"></a></span>
+<span id="cb94-14"><a href="06-Fonctions.html#cb94-14" tabindex="-1"></a>}</span>
+<span id="cb94-15"><a href="06-Fonctions.html#cb94-15" tabindex="-1"></a></span>
+<span id="cb94-16"><a href="06-Fonctions.html#cb94-16" tabindex="-1"></a><span class="co"># Attention, comme les filtres sont contenues dans des &quot; &quot;, il faut à l&#39;intérieur des  </span></span>
+<span id="cb94-17"><a href="06-Fonctions.html#cb94-17" tabindex="-1"></a><span class="co">#  filtres utiliser les &#39; &#39; plutôt que les &quot; &quot;</span></span>
+<span id="cb94-18"><a href="06-Fonctions.html#cb94-18" tabindex="-1"></a>mes_filtres <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;DEPT == &#39;75&#39;&quot;</span>, <span class="st">&quot;!AGEREVQ %in% c(&#39;0&#39;, &#39;5&#39;, &#39;10&#39;, &#39;65&#39;, &#39;70&#39;, &#39;75&#39;, </span></span>
+<span id="cb94-19"><a href="06-Fonctions.html#cb94-19" tabindex="-1"></a><span class="st">                                                  &#39;80&#39;, &#39;85&#39;, &#39;90&#39;, &#39;95&#39;, &#39;100&#39;, &#39;105&#39;,</span></span>
+<span id="cb94-20"><a href="06-Fonctions.html#cb94-20" tabindex="-1"></a><span class="st">                                                  &#39;110&#39;, &#39;115&#39;, &#39;120&#39;)&quot;</span>)</span>
+<span id="cb94-21"><a href="06-Fonctions.html#cb94-21" tabindex="-1"></a></span>
+<span id="cb94-22"><a href="06-Fonctions.html#cb94-22" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb94-23"><a href="06-Fonctions.html#cb94-23" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TACT_moda1=</span><span class="fu">case_when</span>(TACT <span class="sc">==</span> <span class="st">&quot;11&quot;</span> <span class="sc">~</span> <span class="st">&quot;Actifs ayant un emploi&quot;</span>,</span>
+<span id="cb94-24"><a href="06-Fonctions.html#cb94-24" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">&quot;12&quot;</span> <span class="sc">~</span> <span class="st">&quot;Chômeurs&quot;</span>,</span>
+<span id="cb94-25"><a href="06-Fonctions.html#cb94-25" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">&quot;22&quot;</span> <span class="sc">~</span> <span class="st">&quot;Élèves, étudiants et stagiaires non rémunérés&quot;</span>,</span>
+<span id="cb94-26"><a href="06-Fonctions.html#cb94-26" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">&quot;21&quot;</span> <span class="sc">~</span> <span class="st">&quot;Retraités ou préretraités&quot;</span>,</span>
+<span id="cb94-27"><a href="06-Fonctions.html#cb94-27" tabindex="-1"></a>                             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Autres inactifs&quot;</span>),</span>
+<span id="cb94-28"><a href="06-Fonctions.html#cb94-28" tabindex="-1"></a>         <span class="at">TACT_moda1=</span><span class="fu">fct_relevel</span>(TACT_moda1, <span class="fu">c</span>(<span class="st">&quot;Actifs ayant un emploi&quot;</span>, <span class="st">&quot;Chômeurs&quot;</span>,</span>
+<span id="cb94-29"><a href="06-Fonctions.html#cb94-29" tabindex="-1"></a>                                            <span class="st">&quot;Élèves, étudiants et stagiaires non rémunérés&quot;</span>, </span>
+<span id="cb94-30"><a href="06-Fonctions.html#cb94-30" tabindex="-1"></a>                                            <span class="st">&quot;Retraités ou préretraités&quot;</span>, <span class="st">&quot;Autres inactifs&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb94-31"><a href="06-Fonctions.html#cb94-31" tabindex="-1"></a>  <span class="fu">tableau_bis</span>(mes_filtres, <span class="at">var_quali=</span>TACT_moda1, <span class="at">nom_var_quali=</span><span class="st">&quot;Type d&#39;activité&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb94-32"><a href="06-Fonctions.html#cb94-32" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb94-33"><a href="06-Fonctions.html#cb94-33" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">&quot; &quot;</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb94-34"><a href="06-Fonctions.html#cb94-34" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">&quot;Population de 15-64 ans par type d&#39;activité en 2019&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb94-35"><a href="06-Fonctions.html#cb94-35" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">&quot;Source : Insee, RP 2019 ; Champ : Paris.&quot;</span>)</span></code></pre></div>
+<p>On peut également créer une fonction pour permettre de récupérer plus rapidement les libellés des variables à partir du fichier de métadonnées :</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="06-Fonctions.html#cb95-1" tabindex="-1"></a><span class="co"># Pour la fonction mutate, on est de nouveau obligé d&#39;utiliser l&#39;expression </span></span>
+<span id="cb95-2"><a href="06-Fonctions.html#cb95-2" tabindex="-1"></a><span class="co">#  &#39;eval(parse(text={{ cod_var }}))&#39; sinon R ne comprend pas que la variable </span></span>
+<span id="cb95-3"><a href="06-Fonctions.html#cb95-3" tabindex="-1"></a><span class="co">#  utilisée est une expression de type caractère</span></span>
+<span id="cb95-4"><a href="06-Fonctions.html#cb95-4" tabindex="-1"></a>libelles_var <span class="ot">&lt;-</span> <span class="cf">function</span>(data, cod_var, new_var){</span>
+<span id="cb95-5"><a href="06-Fonctions.html#cb95-5" tabindex="-1"></a>  </span>
+<span id="cb95-6"><a href="06-Fonctions.html#cb95-6" tabindex="-1"></a>  levels_var <span class="ot">&lt;-</span> meta[meta<span class="sc">$</span>COD_VAR<span class="sc">==</span>{{ cod_var }}, ]<span class="sc">$</span>COD_MOD</span>
+<span id="cb95-7"><a href="06-Fonctions.html#cb95-7" tabindex="-1"></a>  labels_var <span class="ot">&lt;-</span> meta[meta<span class="sc">$</span>COD_VAR<span class="sc">==</span>{{ cod_var }}, ]<span class="sc">$</span>LIB_MOD</span>
+<span id="cb95-8"><a href="06-Fonctions.html#cb95-8" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>({{ new_var }} <span class="sc">:=</span> <span class="fu">factor</span>(<span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text=</span>{{ cod_var }})), </span>
+<span id="cb95-9"><a href="06-Fonctions.html#cb95-9" tabindex="-1"></a>                                          <span class="at">levels =</span> levels_var, <span class="at">labels =</span> labels_var))</span>
+<span id="cb95-10"><a href="06-Fonctions.html#cb95-10" tabindex="-1"></a></span>
+<span id="cb95-11"><a href="06-Fonctions.html#cb95-11" tabindex="-1"></a>}</span>
+<span id="cb95-12"><a href="06-Fonctions.html#cb95-12" tabindex="-1"></a></span>
+<span id="cb95-13"><a href="06-Fonctions.html#cb95-13" tabindex="-1"></a></span>
+<span id="cb95-14"><a href="06-Fonctions.html#cb95-14" tabindex="-1"></a><span class="co"># Autre possibilité, utiliser la fonction `sym()` (qui crée un symbole à partir </span></span>
+<span id="cb95-15"><a href="06-Fonctions.html#cb95-15" tabindex="-1"></a><span class="co"># d&#39;une chaîne de caractères) avec les &quot;!!&quot; (opérateur bang-bang qui permet de </span></span>
+<span id="cb95-16"><a href="06-Fonctions.html#cb95-16" tabindex="-1"></a><span class="co"># forcer l&#39;évaluation d&#39;une partie d&#39;une expression avant le reste) : </span></span>
+<span id="cb95-17"><a href="06-Fonctions.html#cb95-17" tabindex="-1"></a></span>
+<span id="cb95-18"><a href="06-Fonctions.html#cb95-18" tabindex="-1"></a><span class="co"># libelles_var &lt;- function(data, cod_var, new_var){</span></span>
+<span id="cb95-19"><a href="06-Fonctions.html#cb95-19" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb95-20"><a href="06-Fonctions.html#cb95-20" tabindex="-1"></a><span class="co">#   levels_var &lt;- meta[meta$COD_VAR=={{ cod_var }}, ]$COD_MOD</span></span>
+<span id="cb95-21"><a href="06-Fonctions.html#cb95-21" tabindex="-1"></a><span class="co">#   labels_var &lt;- meta[meta$COD_VAR=={{ cod_var }}, ]$LIB_MOD</span></span>
+<span id="cb95-22"><a href="06-Fonctions.html#cb95-22" tabindex="-1"></a><span class="co">#   data %&gt;% mutate({{ new_var }} := factor(!!sym({{ cod_var }}), </span></span>
+<span id="cb95-23"><a href="06-Fonctions.html#cb95-23" tabindex="-1"></a><span class="co">#                                           levels = levels_var, </span></span>
+<span id="cb95-24"><a href="06-Fonctions.html#cb95-24" tabindex="-1"></a><span class="co">#                                           labels = labels_var))</span></span>
+<span id="cb95-25"><a href="06-Fonctions.html#cb95-25" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb95-26"><a href="06-Fonctions.html#cb95-26" tabindex="-1"></a><span class="co"># }</span></span></code></pre></div>
+<p>Enfin, essayez d’écrire une seconde fonction <code>somme()</code> permettant de systématiser le code utilisée en fin de 1ère séance et qui donnait un tableau de contingence du nombre de personnes caractériées par son statut par commune (cela nous servira pour plus tard…) ; le voici pour rappel :</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="06-Fonctions.html#cb96-1" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb96-2"><a href="06-Fonctions.html#cb96-2" tabindex="-1"></a>  <span class="fu">group_by</span>(COM) <span class="sc">%&gt;%</span></span>
+<span id="cb96-3"><a href="06-Fonctions.html#cb96-3" tabindex="-1"></a>  <span class="fu">count</span>(TACT_moda, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb96-4"><a href="06-Fonctions.html#cb96-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">round</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb96-5"><a href="06-Fonctions.html#cb96-5" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> TACT_moda, <span class="at">values_from =</span> n)</span></code></pre></div>
+<div class="solution-exo">
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="06-Fonctions.html#cb97-1" tabindex="-1"></a>somme <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var_gpe, nom_var){</span>
+<span id="cb97-2"><a href="06-Fonctions.html#cb97-2" tabindex="-1"></a>  </span>
+<span id="cb97-3"><a href="06-Fonctions.html#cb97-3" tabindex="-1"></a>  som <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb97-4"><a href="06-Fonctions.html#cb97-4" tabindex="-1"></a>    <span class="fu">group_by</span>({{var_gpe}}) <span class="sc">%&gt;%</span> </span>
+<span id="cb97-5"><a href="06-Fonctions.html#cb97-5" tabindex="-1"></a>    <span class="fu">count</span>({{nom_var}}, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb97-6"><a href="06-Fonctions.html#cb97-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">round</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb97-7"><a href="06-Fonctions.html#cb97-7" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> {{nom_var}}, <span class="at">values_from =</span> n)</span>
+<span id="cb97-8"><a href="06-Fonctions.html#cb97-8" tabindex="-1"></a>  </span>
+<span id="cb97-9"><a href="06-Fonctions.html#cb97-9" tabindex="-1"></a>  <span class="fu">return</span>(som)</span>
+<span id="cb97-10"><a href="06-Fonctions.html#cb97-10" tabindex="-1"></a>  </span>
+<span id="cb97-11"><a href="06-Fonctions.html#cb97-11" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<p>Vérifions :</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="06-Fonctions.html#cb98-1" tabindex="-1"></a><span class="fu">somme</span>(<span class="at">data=</span>RP_final, COM, TACT_moda)</span></code></pre></div>
+<pre><code># A tibble: 137 × 5
+   COM   `Actifs en emploi` Chômeurs Retraités `Autres inactifs`
+   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;             &lt;dbl&gt;
+ 1 75101               8366      941      2630              3979
+ 2 75102              13118     1378      2148              4964
+ 3 75103              19239     2085      4589              8123
+ 4 75104              15227     1863      4508              7513
+ 5 75105              27378     2611     10607             17618
+ 6 75106              18073     1842      8180             12176
+ 7 75107              23394     2165      9573             13735
+ 8 75108              18254     1565      5297             10534
+ 9 75109              34155     3482      7264             15125
+10 75110              46454     6343     10645             23078
+# ℹ 127 more rows</code></pre>
+<p>La création de fonctions est donc très utile pour avoir un code plus efficace ; il faut toutefois réfléchir à son usage avant de la créer pour savoir à quel point il faut systématiser les procédures utilisées, certains éléments devant être laissés probablement en-dehors de la fonction, comme dans l’exemple précédent le fait d’arrondir les chiffres. Il faut par ailleurs toujours vérfier, sur un ou deux exemples, que la fonction fonctionne bien, c’est-à-dire donne les mêmes résultats que le code initial.</p>
+<p>Pour pouvoir les réutiliser ultérieurement, on peut les réécrire dans un nouveau script qu’on enregistre dans un dossier de notre projet qu’on intitule “fonctions” ; il suffira ensuite d’appeler ce programme avec la fonction <code>source()</code> :</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="06-Fonctions.html#cb100-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;fonctions/fonctions.R&quot;</span>)</span></code></pre></div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<script src="js/tidyverse.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="05-Questions-fouille-donnees.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
+"instapper": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Camille-Sisi/Data-Mining-2025/master/06-Fonctions.Rmd",
+"text": "Source"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

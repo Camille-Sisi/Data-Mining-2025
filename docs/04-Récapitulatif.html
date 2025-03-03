@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section4 Récapitulatig séance 1 - Data Wrangling | DATA MINING</title>
+  <meta name="description" content="Titre du cours" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section4 Récapitulatig séance 1 - Data Wrangling | DATA MINING" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Titre du cours" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section4 Récapitulatig séance 1 - Data Wrangling | DATA MINING" />
+  
+  <meta name="twitter:description" content="Titre du cours" />
+  
+
+<meta name="author" content="Camille Signoretto, Maîtresse de conférences en économie, Université Paris Cité" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="03-Manipulation-variables.html"/>
+<link rel="next" href="05-Questions-fouille-donnees.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/tidyverse.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Mining :  <em>Camille Signoretto</em></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html"><i class="fa fa-check"></i>Présentation</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DATA MINING</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="c04-Récapitulatif" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Section4</span> Récapitulatig séance 1 - Data Wrangling<a href="04-Récapitulatif.html#c04-Récapitulatif" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div align="justify">
+<div id="ce-quon-a-appris" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Ce qu’on a appris<a href="04-Récapitulatif.html#ce-quon-a-appris" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cette séance sur la préparation et nettoyage d’une base de données - phase appelée aussi Data Wrangling - nous a permis d’apprendre à :</p>
+<ul>
+<li>charger des bases de données, y compris dans le cas d’un fichier lourd avec la fonction <code>fread()</code> du package <strong><code>data.table</code></strong> ;</li>
+<li>repérer les informations intéressantes contenues dans cette base, notamment en allant voir le fichier “annexe”, celui des métadonneés (ou dictionnaire des codes) ; mais ce type de fichier n’est pas toujours disponible, si vous avez des données d’une entreprise, peut-être que l’information décrivant cette base est plus informelle, ou même si vous “aspirez” des données <em>via</em> le web vous n’aurez alors pas du tout d’information décrivant la base… :</li>
+<li>manipuler la base de données : en identifiant d’abord le format des données, en sélectionnant un champ différent (moins de lignes/d’observations), et/ou des variables spécifiques (moins de colonnes/d’informations), avec les fonctions <code>filter()</code>, <code>select()</code>, <code>subset()</code>, <code>pivot_wider()</code>, <code>pivot_longer()</code>, <code>unique()</code>, <code>arrange()</code>, etc.;</li>
+<li>manipuler des variables : en identifiant le format des variables, en les mettant dans le bon format, en (re)travaillant les modalités d’une variable qualitative (avec notamment les fonctions <code>mutate()</code>, <code>case_when()</code>, <code>as.factor()</code>, ou encore celles du package <strong><code>factors</code></strong>), en détectant/visualisant/gérant les valeurs manquantes d’une variable quantitative avec entre autres le package <strong><code>naniar</code></strong>, en détectant/visualiant/gérant les valeurs aberrantes d’une variable quantitative à partir en particulier des statistiques de la “boîte à moustaches” (fonction <code>geom_boxplot()</code> à utiliser avec <code>ggplot()</code>, fonction <code>boxplot.stats()</code>), et enfin, en transformant une variable quantitative en variable qualitative (avec la fonction <code>cut()</code>).</li>
+</ul>
+<p>L’usage pour cette phase du langage <code>dplyr</code> ou plus généralement du <code>tidyverse</code> est particulièrement conseillée, cela permet d’“enchaîner” des fonctions en une seule instruction.</p>
+</div>
+<div id="enregistrement-des-tables" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Enregistrement des tables<a href="04-Récapitulatif.html#enregistrement-des-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Et voilà, on a bien “trituré” ces deux bases de données, maintenant on peut les enregistrer dans notre projet pour pouvoir les réutiliser lors de la prochaine séance.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="04-Récapitulatif.html#cb83-1" tabindex="-1"></a><span class="co"># On enregistre les tables de données pour les utiliser ultérieurement</span></span>
+<span id="cb83-2"><a href="04-Récapitulatif.html#cb83-2" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> RP_final,  <span class="at">file =</span> <span class="st">&quot;data/RP_final.Rdata&quot;</span>)</span>
+<span id="cb83-3"><a href="04-Récapitulatif.html#cb83-3" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> meta,  <span class="at">file =</span> <span class="st">&quot;data/meta.Rdata&quot;</span>)</span>
+<span id="cb83-4"><a href="04-Récapitulatif.html#cb83-4" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> OffresPE_2020, <span class="at">file =</span> <span class="st">&quot;data/OffresPE_2020.Rdata&quot;</span>) </span></code></pre></div>
+
+</div>
+
+
+
+<script src="js/tidyverse.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="03-Manipulation-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="05-Questions-fouille-donnees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
+"instapper": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Camille-Sisi/Data-Mining-2025/master/04-Récapitulatif.Rmd",
+"text": "Source"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

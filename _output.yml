@@ -4,18 +4,18 @@ bookdown::gitbook:
   css: css/tidyverse.css
   self_contained: false
   df_print: tibble
-  split_by: rmd
+  split_by: "rmd"
   download: ["epub", "pdf"]
   includes:
     after_body: js/custom_javascript.html
   config:
-    toc:
+    toc: 
       collapse: section
       before: |
         <li><a href="./">Data Mining :  <em>Camille Signoretto</em></a></li>
     sharing:
       twitter: no
-      github: no
+      github: true
       facebook: no
       weibo: no
       instapper: no

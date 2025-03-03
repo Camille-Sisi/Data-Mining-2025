@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 2 Manipulation de la base | DATA MINING</title>
+  <title>Section2 Manipulation de la base | DATA MINING</title>
   <meta name="description" content="Titre du cours" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 2 Manipulation de la base | DATA MINING" />
+  <meta property="og:title" content="Section2 Manipulation de la base | DATA MINING" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Titre du cours" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 2 Manipulation de la base | DATA MINING" />
+  <meta name="twitter:title" content="Section2 Manipulation de la base | DATA MINING" />
   
   <meta name="twitter:description" content="Titre du cours" />
   
@@ -138,6 +138,12 @@ code span.wa { color: #bf0303; } /* Warning */
     <div class="book-summary">
       <nav role="navigation">
 
+<ul class="summary">
+<li><a href="./">Data Mining :  <em>Camille Signoretto</em></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html"><i class="fa fa-check"></i>Présentation</a></li>
+</ul>
 
       </nav>
     </div>
@@ -155,27 +161,27 @@ code span.wa { color: #bf0303; } /* Warning */
 
             <section class="normal" id="section-">
 <div id="c02-Manipulation-base" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Section 2</span> Manipulation de la base<a href="02-Manipulation-base.html#c02-Manipulation-base" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Section2</span> Manipulation de la base<a href="02-Manipulation-base.html#c02-Manipulation-base" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div align="justify">
 <p>On peut maintenant regarder à quoi ressemble la table principale, celle des données.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="02-Manipulation-base.html#cb11-1" tabindex="-1"></a>RP <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div>
-<div id="rwftgafmbv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rwftgafmbv table {
+<div id="binppcaunr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#binppcaunr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rwftgafmbv thead, #rwftgafmbv tbody, #rwftgafmbv tfoot, #rwftgafmbv tr, #rwftgafmbv td, #rwftgafmbv th {
+#binppcaunr thead, #binppcaunr tbody, #binppcaunr tfoot, #binppcaunr tr, #binppcaunr td, #binppcaunr th {
   border-style: none;
 }
 
-#rwftgafmbv p {
+#binppcaunr p {
   margin: 0;
   padding: 0;
 }
 
-#rwftgafmbv .gt_table {
+#binppcaunr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -201,12 +207,12 @@ code span.wa { color: #bf0303; } /* Warning */
   border-left-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_caption {
+#binppcaunr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rwftgafmbv .gt_title {
+#binppcaunr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -218,7 +224,7 @@ code span.wa { color: #bf0303; } /* Warning */
   border-bottom-width: 0;
 }
 
-#rwftgafmbv .gt_subtitle {
+#binppcaunr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -230,7 +236,7 @@ code span.wa { color: #bf0303; } /* Warning */
   border-top-width: 0;
 }
 
-#rwftgafmbv .gt_heading {
+#binppcaunr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -242,13 +248,13 @@ code span.wa { color: #bf0303; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_bottom_border {
+#binppcaunr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_col_headings {
+#binppcaunr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -263,7 +269,7 @@ code span.wa { color: #bf0303; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_col_heading {
+#binppcaunr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -283,7 +289,7 @@ code span.wa { color: #bf0303; } /* Warning */
   overflow-x: hidden;
 }
 
-#rwftgafmbv .gt_column_spanner_outer {
+#binppcaunr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -295,15 +301,15 @@ code span.wa { color: #bf0303; } /* Warning */
   padding-right: 4px;
 }
 
-#rwftgafmbv .gt_column_spanner_outer:first-child {
+#binppcaunr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rwftgafmbv .gt_column_spanner_outer:last-child {
+#binppcaunr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rwftgafmbv .gt_column_spanner {
+#binppcaunr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -315,11 +321,11 @@ code span.wa { color: #bf0303; } /* Warning */
   width: 100%;
 }
 
-#rwftgafmbv .gt_spanner_row {
+#binppcaunr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rwftgafmbv .gt_group_heading {
+#binppcaunr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -345,7 +351,7 @@ code span.wa { color: #bf0303; } /* Warning */
   text-align: left;
 }
 
-#rwftgafmbv .gt_empty_group_heading {
+#binppcaunr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -360,15 +366,15 @@ code span.wa { color: #bf0303; } /* Warning */
   vertical-align: middle;
 }
 
-#rwftgafmbv .gt_from_md > :first-child {
+#binppcaunr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rwftgafmbv .gt_from_md > :last-child {
+#binppcaunr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rwftgafmbv .gt_row {
+#binppcaunr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -387,7 +393,7 @@ code span.wa { color: #bf0303; } /* Warning */
   overflow-x: hidden;
 }
 
-#rwftgafmbv .gt_stub {
+#binppcaunr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -400,7 +406,7 @@ code span.wa { color: #bf0303; } /* Warning */
   padding-right: 5px;
 }
 
-#rwftgafmbv .gt_stub_row_group {
+#binppcaunr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -414,15 +420,15 @@ code span.wa { color: #bf0303; } /* Warning */
   vertical-align: top;
 }
 
-#rwftgafmbv .gt_row_group_first td {
+#binppcaunr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rwftgafmbv .gt_row_group_first th {
+#binppcaunr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rwftgafmbv .gt_summary_row {
+#binppcaunr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -432,16 +438,16 @@ code span.wa { color: #bf0303; } /* Warning */
   padding-right: 5px;
 }
 
-#rwftgafmbv .gt_first_summary_row {
+#binppcaunr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_first_summary_row.thick {
+#binppcaunr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rwftgafmbv .gt_last_summary_row {
+#binppcaunr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -451,7 +457,7 @@ code span.wa { color: #bf0303; } /* Warning */
   border-bottom-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_grand_summary_row {
+#binppcaunr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -461,7 +467,7 @@ code span.wa { color: #bf0303; } /* Warning */
   padding-right: 5px;
 }
 
-#rwftgafmbv .gt_first_grand_summary_row {
+#binppcaunr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -471,7 +477,7 @@ code span.wa { color: #bf0303; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_last_grand_summary_row_top {
+#binppcaunr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -481,11 +487,11 @@ code span.wa { color: #bf0303; } /* Warning */
   border-bottom-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_striped {
+#binppcaunr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rwftgafmbv .gt_table_body {
+#binppcaunr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -494,7 +500,7 @@ code span.wa { color: #bf0303; } /* Warning */
   border-bottom-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_footnotes {
+#binppcaunr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -508,7 +514,7 @@ code span.wa { color: #bf0303; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_footnote {
+#binppcaunr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -517,7 +523,7 @@ code span.wa { color: #bf0303; } /* Warning */
   padding-right: 5px;
 }
 
-#rwftgafmbv .gt_sourcenotes {
+#binppcaunr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -531,7 +537,7 @@ code span.wa { color: #bf0303; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#rwftgafmbv .gt_sourcenote {
+#binppcaunr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -539,72 +545,72 @@ code span.wa { color: #bf0303; } /* Warning */
   padding-right: 5px;
 }
 
-#rwftgafmbv .gt_left {
+#binppcaunr .gt_left {
   text-align: left;
 }
 
-#rwftgafmbv .gt_center {
+#binppcaunr .gt_center {
   text-align: center;
 }
 
-#rwftgafmbv .gt_right {
+#binppcaunr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rwftgafmbv .gt_font_normal {
+#binppcaunr .gt_font_normal {
   font-weight: normal;
 }
 
-#rwftgafmbv .gt_font_bold {
+#binppcaunr .gt_font_bold {
   font-weight: bold;
 }
 
-#rwftgafmbv .gt_font_italic {
+#binppcaunr .gt_font_italic {
   font-style: italic;
 }
 
-#rwftgafmbv .gt_super {
+#binppcaunr .gt_super {
   font-size: 65%;
 }
 
-#rwftgafmbv .gt_footnote_marks {
+#binppcaunr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rwftgafmbv .gt_asterisk {
+#binppcaunr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rwftgafmbv .gt_indent_1 {
+#binppcaunr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rwftgafmbv .gt_indent_2 {
+#binppcaunr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rwftgafmbv .gt_indent_3 {
+#binppcaunr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rwftgafmbv .gt_indent_4 {
+#binppcaunr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rwftgafmbv .gt_indent_5 {
+#binppcaunr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rwftgafmbv .katex-display {
+#binppcaunr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rwftgafmbv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#binppcaunr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1401,7 +1407,7 @@ Créer trois nouvelles bases selon les indications suivantes :</p>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
+"github": true,
 "facebook": false,
 "twitter": false,
 "linkedin": false,
@@ -1441,6 +1447,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

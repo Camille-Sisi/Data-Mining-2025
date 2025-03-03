@@ -138,6 +138,12 @@ code span.wa { color: #bf0303; } /* Warning */
     <div class="book-summary">
       <nav role="navigation">
 
+<ul class="summary">
+<li><a href="./">Data Mining :  <em>Camille Signoretto</em></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html"><i class="fa fa-check"></i>Présentation</a></li>
+</ul>
 
       </nav>
     </div>
@@ -154,9 +160,9 @@ code span.wa { color: #bf0303; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div align="justify">
 <div id="présentation" class="section level1 unnumbered hasAnchor">
 <h1>Présentation<a href="00-Presentation.html#présentation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div align="justify">
 <div id="à-propos-de-ce-document" class="section level2 unnumbered hasAnchor">
 <h2>À propos de ce document<a href="00-Presentation.html#à-propos-de-ce-document" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Ce document est la version 2025 du cours de Data Mining dispensé aux étudiants de deuxième année de l’option Data du master MECI parcours PISE et CCESE. Ce cours est partagé avec Claude Grasland, dont vous trouverez la partie à l’adresse suivante : <a href="https://claudegrasland.github.io/datamining2025/" class="uri">https://claudegrasland.github.io/datamining2025/</a>.</p>
@@ -189,7 +195,6 @@ code span.wa { color: #bf0303; } /* Warning */
 <p>Ce document est mis à disposition selon les termes de la <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International</a>.</p>
 
 </div>
-</div>
 
 
 
@@ -221,7 +226,7 @@ code span.wa { color: #bf0303; } /* Warning */
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
+"github": true,
 "facebook": false,
 "twitter": false,
 "linkedin": false,
@@ -261,6 +266,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

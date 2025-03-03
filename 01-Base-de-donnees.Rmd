@@ -1,7 +1,7 @@
+
 # (PART\*) Séance 1 : Data Wrangling {.unnumbered}
 
 # Récupération de la base de données {#c01-Base-de-donnees}
-
 <div align="justify">
 
 On va travailler cette année sur les données du Recensement de la Population (RP). C'est une base de données riche en informations, qui s'appuie sur les enquêtes annuelles du recensement et est produite par l'Insee. Les fichiers mis à disposition sur leur site sont au nombre de 9 : ils rassemblent des informations différentes, sur des espaces géographiques différents (canton ou ville, région), et à des niveaux d'analyse différents (individus, ménages/logements). Les derniers fichiers disponibles portent sur l'année 2021 mais nous allons travailer sur l'année 2019 qui rassemble les enquêtes annuelles du recensement (EAR) des années 2017 à 2021.

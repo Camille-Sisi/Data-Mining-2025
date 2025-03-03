@@ -1,11 +1,17 @@
 book_filename: "Data Mining"
-repo: https://github.com/Camille-Sisi/Data-Mining-2025
-delete_merged_file: true
 output_dir: "docs"
+delete_merged_file: true
+repo: https://github.com/Camille-Sisi/Data-Mining-2025
 edit: https://github.com/Camille-Sisi/Data-Mining-2025/master/%s
 language:
   ui:
-    chapter_name: "Section "
+    chapter_name: "Section"
     edit: "Source"
-
-
+rmd_files:
+  - index.Rmd
+  - 00-Presentation.Rmd
+  - 01-Base-de-donnees.Rmd
+  - 02-Manipulation-base.Rmd
+  - 03-Manipulation-variables.Rmd
+  - 04-Récapitulatif.Rmd
+  - 05-Questions-fouille-donnees.Rmd

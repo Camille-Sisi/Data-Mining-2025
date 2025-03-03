@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section5 Quelles questions intéressantes pour une “fouille de données” sur la base des RP ? | DATA MINING</title>
+  <meta name="description" content="Titre du cours" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section5 Quelles questions intéressantes pour une “fouille de données” sur la base des RP ? | DATA MINING" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Titre du cours" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section5 Quelles questions intéressantes pour une “fouille de données” sur la base des RP ? | DATA MINING" />
+  
+  <meta name="twitter:description" content="Titre du cours" />
+  
+
+<meta name="author" content="Camille Signoretto, Maîtresse de conférences en économie, Université Paris Cité" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="04-Récapitulatif.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/tidyverse.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Mining :  <em>Camille Signoretto</em></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html"><i class="fa fa-check"></i>Présentation</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DATA MINING</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="c05-Questions-fouille-donnees" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Section5</span> Quelles questions intéressantes pour une “fouille de données” sur la base des RP ?<a href="05-Questions-fouille-donnees.html#c05-Questions-fouille-donnees" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div align="justify">
+<p>Quelles sont les questions intéressantes que l’on peut se poser ? Qu’est-ce qu’on va pouvoir mettre en évidence à partir de ces données ?</p>
+<p>D’abord, on peut caractériser la population de Paris et sa petite couronne selon des variables socio-démographiques (sexe, âge, diplôme, statut conjugal, nombre d’enfants, …) et d’emploi (statut d’activité, PCS, condition d’emploi - contrat, temps de travail -, secteur d’activité, …). Ensuite, on peut décrire les logements de Paris et sa petite couronne, selon le type (appartement, maison, HLM, …), la superficie, le nombre de pièces, le nombre de personnes y habitant, le statut d’occupation (propriétaire, locataire, …), l’ancienneté d’occupation. Enifn, on peut décrire plus précisément les pièces du logement en termes de confort (baignoire / douche, salle climatisée, moyen de chauffage), ainsi que les parties communes de l’immeuble (ascenseur, place de stationnement). Enfin, on pourrait étudier les caractéristiques des occupants de ces logements, et en premier lieu ici ce que l’Insee appelle la “personne de référence du ménage”. Par ailleurs, toutes ces analyses peuvent être réalisées en comparant les différentes communes de Paris et sa petite couronne, ou à un niveau géographique plus fin par quartiers, arrondissements ou encore IRIS.</p>
+<p>Pour manipuler cette base et répondre à quelques-unes de ces questions, nous allons nous concentrer sur la commune de Paris, et allons chercher à reproduire des statistiques publiées sur le site de l’Insee. Nous produirons principalement, lors de cette séance, des tableaux de statistiques, l’analyse graphique fera en effet l’objet de la séance suivante car elle nécessite la présentation détaillée de la “grammaire” <strong><code>Ggplot</code></strong>.</p>
+<p>Avant cela, si les tables de données (“RP_final” et “meta”) ne sont plus dans votre environnement local, il faut de nouveau les importer à partir de l’enregistrement précédemment effectué dans le dossier ‘data’ de votre projet. Pour cela, il faut utiliser la fonction <code>readRDS()</code>, comme ci-dessous :</p>
+<div id="caractéristiques-de-la-population-résidant-à-paris" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Caractéristiques de la population résidant à Paris<a href="05-Questions-fouille-donnees.html#caractéristiques-de-la-population-résidant-à-paris" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Sur le site de l’Insee, vous pouvez trouver les statistiques générales sur les individus à Paris en 2019 <a href="https://www.insee.fr/fr/statistiques/6455183?sommaire=6455209&geo=DEP-75" target="_blank">ici</a> et <a href="https://www.insee.fr/fr/statistiques/6455302?sommaire=6455322&geo=DEP-75" target="_blank">là</a>.</p>
+<p>Comme déjà vu lors de la 1ère séance, l’application de la pondération pour avoir des statistiques représentatives de la population peut être utilisée à l’intérieur de la fonction <code>count()</code> avec l’argument <code>wt=</code>. Cela nous donnera le nombre d’individus concernés par la caractéristique étudiée (par défaut, la variable créée s’appelle “n”, on peut la renommer dans une étape ultérieure avec la fonction <code>rename()</code>). Souvent, on souhaite aussi avoir les pourcentages, on peut alors créer une variable rapportant le nombre de chaque catégorie sur le nombre total d’individus, avec la fonction <code>prop.table()</code> utilisée dans la fonction <code>mutate()</code>. Le package <strong><code>janitor</code></strong> peut permettre enfin d’ajouter une ligne totale (ou une colonne totale selon ce qu’on souhaite faire) avec la fonction <code>adorn_totals()</code>, argument “row” pour avoir le total en ligne ou “col” pour l’avoir en colonne. Des fonctions supplémentaires liées au package <strong><code>gt()</code></strong> peuvent ensuite être utilisées pour mettre en forme le tableau : <code>fmt_number()</code>, <code>tab_header()</code> ou encore <code>tab_source_note()</code>.</p>
+<p>A partir de ces indications, afficher le tableau suivant à partir d’un code utilisant le langage <strong>tidyverse</strong> et en une seule procédure (sans créer de table dans votre environnement) :</p>
+<div id="jyethwzmak" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jyethwzmak table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jyethwzmak thead, #jyethwzmak tbody, #jyethwzmak tfoot, #jyethwzmak tr, #jyethwzmak td, #jyethwzmak th {
+  border-style: none;
+}
+
+#jyethwzmak p {
+  margin: 0;
+  padding: 0;
+}
+
+#jyethwzmak .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jyethwzmak .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jyethwzmak .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jyethwzmak .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jyethwzmak .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jyethwzmak .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jyethwzmak .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jyethwzmak .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jyethwzmak .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jyethwzmak .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jyethwzmak .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jyethwzmak .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jyethwzmak .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jyethwzmak .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jyethwzmak .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jyethwzmak .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jyethwzmak .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jyethwzmak .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jyethwzmak .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jyethwzmak .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jyethwzmak .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jyethwzmak .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jyethwzmak .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jyethwzmak .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jyethwzmak .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jyethwzmak .gt_left {
+  text-align: left;
+}
+
+#jyethwzmak .gt_center {
+  text-align: center;
+}
+
+#jyethwzmak .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jyethwzmak .gt_font_normal {
+  font-weight: normal;
+}
+
+#jyethwzmak .gt_font_bold {
+  font-weight: bold;
+}
+
+#jyethwzmak .gt_font_italic {
+  font-style: italic;
+}
+
+#jyethwzmak .gt_super {
+  font-size: 65%;
+}
+
+#jyethwzmak .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jyethwzmak .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jyethwzmak .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jyethwzmak .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jyethwzmak .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jyethwzmak .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jyethwzmak .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#jyethwzmak .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jyethwzmak div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Population par sexe en 2019</td>
+    </tr>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Sexe">Sexe</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Effectif">Effectif</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Pourcentage">Pourcentage</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Sexe" class="gt_row gt_left">Femmes</td>
+<td headers="Effectif" class="gt_row gt_right">1 146 436</td>
+<td headers="Pourcentage" class="gt_row gt_right">52.9</td></tr>
+    <tr><td headers="Sexe" class="gt_row gt_left">Hommes</td>
+<td headers="Effectif" class="gt_row gt_right">1 019 195</td>
+<td headers="Pourcentage" class="gt_row gt_right">47.1</td></tr>
+    <tr><td headers="Sexe" class="gt_row gt_left">Total</td>
+<td headers="Effectif" class="gt_row gt_right">2 165 631</td>
+<td headers="Pourcentage" class="gt_row gt_right">100.0</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="3">Source : Insee, RP 2019 ; Champ : Paris.</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+<div class="solution-exo">
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="05-Questions-fouille-donnees.html#cb84-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb84-2"><a href="05-Questions-fouille-donnees.html#cb84-2" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb84-3"><a href="05-Questions-fouille-donnees.html#cb84-3" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb84-4"><a href="05-Questions-fouille-donnees.html#cb84-4" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb84-5"><a href="05-Questions-fouille-donnees.html#cb84-5" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">&quot;75&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-6"><a href="05-Questions-fouille-donnees.html#cb84-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SEXE=</span><span class="fu">case_when</span>(SEXE<span class="sc">==</span><span class="st">&quot;1&quot;</span> <span class="sc">~</span> <span class="st">&quot;Hommes&quot;</span>, SEXE<span class="sc">==</span><span class="st">&quot;2&quot;</span> <span class="sc">~</span> <span class="st">&quot;Femmes&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-7"><a href="05-Questions-fouille-donnees.html#cb84-7" tabindex="-1"></a>  <span class="fu">count</span>(SEXE, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-8"><a href="05-Questions-fouille-donnees.html#cb84-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-9"><a href="05-Questions-fouille-donnees.html#cb84-9" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-10"><a href="05-Questions-fouille-donnees.html#cb84-10" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Effectif=</span>n, <span class="st">&#39;Sexe&#39;</span><span class="ot">=</span>SEXE) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-11"><a href="05-Questions-fouille-donnees.html#cb84-11" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb84-12"><a href="05-Questions-fouille-donnees.html#cb84-12" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">&quot; &quot;</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-13"><a href="05-Questions-fouille-donnees.html#cb84-13" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">&quot;Source : Insee, RP 2019 ; Champ : Paris.&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-14"><a href="05-Questions-fouille-donnees.html#cb84-14" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">&quot;Population par sexe en 2019&quot;</span>)</span></code></pre></div>
+</div>
+<p>Il y a plus de femmes habitant Paris en 2019, environ 53%.</p>
+<p>Cherchons maintenant la répartition de la population parisienne par type d’activité : quelle est la proportion d’actifs ayant un emploi par rapport à la part des chômeurs ou encore des retraités ? Attention au champ sur lequel porte ces statistiques (lire le titre du tableau pour cela…).</p>
+<div id="pkohbsrgzb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pkohbsrgzb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pkohbsrgzb thead, #pkohbsrgzb tbody, #pkohbsrgzb tfoot, #pkohbsrgzb tr, #pkohbsrgzb td, #pkohbsrgzb th {
+  border-style: none;
+}
+
+#pkohbsrgzb p {
+  margin: 0;
+  padding: 0;
+}
+
+#pkohbsrgzb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pkohbsrgzb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pkohbsrgzb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pkohbsrgzb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pkohbsrgzb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pkohbsrgzb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pkohbsrgzb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pkohbsrgzb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pkohbsrgzb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pkohbsrgzb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pkohbsrgzb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pkohbsrgzb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pkohbsrgzb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pkohbsrgzb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pkohbsrgzb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pkohbsrgzb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pkohbsrgzb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pkohbsrgzb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pkohbsrgzb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pkohbsrgzb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pkohbsrgzb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pkohbsrgzb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pkohbsrgzb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pkohbsrgzb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pkohbsrgzb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pkohbsrgzb .gt_left {
+  text-align: left;
+}
+
+#pkohbsrgzb .gt_center {
+  text-align: center;
+}
+
+#pkohbsrgzb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pkohbsrgzb .gt_font_normal {
+  font-weight: normal;
+}
+
+#pkohbsrgzb .gt_font_bold {
+  font-weight: bold;
+}
+
+#pkohbsrgzb .gt_font_italic {
+  font-style: italic;
+}
+
+#pkohbsrgzb .gt_super {
+  font-size: 65%;
+}
+
+#pkohbsrgzb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pkohbsrgzb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pkohbsrgzb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pkohbsrgzb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pkohbsrgzb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pkohbsrgzb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pkohbsrgzb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pkohbsrgzb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pkohbsrgzb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Population des 15-64 ans par type d'activité en 2019</td>
+    </tr>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Type-d'activité">Type d'activité</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Effectif">Effectif</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Pourcentage">Pourcentage</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Actifs ayant un emploi</td>
+<td headers="Effectif" class="gt_row gt_right">1 042 588</td>
+<td headers="Pourcentage" class="gt_row gt_right">69.3</td></tr>
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Chômeurs</td>
+<td headers="Effectif" class="gt_row gt_right">135 014</td>
+<td headers="Pourcentage" class="gt_row gt_right">9.0</td></tr>
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Élèves, étudiants et stagiaires non rémunérés</td>
+<td headers="Effectif" class="gt_row gt_right">192 205</td>
+<td headers="Pourcentage" class="gt_row gt_right">12.8</td></tr>
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Retraités ou préretraités</td>
+<td headers="Effectif" class="gt_row gt_right">38 512</td>
+<td headers="Pourcentage" class="gt_row gt_right">2.6</td></tr>
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Autres inactifs</td>
+<td headers="Effectif" class="gt_row gt_right">95 944</td>
+<td headers="Pourcentage" class="gt_row gt_right">6.4</td></tr>
+    <tr><td headers="Type d'activité" class="gt_row gt_center">Total</td>
+<td headers="Effectif" class="gt_row gt_right">1 504 263</td>
+<td headers="Pourcentage" class="gt_row gt_right">100.1</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="3">Source : Insee, RP 2019 ; Champ : Paris.</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+<div class="solution-exo">
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="05-Questions-fouille-donnees.html#cb85-1" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb85-2"><a href="05-Questions-fouille-donnees.html#cb85-2" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">&quot;75&quot;</span> <span class="sc">&amp;</span> <span class="sc">!</span>AGEREVQ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;65&quot;</span>, <span class="st">&quot;70&quot;</span>, <span class="st">&quot;75&quot;</span>, <span class="st">&quot;80&quot;</span>, <span class="st">&quot;85&quot;</span>, <span class="st">&quot;90&quot;</span>, <span class="st">&quot;95&quot;</span>, </span>
+<span id="cb85-3"><a href="05-Questions-fouille-donnees.html#cb85-3" tabindex="-1"></a>                                        <span class="st">&quot;100&quot;</span>, <span class="st">&quot;105&quot;</span>, <span class="st">&quot;110&quot;</span>, <span class="st">&quot;115&quot;</span>, <span class="st">&quot;120&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-4"><a href="05-Questions-fouille-donnees.html#cb85-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TACT=</span><span class="fu">case_when</span>(TACT <span class="sc">==</span> <span class="st">&quot;11&quot;</span> <span class="sc">~</span> <span class="st">&quot;Actifs ayant un emploi&quot;</span>,</span>
+<span id="cb85-5"><a href="05-Questions-fouille-donnees.html#cb85-5" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">&quot;12&quot;</span> <span class="sc">~</span> <span class="st">&quot;Chômeurs&quot;</span>,</span>
+<span id="cb85-6"><a href="05-Questions-fouille-donnees.html#cb85-6" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">&quot;22&quot;</span> <span class="sc">~</span> <span class="st">&quot;Élèves, étudiants et stagiaires non rémunérés&quot;</span>,</span>
+<span id="cb85-7"><a href="05-Questions-fouille-donnees.html#cb85-7" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">&quot;21&quot;</span> <span class="sc">~</span> <span class="st">&quot;Retraités ou préretraités&quot;</span>,</span>
+<span id="cb85-8"><a href="05-Questions-fouille-donnees.html#cb85-8" tabindex="-1"></a>                             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Autres inactifs&quot;</span>),</span>
+<span id="cb85-9"><a href="05-Questions-fouille-donnees.html#cb85-9" tabindex="-1"></a>         <span class="at">TACT=</span><span class="fu">fct_relevel</span>(TACT, <span class="fu">c</span>(<span class="st">&quot;Actifs ayant un emploi&quot;</span>, <span class="st">&quot;Chômeurs&quot;</span>,</span>
+<span id="cb85-10"><a href="05-Questions-fouille-donnees.html#cb85-10" tabindex="-1"></a>                                            <span class="st">&quot;Élèves, étudiants et stagiaires non rémunérés&quot;</span>, </span>
+<span id="cb85-11"><a href="05-Questions-fouille-donnees.html#cb85-11" tabindex="-1"></a>                                            <span class="st">&quot;Retraités ou préretraités&quot;</span>, <span class="st">&quot;Autres inactifs&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-12"><a href="05-Questions-fouille-donnees.html#cb85-12" tabindex="-1"></a>  <span class="fu">count</span>(TACT, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-13"><a href="05-Questions-fouille-donnees.html#cb85-13" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-14"><a href="05-Questions-fouille-donnees.html#cb85-14" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-15"><a href="05-Questions-fouille-donnees.html#cb85-15" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Effectif=</span>n, <span class="st">&quot;Type d&#39;activité&quot;</span><span class="ot">=</span>TACT) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-16"><a href="05-Questions-fouille-donnees.html#cb85-16" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb85-17"><a href="05-Questions-fouille-donnees.html#cb85-17" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">&quot; &quot;</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-18"><a href="05-Questions-fouille-donnees.html#cb85-18" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">&quot;Population des 15-64 ans par type d&#39;activité en 2019&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-19"><a href="05-Questions-fouille-donnees.html#cb85-19" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">&quot;Source : Insee, RP 2019 ; Champ : Paris.&quot;</span>)</span></code></pre></div>
+</div>
+<p>En 2019, la population parisienne comportait plus de 78% d’actifs dont 69% ayant un emploi et 9% au chômage, le taux de chômage à Paris était donc de 11,5% (135014/(1042588+135014))*100). La part des étudiants ou autres élèves était plus élevée que celle des retraités (ou préretaités) : 12,8% contre 2,6%.</p>
+</div>
+<div id="caractéristiques-de-la-population-active-résidant-à-paris" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Caractéristiques de la population active résidant à Paris<a href="05-Questions-fouille-donnees.html#caractéristiques-de-la-population-active-résidant-à-paris" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Maintenant, affichons les deux dernières colonnes (‘2019’ et ‘dont actifs ayant un emploi’) de ce tableau tiré du site de l’Insee, en mettant la ligne “Ensemble” plutôt en fin de tableau (ces 2 usages sont possibles, question de préférence…). Attention encore une fois au champ de ce tableau… Pour cela, on va :</p>
+<ul>
+<li>récupérer les libellés des modalités de la variable CS1 à partir du fichier ‘meta’, en créant 2 vecteurs correspondant aux modalités pour le 1er et aux libellés pour le 2nd, puis en créant une variable ‘CS1_moda’ à partir de ces vecteurs ;</li>
+<li>créer une 1ère table qu’on appellera ‘col2’ qui comportera la 1ère colonne avec les intitulés des PCS et la colonne ‘2019’, attention, il y a une modalité qui ne nous intéresse pas car non affiché dans le tableau de l’Insee, il faudra supprimer cette ligne (vous pouvez utiliser pour cela la fonction <code>slice()</code>) ;</li>
+<li>créer une 2ème table qu’on appellera ‘col3’ qui comportera la 1ère colonne avec les intitulés des PCS et la colonne ‘dont actifs ayant un emploi’, attention le champ n’est donc pas tout à fait le même ;</li>
+<li>joindre ces deux tables et appliquer les fonctions <code>gt()</code> et suivantes pour la mise en forme du tableau final.</li>
+</ul>
+<img src="images/Tab.%20Insee%201.png" />
+<div class="solution-exo">
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="05-Questions-fouille-donnees.html#cb86-1" tabindex="-1"></a><span class="co"># On va récupérer les libellés des modalités de la variable CS1 à partir du </span></span>
+<span id="cb86-2"><a href="05-Questions-fouille-donnees.html#cb86-2" tabindex="-1"></a><span class="co">#  fichier meta :</span></span>
+<span id="cb86-3"><a href="05-Questions-fouille-donnees.html#cb86-3" tabindex="-1"></a>levels_CS1 <span class="ot">&lt;-</span> meta[meta<span class="sc">$</span>COD_VAR<span class="sc">==</span><span class="st">&quot;CS1&quot;</span>, ]<span class="sc">$</span>COD_MOD</span>
+<span id="cb86-4"><a href="05-Questions-fouille-donnees.html#cb86-4" tabindex="-1"></a>labels_CS1 <span class="ot">&lt;-</span> meta[meta<span class="sc">$</span>COD_VAR<span class="sc">==</span><span class="st">&quot;CS1&quot;</span>, ]<span class="sc">$</span>LIB_MOD</span>
+<span id="cb86-5"><a href="05-Questions-fouille-donnees.html#cb86-5" tabindex="-1"></a>RP_final <span class="ot">&lt;-</span> RP_final <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">CS1_moda=</span><span class="fu">factor</span>(CS1, <span class="at">levels =</span> levels_CS1, </span>
+<span id="cb86-6"><a href="05-Questions-fouille-donnees.html#cb86-6" tabindex="-1"></a>                                                <span class="at">labels =</span> labels_CS1))</span>
+<span id="cb86-7"><a href="05-Questions-fouille-donnees.html#cb86-7" tabindex="-1"></a></span>
+<span id="cb86-8"><a href="05-Questions-fouille-donnees.html#cb86-8" tabindex="-1"></a>col2 <span class="ot">&lt;-</span> RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb86-9"><a href="05-Questions-fouille-donnees.html#cb86-9" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">&quot;75&quot;</span> <span class="sc">&amp;</span> <span class="sc">!</span>AGEREVQ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;65&quot;</span>, <span class="st">&quot;70&quot;</span>, <span class="st">&quot;75&quot;</span>, <span class="st">&quot;80&quot;</span>,</span>
+<span id="cb86-10"><a href="05-Questions-fouille-donnees.html#cb86-10" tabindex="-1"></a>                                        <span class="st">&quot;85&quot;</span>, <span class="st">&quot;90&quot;</span>, <span class="st">&quot;95&quot;</span>, <span class="st">&quot;100&quot;</span>, <span class="st">&quot;105&quot;</span>, <span class="st">&quot;110&quot;</span>,</span>
+<span id="cb86-11"><a href="05-Questions-fouille-donnees.html#cb86-11" tabindex="-1"></a>                                        <span class="st">&quot;115&quot;</span>, <span class="st">&quot;120&quot;</span>) <span class="sc">&amp;</span></span>
+<span id="cb86-12"><a href="05-Questions-fouille-donnees.html#cb86-12" tabindex="-1"></a>           TACT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-13"><a href="05-Questions-fouille-donnees.html#cb86-13" tabindex="-1"></a>  <span class="fu">count</span>(CS1_moda, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-14"><a href="05-Questions-fouille-donnees.html#cb86-14" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">round</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-15"><a href="05-Questions-fouille-donnees.html#cb86-15" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&#39;2019&#39;</span><span class="ot">=</span>n, <span class="st">&#39;PCS&#39;</span><span class="ot">=</span>CS1_moda) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-16"><a href="05-Questions-fouille-donnees.html#cb86-16" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-17"><a href="05-Questions-fouille-donnees.html#cb86-17" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">7</span>)</span>
+<span id="cb86-18"><a href="05-Questions-fouille-donnees.html#cb86-18" tabindex="-1"></a></span>
+<span id="cb86-19"><a href="05-Questions-fouille-donnees.html#cb86-19" tabindex="-1"></a>col3 <span class="ot">&lt;-</span> RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb86-20"><a href="05-Questions-fouille-donnees.html#cb86-20" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">&quot;75&quot;</span> <span class="sc">&amp;</span> <span class="sc">!</span>AGEREVQ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;65&quot;</span>, <span class="st">&quot;70&quot;</span>, <span class="st">&quot;75&quot;</span>, <span class="st">&quot;80&quot;</span>,</span>
+<span id="cb86-21"><a href="05-Questions-fouille-donnees.html#cb86-21" tabindex="-1"></a>                                        <span class="st">&quot;85&quot;</span>, <span class="st">&quot;90&quot;</span>, <span class="st">&quot;95&quot;</span>, <span class="st">&quot;100&quot;</span>, <span class="st">&quot;105&quot;</span>, <span class="st">&quot;110&quot;</span>, </span>
+<span id="cb86-22"><a href="05-Questions-fouille-donnees.html#cb86-22" tabindex="-1"></a>                                        <span class="st">&quot;115&quot;</span>, <span class="st">&quot;120&quot;</span>) <span class="sc">&amp;</span></span>
+<span id="cb86-23"><a href="05-Questions-fouille-donnees.html#cb86-23" tabindex="-1"></a>           TACT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;11&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-24"><a href="05-Questions-fouille-donnees.html#cb86-24" tabindex="-1"></a>  <span class="fu">count</span>(CS1_moda, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-25"><a href="05-Questions-fouille-donnees.html#cb86-25" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">round</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-26"><a href="05-Questions-fouille-donnees.html#cb86-26" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&#39;dont actifs ayant un emploi&#39;</span><span class="ot">=</span>n, <span class="st">&#39;PCS&#39;</span><span class="ot">=</span>CS1_moda) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-27"><a href="05-Questions-fouille-donnees.html#cb86-27" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>)</span>
+<span id="cb86-28"><a href="05-Questions-fouille-donnees.html#cb86-28" tabindex="-1"></a></span>
+<span id="cb86-29"><a href="05-Questions-fouille-donnees.html#cb86-29" tabindex="-1"></a>col2 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(col3) <span class="sc">%&gt;%</span>  </span>
+<span id="cb86-30"><a href="05-Questions-fouille-donnees.html#cb86-30" tabindex="-1"></a>  <span class="fu">gt</span>()  <span class="sc">%&gt;%</span> </span>
+<span id="cb86-31"><a href="05-Questions-fouille-donnees.html#cb86-31" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">sep_mark =</span> <span class="st">&quot; &quot;</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-32"><a href="05-Questions-fouille-donnees.html#cb86-32" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">&quot;Population active de 15-64 ans selon la </span></span>
+<span id="cb86-33"><a href="05-Questions-fouille-donnees.html#cb86-33" tabindex="-1"></a><span class="st">             catégorie socioprofessionnelle en 2019&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-34"><a href="05-Questions-fouille-donnees.html#cb86-34" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">&quot;Source : Insee, RP 2019 ; Champ : Paris.&quot;</span>)</span>
+<span id="cb86-35"><a href="05-Questions-fouille-donnees.html#cb86-35" tabindex="-1"></a></span>
+<span id="cb86-36"><a href="05-Questions-fouille-donnees.html#cb86-36" tabindex="-1"></a><span class="co"># On supprime les tableaux intermédiaires</span></span>
+<span id="cb86-37"><a href="05-Questions-fouille-donnees.html#cb86-37" tabindex="-1"></a><span class="fu">rm</span>(col2, col3)</span></code></pre></div>
+</div>
+<p>A Paris, la population active comprend en 2019 plus de 500 000 personnes appartenant à la catégorie “cadres et professions intellectuelles supérieures”, des 2 colonnes on peut en déduire qu’il y a environ 31 000 personnes relevant de cette PCS qui sont au chômage. Les cadres sont suivis des professions intermédiaires (plus de 260 000 actifs) et des employés (quasi 220 000). Il y a très peu d’agriculteurs exploitants, ce qui semble assez logique sur le territoire de Paris !</p>
+</div>
+<div id="caractéristiques-des-logements-parisiens" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Caractéristiques des logements parisiens<a href="05-Questions-fouille-donnees.html#caractéristiques-des-logements-parisiens" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Enfin, pour donner un exemple sur l’étude des caractéristiques des logements parisiens, essayons de même de reproduire le tableau de l’Insee ci-dessous. Souvenez-vous que cette base a plusieurs unités statistiques/niveaux : individus, logements/ménages, etc. Il faut donc faire attention :</p>
+<ul>
+<li>au champ du tableau donc les filtres à utiliser ici ;</li>
+<li>à avoir d’abord les moyennes sur ces deux types de logements, donc uiliser à la suite les fonctions <code>group_by()</code> et <code>summarise()</code> ;</li>
+<li>à ajouter ensuite une ligne sur l’ensemble des résidences principales avec la fonction <code>bind_rows()</code> ;</li>
+<li>à changer les dénominations des colonnes et des modalités, avec les fonctions du package <code>gt()</code> comme <code>cols_label()</code> ou <code>text_case_match()</code>.</li>
+</ul>
+<p><img src="images/Tab.%20Insee%202.png" /></p>
+<div class="solution-exo">
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="05-Questions-fouille-donnees.html#cb87-1" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb87-2"><a href="05-Questions-fouille-donnees.html#cb87-2" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">&quot;75&quot;</span> <span class="sc">&amp;</span> LPRM<span class="sc">==</span><span class="st">&quot;1&quot;</span> <span class="sc">&amp;</span> CATL<span class="sc">==</span><span class="st">&quot;1&quot;</span> <span class="sc">&amp;</span> TYPL <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb87-3"><a href="05-Questions-fouille-donnees.html#cb87-3" tabindex="-1"></a>  <span class="fu">group_by</span>(TYPL) <span class="sc">%&gt;%</span></span>
+<span id="cb87-4"><a href="05-Questions-fouille-donnees.html#cb87-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Moy_pieces =</span> <span class="fu">weighted.mean</span>(<span class="fu">as.numeric</span>(<span class="fu">as.character</span>(NBPI)), </span>
+<span id="cb87-5"><a href="05-Questions-fouille-donnees.html#cb87-5" tabindex="-1"></a>                                       IPONDI, <span class="at">na.rm=</span>T)) <span class="sc">%&gt;%</span></span>
+<span id="cb87-6"><a href="05-Questions-fouille-donnees.html#cb87-6" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="fu">summarise</span>(<span class="at">TYPL =</span> <span class="st">&quot;Ensemble des résidences principales&quot;</span>, </span>
+<span id="cb87-7"><a href="05-Questions-fouille-donnees.html#cb87-7" tabindex="-1"></a>                      RP_final[RP_final<span class="sc">$</span>DEPT <span class="sc">==</span> <span class="st">&quot;75&quot;</span> <span class="sc">&amp;</span> RP_final<span class="sc">$</span>LPRM<span class="sc">==</span><span class="st">&quot;1&quot;</span> <span class="sc">&amp;</span> </span>
+<span id="cb87-8"><a href="05-Questions-fouille-donnees.html#cb87-8" tabindex="-1"></a>                                 RP_final<span class="sc">$</span>CATL <span class="sc">==</span> <span class="st">&quot;1&quot;</span> <span class="sc">&amp;</span> RP_final<span class="sc">$</span>TYPL <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>), ], </span>
+<span id="cb87-9"><a href="05-Questions-fouille-donnees.html#cb87-9" tabindex="-1"></a>                      <span class="at">Moy_pieces =</span> <span class="fu">weighted.mean</span>(<span class="fu">as.numeric</span>(<span class="fu">as.character</span>(NBPI)), </span>
+<span id="cb87-10"><a href="05-Questions-fouille-donnees.html#cb87-10" tabindex="-1"></a>                                                 IPONDI, <span class="at">na.rm=</span>T))) <span class="sc">%&gt;%</span></span>
+<span id="cb87-11"><a href="05-Questions-fouille-donnees.html#cb87-11" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb87-12"><a href="05-Questions-fouille-donnees.html#cb87-12" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">dec_mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">decimals =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb87-13"><a href="05-Questions-fouille-donnees.html#cb87-13" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">TYPL=</span><span class="st">&quot;Type de logement&quot;</span>, <span class="at">Moy_pieces=</span><span class="st">&quot;2019&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb87-14"><a href="05-Questions-fouille-donnees.html#cb87-14" tabindex="-1"></a>  <span class="fu">text_case_match</span>(<span class="st">&quot;1&quot;</span> <span class="sc">~</span> <span class="st">&quot;Maison&quot;</span>, <span class="st">&quot;2&quot;</span> <span class="sc">~</span> (<span class="st">&quot;Appartement&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb87-15"><a href="05-Questions-fouille-donnees.html#cb87-15" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">&quot;Nombre moyen de pièces des résidences principales&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb87-16"><a href="05-Questions-fouille-donnees.html#cb87-16" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">&quot;Source : Insee, RP 2019 ; Champ : Paris.&quot;</span>)</span></code></pre></div>
+</div>
+<p>Ainsi, si l’on veut créer des tableaux de répartition à une seule variable, on peut utiliser ces procédures qui se structurent toujours de la même façon. Au lieu de faire un copié-collé du code et de changer le nom des variables, autrement dit pour systématiser nos procédures, une astuce est de créer ses propres fonctions. C’est ce que nous allons étudier maintenant.</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<script src="js/tidyverse.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="04-Récapitulatif.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
+"instapper": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Camille-Sisi/Data-Mining-2025/master/05-Questions-fouille-donnees.Rmd",
+"text": "Source"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

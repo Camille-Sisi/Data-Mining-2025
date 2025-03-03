@@ -1,8 +1,7 @@
 
-<div align="justify">
-
-
 # Présentation {-}
+
+<div align="justify">
 
 ## À propos de ce document {-}
 
