@@ -17,3 +17,4 @@ rmd_files:
   - 05-Questions-fouille-donnees.Rmd
   - 06-Fonctions.Rmd
   - 07-Ggplot-theorique.Rmd
+  - 08-Ggplot-pratique.Rmd

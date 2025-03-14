@@ -33,3 +33,11 @@ les-autres-options-graphiques-titres-échelles-des-axes-etc.
 code-minimal
 liens-utiles-pour-aller-plus-loin
 les-grands-principes-de-data-visualization
+c08-Ggplot-pratique
+exemple-de-la-construction-dun-graphique-pas-à-pas
+dautres-exemples-à-travers-des-exercices
+distribution-de-la-durée-des-contrats-proposés-selon-le-type-de-contrat
+comparaison-des-montants-moyen-et-médian-des-durées-de-contrat-des-offres-demplois-par-secteur-dactivité
+evolution-de-la-durée-des-contrats-des-offres-demploi-durant-lannée-2020
+top-5-de-la-durée-moyenne-des-offres-demploi-en-cdd-et-missions-dintérim-selon-les-secteurs-dactivité
+à-vous-de-jouer
