@@ -15,3 +15,5 @@ rmd_files:
   - 03-Manipulation-variables.Rmd
   - 04-Récapitulatif.Rmd
   - 05-Questions-fouille-donnees.Rmd
+  - 06-Fonctions.Rmd
+  - 07-Ggplot-theorique.Rmd

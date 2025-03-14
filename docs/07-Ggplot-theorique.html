@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section7 Data Visualization et Ggplot2 : aspects théoriques | DATA MINING</title>
+  <meta name="description" content="Titre du cours" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section7 Data Visualization et Ggplot2 : aspects théoriques | DATA MINING" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Titre du cours" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section7 Data Visualization et Ggplot2 : aspects théoriques | DATA MINING" />
+  
+  <meta name="twitter:description" content="Titre du cours" />
+  
+
+<meta name="author" content="Camille Signoretto, Maîtresse de conférences en économie, Université Paris Cité" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="06-Fonctions.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/tidyverse.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Mining :  <em>Camille Signoretto</em></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html"><i class="fa fa-check"></i>Présentation</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DATA MINING</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="c07-Ggplot-theorique" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Section7</span> Data Visualization et Ggplot2 : aspects théoriques<a href="07-Ggplot-theorique.html#c07-Ggplot-theorique" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div align="justify">
+<div id="présentation-générale-de-ggplot2" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Présentation générale de Ggplot2<a href="07-Ggplot-theorique.html#présentation-générale-de-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le package <strong><code>ggplot2</code></strong> (inclus dans le package <code>tidyverse</code>) est l’un des atouts de <strong><code>R</code></strong> et permet de réaliser de beaux graphiques ; vous en trouverez <a href="https://ggplot2.tidyverse.org/index.html" target="_blank">ici</a> la présentation officielle. L’inconvénient, surtout pour quelqu’un qui serait habitué à construire des graphiques sous excel, est qu’il faut (presque) tout paramétrer, ce qui peut finalement donner un code très long.<br />
+L’architecture globale de <strong><code>ggplot2</code></strong> est souvent représentée par le schéma ci-dessous :</p>
+<p><img src="images/Structure%20generale%20Ggplot2.png" /></p>
+<p>Pour le lire, il faut partir du bas du schéma :</p>
+<ul>
+<li>par “Data”, nous devons d’abord préciser la base ou le tableau de données utilisé(e) qui contient la ou les variables qui seront représentées ;</li>
+<li>par “aesthetics”, nous allons ensuite indiquer les variables qui seront projetées sur le graphe ;</li>
+<li>par “geometries”, nous indiquons le type de graphique utilisé ou la forme géométrique ;</li>
+<li>par “facets”, nous pouvons <em>éventuellement</em> (facultatif donc) diviser ou découper le graphique en plusieurs graphes (ou “panneaux”) dépendant d’une autre variable par exemple ;</li>
+<li>par “statistics”, nous pouvons <em>là aussi éventuellement</em> ajouter des statistiques ;</li>
+<li>par “coordinates”, nous pouvons <em>là aussi éventuellement</em> changer le sens du graphique ;</li>
+<li>enfin, par “theme”, nous pouvons utiliser <em>éventuellement</em> l’un des thèmes graphiques diponibles et/ou ajouter un certain nombre d’options sur ce qui “entoure” le graphique, c’est-à-dire les positions et/ou couleurs et/ou taille, etc., des axes, titre, légende, etc.</li>
+</ul>
+<div id="les-aesthetics-ou-arguments-esthétiques" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Les “aesthetics” ou arguments esthétiques<a href="07-Ggplot-theorique.html#les-aesthetics-ou-arguments-esthétiques" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il s’agit principalement d’indiquer quelle variable sera utilisée en abcisse (<code>x=</code>), et laquelle sera éventuellement utilisée en ordonnée (<code>y=</code>).<br />
+Mais on peut aussi ajouter des variables supplémentaires qui seront différenciées par :</p>
+<ul>
+<li>couleur, avec <code>color=</code> (pour des points, lignes ou symboles) ou <code>fill=</code> (pour le contenu des bâtons ou symboles) ;</li>
+<li>taille avec <code>size=</code> ;</li>
+<li>symboles avec <code>shape=</code> ;</li>
+<li>type de lignes avec <code>linetype=</code> ;</li>
+<li>degré de transparence avec <code>alpha=</code> (mais non conseillé pour les variables discrètes).</li>
+</ul>
+<p>La <strong>nuance à bien comprendre</strong> est qu’utiliser ces options à l’intérieur de la fonction <code>aes()</code> revient à ajouter une 3ème variable (une légende apparaîtra alors automatiquement), alors que si l’on veut simplement changer l’aspect des points, lignes, barres, etc., d’une variable déjà projetée, il faut appeler (souvent) ces mêmes options après la fonction <code>aes()</code> à l’intérieur de la fonction <code>geom_***()</code> par exemple. Dans ce cas-là, on peut changer la couleur des points avec <code>color=</code> , la taille des points ou lignes avec <code>size=</code>, l’épaisseur des barres avec <code>width=</code>, etc.
+C’est la différence entre le “mapping” et les “settings”.</p>
+<p>Chacune de ces options ont des modalités différentes, il peut être bien d’avoir des mémos rangés dans un dossier créé pour cela pour éviter de les chercher à chaque fois.<br />
+Par exemple, pour les couleurs, vous trouverez un mémo pdf <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf" target="_blank">ici</a>, ou un bon récapitulatif <a href="https://larmarange.github.io/analyse-R/couleurs.html" target="_blank">là</a>. On peut également utiliser la fonction <code>colours()</code> dans <code>R</code> pour voir la liste complète des couleurs standard.</p>
+<p>Pour la liste des symboles (“shape”) et le numéro correspondant que l’on appelera avec l’argument <code>shape=</code>, ci-dessous un récapitulatif :
+<img src="images/Liste%20symboles%20Ggplot2.png" /></p>
+<p>Et voici pour la liste des types de lignes, avec <code>linetype=</code> :
+<img src="images/Type%20de%20lignes%20Ggplot2.png" /></p>
+</div>
+<div id="les-géométries" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Les géométries<a href="07-Ggplot-theorique.html#les-géométries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une fois les variables appelées, il faut définir le type de graphique. Il y a beaucoup de choix possibles inclus dans <strong><code>ggplot2</code></strong>, le tout est de bien comprendre quel type de graphique convient le mieux à ou aux variables utilisées et à ce que l’on veut montrer (cf. section suivante sur les grands principes de la data visualization). Voici un tableau récapitulant les principales “geometries”.</p>
+<table>
+<caption><strong>Tableau : Les principales fonctions “geometries” de Ggplot</strong></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Fonction</th>
+<th align="left">Type de graphique</th>
+<th align="left">Type de variable(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>geom_histogram()</code></td>
+<td align="left">Histogramme</td>
+<td align="left">1 variable continue</td>
+</tr>
+<tr class="even">
+<td align="left"><code>geom_density()</code></td>
+<td align="left">Courbe de densité</td>
+<td align="left">1 variable continue</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>geom_area()</code></td>
+<td align="left">Graphique en aires empilées</td>
+<td align="left">1 variable continue</td>
+</tr>
+<tr class="even">
+<td align="left"><code>geom_col()</code></td>
+<td align="left">Graphique en bâtons</td>
+<td align="left">1 variable discrète</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>geom_point()</code></td>
+<td align="left">Nuage de points</td>
+<td align="left">2 variables continues</td>
+</tr>
+<tr class="even">
+<td align="left"><code>geom_jitter()</code></td>
+<td align="left">Nuage de points dispersés</td>
+<td align="left">2 variables continues</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>geom_boxplot()</code></td>
+<td align="left">Boîte à moustache</td>
+<td align="left">1 variable continue, sans ou avec 1 variable discrète</td>
+</tr>
+<tr class="even">
+<td align="left"><code>geom_violin()</code></td>
+<td align="left">Graphes en violon</td>
+<td align="left">1 variable continue, sans ou avec 1 variable discrète</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>geom_bar()</code></td>
+<td align="left">Graphique en bâtons</td>
+<td align="left">1 variable continue, sans ou avec 1 variable discrète</td>
+</tr>
+<tr class="even">
+<td align="left"><code>geom_line()</code></td>
+<td align="left">Lignes</td>
+<td align="left">Fonction continue selon une variable de date</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>geom_area()</code></td>
+<td align="left">Graphique en aires empilées</td>
+<td align="left">Fonction continue selon une variable de date</td>
+</tr>
+</tbody>
+</table>
+<p>Certaines d’entre elles ont des options à préciser, presque de façon obligatoire comme nous l’avons déjà vu avec <code>geom_histogram()</code> et l’option <code>bins=</code>, si elle n’est pas précisée, elle sera “forcée” par <code>R</code> mais un message d’avertissement en rouge apparaîtra.<br />
+Il en existe bien sûr plein d’autres, il faut dans ce cas rechercher sur internet ou aller voir sur la “cheatsheet” de ggplot2 disponible sur internet.</p>
+<p>Il est possible de faire suivre plusieurs fonctions <code>geom_***()</code> : par exemple un <code>geom_line()</code> après un <code>geom_point()</code>, un <code>geom_text()</code> après un <code>geom_bar()</code>, etc. Dans ce cas, des variables supplémentaires peuvent être ajoutées (ou remplacer les précédentes) avec une nouvelle fonction <code>aes</code> à l’intérieur de ce <code>geom_***()</code> ; un exemple assez courant est la construction d’un graphique en bâtons avec l’ajout des valeurs de la variable à l’intérieur des bâtons (ou juste au-dessus), on fera alors appel à deux fonction <code>geom_***()</code> comme ceci : <code>data %&gt;% ggplot() + aes(x=, y=) + geom_bar() + geom_text(aes(label=))</code>. De même, il est possible de spécifier des données (<code>data</code>) différentes pour chaque <code>geom_***()</code> .</p>
+</div>
+<div id="les-facettes" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Les facettes<a href="07-Ggplot-theorique.html#les-facettes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il y a deux types de facettes (en réalité trois, avec celle par défaut qui s’intitule <code>facet_null()</code> et produit un seul graphe) :</p>
+<ul>
+<li><code>facet_wrap()</code> : produit une suite de graphiques et a un argument principal <code>facets=vars()</code> et éventuellement <code>ncol=</code> et <code>nrow=</code> ;</li>
+<li><code>facet_grid()</code> : produit une grille ou matrice de graphiques définies par une ou deux variables qui forment les lignes et les colonnes, définies avec les deux arguments principaux <code>cols=</code> et <code>row=</code>, ou en indiquant un <code>~</code> entre les deux variables.<br />
+À savoir, il y a des options pour contrôler les échelles avec l’argument <code>scales=</code>.<br />
+Les facettes sont ainsi une autre façon, par rapport aux “aesthetics”, de représenter deux variables par rapport à une troisième variable.</li>
+</ul>
+</div>
+<div id="les-statistiques" class="section level3 hasAnchor" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> Les statistiques<a href="07-Ggplot-theorique.html#les-statistiques" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>On peut vouloir ajouter sur un graphique des statistiques particulières ou supplémentaires, comme la moyenne ou médiane d’une variable quantitative, ou encore représenter la régression linéaire dans le cas d’une variable fonction d’une autre, etc.<br />
+Par exemple, si l’on projette des boîtes à moustache, la moyenne n’étant pas affichée on peut la rajouter avec la fonction <code>stat_summary()</code> et l’option <code>fun = mean</code>.<br />
+Si l’on souhaite ajouter une régression linéaire sur un graphique de nuage de points, il faut utiliser la fonction <code>geom_smooth()</code> et l’option <code>method=lm</code>.<br />
+Certaines statistiques peuvent aussi être calculées ou transformées directement dans certaines fonctions : c’est par exemple le cas avec la fonction <code>geom_histogramm()</code> où l’on peut produire un histogramme de la densité en spécifiant <code>y=..density..</code> dans l’<code>aes()</code> ou en la superposant à l’aide d’une courbe à l’histogramme initial en ajoutant alors ensuite un <code>geom_density()</code> ; ou encore avec la fonction <code>geom_bar()</code> avec les arguments <code>stat = "summary_bin", fun = mean</code> (par défaut, <code>stat = "count"</code>, dans ce cas la hauteur des barres représente le comptage des cas dans chaque catégorie).</p>
+</div>
+<div id="les-coordonnées" class="section level3 hasAnchor" number="7.1.5">
+<h3><span class="header-section-number">7.1.5</span> Les coordonnées<a href="07-Ggplot-theorique.html#les-coordonnées" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les systèmes de coordonnées linéaires permettent de changer le sens du graphique ou de “zoomer” sur le graphique :</p>
+<ul>
+<li><code>coord_cartesian()</code> : c’est le système de coordonnées par défaut (repère “cartésien”), en changeant les arguments <code>xlim=</code> ou <code>ylim=</code>, on procède à un zoom sur l’axe des abscisses et/ou celui des ordonnées ; cela permet de ne pas supprimer des données comme le ferait les fonctions <code>scale_x_continuous()</code> ou <code>scale_y_continuous</code> mais juste de ne pas les afficher sur le graphe ;</li>
+<li><code>coord_flip()</code> : permet d’inverser les axes ;</li>
+<li><code>coord_fixed()</code> : produit un système de coordonnées cartésiennes avec un “ratio d’aspect” fixe.</li>
+</ul>
+<p>Il existe également des systèmes de coordonnées non-linéaires, comme <code>coord_polar()</code> par exemple.</p>
+</div>
+<div id="les-thèmes" class="section level3 hasAnchor" number="7.1.6">
+<h3><span class="header-section-number">7.1.6</span> Les thèmes<a href="07-Ggplot-theorique.html#les-thèmes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il y a plusieurs thèmes existants dans le package <strong><code>ggplot2</code></strong>, <code>theme_gray()</code> est le thème par défaut ; les autres sont présentés dans la figure ci-dessous.
+<img src="images/Liste%20Themes%20Ggplot.png" /></p>
+<p>Ensuite, la fonction <code>theme()</code> permet de modifier les aspects du graphique : il y a un certain nombre d’arguments disponibles qui permettent de modifier les éléments entourant le graphique comme les titre et sous-titre, les éléments à l’intérieur du graphique c’est-à-dire de la grille, les éléments des axes, ou encore les éléments de la légende (ou sa position sur la figure), etc.<br />
+La figure ci-dessous est une bonne synthèse de la manière dont il faut programmer ces différentes éléments du thème d’un graphique (téléchargeable directement <a href="https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf" target="_blank">ici</a>) :<br />
+<img src="images/ggplot_theme_system_cheatsheet.png" /></p>
+</div>
+<div id="les-autres-options-graphiques-titres-échelles-des-axes-etc." class="section level3 hasAnchor" number="7.1.7">
+<h3><span class="header-section-number">7.1.7</span> Les autres options graphiques : titres, échelles des axes, etc.<a href="07-Ggplot-theorique.html#les-autres-options-graphiques-titres-échelles-des-axes-etc." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour le titre général, mais aussi les titres des axes, ainsi qu’une éventuelle légende, source, etc., on peut les rassembler dans la fonction <code>labs()</code> :</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="07-Ggplot-theorique.html#cb100-1" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb100-2"><a href="07-Ggplot-theorique.html#cb100-2" tabindex="-1"></a>  <span class="at">title    =</span> <span class="st">&quot; &quot;</span>,</span>
+<span id="cb100-3"><a href="07-Ggplot-theorique.html#cb100-3" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">&quot; &quot;</span>,</span>
+<span id="cb100-4"><a href="07-Ggplot-theorique.html#cb100-4" tabindex="-1"></a>  <span class="at">x        =</span> <span class="st">&quot; &quot;</span>,</span>
+<span id="cb100-5"><a href="07-Ggplot-theorique.html#cb100-5" tabindex="-1"></a>  <span class="at">y        =</span> <span class="st">&quot; &quot;</span>,</span>
+<span id="cb100-6"><a href="07-Ggplot-theorique.html#cb100-6" tabindex="-1"></a>  <span class="at">caption  =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<p>Les axes des échelles peuvent être changés, ainsi que les valeurs affichées, avec les fonctions <code>scale</code> : si les variables sont quantitatives/continues, avec <code>scale_x_continous()</code> et <code>scale_y_continuous()</code> ; si les variables sont qualitatives/discrètes, avec <code>scale_x_discrete()</code> et <code>scale_x_discrete()</code> ; dont les options les plus souvent utilisées sont <code>limits=</code>, <code>breaks=</code>, <code>labels=</code>, ou encore <code>trans=</code> qui permet de transformer la mesure de l’échelle (exponentielle, log, …). Lorsqu’une option <code>fill=</code> ou <code>color=</code> est utilisée dans un <code>aes</code>, alors on peut modifier le type de couleurs ou palettes utilisées avec par exemple <code>scale_fill_brewer()</code> pour la pallette de couleur <code>RBrewer</code> ou <code>scale_fill_viridis()</code> pour la palette <code>Viridis</code>, etc.</p>
+<p>Il y a encore d’autres fonctions qui permettent de “customiser” à votre goût un graphique <code>ggplot</code>, il faut s’aventurer dans les diverses documentations plus complètes sur le package <strong><code>ggplot2</code></strong>.</p>
+</div>
+<div id="code-minimal" class="section level3 hasAnchor" number="7.1.8">
+<h3><span class="header-section-number">7.1.8</span> Code minimal<a href="07-Ggplot-theorique.html#code-minimal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Après l’appel de la fonction <code>ggplot()</code>, chaque “couche” supplémentaire utilisée est précisée par le signe <strong><code>+</code></strong> et non l’habituel pipe <code>%&gt;%</code> pour bien signifier qu’on est toujours dans la fonction <code>ggplot()</code>, par ailleurs il faut faire attention de mettre le signe <strong><code>+</code></strong> à la fin d’une ligne et ensuite de faire un saut de ligne (le contraire saut de ligne et début de la ligne suivante avec le <code>+</code> ne fonctionnera pas). Les trois arguments obligatoires sont donc les 3 premières : “data”, “aesthethics” et “geometries”. En langage tidyverse, il existe plusieurs façons d’écrire le code :</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="07-Ggplot-theorique.html#cb101-1" tabindex="-1"></a><span class="co"># Les 4 façons d&#39;écrire suivantes sont similaires :</span></span>
+<span id="cb101-2"><a href="07-Ggplot-theorique.html#cb101-2" tabindex="-1"></a>data <span class="sc">%&gt;%</span>              <span class="co"># on spécifie la table de données</span></span>
+<span id="cb101-3"><a href="07-Ggplot-theorique.html#cb101-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span>          <span class="co"># on appelle la fonction ggplot()</span></span>
+<span id="cb101-4"><a href="07-Ggplot-theorique.html#cb101-4" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> , <span class="at">y =</span> ) <span class="sc">+</span>   <span class="co"># on spécifie dans l&#39;aes() les variables à mettre dans l&#39;axe  </span></span>
+<span id="cb101-5"><a href="07-Ggplot-theorique.html#cb101-5" tabindex="-1"></a>                      <span class="co">#         des abcisses (x=) et dans l&#39;axe des ordonnées (y=)</span></span>
+<span id="cb101-6"><a href="07-Ggplot-theorique.html#cb101-6" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()    <span class="co"># on trace l&#39;histogramme</span></span>
+<span id="cb101-7"><a href="07-Ggplot-theorique.html#cb101-7" tabindex="-1"></a></span>
+<span id="cb101-8"><a href="07-Ggplot-theorique.html#cb101-8" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> , <span class="at">y =</span> )) <span class="sc">+</span> <span class="fu">geom_histogram</span>() </span>
+<span id="cb101-9"><a href="07-Ggplot-theorique.html#cb101-9" tabindex="-1"></a><span class="fu">ggplot</span>(data) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> , <span class="at">y =</span> ) <span class="sc">+</span> <span class="fu">geom_histogram</span>() </span>
+<span id="cb101-10"><a href="07-Ggplot-theorique.html#cb101-10" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> , <span class="at">y =</span> ))  <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p>Nous privilégierons ici la 1ère d’entre elles, mais vous pouvez en choisir une autre !</p>
+</div>
+<div id="liens-utiles-pour-aller-plus-loin" class="section level3 hasAnchor" number="7.1.9">
+<h3><span class="header-section-number">7.1.9</span> Liens utiles pour aller plus loin<a href="07-Ggplot-theorique.html#liens-utiles-pour-aller-plus-loin" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Nous ne pouvons pas résumer l’ensemble des possibilités données par <strong>ggplot2</strong> ; il faudra donc rechercher par soi-même si besoin. Voici pour cela deux sites très complets sur le package :</p>
+<ul>
+<li><a href="https://ggplot2-book.org/toolbox.html">https://ggplot2-book.org/toolbox.html</a><br />
+</li>
+<li><a href="https://bookdown.org/ael/rexplor/chap8.html#aes">https://bookdown.org/ael/rexplor/chap8.html#aes</a></li>
+</ul>
+</div>
+</div>
+<div id="les-grands-principes-de-data-visualization" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Les grands principes de data visualization<a href="07-Ggplot-theorique.html#les-grands-principes-de-data-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Sans prétendre, ni pouvoir, faire un cours complet de data visualization, voici quelques grands principes à essayer de respecter quand on souhaite représenter graphiquement des résultats issus du traitement de données :</p>
+<ul>
+<li>savoir au préalable le message principal que l’on souhaite faire passer : cela peut sembler évident, mais il faut toujour avoir cela en tête ;</li>
+<li>construire un graphique intelligible par le plus grand nombre : des graphiques trop sophistiqués, trop chargés d’informations, etc., ne permettront pas de transmettre le message souhaité. Cela peut bien sûr varier selon le public, mais… ;</li>
+<li>situer le graphique : avec un titre explicite, éventuellement un sous-titre, ensuite avec une légende reprenant le champ et/ou la source, etc. ;</li>
+<li>choisir le “bon” graphique selon le type de variables à représenter : variable continue ou discrète, croisement d’un type de variable avec un autre type, variables dépendant du temps (évolution), etc. ;</li>
+<li>présenter le graphique de manière la plus objective possible : ne pas “tordre” le graphique pour faire apparaître un résultat qui n’est pas si évident que cela (c’est typiquement l’exemple d’un changement d’échelle ; d’un “zoom” sur l’axe des ‘y’ sur un graphique en évolution par exemple, pour montrer des variations qui ne seraient pas visibles si l’axe commençait à 0) ;</li>
+<li>rajouter des informations (étiquettes de nom, valeur, etc.) sans trop surcharger le graphique néanmoins ;</li>
+<li>être logique dans la contruction des éléments extérieurs au graphe : par exemple, ordre des modalités d’une légende située à droite selon le point d’arrivée des courbes ; ordre des modalités d’une variable discrète (par exemple le niveau de diplôme) ou selon la moyenne/médiane d’une autre variable par ordre croissant ou décroissant ; utiliser (le plus possible) des axes similaires pour comparer deux grahes côte à cote.</li>
+</ul>
+<p>Ce chapitre de cours donne des conseils synthétiques : cf. <a href="https://rafalab.github.io/dsbook/data-visualization-principles.html" target="_blank">ici</a> ; ou cet article-<a href="https://www.sciencedirect.com/science/article/pii/S2666389920301896" target="_blank">là</a>.</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<script src="js/tidyverse.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="06-Fonctions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
+"instapper": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Camille-Sisi/Data-Mining-2025/master/07-Ggplot-theorique.Rmd",
+"text": "Source"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

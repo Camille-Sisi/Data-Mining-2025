@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section8 Data Mining et Data Visualization en pratique | DATA MINING</title>
+  <meta name="description" content="Titre du cours" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section8 Data Mining et Data Visualization en pratique | DATA MINING" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Titre du cours" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section8 Data Mining et Data Visualization en pratique | DATA MINING" />
+  
+  <meta name="twitter:description" content="Titre du cours" />
+  
+
+<meta name="author" content="Camille Signoretto, Maîtresse de conférences en économie, Université Paris Cité" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="07-Ggplot-theorique.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/tidyverse.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Mining :  <em>Camille Signoretto</em></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html"><i class="fa fa-check"></i>Présentation</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DATA MINING</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="c08-Ggplot-pratique" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Section8</span> Data Mining et Data Visualization en pratique<a href="08-Ggplot-pratique.html#c08-Ggplot-pratique" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div align="justify">
+<p>Reprenons la base de données sur les offres d’emplois de Pôle emploi (devenu France Travail) de l’année 2020 disponibles sur Paris et la petite couronne, et commençons notre analyse descriptive des informations présentes dans cette base en construisant des graphiques pour répondre à certaines questions relatives à ces ces offres d’emploi. On pourra ainsi étudier l’évolution au cours de l’année de ces offres d’emplois.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="08-Ggplot-pratique.html#cb102-1" tabindex="-1"></a><span class="co"># Appelons la table si elle n&#39;est pas déjà dans votre environnement</span></span>
+<span id="cb102-2"><a href="08-Ggplot-pratique.html#cb102-2" tabindex="-1"></a>OffresPE_2020 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/OffresPE_2020.Rdata&quot;</span>)</span>
+<span id="cb102-3"><a href="08-Ggplot-pratique.html#cb102-3" tabindex="-1"></a></span>
+<span id="cb102-4"><a href="08-Ggplot-pratique.html#cb102-4" tabindex="-1"></a><span class="co"># Rappel des variables présentes et de leurs noms</span></span>
+<span id="cb102-5"><a href="08-Ggplot-pratique.html#cb102-5" tabindex="-1"></a><span class="fu">names</span>(OffresPE_2020)</span></code></pre></div>
+<pre><code> [1] &quot;date_firstSeenDay&quot;       &quot;date_scraping&quot;          
+ [3] &quot;date_sitePublicationDay&quot; &quot;job_title&quot;              
+ [5] &quot;job_ROME_code&quot;           &quot;job_qualification&quot;      
+ [7] &quot;contractType&quot;            &quot;contractDuration_min&quot;   
+ [9] &quot;contractDuration_max&quot;    &quot;contractDuration_period&quot;
+[11] &quot;contractDuration_value&quot;  &quot;workTime_hours&quot;         
+[13] &quot;workTime_category&quot;       &quot;workTime_value&quot;         
+[15] &quot;location_label&quot;          &quot;location_zipcode&quot;       
+[17] &quot;location_departement&quot;    &quot;salary_min&quot;             
+[19] &quot;salary_max&quot;              &quot;salary_period&quot;          
+[21] &quot;salary_value&quot;            &quot;salary_hourly_mean&quot;     
+[23] &quot;salary_hourly_min&quot;       &quot;salary_hourly_max&quot;      
+[25] &quot;entreprise_nom&quot;          &quot;entrepriseSecteur_NAF88&quot;
+[27] &quot;entrepriseSecteur_NAF21&quot; &quot;teleworking_mentioned&quot;  
+[29] &quot;experience_min&quot;          &quot;experience_max&quot;         
+[31] &quot;education_level&quot;        </code></pre>
+<div id="exemple-de-la-construction-dun-graphique-pas-à-pas" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Exemple de la construction d’un graphique pas à pas<a href="08-Ggplot-pratique.html#exemple-de-la-construction-dun-graphique-pas-à-pas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On va chercher à représenter la distribution de la durée des contrats (pour rappel exprimée en jours) pour les offres d’emplois en contrat à durée déterminée (<code>CDD</code>) et en intérim (<code>MIS</code>) en fonction du mois. Notre variable principale est donc <code>salary_hourly_mean</code>, et la variable “secondaire” ou fonction de la première sera à construite à partir de la date de publication de l’offre <code>date_sitePublicationDay</code>.</p>
+<p>Pour représenter la distribution d’une variable quantitative ou continue, on peut utiliser un histogramme (ou/et une courbe de densité), mais comme ici on veut la représenter selon une autre variable peut-être serait-il mieux d’utiliser une boîte à moustache qui donnera les principaux éléments de description de la distribution de cette variable.</p>
+<p>Nous avons déjà vu ces deux graphiques précédemment, mais reprenons-les pour voir dans le détail comment nous les construisons !<br />
+<strong>D’abord</strong>, on va créer une <strong>boîte à moustache pour représenter la distribution de la variable <code>px_m2</code></strong>:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="08-Ggplot-pratique.html#cb104-1" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb104-2"><a href="08-Ggplot-pratique.html#cb104-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb104-3"><a href="08-Ggplot-pratique.html#cb104-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> contractDuration_value) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-74-1.svg" width="672" />
+Comme il reste des valeurs aberrantes (cf. section 3.2.3. de la séance 1 de ce cours) et des valeurs manquantes (objet de l’“Avis”), il faut un peu nettoyer la base, regardons plus précisément ces valeurs aberrantes en haut de la distribution :</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="08-Ggplot-pratique.html#cb105-1" tabindex="-1"></a><span class="co"># Pour revoir cette distribution</span></span>
+<span id="cb105-2"><a href="08-Ggplot-pratique.html#cb105-2" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb105-3"><a href="08-Ggplot-pratique.html#cb105-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb105-4"><a href="08-Ggplot-pratique.html#cb105-4" tabindex="-1"></a>  <span class="fu">select</span>(contractType, contractDuration_value, contractDuration_period, contractDuration_min, contractDuration_max, job_title, entrepriseSecteur_NAF21)</span></code></pre></div>
+<pre><code># A tibble: 92,563 × 7
+   contractType contractDuration_value contractDuration_period
+   &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;                  
+ 1 CDD                           20656 YEAR                   
+ 2 CDD                           20656 YEAR                   
+ 3 CDD                            8262 YEAR                   
+ 4 CDD                            8262 YEAR                   
+ 5 CDD                            8262 YEAR                   
+ 6 CDD                            8262 YEAR                   
+ 7 CDD                            8262 YEAR                   
+ 8 CDD                            8262 YEAR                   
+ 9 CDD                            8262 YEAR                   
+10 CDD                            6656 YEAR                   
+# ℹ 92,553 more rows
+# ℹ 4 more variables: contractDuration_min &lt;dbl&gt;, contractDuration_max &lt;dbl&gt;,
+#   job_title &lt;chr&gt;, entrepriseSecteur_NAF21 &lt;chr&gt;</code></pre>
+<p>On voit qu’il y a vraisemblablement un problème pour les premières observations de ces valeurs aberrantes puisque la période dans laquelle la durée du contrat est exprimée (variable <code>contractDuration_period</code>) serait l’année, alors qu’il s’agit probablement plutôt de mois ou de jours étant donné les valeurs minimum et maximum, on va donc supprimer ces observations car il semble difficile de les modifier sans savoir quelle est la bonne temporalité dans laquelle elles sont exprimées et aussi car il ne s’agit que de 42 observations.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="08-Ggplot-pratique.html#cb107-1" tabindex="-1"></a>OffresPE_2020 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span></span>
+<span id="cb107-2"><a href="08-Ggplot-pratique.html#cb107-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> </span>
+<span id="cb107-3"><a href="08-Ggplot-pratique.html#cb107-3" tabindex="-1"></a>             contractDuration_period<span class="sc">==</span><span class="st">&quot;YEAR&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb107-4"><a href="08-Ggplot-pratique.html#cb107-4" tabindex="-1"></a>             contractDuration_value<span class="sc">&gt;</span><span class="dv">780</span>))</span>
+<span id="cb107-5"><a href="08-Ggplot-pratique.html#cb107-5" tabindex="-1"></a></span>
+<span id="cb107-6"><a href="08-Ggplot-pratique.html#cb107-6" tabindex="-1"></a></span>
+<span id="cb107-7"><a href="08-Ggplot-pratique.html#cb107-7" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb107-8"><a href="08-Ggplot-pratique.html#cb107-8" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb107-9"><a href="08-Ggplot-pratique.html#cb107-9" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> contractDuration_value) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-76-1.svg" width="672" />
+C’est plus lisible, même s’il reste des valeurs élevées et supérieures à la durée maximale d’un CDD dans le secteur privée qui est de 18 mois, soit environ 549 jours, mais il est possible d’avoir des CDD plus longs dans la fonctino publique, nous pouvonr éventuellement rajouter un filtre sur le secteur d’activité pour éviter d’avoir des offres émanant de l’administration publique pour pouvoir comparer ce qui est comparable !</p>
+<p>Ou nous pouvons procéder à des paramétrages supplémentaires pour que la boxplot soit davantage visible. On peut par exemple <strong>utiliser une option pour mettre une échelle moins grande en abcisse</strong>. Plusieurs manières de faire existent, mais l’une d’entre elles équivaut à supprimer les valeurs, alors qu’une autre permet de les garder et juste de ne pas les faire apparaître sur le graphique, cela peut-être important si ensuite nous voulons ajoutons des statistiques comme la moyenne sur le boxplot, comme nous allons le voir.</p>
+<p>La première manière est d’utiliser l’argument <code>scale_x_continuous()</code> et l’option <code>limits=c()</code> pour indiquer les nouvelles valeurs de l’échelle, par exemple ici entre 1 et 2 000, mais un avertissement est alors donné : 1151 lignes ont été supprimées, si nous ajoutons ensuite la moyenne, elle sera calculée sans ces 1151 observations, cela peut donc changer les indicateurs de moyenne, voire de médiane, ce n’est donc pas rigoureux.</p>
+<p>Utilisons plutôt la seconde méthode maintenant, avec l’option <code>xlim()</code> à intégrer dans la fonction <code>coord_cartesian()</code> qui fait l’équivalent d’un zoom sur le graphique sans supprimer des observations :</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="08-Ggplot-pratique.html#cb108-1" tabindex="-1"></a><span class="co"># 1ère méthode :</span></span>
+<span id="cb108-2"><a href="08-Ggplot-pratique.html#cb108-2" tabindex="-1"></a><span class="co"># OffresPE_2020 %&gt;% filter(contractType %in% c(&quot;CDD&quot;, &quot;MIS&quot;) &amp; !is.na(contractDuration_value)) %&gt;%</span></span>
+<span id="cb108-3"><a href="08-Ggplot-pratique.html#cb108-3" tabindex="-1"></a><span class="co">#   ggplot() + aes(x = contractDuration_value) + geom_boxplot() +</span></span>
+<span id="cb108-4"><a href="08-Ggplot-pratique.html#cb108-4" tabindex="-1"></a><span class="co">#   scale_x_continuous(limits = c(1, 550))</span></span>
+<span id="cb108-5"><a href="08-Ggplot-pratique.html#cb108-5" tabindex="-1"></a></span>
+<span id="cb108-6"><a href="08-Ggplot-pratique.html#cb108-6" tabindex="-1"></a><span class="co"># 2nde méthode plus rigoureuse :</span></span>
+<span id="cb108-7"><a href="08-Ggplot-pratique.html#cb108-7" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb108-8"><a href="08-Ggplot-pratique.html#cb108-8" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb108-9"><a href="08-Ggplot-pratique.html#cb108-9" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> contractDuration_value) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb108-10"><a href="08-Ggplot-pratique.html#cb108-10" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">550</span>))</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-77-1.svg" width="672" /></p>
+<p><strong>Ensuite</strong>, nous souhaitons <strong>représenter la distribution de cette variable selon le mois de publication de l’offre</strong>) : nous allons pour cela créer une variable <code>mois_publication</code> à partir d’une fonction relative à la date puis nous l’ordonnons ; et nous allons en profiter pour préciser un peu l’échelle des abscisses (réduire le “pas” avec l’option <code>breaks=seq()</code> en mettant tous les 30 jours pour voir à peu près les mois) :</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="08-Ggplot-pratique.html#cb109-1" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb109-2"><a href="08-Ggplot-pratique.html#cb109-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb109-3"><a href="08-Ggplot-pratique.html#cb109-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
+<span id="cb109-4"><a href="08-Ggplot-pratique.html#cb109-4" tabindex="-1"></a>         <span class="at">mois_publication =</span> <span class="fu">factor</span>(mois_publication, </span>
+<span id="cb109-5"><a href="08-Ggplot-pratique.html#cb109-5" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;déc.&quot;</span>,<span class="st">&quot;nov.&quot;</span>,<span class="st">&quot;oct.&quot;</span>,<span class="st">&quot;sept.&quot;</span>, <span class="st">&quot;août&quot;</span>, <span class="st">&quot;juil.&quot;</span>,</span>
+<span id="cb109-6"><a href="08-Ggplot-pratique.html#cb109-6" tabindex="-1"></a>                                              <span class="st">&quot;juin&quot;</span>,<span class="st">&quot;mai&quot;</span>,<span class="st">&quot;avr.&quot;</span>, <span class="st">&quot;mars&quot;</span>, <span class="st">&quot;févr.&quot;</span>, <span class="st">&quot;janv.&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb109-7"><a href="08-Ggplot-pratique.html#cb109-7" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> contractDuration_value, <span class="at">y=</span>mois_publication) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb109-8"><a href="08-Ggplot-pratique.html#cb109-8" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">550</span>))  <span class="sc">+</span> </span>
+<span id="cb109-9"><a href="08-Ggplot-pratique.html#cb109-9" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">550</span>,<span class="dv">30</span>))</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-78-1.svg" width="672" />
+On voit que la médiane est plutôt stable entre les mois, sauf en mai et en avril, et par ailleurs les valeurs Q3 varient beaucoup entre les mois.</p>
+<p>Nous pouvons <strong>également ajouter la moyenne</strong>, puisqu’ici nous voyons de gauche à droite, le minimum, le 1er quartile, la médiane, le 3ème quartile, le maximum et les “outliers” (points aberrants selon les statistiques de la boxplot). Pour cela, il faut utiliser la “couche” <em>statistique</em> de <code>ggplot()</code> avec la fonction <code>stat_summary()</code> et les options <code>fun = mean</code> pour la moyenne, <code>geom = point</code> pour qu’elle soit représentée par un point, <code>color="gray50"</code> pour qu’elle se différencie des autres points et soit en gris, et éventuellement <code>size=2</code> pour jouer sur la taille du point.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="08-Ggplot-pratique.html#cb110-1" tabindex="-1"></a><span class="co"># Pour infos, les options de `geom =` dans `stat_summary()` sont par exemple :  </span></span>
+<span id="cb110-2"><a href="08-Ggplot-pratique.html#cb110-2" tabindex="-1"></a><span class="co"># &quot;point&quot;, &quot;pointrange&quot;, &quot;crossbar&quot;, &quot;bar&quot; (cell-ci à ne pas utiliser ici néanmoins !)</span></span>
+<span id="cb110-3"><a href="08-Ggplot-pratique.html#cb110-3" tabindex="-1"></a></span>
+<span id="cb110-4"><a href="08-Ggplot-pratique.html#cb110-4" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb110-5"><a href="08-Ggplot-pratique.html#cb110-5" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb110-6"><a href="08-Ggplot-pratique.html#cb110-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
+<span id="cb110-7"><a href="08-Ggplot-pratique.html#cb110-7" tabindex="-1"></a>         <span class="at">mois_publication =</span> <span class="fu">factor</span>(mois_publication, </span>
+<span id="cb110-8"><a href="08-Ggplot-pratique.html#cb110-8" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;déc.&quot;</span>,<span class="st">&quot;nov.&quot;</span>,<span class="st">&quot;oct.&quot;</span>,<span class="st">&quot;sept.&quot;</span>, <span class="st">&quot;août&quot;</span>, <span class="st">&quot;juil.&quot;</span>,</span>
+<span id="cb110-9"><a href="08-Ggplot-pratique.html#cb110-9" tabindex="-1"></a>                                              <span class="st">&quot;juin&quot;</span>,<span class="st">&quot;mai&quot;</span>,<span class="st">&quot;avr.&quot;</span>, <span class="st">&quot;mars&quot;</span>, <span class="st">&quot;févr.&quot;</span>, <span class="st">&quot;janv.&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb110-10"><a href="08-Ggplot-pratique.html#cb110-10" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> contractDuration_value, <span class="at">y=</span>mois_publication) <span class="sc">+</span> </span>
+<span id="cb110-11"><a href="08-Ggplot-pratique.html#cb110-11" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb110-12"><a href="08-Ggplot-pratique.html#cb110-12" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">color=</span><span class="st">&quot;gray50&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb110-13"><a href="08-Ggplot-pratique.html#cb110-13" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">550</span>))  <span class="sc">+</span> </span>
+<span id="cb110-14"><a href="08-Ggplot-pratique.html#cb110-14" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">550</span>,<span class="dv">30</span>))</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-79-1.svg" width="672" />
+On observe ainsi des différences entre la moyenne et la médiane, puisque la moyenne est toujours supérieure à la médiane puisque tirée par des valeurs plus souvent très élevées que très faibles (plus de points au-delà du maximum que l’inverse), mais elle semble moins varier selon les mois.</p>
+<p>On peut aussi vouloir enlever les outliers avec l’option <code>outlier.shape</code> de <code>geom_boxplot()</code> comme ceci : <code>geom_boxplot(outlier.shape = NA)</code>.</p>
+<p>On peut encore vouloir <strong>ordonner l’affichage des années par ordre décroissant de la médiane</strong> ou de <strong>la moyenne</strong> (ordre décroissant ici = valeur la plus élevée en haut du graphique). Nous pouvons, entre autres, utiliser pour cela la fonction <code>fct_reorder()</code> du package <strong><code>forcats</code></strong> déjà présenté dans la section 3.2 de ce cours (Séance 1) : nous pouvons alors directement l’intégrer dans l’<code>aes</code> de <strong>ggplot</strong> dans la variable en ordonnée <code>y=fct_reorder()</code>, il faut pour cela mettre entre parenthèses la variable utilisée en ordonnée, suivie de la variable par laquelle on ordonne (la même que celle utilisée dans <code>x=</code>). Utilisée dans un boxplot, cela ordonne par défaut selon la médiane ; si on veut que les régions soient ordonnées par la moyenne, il faut rajouter l’option <code>.fun=mean</code> dans la fonction <code>fct_reorder()</code>, cf. le code en-dessous.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="08-Ggplot-pratique.html#cb111-1" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb111-2"><a href="08-Ggplot-pratique.html#cb111-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb111-3"><a href="08-Ggplot-pratique.html#cb111-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb111-4"><a href="08-Ggplot-pratique.html#cb111-4" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb111-5"><a href="08-Ggplot-pratique.html#cb111-5" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> contractDuration_value, </span>
+<span id="cb111-6"><a href="08-Ggplot-pratique.html#cb111-6" tabindex="-1"></a>      <span class="at">y=</span><span class="fu">fct_reorder</span>(mois_publication, contractDuration_value, <span class="at">.fun=</span>mean)) <span class="sc">+</span> </span>
+<span id="cb111-7"><a href="08-Ggplot-pratique.html#cb111-7" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb111-8"><a href="08-Ggplot-pratique.html#cb111-8" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">color=</span><span class="st">&quot;gray50&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb111-9"><a href="08-Ggplot-pratique.html#cb111-9" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">550</span>))  <span class="sc">+</span> </span>
+<span id="cb111-10"><a href="08-Ggplot-pratique.html#cb111-10" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">550</span>,<span class="dv">30</span>))</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-80-1.svg" width="672" /></p>
+<p>On observe que les offres d’emploi avec des contrats légèrement plus longs sont plus probables au mois de septembre puis de novembre, alors qu’en début d’année civile (janvier et février) c’est là où les moyennes sont les plus basses.
+Cependant, comme ici notre seconde variable est une variable temporelle - le mois -, cela n’est pas forcément pertinent de modifier l’ordre du graphique pour le mettre selon la moyenne car cela pourrait perturber la lecture du graphique. On va revenir sur le graphique précédent donc.</p>
+<p>Nous arrivons à un graphique intéressant, il faut <strong>maintenant améliorer la description autour</strong> : noms des axes, titres, légende informative sous le graphique (avec notamment un avertissement sur les valeurs non affichées sur le graphique), éventuellement un peu de couleur (avec <code>fill=</code> non pas dans l’<code>aes()</code> mais dans la fonction <code>geom_boxplot()</code> pour qu’elle soit identique quel que soit le département), etc.<br />
+Cela se fait avec la fonction <code>labs()</code>, et ensuite la fonction <code>theme()</code>.<br />
+Une petite astuce pour les titres pour qu’ils ne soient pas coupés sur le graphe : <code>\n</code> collé à un mot (sans espace) permet de mettre à la ligne à partir de ce mot !</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="08-Ggplot-pratique.html#cb112-1" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb112-2"><a href="08-Ggplot-pratique.html#cb112-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb112-3"><a href="08-Ggplot-pratique.html#cb112-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
+<span id="cb112-4"><a href="08-Ggplot-pratique.html#cb112-4" tabindex="-1"></a>         <span class="at">mois_publication =</span> <span class="fu">factor</span>(mois_publication, </span>
+<span id="cb112-5"><a href="08-Ggplot-pratique.html#cb112-5" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;déc.&quot;</span>,<span class="st">&quot;nov.&quot;</span>,<span class="st">&quot;oct.&quot;</span>,<span class="st">&quot;sept.&quot;</span>, <span class="st">&quot;août&quot;</span>, <span class="st">&quot;juil.&quot;</span>,</span>
+<span id="cb112-6"><a href="08-Ggplot-pratique.html#cb112-6" tabindex="-1"></a>                                              <span class="st">&quot;juin&quot;</span>,<span class="st">&quot;mai&quot;</span>,<span class="st">&quot;avr.&quot;</span>, <span class="st">&quot;mars&quot;</span>, <span class="st">&quot;févr.&quot;</span>, <span class="st">&quot;janv.&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb112-7"><a href="08-Ggplot-pratique.html#cb112-7" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> contractDuration_value, <span class="at">y=</span>mois_publication) <span class="sc">+</span> </span>
+<span id="cb112-8"><a href="08-Ggplot-pratique.html#cb112-8" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">fill=</span><span class="st">&quot;khaki&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb112-9"><a href="08-Ggplot-pratique.html#cb112-9" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">color=</span><span class="st">&quot;gray50&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb112-10"><a href="08-Ggplot-pratique.html#cb112-10" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">550</span>))  <span class="sc">+</span> </span>
+<span id="cb112-11"><a href="08-Ggplot-pratique.html#cb112-11" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">550</span>,<span class="dv">30</span>)) <span class="sc">+</span></span>
+<span id="cb112-12"><a href="08-Ggplot-pratique.html#cb112-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Distribution de la durée des offres d&#39;emploi en CDD et missions d&#39;intérim dans Paris </span><span class="sc">\n</span><span class="st">et sa petite couronne en 2020&quot;</span>, </span>
+<span id="cb112-13"><a href="08-Ggplot-pratique.html#cb112-13" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Durée du contrat proposé en mois&quot;</span>, <span class="at">y=</span><span class="st">&quot;Mois&quot;</span>,</span>
+<span id="cb112-14"><a href="08-Ggplot-pratique.html#cb112-14" tabindex="-1"></a>       <span class="at">caption=</span><span class="st">&quot;Remarques : Les valeurs au-dessus de 550 jours soit 18 mois ne sont pas affichées ; les points </span><span class="sc">\n</span><span class="st">au-delà du minimum et maximum non plus ; les points en gris représentent la moyenne. </span><span class="sc">\n</span><span class="st">Source : Base &#39;JOCAS&#39;, offres d&#39;emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020. </span><span class="sc">\n</span><span class="st">Calculs : Camille Signoretto.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb112-15"><a href="08-Ggplot-pratique.html#cb112-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="dv">0</span>),</span>
+<span id="cb112-16"><a href="08-Ggplot-pratique.html#cb112-16" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>),</span>
+<span id="cb112-17"><a href="08-Ggplot-pratique.html#cb112-17" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb112-18"><a href="08-Ggplot-pratique.html#cb112-18" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>))</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-81-1.svg" width="672" /></p>
+<p>Voilà un premier graphique construit avec la grammaire de <code>ggplot()</code>. À vous maintenant de construire vous-mêmes les graphiques qui vous sont suggérés dans la section suivante !</p>
+</div>
+<div id="dautres-exemples-à-travers-des-exercices" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> D’autres exemples à travers des exercices<a href="08-Ggplot-pratique.html#dautres-exemples-à-travers-des-exercices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="distribution-de-la-durée-des-contrats-proposés-selon-le-type-de-contrat" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Distribution de la durée des contrats proposés, selon le type de contrat<a href="08-Ggplot-pratique.html#distribution-de-la-durée-des-contrats-proposés-selon-le-type-de-contrat" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Construisez le même type de graphique mais cette fois à partir d’une densité de distribution selon le type de contrat - CDD ou intérim. N’hésitez pas à changer les options pour le mettre à votre goût !!</p>
+<img src="Data-Mining_files/figure-html/unnamed-chunk-82-1.svg" width="672" />
+<div class="solution-exo">
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="08-Ggplot-pratique.html#cb113-1" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb113-2"><a href="08-Ggplot-pratique.html#cb113-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb113-3"><a href="08-Ggplot-pratique.html#cb113-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb113-4"><a href="08-Ggplot-pratique.html#cb113-4" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> contractDuration_value, <span class="at">fill =</span> contractType) <span class="sc">+</span> </span>
+<span id="cb113-5"><a href="08-Ggplot-pratique.html#cb113-5" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb113-6"><a href="08-Ggplot-pratique.html#cb113-6" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">550</span>)) <span class="sc">+</span> </span>
+<span id="cb113-7"><a href="08-Ggplot-pratique.html#cb113-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">550</span>,<span class="dv">30</span>)) <span class="sc">+</span></span>
+<span id="cb113-8"><a href="08-Ggplot-pratique.html#cb113-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Distribution de la durée des offres d&#39;emploi en CDD et missions d&#39;intérim dans Paris </span><span class="sc">\n</span><span class="st">et sa petite couronne en 2020&quot;</span>, </span>
+<span id="cb113-9"><a href="08-Ggplot-pratique.html#cb113-9" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Durée du contrat proposé en mois&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>, <span class="at">fill=</span><span class="st">&quot;Type de contrat&quot;</span>,</span>
+<span id="cb113-10"><a href="08-Ggplot-pratique.html#cb113-10" tabindex="-1"></a>       <span class="at">caption=</span><span class="st">&quot;Remarques : Les valeurs au-dessus de 550 jours soit 18 mois ne sont pas affichées. </span><span class="sc">\n</span><span class="st">Source : Base &#39;JOCAS&#39;, offres d&#39;emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020. </span><span class="sc">\n</span><span class="st">Calculs : Camille Signoretto.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb113-11"><a href="08-Ggplot-pratique.html#cb113-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="dv">0</span>),</span>
+<span id="cb113-12"><a href="08-Ggplot-pratique.html#cb113-12" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">11</span>),</span>
+<span id="cb113-13"><a href="08-Ggplot-pratique.html#cb113-13" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb113-14"><a href="08-Ggplot-pratique.html#cb113-14" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>))</span></code></pre></div>
+</div>
+</div>
+<div id="comparaison-des-montants-moyen-et-médian-des-durées-de-contrat-des-offres-demplois-par-secteur-dactivité" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Comparaison des montants moyen et médian des durées de contrat des offres d’emplois, par secteur d’activité<a href="08-Ggplot-pratique.html#comparaison-des-montants-moyen-et-médian-des-durées-de-contrat-des-offres-demplois-par-secteur-dactivité" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Construisez maintenant un graphique mettant l’un à côté de l’autre deux graphes en bâtons représentant respectivement la durée moyenne et la durée médiane des offres d’emploi selon le <em>secteur d’activité</em>.</p>
+<p>Pour vous aider si besoin, réfléchissez par étapes :</p>
+<ul>
+<li>il est bien de commencer par créer une variable en regroupant certains secteurs et en leur donnant un nom complet pour pouvoir plus facilement les identifier ;</li>
+<li>créer un premier graphe que vous assignerez à un nouvel objet et qui représentera celui de la moyenne par secteur ;</li>
+<li>vous pouvez pour cela créer une nouvelle variable qui constituera la moyenne pour chaque secteur (un conseil : arrondir à l’unité) ;</li>
+<li>sélectionnez les variables qui seront utilisées dans le graphique et vérifier (ou corriger sinon) qu’il n’y ait pas des doublons (lignes identiques) car cela peut fausser le graphique ;</li>
+<li>construisez le graphique avec <code>ggplot()</code> et la bonne fonction <code>geom_***()</code> ;</li>
+<li>faîtes de même pour la médiane par secteur ;</li>
+<li>vous pouvez ensuite mettre ces graphiques côte à côté avec le package <strong><code>patchwork</code></strong> (qu’il vous faudra probablement installer si c’est la première fois que vous l’utilisez), recherchez sur internet comment faire ensuite (c’est très simple !), puis mettez le même axe des ordonnées pour gagner de la place avec l’argument <code>plot_layout(axes = "collect")</code>, enfin ajoutez un titre et une légende générale avec la fonction <code>plot_annotation()</code>.</li>
+</ul>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="08-Ggplot-pratique.html#cb114-1" tabindex="-1"></a>OffresPE_2020 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb114-2"><a href="08-Ggplot-pratique.html#cb114-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
+<span id="cb114-3"><a href="08-Ggplot-pratique.html#cb114-3" tabindex="-1"></a>         <span class="at">secteurs=</span><span class="fu">as.factor</span>(<span class="fu">case_when</span>(entrepriseSecteur_NAF21 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Industrie&quot;</span>,</span>
+<span id="cb114-4"><a href="08-Ggplot-pratique.html#cb114-4" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;F&quot;</span> <span class="sc">~</span> <span class="st">&quot;Construction&quot;</span>,</span>
+<span id="cb114-5"><a href="08-Ggplot-pratique.html#cb114-5" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;G&quot;</span> <span class="sc">~</span> <span class="st">&quot;Commerce&quot;</span>,</span>
+<span id="cb114-6"><a href="08-Ggplot-pratique.html#cb114-6" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;H&quot;</span> <span class="sc">~</span> <span class="st">&quot;Transports&quot;</span>,</span>
+<span id="cb114-7"><a href="08-Ggplot-pratique.html#cb114-7" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;I&quot;</span> <span class="sc">~</span> <span class="st">&quot;Hébergement/restauration&quot;</span>,</span>
+<span id="cb114-8"><a href="08-Ggplot-pratique.html#cb114-8" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;J&quot;</span> <span class="sc">~</span> <span class="st">&quot;Info/com&quot;</span>,</span>
+<span id="cb114-9"><a href="08-Ggplot-pratique.html#cb114-9" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;K&quot;</span>, <span class="st">&quot;L&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Activités financières et immo&quot;</span>,</span>
+<span id="cb114-10"><a href="08-Ggplot-pratique.html#cb114-10" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;M&quot;</span> <span class="sc">~</span> <span class="st">&quot;Activités spécialisées, scientifiques et techniques&quot;</span>,</span>
+<span id="cb114-11"><a href="08-Ggplot-pratique.html#cb114-11" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;N&quot;</span> <span class="sc">~</span> <span class="st">&quot;Activités de services administratifs et de soutien&quot;</span>,</span>
+<span id="cb114-12"><a href="08-Ggplot-pratique.html#cb114-12" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;O&quot;</span> <span class="sc">~</span> <span class="st">&quot;Administration publique&quot;</span>,</span>
+<span id="cb114-13"><a href="08-Ggplot-pratique.html#cb114-13" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;P&quot;</span> <span class="sc">~</span> <span class="st">&quot;Enseignement&quot;</span>,</span>
+<span id="cb114-14"><a href="08-Ggplot-pratique.html#cb114-14" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;Q&quot;</span> <span class="sc">~</span> <span class="st">&quot;Santé humaine et action sociale&quot;</span>,</span>
+<span id="cb114-15"><a href="08-Ggplot-pratique.html#cb114-15" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;R&quot;</span> <span class="sc">~</span> <span class="st">&quot;Arts, spectacles et activités récréatives&quot;</span>,</span>
+<span id="cb114-16"><a href="08-Ggplot-pratique.html#cb114-16" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;S&quot;</span> <span class="sc">~</span> <span class="st">&quot;Autres activités de service&quot;</span>,</span>
+<span id="cb114-17"><a href="08-Ggplot-pratique.html#cb114-17" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;T&quot;</span> <span class="sc">~</span> <span class="st">&quot;Activités des ménages en tant qu&#39;employeurs&quot;</span>,</span>
+<span id="cb114-18"><a href="08-Ggplot-pratique.html#cb114-18" tabindex="-1"></a>                                      <span class="cn">TRUE</span> <span class="sc">~</span> entrepriseSecteur_NAF21)))</span>
+<span id="cb114-19"><a href="08-Ggplot-pratique.html#cb114-19" tabindex="-1"></a></span>
+<span id="cb114-20"><a href="08-Ggplot-pratique.html#cb114-20" tabindex="-1"></a><span class="co"># On va supprimer les 7 offres qui sont dans le secteur &quot;U&quot; &quot;Activités extra-territoriales&quot;...</span></span></code></pre></div>
+<img src="Data-Mining_files/figure-html/unnamed-chunk-85-1.svg" width="672" />
+<div class="solution-exo">
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="08-Ggplot-pratique.html#cb115-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb115-2"><a href="08-Ggplot-pratique.html#cb115-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value) <span class="sc">&amp;</span> </span>
+<span id="cb115-3"><a href="08-Ggplot-pratique.html#cb115-3" tabindex="-1"></a>           <span class="sc">!</span>entrepriseSecteur_NAF21<span class="sc">==</span><span class="st">&quot;U&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-4"><a href="08-Ggplot-pratique.html#cb115-4" tabindex="-1"></a>  <span class="fu">group_by</span>(secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-5"><a href="08-Ggplot-pratique.html#cb115-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moy_duree =</span> <span class="fu">round</span>(<span class="fu">mean</span>(contractDuration_value))) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-6"><a href="08-Ggplot-pratique.html#cb115-6" tabindex="-1"></a>  <span class="fu">select</span>(moy_duree, secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-7"><a href="08-Ggplot-pratique.html#cb115-7" tabindex="-1"></a>  <span class="fu">unique</span>()  <span class="sc">%&gt;%</span> </span>
+<span id="cb115-8"><a href="08-Ggplot-pratique.html#cb115-8" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> secteurs, <span class="at">y =</span> moy_duree) <span class="sc">+</span></span>
+<span id="cb115-9"><a href="08-Ggplot-pratique.html#cb115-9" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">fill=</span><span class="st">&quot;honeydew&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb115-10"><a href="08-Ggplot-pratique.html#cb115-10" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb115-11"><a href="08-Ggplot-pratique.html#cb115-11" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">275</span>,<span class="dv">30</span>)) <span class="sc">+</span></span>
+<span id="cb115-12"><a href="08-Ggplot-pratique.html#cb115-12" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> moy_duree), <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">color=</span><span class="st">&quot;gray25&quot;</span>, <span class="at">size=</span><span class="fl">2.8</span>) <span class="sc">+</span></span>
+<span id="cb115-13"><a href="08-Ggplot-pratique.html#cb115-13" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Moyenne&quot;</span>, <span class="at">x =</span> <span class="st">&quot; &quot;</span>, <span class="at">y =</span> <span class="st">&quot; &quot;</span>) <span class="sc">+</span></span>
+<span id="cb115-14"><a href="08-Ggplot-pratique.html#cb115-14" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>, <span class="at">vjust=</span><span class="fl">0.5</span>, <span class="at">size=</span><span class="fl">8.5</span>),</span>
+<span id="cb115-15"><a href="08-Ggplot-pratique.html#cb115-15" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">10.5</span>))</span>
+<span id="cb115-16"><a href="08-Ggplot-pratique.html#cb115-16" tabindex="-1"></a></span>
+<span id="cb115-17"><a href="08-Ggplot-pratique.html#cb115-17" tabindex="-1"></a></span>
+<span id="cb115-18"><a href="08-Ggplot-pratique.html#cb115-18" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb115-19"><a href="08-Ggplot-pratique.html#cb115-19" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value) <span class="sc">&amp;</span> </span>
+<span id="cb115-20"><a href="08-Ggplot-pratique.html#cb115-20" tabindex="-1"></a>           <span class="sc">!</span>entrepriseSecteur_NAF21<span class="sc">==</span><span class="st">&quot;U&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-21"><a href="08-Ggplot-pratique.html#cb115-21" tabindex="-1"></a>  <span class="fu">group_by</span>(secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-22"><a href="08-Ggplot-pratique.html#cb115-22" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mediane_duree =</span> <span class="fu">round</span>(<span class="fu">median</span>(contractDuration_value))) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-23"><a href="08-Ggplot-pratique.html#cb115-23" tabindex="-1"></a>  <span class="fu">select</span>(mediane_duree, secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-24"><a href="08-Ggplot-pratique.html#cb115-24" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb115-25"><a href="08-Ggplot-pratique.html#cb115-25" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> secteurs, <span class="at">y =</span> mediane_duree) <span class="sc">+</span></span>
+<span id="cb115-26"><a href="08-Ggplot-pratique.html#cb115-26" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">fill=</span><span class="st">&quot;honeydew&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb115-27"><a href="08-Ggplot-pratique.html#cb115-27" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb115-28"><a href="08-Ggplot-pratique.html#cb115-28" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">275</span>,<span class="dv">30</span>)) <span class="sc">+</span></span>
+<span id="cb115-29"><a href="08-Ggplot-pratique.html#cb115-29" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> mediane_duree), <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">color=</span><span class="st">&quot;gray25&quot;</span>, <span class="at">size=</span><span class="fl">2.8</span>) <span class="sc">+</span></span>
+<span id="cb115-30"><a href="08-Ggplot-pratique.html#cb115-30" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Médiane&quot;</span>, <span class="at">x =</span> <span class="st">&quot; &quot;</span>, <span class="at">y =</span> <span class="st">&quot; &quot;</span>) <span class="sc">+</span></span>
+<span id="cb115-31"><a href="08-Ggplot-pratique.html#cb115-31" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>, <span class="at">vjust=</span><span class="fl">0.5</span>, <span class="at">size=</span><span class="fl">8.5</span>),</span>
+<span id="cb115-32"><a href="08-Ggplot-pratique.html#cb115-32" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">10.5</span>))</span>
+<span id="cb115-33"><a href="08-Ggplot-pratique.html#cb115-33" tabindex="-1"></a></span>
+<span id="cb115-34"><a href="08-Ggplot-pratique.html#cb115-34" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb115-35"><a href="08-Ggplot-pratique.html#cb115-35" tabindex="-1"></a>(p1 <span class="sc">+</span> p2) <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">axes =</span> <span class="st">&quot;collect&quot;</span>) <span class="sc">+</span></span>
+<span id="cb115-36"><a href="08-Ggplot-pratique.html#cb115-36" tabindex="-1"></a><span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">&quot;Moyennes et médianes de la durée des contrats des offres d&#39;emploi sur Paris et sa petite </span><span class="sc">\n</span><span class="st">couronne, en 2020 et selon le secteur d&#39;activité&quot;</span>, </span>
+<span id="cb115-37"><a href="08-Ggplot-pratique.html#cb115-37" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;Source : Base &#39;JOCAS&#39;, offres d&#39;emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020. </span><span class="sc">\n</span><span class="st">Calculs : Camille Signoretto.&quot;</span>, </span>
+<span id="cb115-38"><a href="08-Ggplot-pratique.html#cb115-38" tabindex="-1"></a>                <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb115-39"><a href="08-Ggplot-pratique.html#cb115-39" tabindex="-1"></a>                              <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)))</span></code></pre></div>
+</div>
+<p>On observe que ce sont deux secteurs regroupant des activités publiques - administration et enseignement - qui proposent des contrats avec des durées (moyennes et médianes) relativement plus longues, ce qui peut être logique puisque le droit sur la durée des contrats à durée déterminée est justement différent. A l’inverse, deux secteurs des services - “Activités spécialisées, scientifiques et techniques”, et “Activités de services administratifs et de soutien” - présentent des durées moyennes et médianes relativement courtes ; on retrouve ensuite l’hébergement/restauration et la construction pour les moyennes, car les médianes sont toutes identiques au-delà des 4 premiers secteurs cités.</p>
+On aurait pu sinon utilser un “dot plot”, comme ci-dessous. Cherchez comment l’on peut construire ce type de graphique (rq : cela ne correspond par à une fonction en tant que telle). Le début du code est le même, ce sont les fonctions <code>geom_***</code> qui changent…<br />
+<img src="Data-Mining_files/figure-html/unnamed-chunk-87-1.svg" width="672" />
+<div class="solution-exo">
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="08-Ggplot-pratique.html#cb116-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggrepel&quot;</span>)</span>
+<span id="cb116-2"><a href="08-Ggplot-pratique.html#cb116-2" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb116-3"><a href="08-Ggplot-pratique.html#cb116-3" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value) <span class="sc">&amp;</span> </span>
+<span id="cb116-4"><a href="08-Ggplot-pratique.html#cb116-4" tabindex="-1"></a>           <span class="sc">!</span>entrepriseSecteur_NAF21<span class="sc">==</span><span class="st">&quot;U&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-5"><a href="08-Ggplot-pratique.html#cb116-5" tabindex="-1"></a>  <span class="fu">group_by</span>(secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-6"><a href="08-Ggplot-pratique.html#cb116-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moy_duree =</span> <span class="fu">round</span>(<span class="fu">mean</span>(contractDuration_value))) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-7"><a href="08-Ggplot-pratique.html#cb116-7" tabindex="-1"></a>  <span class="fu">select</span>(moy_duree, secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-8"><a href="08-Ggplot-pratique.html#cb116-8" tabindex="-1"></a>  <span class="fu">unique</span>()  <span class="sc">%&gt;%</span> </span>
+<span id="cb116-9"><a href="08-Ggplot-pratique.html#cb116-9" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span>moy_duree , <span class="at">y =</span> secteurs) <span class="sc">+</span></span>
+<span id="cb116-10"><a href="08-Ggplot-pratique.html#cb116-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;burlywood4&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb116-11"><a href="08-Ggplot-pratique.html#cb116-11" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">xend=</span>moy_duree, <span class="at">y=</span>secteurs), <span class="at">color=</span><span class="st">&quot;snow4&quot;</span>) <span class="sc">+</span></span>
+<span id="cb116-12"><a href="08-Ggplot-pratique.html#cb116-12" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> moy_duree), <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span> </span>
+<span id="cb116-13"><a href="08-Ggplot-pratique.html#cb116-13" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Moyenne&quot;</span>, <span class="at">x =</span> <span class="st">&quot; &quot;</span>, <span class="at">y =</span> <span class="st">&quot; &quot;</span>) <span class="sc">+</span></span>
+<span id="cb116-14"><a href="08-Ggplot-pratique.html#cb116-14" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">10.5</span>))</span>
+<span id="cb116-15"><a href="08-Ggplot-pratique.html#cb116-15" tabindex="-1"></a></span>
+<span id="cb116-16"><a href="08-Ggplot-pratique.html#cb116-16" tabindex="-1"></a></span>
+<span id="cb116-17"><a href="08-Ggplot-pratique.html#cb116-17" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb116-18"><a href="08-Ggplot-pratique.html#cb116-18" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value) <span class="sc">&amp;</span> </span>
+<span id="cb116-19"><a href="08-Ggplot-pratique.html#cb116-19" tabindex="-1"></a>           <span class="sc">!</span>entrepriseSecteur_NAF21<span class="sc">==</span><span class="st">&quot;U&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-20"><a href="08-Ggplot-pratique.html#cb116-20" tabindex="-1"></a>  <span class="fu">group_by</span>(secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-21"><a href="08-Ggplot-pratique.html#cb116-21" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mediane_duree =</span> <span class="fu">round</span>(<span class="fu">median</span>(contractDuration_value))) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-22"><a href="08-Ggplot-pratique.html#cb116-22" tabindex="-1"></a>  <span class="fu">select</span>(mediane_duree, secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-23"><a href="08-Ggplot-pratique.html#cb116-23" tabindex="-1"></a>  <span class="fu">unique</span>()  <span class="sc">%&gt;%</span> </span>
+<span id="cb116-24"><a href="08-Ggplot-pratique.html#cb116-24" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span>mediane_duree , <span class="at">y =</span> secteurs) <span class="sc">+</span></span>
+<span id="cb116-25"><a href="08-Ggplot-pratique.html#cb116-25" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;burlywood4&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb116-26"><a href="08-Ggplot-pratique.html#cb116-26" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">xend=</span>mediane_duree, <span class="at">y=</span>secteurs), <span class="at">color=</span><span class="st">&quot;snow4&quot;</span>) <span class="sc">+</span></span>
+<span id="cb116-27"><a href="08-Ggplot-pratique.html#cb116-27" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> mediane_duree), <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span> </span>
+<span id="cb116-28"><a href="08-Ggplot-pratique.html#cb116-28" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Médiane&quot;</span>, <span class="at">x =</span> <span class="st">&quot; &quot;</span>, <span class="at">y =</span> <span class="st">&quot; &quot;</span>) <span class="sc">+</span></span>
+<span id="cb116-29"><a href="08-Ggplot-pratique.html#cb116-29" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">10.5</span>))</span>
+<span id="cb116-30"><a href="08-Ggplot-pratique.html#cb116-30" tabindex="-1"></a> </span>
+<span id="cb116-31"><a href="08-Ggplot-pratique.html#cb116-31" tabindex="-1"></a>(p3 <span class="sc">+</span> p4) <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">axes =</span> <span class="st">&quot;collect&quot;</span>) <span class="sc">+</span></span>
+<span id="cb116-32"><a href="08-Ggplot-pratique.html#cb116-32" tabindex="-1"></a><span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">&quot;Moyennes et médianes de la durée des contrats des offres d&#39;emploi en CDD et intérim sur Paris et </span><span class="sc">\n</span><span class="st">sa petite couronne, en 2020 et selon le secteur d&#39;activité&quot;</span>, </span>
+<span id="cb116-33"><a href="08-Ggplot-pratique.html#cb116-33" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;Source : Base &#39;JOCAS&#39;, offres d&#39;emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020. </span><span class="sc">\n</span><span class="st">Calculs : Camille Signoretto.&quot;</span>, </span>
+<span id="cb116-34"><a href="08-Ggplot-pratique.html#cb116-34" tabindex="-1"></a>                <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb116-35"><a href="08-Ggplot-pratique.html#cb116-35" tabindex="-1"></a>                              <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)))</span></code></pre></div>
+</div>
+</div>
+<div id="evolution-de-la-durée-des-contrats-des-offres-demploi-durant-lannée-2020" class="section level3 hasAnchor" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Evolution de la durée des contrats des offres d’emploi durant l’année 2020<a href="08-Ggplot-pratique.html#evolution-de-la-durée-des-contrats-des-offres-demploi-durant-lannée-2020" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Changeons un peu de perspective et construisez cette fois un graphique montrant l’évolution de la durée des contrats des offres d’emploi durant l’année 2020 à Paris et sa petite couronne, de manière générale et ensuite selon 6 secteurs choisis selon leur durée médiane mise en avant un peu plus haut : les 3 ayant les durées moyennes les plus élevées (“Administration publique”, “Enseignement”, et “Arts, spectacles et activités récréatives”), et les 3 ayant les durées moyennes les moins élevées (“Activités spécialisées, scientifiques et techniques”, “Activités de services administratifs et de soutien”, et “Hébergement/restauration”).<br />
+On peut vouloir le rendre interactif de telle sorte que l’utilisateur puisse voir les valeurs des points en passant la souris dessus : pour cela, il faut installer et charge le package <strong><code>plotly</code></strong> puis utiliserla fonction <code>ggplotly()</code> ; cela nécessite de stocker le graphique dans un objet.</p>
+<p>De même, il faut procéder par étapes :</p>
+<ul>
+<li>créer la variable de prix moyen de durée selon le mois ;</li>
+<li>ne garder que ces variables, supprimer les lignes doublons le cas échéant ;</li>
+<li>construir un graphique sous forme de courbes avec des points représentants les valeurs en le stockant dans un objet ;</li>
+<li>appeler la fonction <code>ggplotly()</code> en utilisant l’argument <code>tooltip()</code> pour que seule la valeur des “y” soit affichée..</li>
+</ul>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-9403774206956c4f4112" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-9403774206956c4f4112">{"x":{"data":[{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[141,137,146,145,145,149,148,148,153,143,153,142],"text":["moy_duree: 141","moy_duree: 137","moy_duree: 146","moy_duree: 145","moy_duree: 145","moy_duree: 149","moy_duree: 148","moy_duree: 148","moy_duree: 153","moy_duree: 143","moy_duree: 153","moy_duree: 142"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)","dash":"solid"},"frame":null}],"layout":{"margin":{"t":50,"r":50,"b":80,"l":50},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Evolution de la durée moyenne des contrats dans les offres d'emplois en CDD et intérim sur <br />Paris et sa petite couronne en 2020","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,12.6],"tickmode":"array","ticktext":["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."],"tickvals":[1,2,3,4.0000000000000009,5,6,7.0000000000000009,8,9,10,11,12],"categoryorder":"array","categoryarray":["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":" ","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[85.5,184.5],"tickmode":"array","ticktext":["90","105","120","135","150","165","180"],"tickvals":[90,105,120,135,150,165,180],"categoryorder":"array","categoryarray":["90","105","120","135","150","165","180"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":" ","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative","annotations":[{"text":"Source : Source : Base 'JOCAS', offres d'emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020. <br />Calculs : Camille Signoretto. <br />Note : l'axe des ordonnées ne commence qu'à 90 jours (3 mois).","showarrow":false,"x":0,"y":-0.20000000000000001,"xref":"paper","yref":"paper","xanchor":"left","yanchor":"auto","xshift":0,"yshift":0,"font":{"size":10.5},"align":"left"}]},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"cf81066205d":{"x":{},"y":{},"type":"scatter"},"cf81b214d8a":{"x":{},"y":{}}},"cur_data":"cf81066205d","visdat":{"cf81066205d":["function (y) ","x"],"cf81b214d8a":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="solution-exo">
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="08-Ggplot-pratique.html#cb117-1" tabindex="-1"></a>g_evo <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb117-2"><a href="08-Ggplot-pratique.html#cb117-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value) <span class="sc">&amp;</span> </span>
+<span id="cb117-3"><a href="08-Ggplot-pratique.html#cb117-3" tabindex="-1"></a>           <span class="sc">!</span>entrepriseSecteur_NAF21<span class="sc">==</span><span class="st">&quot;U&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb117-4"><a href="08-Ggplot-pratique.html#cb117-4" tabindex="-1"></a>  <span class="fu">group_by</span>(mois_publication) <span class="sc">%&gt;%</span> </span>
+<span id="cb117-5"><a href="08-Ggplot-pratique.html#cb117-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moy_duree =</span> <span class="fu">round</span>(<span class="fu">mean</span>(contractDuration_value)),</span>
+<span id="cb117-6"><a href="08-Ggplot-pratique.html#cb117-6" tabindex="-1"></a>         <span class="at">mois_publication =</span> <span class="fu">factor</span>(mois_publication, </span>
+<span id="cb117-7"><a href="08-Ggplot-pratique.html#cb117-7" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;janv.&quot;</span>,<span class="st">&quot;févr.&quot;</span>,<span class="st">&quot;mars&quot;</span>,<span class="st">&quot;avr.&quot;</span>,<span class="st">&quot;mai&quot;</span>,<span class="st">&quot;juin&quot;</span>,</span>
+<span id="cb117-8"><a href="08-Ggplot-pratique.html#cb117-8" tabindex="-1"></a>                                              <span class="st">&quot;juil.&quot;</span>,<span class="st">&quot;août&quot;</span>,<span class="st">&quot;sept.&quot;</span>,<span class="st">&quot;oct.&quot;</span>,<span class="st">&quot;nov.&quot;</span>,<span class="st">&quot;déc.&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb117-9"><a href="08-Ggplot-pratique.html#cb117-9" tabindex="-1"></a>  <span class="fu">select</span>(moy_duree, mois_publication) <span class="sc">%&gt;%</span> </span>
+<span id="cb117-10"><a href="08-Ggplot-pratique.html#cb117-10" tabindex="-1"></a>  <span class="fu">unique</span>()  <span class="sc">%&gt;%</span> </span>
+<span id="cb117-11"><a href="08-Ggplot-pratique.html#cb117-11" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> mois_publication, <span class="at">y =</span> moy_duree) <span class="sc">+</span></span>
+<span id="cb117-12"><a href="08-Ggplot-pratique.html#cb117-12" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>)  <span class="sc">+</span></span>
+<span id="cb117-13"><a href="08-Ggplot-pratique.html#cb117-13" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">90</span>,<span class="dv">180</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">90</span>,<span class="dv">180</span>,<span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb117-14"><a href="08-Ggplot-pratique.html#cb117-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Evolution de la durée moyenne des contrats dans les offres d&#39;emplois en CDD et intérim sur </span><span class="sc">\n</span><span class="st">Paris et sa petite couronne en 2020&quot;</span>, </span>
+<span id="cb117-15"><a href="08-Ggplot-pratique.html#cb117-15" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot; &quot;</span>, <span class="at">y =</span> <span class="st">&quot; &quot;</span>) <span class="sc">+</span></span>
+<span id="cb117-16"><a href="08-Ggplot-pratique.html#cb117-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>), </span>
+<span id="cb117-17"><a href="08-Ggplot-pratique.html#cb117-17" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="dv">0</span>))</span>
+<span id="cb117-18"><a href="08-Ggplot-pratique.html#cb117-18" tabindex="-1"></a></span>
+<span id="cb117-19"><a href="08-Ggplot-pratique.html#cb117-19" tabindex="-1"></a><span class="co">#install.packages(&quot;plotly&quot;)</span></span>
+<span id="cb117-20"><a href="08-Ggplot-pratique.html#cb117-20" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb117-21"><a href="08-Ggplot-pratique.html#cb117-21" tabindex="-1"></a><span class="fu">ggplotly</span>(g_evo, <span class="at">tooltip =</span> <span class="fu">c</span>(<span class="st">&quot;moy_duree&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb117-22"><a href="08-Ggplot-pratique.html#cb117-22" tabindex="-1"></a> <span class="fu">layout</span>(<span class="at">margin =</span> <span class="fu">list</span>(<span class="at">l =</span> <span class="dv">50</span>, <span class="at">r =</span> <span class="dv">50</span>, <span class="at">b =</span> <span class="dv">80</span>, <span class="at">t =</span> <span class="dv">50</span>),</span>
+<span id="cb117-23"><a href="08-Ggplot-pratique.html#cb117-23" tabindex="-1"></a>        <span class="at">annotations =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">&quot;Source : Source : Base &#39;JOCAS&#39;, offres d&#39;emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020. </span><span class="sc">\n</span><span class="st">Calculs : Camille Signoretto. </span><span class="sc">\n</span><span class="st">Note : l&#39;axe des ordonnées ne commence qu&#39;à 90 jours (3 mois).&quot;</span>,</span>
+<span id="cb117-24"><a href="08-Ggplot-pratique.html#cb117-24" tabindex="-1"></a>                           <span class="at">showarrow =</span> F, <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="sc">-</span><span class="fl">0.2</span>, </span>
+<span id="cb117-25"><a href="08-Ggplot-pratique.html#cb117-25" tabindex="-1"></a>                           <span class="at">xref=</span><span class="st">&#39;paper&#39;</span>, <span class="at">yref=</span><span class="st">&#39;paper&#39;</span>, <span class="at">xanchor=</span><span class="st">&#39;left&#39;</span>, <span class="at">yanchor=</span><span class="st">&#39;auto&#39;</span>,  </span>
+<span id="cb117-26"><a href="08-Ggplot-pratique.html#cb117-26" tabindex="-1"></a>                           <span class="at">xshift=</span><span class="dv">0</span>, <span class="at">yshift=</span><span class="dv">0</span>, <span class="at">font=</span><span class="fu">list</span>(<span class="at">size=</span><span class="fl">10.5</span>), <span class="at">align=</span><span class="st">&quot;left&quot;</span>))</span></code></pre></div>
+</div>
+<p>On retrouve un résultat que l’on avait observé précédemment avec la boxplot, à savoir que la durée moyenne des contrats est plus faible en début d’année civiel et connaît deux “pics”, en septembre puis en novembre.</p>
+<p>Regardons maintenant selon quelques secteurs d’activité (les 6 mentionnés au-dessus), pour étudier si cette évolution est différente selon la position du secteur dans l’échelle des durées moyennes.</p>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-6d32f01447542f59d9e4" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-6d32f01447542f59d9e4">{"x":{"data":[{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[268,268,301,340,282,298,243,248,296,257,245,253],"text":["moy_duree: 268","moy_duree: 268","moy_duree: 301","moy_duree: 340","moy_duree: 282","moy_duree: 298","moy_duree: 243","moy_duree: 248","moy_duree: 296","moy_duree: 257","moy_duree: 245","moy_duree: 253"],"type":"scatter","mode":"lines","line":{"width":3.0236220472440949,"color":"rgba(248,118,109,1)","dash":"solid"},"hoveron":"points","name":"Administration publique","legendgroup":"Administration publique","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[194,174,190,206,225,218,206,195,212,192,193,192],"text":["moy_duree: 194","moy_duree: 174","moy_duree: 190","moy_duree: 206","moy_duree: 225","moy_duree: 218","moy_duree: 206","moy_duree: 195","moy_duree: 212","moy_duree: 192","moy_duree: 193","moy_duree: 192"],"type":"scatter","mode":"lines","line":{"width":3.0236220472440949,"color":"rgba(183,159,0,1)","dash":"solid"},"hoveron":"points","name":"Enseignement","legendgroup":"Enseignement","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[123,136,119,247,191,147,196,295,136,420,195,192],"text":["moy_duree: 123","moy_duree: 136","moy_duree: 119","moy_duree: 247","moy_duree: 191","moy_duree: 147","moy_duree: 196","moy_duree: 295","moy_duree: 136","moy_duree: 420","moy_duree: 195","moy_duree: 192"],"type":"scatter","mode":"lines","line":{"width":3.0236220472440949,"color":"rgba(0,186,56,1)","dash":"solid"},"hoveron":"points","name":"Arts, spectacles et activités récréatives","legendgroup":"Arts, spectacles et activités récréatives","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[121,108,131,116,132,142,151,135,111,86,118,112],"text":["moy_duree: 121","moy_duree: 108","moy_duree: 131","moy_duree: 116","moy_duree: 132","moy_duree: 142","moy_duree: 151","moy_duree: 135","moy_duree: 111","moy_duree:  86","moy_duree: 118","moy_duree: 112"],"type":"scatter","mode":"lines","line":{"width":3.0236220472440949,"color":"rgba(0,191,196,1)","dash":"solid"},"hoveron":"points","name":"Activités spécialisées, scientifiques et techniques","legendgroup":"Activités spécialisées, scientifiques et techniques","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[118,106,124,91,105,126,108,107,113,106,107,98],"text":["moy_duree: 118","moy_duree: 106","moy_duree: 124","moy_duree:  91","moy_duree: 105","moy_duree: 126","moy_duree: 108","moy_duree: 107","moy_duree: 113","moy_duree: 106","moy_duree: 107","moy_duree:  98"],"type":"scatter","mode":"lines","line":{"width":3.0236220472440949,"color":"rgba(97,156,255,1)","dash":"solid"},"hoveron":"points","name":"Activités de services administratifs et de soutien","legendgroup":"Activités de services administratifs et de soutien","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[121,118,110,104,127,132,124,117,131,125,97,128],"text":["moy_duree: 121","moy_duree: 118","moy_duree: 110","moy_duree: 104","moy_duree: 127","moy_duree: 132","moy_duree: 124","moy_duree: 117","moy_duree: 131","moy_duree: 125","moy_duree:  97","moy_duree: 128"],"type":"scatter","mode":"lines","line":{"width":3.0236220472440949,"color":"rgba(245,100,227,1)","dash":"solid"},"hoveron":"points","name":"Hébergement/restauration","legendgroup":"Hébergement/restauration","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":80,"r":50,"b":80,"l":50},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Evolution de la durée moyenne des contrats dans les offres d'emplois en CDD et missions d'intérim sur Paris <br />et sa petite couronne en 2020, dans les trois secteurs ayant les moyennes les plus élevées et les 3 secteurs <br />ayant les moyennes les plus faibles","font":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835205},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,12.6],"tickmode":"array","ticktext":["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."],"tickvals":[1,2,3,4.0000000000000009,5,6,7.0000000000000009,8,9,10,11,12],"categoryorder":"array","categoryarray":["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":" ","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[57.5,442.5],"tickmode":"array","ticktext":["75","90","105","120","135","150","165","180","195","210","225","240","255","270","285","300","315","330","345","360","375","390","405","420"],"tickvals":[75,90,105,120,135,150,165,180,195,210,225,240,255,270,285,300,315,330,345,360,375,390,405,420],"categoryorder":"array","categoryarray":["75","90","105","120","135","150","165","180","195","210","225","240","255","270","285","300","315","330","345","360","375","390","405","420"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":" ","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Secteurs","font":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835205}}},"hovermode":"closest","barmode":"relative","annotations":[{"text":"Source : Source : Base 'JOCAS', offres d'emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020. <br />Calculs : Camille Signoretto. <br />Note : l'axe des ordonnées ne commence qu'à 75 jours (2 mois et demi).","showarrow":false,"x":0,"y":-0.20000000000000001,"xref":"paper","yref":"paper","xanchor":"left","yanchor":"auto","xshift":0,"yshift":0,"font":{"size":9},"align":"left"}]},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"cf863a6428a":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"cf863a6428a","visdat":{"cf863a6428a":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="solution-exo">
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="08-Ggplot-pratique.html#cb118-1" tabindex="-1"></a>g_evo_pls <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb118-2"><a href="08-Ggplot-pratique.html#cb118-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value) <span class="sc">&amp;</span> </span>
+<span id="cb118-3"><a href="08-Ggplot-pratique.html#cb118-3" tabindex="-1"></a>           secteurs <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Administration publique&quot;</span>, <span class="st">&quot;Enseignement&quot;</span>, </span>
+<span id="cb118-4"><a href="08-Ggplot-pratique.html#cb118-4" tabindex="-1"></a>                         <span class="st">&quot;Arts, spectacles et activités récréatives&quot;</span>,</span>
+<span id="cb118-5"><a href="08-Ggplot-pratique.html#cb118-5" tabindex="-1"></a>                         <span class="st">&quot;Hébergement/restauration&quot;</span>, </span>
+<span id="cb118-6"><a href="08-Ggplot-pratique.html#cb118-6" tabindex="-1"></a>                         <span class="st">&quot;Activités spécialisées, scientifiques et techniques&quot;</span>,</span>
+<span id="cb118-7"><a href="08-Ggplot-pratique.html#cb118-7" tabindex="-1"></a>                         <span class="st">&quot;Activités de services administratifs et de soutien&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-8"><a href="08-Ggplot-pratique.html#cb118-8" tabindex="-1"></a>  <span class="fu">group_by</span>(mois_publication, secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-9"><a href="08-Ggplot-pratique.html#cb118-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">moy_duree =</span> <span class="fu">round</span>(<span class="fu">mean</span>(contractDuration_value),<span class="dv">0</span>),</span>
+<span id="cb118-10"><a href="08-Ggplot-pratique.html#cb118-10" tabindex="-1"></a>         <span class="at">mois_publication =</span> <span class="fu">factor</span>(mois_publication, </span>
+<span id="cb118-11"><a href="08-Ggplot-pratique.html#cb118-11" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;janv.&quot;</span>,<span class="st">&quot;févr.&quot;</span>,<span class="st">&quot;mars&quot;</span>,<span class="st">&quot;avr.&quot;</span>,<span class="st">&quot;mai&quot;</span>,<span class="st">&quot;juin&quot;</span>,</span>
+<span id="cb118-12"><a href="08-Ggplot-pratique.html#cb118-12" tabindex="-1"></a>                                              <span class="st">&quot;juil.&quot;</span>,<span class="st">&quot;août&quot;</span>,<span class="st">&quot;sept.&quot;</span>,<span class="st">&quot;oct.&quot;</span>,<span class="st">&quot;nov.&quot;</span>,<span class="st">&quot;déc.&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-13"><a href="08-Ggplot-pratique.html#cb118-13" tabindex="-1"></a>  <span class="fu">select</span>(moy_duree, mois_publication, secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-14"><a href="08-Ggplot-pratique.html#cb118-14" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb118-15"><a href="08-Ggplot-pratique.html#cb118-15" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">secteurs=</span><span class="fu">factor</span>(secteurs, </span>
+<span id="cb118-16"><a href="08-Ggplot-pratique.html#cb118-16" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Administration publique&quot;</span>, <span class="st">&quot;Enseignement&quot;</span>, </span>
+<span id="cb118-17"><a href="08-Ggplot-pratique.html#cb118-17" tabindex="-1"></a>                         <span class="st">&quot;Arts, spectacles et activités récréatives&quot;</span>, </span>
+<span id="cb118-18"><a href="08-Ggplot-pratique.html#cb118-18" tabindex="-1"></a>                         <span class="st">&quot;Activités spécialisées, scientifiques et techniques&quot;</span>,</span>
+<span id="cb118-19"><a href="08-Ggplot-pratique.html#cb118-19" tabindex="-1"></a>                         <span class="st">&quot;Activités de services administratifs et de soutien&quot;</span>,</span>
+<span id="cb118-20"><a href="08-Ggplot-pratique.html#cb118-20" tabindex="-1"></a>                         <span class="st">&quot;Hébergement/restauration&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-21"><a href="08-Ggplot-pratique.html#cb118-21" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>mois_publication, <span class="at">y=</span>moy_duree, <span class="at">color=</span>secteurs) <span class="sc">+</span> </span>
+<span id="cb118-22"><a href="08-Ggplot-pratique.html#cb118-22" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span>secteurs), <span class="at">linewidth=</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb118-23"><a href="08-Ggplot-pratique.html#cb118-23" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">75</span>,<span class="dv">425</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">75</span>,<span class="dv">425</span>,<span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb118-24"><a href="08-Ggplot-pratique.html#cb118-24" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Evolution de la durée moyenne des contrats dans les offres d&#39;emplois en CDD et missions d&#39;intérim sur Paris </span><span class="sc">\n</span><span class="st">et sa petite couronne en 2020, dans les trois secteurs ayant les moyennes les plus élevées et les 3 secteurs </span><span class="sc">\n</span><span class="st">ayant les moyennes les plus faibles&quot;</span>, <span class="at">x =</span> <span class="st">&quot; &quot;</span>, <span class="at">y =</span> <span class="st">&quot; &quot;</span>, <span class="at">color=</span><span class="st">&quot;Secteurs&quot;</span>) <span class="sc">+</span></span>
+<span id="cb118-25"><a href="08-Ggplot-pratique.html#cb118-25" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb118-26"><a href="08-Ggplot-pratique.html#cb118-26" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb118-27"><a href="08-Ggplot-pratique.html#cb118-27" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="dv">0</span>))</span>
+<span id="cb118-28"><a href="08-Ggplot-pratique.html#cb118-28" tabindex="-1"></a></span>
+<span id="cb118-29"><a href="08-Ggplot-pratique.html#cb118-29" tabindex="-1"></a><span class="fu">ggplotly</span>(g_evo_pls, <span class="at">tooltip =</span> <span class="fu">c</span>(<span class="st">&quot;moy_duree&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-30"><a href="08-Ggplot-pratique.html#cb118-30" tabindex="-1"></a> <span class="fu">layout</span>(<span class="at">margin =</span> <span class="fu">list</span>(<span class="at">l =</span> <span class="dv">50</span>, <span class="at">r =</span> <span class="dv">50</span>, <span class="at">b =</span> <span class="dv">80</span>, <span class="at">t =</span> <span class="dv">80</span>),</span>
+<span id="cb118-31"><a href="08-Ggplot-pratique.html#cb118-31" tabindex="-1"></a>        <span class="at">annotations =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">&quot;Source : Source : Base &#39;JOCAS&#39;, offres d&#39;emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020. </span><span class="sc">\n</span><span class="st">Calculs : Camille Signoretto. </span><span class="sc">\n</span><span class="st">Note : l&#39;axe des ordonnées ne commence qu&#39;à 75 jours (2 mois et demi).&quot;</span>,</span>
+<span id="cb118-32"><a href="08-Ggplot-pratique.html#cb118-32" tabindex="-1"></a>                           <span class="at">showarrow =</span> F, <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="sc">-</span><span class="fl">0.2</span>, </span>
+<span id="cb118-33"><a href="08-Ggplot-pratique.html#cb118-33" tabindex="-1"></a>                           <span class="at">xref=</span><span class="st">&#39;paper&#39;</span>, <span class="at">yref=</span><span class="st">&#39;paper&#39;</span>, <span class="at">xanchor=</span><span class="st">&#39;left&#39;</span>, <span class="at">yanchor=</span><span class="st">&#39;auto&#39;</span>,  </span>
+<span id="cb118-34"><a href="08-Ggplot-pratique.html#cb118-34" tabindex="-1"></a>                           <span class="at">xshift=</span><span class="dv">0</span>, <span class="at">yshift=</span><span class="dv">0</span>, <span class="at">font=</span><span class="fu">list</span>(<span class="at">size=</span><span class="dv">9</span>), <span class="at">align=</span><span class="st">&quot;left&quot;</span>))</span></code></pre></div>
+</div>
+<p>On observe une saisonnalité beaucoup plus importante dans la durée des contrats proposés selon les secteurs, la volatilité la plus grande de la durée moyenne des contrats est présente dans le secteur des “arts, spectacles et activités récréatives”. Cela peut être dû en partie à cette année 2020, particulière du fait de la crise sanitaire du Covid-19. Il faudrait bien sûr creuser davantage pour mieux comprendre ces évolutions de la durée moyenne des contrats proposés selon les secteurs d’activité et les mois.</p>
+</div>
+<div id="top-5-de-la-durée-moyenne-des-offres-demploi-en-cdd-et-missions-dintérim-selon-les-secteurs-dactivité" class="section level3 hasAnchor" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Top 5 de la durée moyenne des offres d’emploi en CDD et missions d’intérim selon les secteurs d’activité<a href="08-Ggplot-pratique.html#top-5-de-la-durée-moyenne-des-offres-demploi-en-cdd-et-missions-dintérim-selon-les-secteurs-dactivité" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Enfin, construisez un graphique en bâtons indiquant les seuls 5 premiers secteurs d’activité ayant les durées moyennes des offres d’emploi en CDD et missions d’intérim les plus élevés, puis les durées médianes, et les mettre côte à côte.</p>
+<img src="Data-Mining_files/figure-html/unnamed-chunk-93-1.svg" width="672" />
+<div class="solution-exo">
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="08-Ggplot-pratique.html#cb119-1" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb119-2"><a href="08-Ggplot-pratique.html#cb119-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value) <span class="sc">&amp;</span> </span>
+<span id="cb119-3"><a href="08-Ggplot-pratique.html#cb119-3" tabindex="-1"></a>           secteurs <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Administration publique&quot;</span>, <span class="st">&quot;Enseignement&quot;</span>, </span>
+<span id="cb119-4"><a href="08-Ggplot-pratique.html#cb119-4" tabindex="-1"></a>                         <span class="st">&quot;Arts, spectacles et activités récréatives&quot;</span>,</span>
+<span id="cb119-5"><a href="08-Ggplot-pratique.html#cb119-5" tabindex="-1"></a>                         <span class="st">&quot;Hébergement/restauration&quot;</span>, </span>
+<span id="cb119-6"><a href="08-Ggplot-pratique.html#cb119-6" tabindex="-1"></a>                         <span class="st">&quot;Activités spécialisées, scientifiques et techniques&quot;</span>,</span>
+<span id="cb119-7"><a href="08-Ggplot-pratique.html#cb119-7" tabindex="-1"></a>                         <span class="st">&quot;Activités de services administratifs et de soutien&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-8"><a href="08-Ggplot-pratique.html#cb119-8" tabindex="-1"></a>  <span class="fu">group_by</span>(secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-9"><a href="08-Ggplot-pratique.html#cb119-9" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">moy_duree =</span> <span class="fu">round</span>(<span class="fu">mean</span>(contractDuration_value))) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-10"><a href="08-Ggplot-pratique.html#cb119-10" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(moy_duree)) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-11"><a href="08-Ggplot-pratique.html#cb119-11" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> moy_duree, <span class="at">y =</span> <span class="fu">fct_reorder</span>(secteurs, moy_duree))  <span class="sc">+</span> </span>
+<span id="cb119-12"><a href="08-Ggplot-pratique.html#cb119-12" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">fill=</span><span class="st">&quot;darkgoldenrod1&quot;</span>)  <span class="sc">+</span></span>
+<span id="cb119-13"><a href="08-Ggplot-pratique.html#cb119-13" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>moy_duree), <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust=</span><span class="fl">0.5</span>), <span class="at">size=</span><span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb119-14"><a href="08-Ggplot-pratique.html#cb119-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Durée moyenne en jours&quot;</span>,</span>
+<span id="cb119-15"><a href="08-Ggplot-pratique.html#cb119-15" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot; &quot;</span>) <span class="sc">+</span></span>
+<span id="cb119-16"><a href="08-Ggplot-pratique.html#cb119-16" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb119-17"><a href="08-Ggplot-pratique.html#cb119-17" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, <span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),</span>
+<span id="cb119-18"><a href="08-Ggplot-pratique.html#cb119-18" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb119-19"><a href="08-Ggplot-pratique.html#cb119-19" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb119-20"><a href="08-Ggplot-pratique.html#cb119-20" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>))</span>
+<span id="cb119-21"><a href="08-Ggplot-pratique.html#cb119-21" tabindex="-1"></a></span>
+<span id="cb119-22"><a href="08-Ggplot-pratique.html#cb119-22" tabindex="-1"></a>p6 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb119-23"><a href="08-Ggplot-pratique.html#cb119-23" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value) <span class="sc">&amp;</span> </span>
+<span id="cb119-24"><a href="08-Ggplot-pratique.html#cb119-24" tabindex="-1"></a>           secteurs <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Administration publique&quot;</span>, <span class="st">&quot;Enseignement&quot;</span>, </span>
+<span id="cb119-25"><a href="08-Ggplot-pratique.html#cb119-25" tabindex="-1"></a>                         <span class="st">&quot;Arts, spectacles et activités récréatives&quot;</span>,</span>
+<span id="cb119-26"><a href="08-Ggplot-pratique.html#cb119-26" tabindex="-1"></a>                         <span class="st">&quot;Hébergement/restauration&quot;</span>, </span>
+<span id="cb119-27"><a href="08-Ggplot-pratique.html#cb119-27" tabindex="-1"></a>                         <span class="st">&quot;Activités spécialisées, scientifiques et techniques&quot;</span>,</span>
+<span id="cb119-28"><a href="08-Ggplot-pratique.html#cb119-28" tabindex="-1"></a>                         <span class="st">&quot;Activités de services administratifs et de soutien&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-29"><a href="08-Ggplot-pratique.html#cb119-29" tabindex="-1"></a>  <span class="fu">group_by</span>(secteurs) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-30"><a href="08-Ggplot-pratique.html#cb119-30" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mediane_duree =</span> <span class="fu">round</span>(<span class="fu">median</span>(contractDuration_value)),</span>
+<span id="cb119-31"><a href="08-Ggplot-pratique.html#cb119-31" tabindex="-1"></a>            <span class="at">moy_duree =</span> <span class="fu">round</span>(<span class="fu">mean</span>(contractDuration_value))) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-32"><a href="08-Ggplot-pratique.html#cb119-32" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mediane_duree)) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-33"><a href="08-Ggplot-pratique.html#cb119-33" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> mediane_duree, <span class="at">y =</span> <span class="fu">fct_reorder</span>(secteurs, moy_duree))  <span class="sc">+</span> </span>
+<span id="cb119-34"><a href="08-Ggplot-pratique.html#cb119-34" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">fill=</span><span class="st">&quot;coral1&quot;</span>)  <span class="sc">+</span></span>
+<span id="cb119-35"><a href="08-Ggplot-pratique.html#cb119-35" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>mediane_duree), <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust=</span><span class="fl">0.5</span>), <span class="at">size=</span><span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb119-36"><a href="08-Ggplot-pratique.html#cb119-36" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Durée médiane en jours&quot;</span>,</span>
+<span id="cb119-37"><a href="08-Ggplot-pratique.html#cb119-37" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot; &quot;</span>) <span class="sc">+</span></span>
+<span id="cb119-38"><a href="08-Ggplot-pratique.html#cb119-38" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb119-39"><a href="08-Ggplot-pratique.html#cb119-39" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, <span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),</span>
+<span id="cb119-40"><a href="08-Ggplot-pratique.html#cb119-40" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb119-41"><a href="08-Ggplot-pratique.html#cb119-41" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb119-42"><a href="08-Ggplot-pratique.html#cb119-42" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>))</span>
+<span id="cb119-43"><a href="08-Ggplot-pratique.html#cb119-43" tabindex="-1"></a></span>
+<span id="cb119-44"><a href="08-Ggplot-pratique.html#cb119-44" tabindex="-1"></a>(p5 <span class="sc">+</span> p6) <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">axes =</span> <span class="st">&quot;collect&quot;</span>) <span class="sc">+</span></span>
+<span id="cb119-45"><a href="08-Ggplot-pratique.html#cb119-45" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span>  <span class="st">&quot;Top 5 des secteurs d&#39;activité ayant des offres d&#39;emploi en CDD et missions d&#39;intérim </span><span class="sc">\n</span><span class="st">avec les durées moyennes les plus élevées&quot;</span>, </span>
+<span id="cb119-46"><a href="08-Ggplot-pratique.html#cb119-46" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;Source : Source : Base &#39;JOCAS&#39;, offres d&#39;emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020. </span><span class="sc">\n</span><span class="st">Calculs : Camille Signoretto.&quot;</span>, </span>
+<span id="cb119-47"><a href="08-Ggplot-pratique.html#cb119-47" tabindex="-1"></a>                <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))) <span class="sc">&amp;</span></span>
+<span id="cb119-48"><a href="08-Ggplot-pratique.html#cb119-48" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>))</span></code></pre></div>
+</div>
+<p>On retrouve les mêmes résultats.</p>
+</div>
+<div id="à-vous-de-jouer" class="section level3 hasAnchor" number="8.2.5">
+<h3><span class="header-section-number">8.2.5</span> À vous de “jouer” !<a href="08-Ggplot-pratique.html#à-vous-de-jouer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Bien sûr, vous pouvez créer des fonctions sur ces graphiques ; puis “jouez” avec d’autres variables ; ou encore construire des cartes sur le niveau commune ; utiliser d’autres types de graphiques ; etc. ; etc.</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<script src="js/tidyverse.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="07-Ggplot-theorique.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
+"instapper": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Camille-Sisi/Data-Mining-2025/master/08-Ggplot-pratique.Rmd",
+"text": "Source"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
