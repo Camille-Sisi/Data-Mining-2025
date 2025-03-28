@@ -20,6 +20,7 @@ Des exemples d'application Shiny sont données sur la page officielle dans la <a
 # "05_sliders", "06_tabsets", "07_widgets", "08_html", "09_upload",
 # "10_download", "11_timer"
 runExample("01_hello")
+runExample("05_sliders")
 ```
   
 Un autre exemple d'application finale qui comprend un aspect territorial donc avec de jolis cartes, et qui s'appuie sur les données du Recensement de la population (rassemblées par l'Insee sur la période 1968-2019 et qui forme la base Saphir), est disponible <a href="https://francestrategie.shinyapps.io/app_seg/" target="_blank">ici</a> .  

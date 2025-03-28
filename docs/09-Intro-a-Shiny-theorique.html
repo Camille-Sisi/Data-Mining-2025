@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="08-Ggplot-pratique.html"/>
-
+<link rel="next" href="10-Intro-a-Shiny-exemples.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -180,7 +180,8 @@ code span.wa { color: #bf0303; } /* Warning */
 <span id="cb121-2"><a href="09-Intro-a-Shiny-theorique.html#cb121-2" tabindex="-1"></a><span class="co"># suivante : &quot;01_hello&quot;, &quot;02_text&quot;, &quot;03_reactivity&quot;, &quot;04_mpg&quot;, </span></span>
 <span id="cb121-3"><a href="09-Intro-a-Shiny-theorique.html#cb121-3" tabindex="-1"></a><span class="co"># &quot;05_sliders&quot;, &quot;06_tabsets&quot;, &quot;07_widgets&quot;, &quot;08_html&quot;, &quot;09_upload&quot;,</span></span>
 <span id="cb121-4"><a href="09-Intro-a-Shiny-theorique.html#cb121-4" tabindex="-1"></a><span class="co"># &quot;10_download&quot;, &quot;11_timer&quot;</span></span>
-<span id="cb121-5"><a href="09-Intro-a-Shiny-theorique.html#cb121-5" tabindex="-1"></a><span class="fu">runExample</span>(<span class="st">&quot;01_hello&quot;</span>)</span></code></pre></div>
+<span id="cb121-5"><a href="09-Intro-a-Shiny-theorique.html#cb121-5" tabindex="-1"></a><span class="fu">runExample</span>(<span class="st">&quot;01_hello&quot;</span>)</span>
+<span id="cb121-6"><a href="09-Intro-a-Shiny-theorique.html#cb121-6" tabindex="-1"></a><span class="fu">runExample</span>(<span class="st">&quot;05_sliders&quot;</span>)</span></code></pre></div>
 <p>Un autre exemple d’application finale qui comprend un aspect territorial donc avec de jolis cartes, et qui s’appuie sur les données du Recensement de la population (rassemblées par l’Insee sur la période 1968-2019 et qui forme la base Saphir), est disponible <a href="https://francestrategie.shinyapps.io/app_seg/" target="_blank">ici</a> .</p>
 <p>Enfin, cette introduction s’appuie sur d’autres ressources externes, pour n’en citer que quelques uns : - un bon tutoriel <a href="https://deanattali.com/blog/building-shiny-apps-tutorial/" target="_blank">ici</a> ; - une introduction claire <a href="https://laderast.github.io/gradual_shiny/introduction.html" target="_blank">là</a>. Et vous trouverez sur les 2 liens suivants deux ouvrages en ligne, pour compléter et aller plus loin : the <a href="https://mastering-shiny.org/index.html" target="_blank">Mastering Shiny</a> ; et the <a href="https://plotly-r.com/" target="_blank">Interactive web-based data visualization with R, plotly, and shiny</a>.</p>
 <div id="la-structure-générale-dune-application-shiny" class="section level2 hasAnchor" number="9.1">
@@ -537,55 +538,21 @@ Cela peut être résumé par le schéma suivant, emprunté à l’une des source
 <li>un <em>troisième type de réactivité qui crée un contexte réactif</em>, à travers notamment la fonction <code>observe({})</code> (ou son corrolaire <code>observeEvent()</code>) : cette fonction sera utilisée losque vous souhaitez faire une opération qui dépend de plusieurs autres variables réactives, en particulier si vous souhaitez changer un input qui est dépendant d’un autre input, mais sans créer nécessairement d’output. Cela peut être utile si le choix d’une variable - les départements d’une région par exemple - est conditionnée au choix antérieur de la région en question : dans ce cas, l’utilisateur qui choisira une région dans un premier widget ne verra s’afficher que les départements de cette région dans un second widget et non tous les départements disponibles dans la base de données.</li>
 </ul>
 <p>Il y a bien d’autres fonctions de réactivité dans Shiny : <code>eventReactive()</code>, <code>observeEvent()</code>, <code>reactiveValues()</code>, <code>isolate()</code>, <code>req()</code>, mais qu’on ne présentera pas forcément en détails dans ce cours mais que vous pourrez utiliser dans votre application finale.</p>
-<div id="un-exemple-avec-le-code-du-script-par-défaut" class="section level2 hasAnchor" align="justify" number="9.3">
+<div align="justify">
+<div id="un-exemple-avec-le-code-du-script-par-défaut" class="section level2 hasAnchor" number="9.3">
 <h2><span class="header-section-number">9.3</span> Un exemple avec le code du script par défaut<a href="09-Intro-a-Shiny-theorique.html#un-exemple-avec-le-code-du-script-par-défaut" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Voyons ensemble un premier exemple : dans <strong>RStudio</strong>, ouvrez un nouveau fichier “Shiny Web App…” que vous intitulez comme vous le souhaitez (attention, pas d’espace permis entre deux mots par exemple), vous laissez l’option “Single File” et vous l’enregistrez de préférence dans votre projet.<br />
 Un nouveau scrip s’ouvre avec par défaut un code minimal déjà écrit : on retrouve la structure du code présentée juste au-dessus, et à l’intérieur de l’UI et du Server quelques codes pour avoir un titre, un widget sous forme de “slider” et un graphique qui sera un histogramme d’après la fonction écrit dans la partie Server. Faisons tourner l’application avec le bouton en haut à droite “Run App” pour voir ce que cela donne ! On voit bien les différents éléments correspondants au code écrit dans le script R et on voit bien également que l’application est interactive puisque si l’on modifie le nombre de classes dans la barre slider, le graphique est modifié alors simultanément !</p>
 
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-
-
-
-
 <script src="js/tidyverse.js"></script>
             </section>
 
           </div>
         </div>
       </div>
-<a href="08-Ggplot-pratique.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="08-Ggplot-pratique.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="10-Intro-a-Shiny-exemples.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

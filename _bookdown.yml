@@ -19,3 +19,4 @@ rmd_files:
   - 07-Ggplot-theorique.Rmd
   - 08-Ggplot-pratique.Rmd
   - 09-Intro-a-Shiny-theorique.Rmd
+  - 10-Intro-a-Shiny-exemples.Rmd
