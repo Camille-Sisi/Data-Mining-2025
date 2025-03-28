@@ -18,3 +18,4 @@ rmd_files:
   - 06-Fonctions.Rmd
   - 07-Ggplot-theorique.Rmd
   - 08-Ggplot-pratique.Rmd
+  - 09-Intro-a-Shiny-theorique.Rmd

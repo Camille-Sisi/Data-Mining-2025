@@ -29,7 +29,8 @@ Comme il reste des valeurs aberrantes (cf. section 3.2.3. de la séance 1 de ce 
 # Pour revoir cette distribution
 OffresPE_2020 %>% filter(contractType %in% c("CDD", "MIS")) %>% 
   arrange(desc(contractDuration_value)) %>% 
-  select(contractType, contractDuration_value, contractDuration_period, contractDuration_min, contractDuration_max, job_title, entrepriseSecteur_NAF21)
+  select(contractType, contractDuration_value, contractDuration_period, 
+         contractDuration_min, contractDuration_max, job_title, entrepriseSecteur_NAF21)
 ```
 
 On voit qu'il y a vraisemblablement un problème pour les premières observations de ces valeurs aberrantes puisque la période dans laquelle la durée du contrat est exprimée (variable `contractDuration_period`) serait l'année, alors qu'il s'agit probablement plutôt de mois ou de jours étant donné les valeurs minimum et maximum, on va donc supprimer ces observations car il semble difficile de les modifier sans savoir quelle est la bonne temporalité dans laquelle elles sont exprimées et aussi car il ne s'agit que de 42 observations.
@@ -69,7 +70,7 @@ OffresPE_2020 %>%
 ```{r}
 OffresPE_2020 %>% 
   filter(contractType %in% c("CDD", "MIS") & !is.na(contractDuration_value)) %>% 
-  mutate(mois_publication=months(date_sitePublicationDay, abbreviate = T),
+  mutate(mois_publication = months(date_sitePublicationDay, abbreviate = T),
          mois_publication = factor(mois_publication, 
                                    levels = c("déc.","nov.","oct.","sept.", "août", "juil.",
                                               "juin","mai","avr.", "mars", "févr.", "janv."))) %>% 
@@ -86,7 +87,7 @@ Nous pouvons **également ajouter la moyenne**, puisqu'ici nous voyons de gauche
 
 OffresPE_2020 %>% 
   filter(contractType %in% c("CDD", "MIS") & !is.na(contractDuration_value)) %>% 
-  mutate(mois_publication=months(date_sitePublicationDay, abbreviate = T),
+  mutate(mois_publication = months(date_sitePublicationDay, abbreviate = T),
          mois_publication = factor(mois_publication, 
                                    levels = c("déc.","nov.","oct.","sept.", "août", "juil.",
                                               "juin","mai","avr.", "mars", "févr.", "janv."))) %>% 
@@ -105,10 +106,10 @@ On peut encore vouloir **ordonner l'affichage des années par ordre décroissant
 ```{r}
 OffresPE_2020 %>% 
   filter(contractType %in% c("CDD", "MIS") & !is.na(contractDuration_value)) %>% 
-  mutate(mois_publication=months(date_sitePublicationDay, abbreviate = T)) %>% 
+  mutate(mois_publication = months(date_sitePublicationDay, abbreviate = T)) %>% 
   ggplot() + 
   aes(x = contractDuration_value, 
-      y=fct_reorder(mois_publication, contractDuration_value, .fun=mean)) + 
+      y = fct_reorder(mois_publication, contractDuration_value, .fun=mean)) + 
   geom_boxplot(outlier.shape = NA) + 
   stat_summary(fun=mean, geom="point", color="gray50", size=2) +
   coord_cartesian(xlim=c(0,550))  + 
@@ -125,7 +126,7 @@ Une petite astuce pour les titres pour qu'ils ne soient pas coupés sur le graph
 ```{r}
 OffresPE_2020 %>% 
   filter(contractType %in% c("CDD", "MIS") & !is.na(contractDuration_value)) %>% 
-  mutate(mois_publication=months(date_sitePublicationDay, abbreviate = T),
+  mutate(mois_publication = months(date_sitePublicationDay, abbreviate = T),
          mois_publication = factor(mois_publication, 
                                    levels = c("déc.","nov.","oct.","sept.", "août", "juil.",
                                               "juin","mai","avr.", "mars", "févr.", "janv."))) %>% 
@@ -265,6 +266,7 @@ plot_annotation(title = "Durée (en mois) des CDD et intérim dans les offres d'
                 theme = theme(plot.title = element_text(size = 12),
                               plot.caption = element_text(hjust = 0)))
 ```
+
 <div class="solution-exo">
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
 p1 <- OffresPE_2020 %>% 

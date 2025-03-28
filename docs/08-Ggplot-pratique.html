@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="07-Ggplot-theorique.html"/>
-
+<link rel="next" href="09-Intro-a-Shiny-theorique.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -207,7 +207,8 @@ Comme il reste des valeurs aberrantes (cf. section 3.2.3. de la séance 1 de ce
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="08-Ggplot-pratique.html#cb105-1" tabindex="-1"></a><span class="co"># Pour revoir cette distribution</span></span>
 <span id="cb105-2"><a href="08-Ggplot-pratique.html#cb105-2" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb105-3"><a href="08-Ggplot-pratique.html#cb105-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
-<span id="cb105-4"><a href="08-Ggplot-pratique.html#cb105-4" tabindex="-1"></a>  <span class="fu">select</span>(contractType, contractDuration_value, contractDuration_period, contractDuration_min, contractDuration_max, job_title, entrepriseSecteur_NAF21)</span></code></pre></div>
+<span id="cb105-4"><a href="08-Ggplot-pratique.html#cb105-4" tabindex="-1"></a>  <span class="fu">select</span>(contractType, contractDuration_value, contractDuration_period, </span>
+<span id="cb105-5"><a href="08-Ggplot-pratique.html#cb105-5" tabindex="-1"></a>         contractDuration_min, contractDuration_max, job_title, entrepriseSecteur_NAF21)</span></code></pre></div>
 <pre><code># A tibble: 92,563 × 7
    contractType contractDuration_value contractDuration_period
    &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;                  
@@ -253,7 +254,7 @@ C’est plus lisible, même s’il reste des valeurs élevées et supérieures �
 <p><strong>Ensuite</strong>, nous souhaitons <strong>représenter la distribution de cette variable selon le mois de publication de l’offre</strong>) : nous allons pour cela créer une variable <code>mois_publication</code> à partir d’une fonction relative à la date puis nous l’ordonnons ; et nous allons en profiter pour préciser un peu l’échelle des abscisses (réduire le “pas” avec l’option <code>breaks=seq()</code> en mettant tous les 30 jours pour voir à peu près les mois) :</p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="08-Ggplot-pratique.html#cb109-1" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
 <span id="cb109-2"><a href="08-Ggplot-pratique.html#cb109-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
-<span id="cb109-3"><a href="08-Ggplot-pratique.html#cb109-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
+<span id="cb109-3"><a href="08-Ggplot-pratique.html#cb109-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication =</span> <span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
 <span id="cb109-4"><a href="08-Ggplot-pratique.html#cb109-4" tabindex="-1"></a>         <span class="at">mois_publication =</span> <span class="fu">factor</span>(mois_publication, </span>
 <span id="cb109-5"><a href="08-Ggplot-pratique.html#cb109-5" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;déc.&quot;</span>,<span class="st">&quot;nov.&quot;</span>,<span class="st">&quot;oct.&quot;</span>,<span class="st">&quot;sept.&quot;</span>, <span class="st">&quot;août&quot;</span>, <span class="st">&quot;juil.&quot;</span>,</span>
 <span id="cb109-6"><a href="08-Ggplot-pratique.html#cb109-6" tabindex="-1"></a>                                              <span class="st">&quot;juin&quot;</span>,<span class="st">&quot;mai&quot;</span>,<span class="st">&quot;avr.&quot;</span>, <span class="st">&quot;mars&quot;</span>, <span class="st">&quot;févr.&quot;</span>, <span class="st">&quot;janv.&quot;</span>))) <span class="sc">%&gt;%</span> </span>
@@ -268,7 +269,7 @@ On voit que la médiane est plutôt stable entre les mois, sauf en mai et en avr
 <span id="cb110-3"><a href="08-Ggplot-pratique.html#cb110-3" tabindex="-1"></a></span>
 <span id="cb110-4"><a href="08-Ggplot-pratique.html#cb110-4" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
 <span id="cb110-5"><a href="08-Ggplot-pratique.html#cb110-5" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
-<span id="cb110-6"><a href="08-Ggplot-pratique.html#cb110-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
+<span id="cb110-6"><a href="08-Ggplot-pratique.html#cb110-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication =</span> <span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
 <span id="cb110-7"><a href="08-Ggplot-pratique.html#cb110-7" tabindex="-1"></a>         <span class="at">mois_publication =</span> <span class="fu">factor</span>(mois_publication, </span>
 <span id="cb110-8"><a href="08-Ggplot-pratique.html#cb110-8" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;déc.&quot;</span>,<span class="st">&quot;nov.&quot;</span>,<span class="st">&quot;oct.&quot;</span>,<span class="st">&quot;sept.&quot;</span>, <span class="st">&quot;août&quot;</span>, <span class="st">&quot;juil.&quot;</span>,</span>
 <span id="cb110-9"><a href="08-Ggplot-pratique.html#cb110-9" tabindex="-1"></a>                                              <span class="st">&quot;juin&quot;</span>,<span class="st">&quot;mai&quot;</span>,<span class="st">&quot;avr.&quot;</span>, <span class="st">&quot;mars&quot;</span>, <span class="st">&quot;févr.&quot;</span>, <span class="st">&quot;janv.&quot;</span>))) <span class="sc">%&gt;%</span> </span>
@@ -283,10 +284,10 @@ On observe ainsi des différences entre la moyenne et la médiane, puisque la mo
 <p>On peut encore vouloir <strong>ordonner l’affichage des années par ordre décroissant de la médiane</strong> ou de <strong>la moyenne</strong> (ordre décroissant ici = valeur la plus élevée en haut du graphique). Nous pouvons, entre autres, utiliser pour cela la fonction <code>fct_reorder()</code> du package <strong><code>forcats</code></strong> déjà présenté dans la section 3.2 de ce cours (Séance 1) : nous pouvons alors directement l’intégrer dans l’<code>aes</code> de <strong>ggplot</strong> dans la variable en ordonnée <code>y=fct_reorder()</code>, il faut pour cela mettre entre parenthèses la variable utilisée en ordonnée, suivie de la variable par laquelle on ordonne (la même que celle utilisée dans <code>x=</code>). Utilisée dans un boxplot, cela ordonne par défaut selon la médiane ; si on veut que les régions soient ordonnées par la moyenne, il faut rajouter l’option <code>.fun=mean</code> dans la fonction <code>fct_reorder()</code>, cf. le code en-dessous.</p>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="08-Ggplot-pratique.html#cb111-1" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
 <span id="cb111-2"><a href="08-Ggplot-pratique.html#cb111-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
-<span id="cb111-3"><a href="08-Ggplot-pratique.html#cb111-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb111-3"><a href="08-Ggplot-pratique.html#cb111-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication =</span> <span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T)) <span class="sc">%&gt;%</span> </span>
 <span id="cb111-4"><a href="08-Ggplot-pratique.html#cb111-4" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb111-5"><a href="08-Ggplot-pratique.html#cb111-5" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> contractDuration_value, </span>
-<span id="cb111-6"><a href="08-Ggplot-pratique.html#cb111-6" tabindex="-1"></a>      <span class="at">y=</span><span class="fu">fct_reorder</span>(mois_publication, contractDuration_value, <span class="at">.fun=</span>mean)) <span class="sc">+</span> </span>
+<span id="cb111-6"><a href="08-Ggplot-pratique.html#cb111-6" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">fct_reorder</span>(mois_publication, contractDuration_value, <span class="at">.fun=</span>mean)) <span class="sc">+</span> </span>
 <span id="cb111-7"><a href="08-Ggplot-pratique.html#cb111-7" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
 <span id="cb111-8"><a href="08-Ggplot-pratique.html#cb111-8" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">color=</span><span class="st">&quot;gray50&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb111-9"><a href="08-Ggplot-pratique.html#cb111-9" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">550</span>))  <span class="sc">+</span> </span>
@@ -299,7 +300,7 @@ Cela se fait avec la fonction <code>labs()</code>, et ensuite la fonction <code>
 Une petite astuce pour les titres pour qu’ils ne soient pas coupés sur le graphe : <code>\n</code> collé à un mot (sans espace) permet de mettre à la ligne à partir de ce mot !</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="08-Ggplot-pratique.html#cb112-1" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> </span>
 <span id="cb112-2"><a href="08-Ggplot-pratique.html#cb112-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value)) <span class="sc">%&gt;%</span> </span>
-<span id="cb112-3"><a href="08-Ggplot-pratique.html#cb112-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
+<span id="cb112-3"><a href="08-Ggplot-pratique.html#cb112-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication =</span> <span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
 <span id="cb112-4"><a href="08-Ggplot-pratique.html#cb112-4" tabindex="-1"></a>         <span class="at">mois_publication =</span> <span class="fu">factor</span>(mois_publication, </span>
 <span id="cb112-5"><a href="08-Ggplot-pratique.html#cb112-5" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;déc.&quot;</span>,<span class="st">&quot;nov.&quot;</span>,<span class="st">&quot;oct.&quot;</span>,<span class="st">&quot;sept.&quot;</span>, <span class="st">&quot;août&quot;</span>, <span class="st">&quot;juil.&quot;</span>,</span>
 <span id="cb112-6"><a href="08-Ggplot-pratique.html#cb112-6" tabindex="-1"></a>                                              <span class="st">&quot;juin&quot;</span>,<span class="st">&quot;mai&quot;</span>,<span class="st">&quot;avr.&quot;</span>, <span class="st">&quot;mars&quot;</span>, <span class="st">&quot;févr.&quot;</span>, <span class="st">&quot;janv.&quot;</span>))) <span class="sc">%&gt;%</span> </span>
@@ -374,7 +375,7 @@ Une petite astuce pour les titres pour qu’ils ne soient pas coupés sur le gra
 <span id="cb114-18"><a href="08-Ggplot-pratique.html#cb114-18" tabindex="-1"></a>                                      <span class="cn">TRUE</span> <span class="sc">~</span> entrepriseSecteur_NAF21)))</span>
 <span id="cb114-19"><a href="08-Ggplot-pratique.html#cb114-19" tabindex="-1"></a></span>
 <span id="cb114-20"><a href="08-Ggplot-pratique.html#cb114-20" tabindex="-1"></a><span class="co"># On va supprimer les 7 offres qui sont dans le secteur &quot;U&quot; &quot;Activités extra-territoriales&quot;...</span></span></code></pre></div>
-<img src="Data-Mining_files/figure-html/unnamed-chunk-85-1.svg" width="672" />
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-85-1.svg" width="672" /></p>
 <div class="solution-exo">
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="08-Ggplot-pratique.html#cb115-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
 <span id="cb115-2"><a href="08-Ggplot-pratique.html#cb115-2" tabindex="-1"></a>  <span class="fu">filter</span>(contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDD&quot;</span>, <span class="st">&quot;MIS&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(contractDuration_value) <span class="sc">&amp;</span> </span>
@@ -600,31 +601,6 @@ On peut vouloir le rendre interactif de telle sorte que l’utilisateur puisse v
 
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-
 
 
 
@@ -634,8 +610,8 @@ On peut vouloir le rendre interactif de telle sorte que l’utilisateur puisse v
           </div>
         </div>
       </div>
-<a href="07-Ggplot-theorique.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="07-Ggplot-theorique.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="09-Intro-a-Shiny-theorique.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

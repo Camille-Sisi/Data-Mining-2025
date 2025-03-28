@@ -41,3 +41,9 @@ comparaison-des-montants-moyen-et-médian-des-durées-de-contrat-des-offres-demp
 evolution-de-la-durée-des-contrats-des-offres-demploi-durant-lannée-2020
 top-5-de-la-durée-moyenne-des-offres-demploi-en-cdd-et-missions-dintérim-selon-les-secteurs-dactivité
 à-vous-de-jouer
+c09-Intro-a-Shiny-theorique
+la-structure-générale-dune-application-shiny
+la-partie-ui
+la-partie-server
+la-réactivité
+un-exemple-avec-le-code-du-script-par-défaut
