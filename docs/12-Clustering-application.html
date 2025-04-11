@@ -1,0 +1,2739 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section13 Clustering : application sur le RP 2019 | DATA MINING</title>
+  <meta name="description" content="Titre du cours" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section13 Clustering : application sur le RP 2019 | DATA MINING" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Titre du cours" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section13 Clustering : application sur le RP 2019 | DATA MINING" />
+  
+  <meta name="twitter:description" content="Titre du cours" />
+  
+
+<meta name="author" content="Camille Signoretto, Maîtresse de conférences en économie, Université Paris Cité" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="11-Clustering-theorique.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/tidyverse.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Mining :  <em>Camille Signoretto</em></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html"><i class="fa fa-check"></i>Présentation</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DATA MINING</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="c12-Clustering-application" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">Section13</span> Clustering : application sur le RP 2019<a href="12-Clustering-application.html#c12-Clustering-application" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div align="justify">
+<!--Pour un rappel des fondements théoriques des techniques de clustering, voir par exemple <a href="https://camille-sisi.github.io/Data-Mining-2022/14-Clustering-theorique.html" target="_blank">ici</a>, ou <a href="https://larmarange.github.io/analyse-R/classification-ascendante-hierarchique.html" target="_blank">là</a>.  
+Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il n'y a pas de variable d'intérêt ou variable cible, on cherche plutôt à rassembler des observations qui "se ressemblent" mais pas d'expliquer une variable/un phénomène par rapport à d'autres.-->
+<div id="choix-des-variables-et-préparation-du-tableau-final" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Choix des variables et préparation du tableau final<a href="12-Clustering-application.html#choix-des-variables-et-préparation-du-tableau-final" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A partir de la base du RP2019, l’objectif de notre analyse est de décrire des groupes de communes qui se ressemblent ou sont relativement homogènes, c’est-à-dire qui ont des caractéristiques proches. Mais, bien sûr, les méthodes de clustering peuvent être appliquées à toutes sortes de problématiques et de données.</p>
+<p>Pour cela, on doit avoir un tableau avec <strong>n</strong> individus ou observations (lignes) et <strong>p</strong> variables (colonnes), la mesure des variables peut être des effectifs, mais aussi des proportions. L’idée étant de regrouper nos communes en classes homogènes (=<em>clusters</em>) en un nombre plus restreint, nos observations sont donc constituées ici par les communes. Il faut ensuite choisir sur quelles caractéristiques on va les regrouper et chercher une certaine homogénéité. Cela peut être à partir de différentes choses selon notre base de données : caractéristiques socio-professionnelles de la personne de référence du ménage, caractéristiques des logements, etc.</p>
+<div id="variable-socio-professionnelle-caractérisant-la-personne-de-référence-du-ménage" class="section level3 hasAnchor" number="13.1.1">
+<h3><span class="header-section-number">13.1.1</span> Variable socio-professionnelle caractérisant la personne de référence du ménage<a href="12-Clustering-application.html#variable-socio-professionnelle-caractérisant-la-personne-de-référence-du-ménage" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>On va dans cet exemple (communes de Paris et sa petite couronne) s’intéresser aux caractéristiques socio-professionnelles de la population de 15 ans ou plus : on aura en lignes nos <strong>n</strong> communes des 4 départements et en colonnes nos <strong>p</strong> variables d’entrées, soient par exemple le nombre d’habitants, le nombre d’individus qui sont actuellement chômeurs, le nombre de personnes en emploi, le nombre de cadres, etc.</p>
+<p>On va réaliser ici un exemple très simple en ne prenant qu’une variable reconstruite à partir de celle de la catégorie socio-professionnnelle (<code>CS1</code>) qui a actuellement 8 modalités et de celle du type d’activité (<code>TACT</code>), cela permettant de distinguer les actifs en emploi des chômeurs. Si l’on prend plus de variables, il faut faire attention à ce que certaines modalités ne se recoupent pas entre elles, ou quand l’information est trop proche - par exemple la condition d’emploi et le type d’activité. Pour cela, il faut étudier les corrélations entre les variables finalement obtenues, avec les fonctions <code>cor()</code> ou <code>corrplot(cor())</code> du package <strong><code>corrplot</code></strong> par exemple. Mais si le nombre de variables prises en compte est importante, il peut être également plus pertinent de procéder avant la méthode de clustering à une méthode d’analyse factorielle.<br />
+</p>
+<p>Regardons d’abord pour cette variable - <code>CS1</code> - si un regroupement et un recodage des modalités est nécessaire.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="12-Clustering-application.html#cb143-1" tabindex="-1"></a><span class="co"># Chargement des librairies</span></span>
+<span id="cb143-2"><a href="12-Clustering-application.html#cb143-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb143-3"><a href="12-Clustering-application.html#cb143-3" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb143-4"><a href="12-Clustering-application.html#cb143-4" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb143-5"><a href="12-Clustering-application.html#cb143-5" tabindex="-1"></a></span>
+<span id="cb143-6"><a href="12-Clustering-application.html#cb143-6" tabindex="-1"></a>meta <span class="sc">%&gt;%</span> </span>
+<span id="cb143-7"><a href="12-Clustering-application.html#cb143-7" tabindex="-1"></a>  <span class="fu">select</span>(COD_VAR, COD_MOD, LIB_MOD) <span class="sc">%&gt;%</span> </span>
+<span id="cb143-8"><a href="12-Clustering-application.html#cb143-8" tabindex="-1"></a>  <span class="fu">filter</span>(COD_VAR <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CS1&quot;</span>, <span class="st">&quot;TACT&quot;</span>))</span></code></pre></div>
+<pre><code># A tibble: 15 × 3
+   COD_VAR COD_MOD LIB_MOD                                                      
+   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;                                                        
+ 1 CS1     1       Agriculteurs exploitants                                     
+ 2 CS1     2       Artisans, commerçants et chefs d&#39;entreprise                  
+ 3 CS1     3       Cadres et professions intellectuelles supérieures            
+ 4 CS1     4       Professions Intermédiaires                                   
+ 5 CS1     5       Employés                                                     
+ 6 CS1     6       Ouvriers                                                     
+ 7 CS1     7       Retraités                                                    
+ 8 CS1     8       Autres personnes sans activité professionnelle               
+ 9 TACT    11      Actifs ayant un emploi, y compris sous apprentissage ou en s…
+10 TACT    12      Chômeurs                                                     
+11 TACT    21      Retraités ou préretraités                                    
+12 TACT    22      Élèves, étudiants, stagiaires non rémunéré de 14 ans ou plus 
+13 TACT    23      Moins de 14 ans                                              
+14 TACT    24      Femmes ou hommes au foyer                                    
+15 TACT    25      Autres inactifs                                              </code></pre>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="12-Clustering-application.html#cb145-1" tabindex="-1"></a><span class="co"># Fonction &quot;tableau&quot; créée dans la section 6</span></span>
+<span id="cb145-2"><a href="12-Clustering-application.html#cb145-2" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>AGER20 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;2&quot;</span>,<span class="st">&quot;5&quot;</span>, <span class="st">&quot;10&quot;</span>,<span class="st">&quot;14&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb145-3"><a href="12-Clustering-application.html#cb145-3" tabindex="-1"></a>  <span class="fu">tableau</span>(<span class="at">var_quali =</span> CS1, <span class="at">nom_var_quali =</span> <span class="st">&quot;PCS&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div>
+<div id="udxcgvmpbs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#udxcgvmpbs table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#udxcgvmpbs thead, #udxcgvmpbs tbody, #udxcgvmpbs tfoot, #udxcgvmpbs tr, #udxcgvmpbs td, #udxcgvmpbs th {
+  border-style: none;
+}
+
+#udxcgvmpbs p {
+  margin: 0;
+  padding: 0;
+}
+
+#udxcgvmpbs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#udxcgvmpbs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#udxcgvmpbs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#udxcgvmpbs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#udxcgvmpbs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#udxcgvmpbs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#udxcgvmpbs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#udxcgvmpbs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#udxcgvmpbs .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#udxcgvmpbs .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#udxcgvmpbs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#udxcgvmpbs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#udxcgvmpbs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#udxcgvmpbs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#udxcgvmpbs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#udxcgvmpbs .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#udxcgvmpbs .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#udxcgvmpbs .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#udxcgvmpbs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#udxcgvmpbs .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#udxcgvmpbs .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#udxcgvmpbs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#udxcgvmpbs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#udxcgvmpbs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#udxcgvmpbs .gt_left {
+  text-align: left;
+}
+
+#udxcgvmpbs .gt_center {
+  text-align: center;
+}
+
+#udxcgvmpbs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#udxcgvmpbs .gt_font_normal {
+  font-weight: normal;
+}
+
+#udxcgvmpbs .gt_font_bold {
+  font-weight: bold;
+}
+
+#udxcgvmpbs .gt_font_italic {
+  font-style: italic;
+}
+
+#udxcgvmpbs .gt_super {
+  font-size: 65%;
+}
+
+#udxcgvmpbs .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#udxcgvmpbs .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#udxcgvmpbs .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#udxcgvmpbs .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#udxcgvmpbs .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#udxcgvmpbs .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#udxcgvmpbs .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#udxcgvmpbs .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#udxcgvmpbs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="PCS">PCS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Effectif">Effectif</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Pourcentage">Pourcentage</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="PCS" class="gt_row gt_center">1</td>
+<td headers="Effectif" class="gt_row gt_right">890.8146</td>
+<td headers="Pourcentage" class="gt_row gt_right">0.0</td></tr>
+    <tr><td headers="PCS" class="gt_row gt_center">2</td>
+<td headers="Effectif" class="gt_row gt_right">187816.5390</td>
+<td headers="Pourcentage" class="gt_row gt_right">3.4</td></tr>
+    <tr><td headers="PCS" class="gt_row gt_center">3</td>
+<td headers="Effectif" class="gt_row gt_right">1202479.4687</td>
+<td headers="Pourcentage" class="gt_row gt_right">21.5</td></tr>
+    <tr><td headers="PCS" class="gt_row gt_center">4</td>
+<td headers="Effectif" class="gt_row gt_right">838616.6681</td>
+<td headers="Pourcentage" class="gt_row gt_right">15.0</td></tr>
+    <tr><td headers="PCS" class="gt_row gt_center">5</td>
+<td headers="Effectif" class="gt_row gt_right">872375.2789</td>
+<td headers="Pourcentage" class="gt_row gt_right">15.6</td></tr>
+    <tr><td headers="PCS" class="gt_row gt_center">6</td>
+<td headers="Effectif" class="gt_row gt_right">416074.6945</td>
+<td headers="Pourcentage" class="gt_row gt_right">7.4</td></tr>
+    <tr><td headers="PCS" class="gt_row gt_center">7</td>
+<td headers="Effectif" class="gt_row gt_right">1020480.0552</td>
+<td headers="Pourcentage" class="gt_row gt_right">18.2</td></tr>
+    <tr><td headers="PCS" class="gt_row gt_center">8</td>
+<td headers="Effectif" class="gt_row gt_right">1055867.3440</td>
+<td headers="Pourcentage" class="gt_row gt_right">18.9</td></tr>
+    <tr><td headers="PCS" class="gt_row gt_center">Total</td>
+<td headers="Effectif" class="gt_row gt_right">5594600.8630</td>
+<td headers="Pourcentage" class="gt_row gt_right">100.0</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<p>Il faut donc supprimer la modalité “1” qui correspond aux agriculteurs car trop peu représentés sur ce champ, mais pour le reste on peut laisser comme cela.</p>
+</div>
+<div id="création-du-tableau-de-contingence" class="section level3 hasAnchor" number="13.1.2">
+<h3><span class="header-section-number">13.1.2</span> Création du tableau de contingence<a href="12-Clustering-application.html#création-du-tableau-de-contingence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour créer le tableau de contigence donnant le nombre d’individus pour chacune des modalités de cette variable et pour chaque commune, on va créer une fonction qu’on va appeler <code>tab_cont_n</code>, pour avoir en ligne les communes et en colonne chaque modalité de la variable en question :</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="12-Clustering-application.html#cb146-1" tabindex="-1"></a>tab_cont_n <span class="ot">&lt;-</span> <span class="cf">function</span>(data, ..., nom_var, var, prefix_var)</span>
+<span id="cb146-2"><a href="12-Clustering-application.html#cb146-2" tabindex="-1"></a>{</span>
+<span id="cb146-3"><a href="12-Clustering-application.html#cb146-3" tabindex="-1"></a>  tab_n <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb146-4"><a href="12-Clustering-application.html#cb146-4" tabindex="-1"></a>            <span class="fu">group_by</span>(...) <span class="sc">%&gt;%</span></span>
+<span id="cb146-5"><a href="12-Clustering-application.html#cb146-5" tabindex="-1"></a>            <span class="fu">summarise</span>({{ nom_var }} <span class="sc">:=</span> <span class="fu">round</span>(<span class="fu">sum</span>(IPONDI))) <span class="sc">%&gt;%</span> </span>
+<span id="cb146-6"><a href="12-Clustering-application.html#cb146-6" tabindex="-1"></a>            <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> {{ var }}, <span class="at">values_from =</span> {{ nom_var }},</span>
+<span id="cb146-7"><a href="12-Clustering-application.html#cb146-7" tabindex="-1"></a>                        <span class="at">values_fill =</span> <span class="dv">0</span>, <span class="at">names_prefix =</span> prefix_var)</span>
+<span id="cb146-8"><a href="12-Clustering-application.html#cb146-8" tabindex="-1"></a>  </span>
+<span id="cb146-9"><a href="12-Clustering-application.html#cb146-9" tabindex="-1"></a>  <span class="fu">return</span>(tab_n)</span>
+<span id="cb146-10"><a href="12-Clustering-application.html#cb146-10" tabindex="-1"></a>}</span></code></pre></div>
+<p>On peut l’intégrer dans notre script <code>fonctions.R</code> pour pouvoir l’utiliser plus tard en appelant simplement ce fichier en début de code.</p>
+<p><br />
+On crée maintenant notre tableau de contingence, en créant comme déjà mentionné une variable croisant l’information sur la catégorie socio-professionnelle et celle sur le statut d’activité regroupé en emploi, chômage, retraités ou autres inactifs.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="12-Clustering-application.html#cb147-1" tabindex="-1"></a><span class="co"># On enlève les agriculteurs, , la commune sans dénomination et les moins de 15 ans</span></span>
+<span id="cb147-2"><a href="12-Clustering-application.html#cb147-2" tabindex="-1"></a>cat_soc <span class="ot">&lt;-</span> RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb147-3"><a href="12-Clustering-application.html#cb147-3" tabindex="-1"></a>  <span class="fu">filter</span>(CS1<span class="sc">!=</span><span class="st">&quot;1&quot;</span> <span class="sc">&amp;</span> COM<span class="sc">!=</span><span class="st">&quot;ZZZZZ&quot;</span> <span class="sc">&amp;!</span>AGER20 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;2&quot;</span>,<span class="st">&quot;5&quot;</span>, <span class="st">&quot;10&quot;</span>,<span class="st">&quot;14&quot;</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb147-4"><a href="12-Clustering-application.html#cb147-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CS_empcho =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(CS1 <span class="sc">==</span> <span class="st">&quot;2&quot;</span> <span class="sc">&amp;</span> TACT<span class="sc">==</span><span class="st">&quot;11&quot;</span> <span class="sc">~</span> <span class="st">&quot;Arti_com&quot;</span>,</span>
+<span id="cb147-5"><a href="12-Clustering-application.html#cb147-5" tabindex="-1"></a>                                         CS1 <span class="sc">==</span> <span class="st">&quot;3&quot;</span> <span class="sc">&amp;</span> TACT<span class="sc">==</span><span class="st">&quot;11&quot;</span> <span class="sc">~</span> <span class="st">&quot;Cadres&quot;</span>,</span>
+<span id="cb147-6"><a href="12-Clustering-application.html#cb147-6" tabindex="-1"></a>                                         CS1 <span class="sc">==</span> <span class="st">&quot;4&quot;</span> <span class="sc">&amp;</span> TACT<span class="sc">==</span><span class="st">&quot;11&quot;</span> <span class="sc">~</span> <span class="st">&quot;PI&quot;</span>,</span>
+<span id="cb147-7"><a href="12-Clustering-application.html#cb147-7" tabindex="-1"></a>                                         CS1 <span class="sc">==</span> <span class="st">&quot;5&quot;</span> <span class="sc">&amp;</span> TACT<span class="sc">==</span><span class="st">&quot;11&quot;</span> <span class="sc">~</span> <span class="st">&quot;Employés&quot;</span>,</span>
+<span id="cb147-8"><a href="12-Clustering-application.html#cb147-8" tabindex="-1"></a>                                         CS1 <span class="sc">==</span> <span class="st">&quot;6&quot;</span> <span class="sc">&amp;</span> TACT<span class="sc">==</span><span class="st">&quot;11&quot;</span> <span class="sc">~</span> <span class="st">&quot;Ouvriers&quot;</span>,</span>
+<span id="cb147-9"><a href="12-Clustering-application.html#cb147-9" tabindex="-1"></a>                                         CS1 <span class="sc">!=</span> <span class="st">&quot;7&quot;</span> <span class="sc">&amp;</span> TACT<span class="sc">==</span><span class="st">&quot;12&quot;</span> <span class="sc">~</span> <span class="st">&quot;Chômeurs&quot;</span>,</span>
+<span id="cb147-10"><a href="12-Clustering-application.html#cb147-10" tabindex="-1"></a>                                         CS1 <span class="sc">==</span> <span class="st">&quot;7&quot;</span> <span class="sc">&amp;</span> TACT<span class="sc">==</span><span class="st">&quot;21&quot;</span> <span class="sc">~</span> <span class="st">&quot;Retraités&quot;</span>,</span>
+<span id="cb147-11"><a href="12-Clustering-application.html#cb147-11" tabindex="-1"></a>                                         <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Autres inactifs&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb147-12"><a href="12-Clustering-application.html#cb147-12" tabindex="-1"></a>  <span class="fu">tab_cont_n</span>(COM, CS_empcho, <span class="at">nom_var=</span>cat_soc, <span class="at">var=</span>CS_empcho, <span class="at">prefix_var=</span><span class="st">&quot;nb_&quot;</span>)</span>
+<span id="cb147-13"><a href="12-Clustering-application.html#cb147-13" tabindex="-1"></a>cat_soc</span></code></pre></div>
+<pre><code># A tibble: 136 × 9
+   COM   nb_Arti_com `nb_Autres inactifs` nb_Cadres nb_Chômeurs nb_Employés
+   &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+ 1 75101         828                 2249      4294         935        1268
+ 2 75102        1086                 2320      7056        1375        1761
+ 3 75103        1619                 4287     10160        2085        2617
+ 4 75104        1247                 4100      7793        1863        2344
+ 5 75105        1869                11010     15853        2611        3494
+ 6 75106        1788                 8296     10170        1842        2348
+ 7 75107        2462                 8257     12641        2165        3603
+ 8 75108        1801                 5559      9702        1565        2846
+ 9 75109        2736                 7069     19617        3478        4083
+10 75110        2792                11091     24147        6343        6956
+# ℹ 126 more rows
+# ℹ 3 more variables: nb_Ouvriers &lt;dbl&gt;, nb_PI &lt;dbl&gt;, nb_Retraités &lt;dbl&gt;</code></pre>
+<p>On a donc 136 lignes correspondant à 136 communes de nos 4 départements, et 9 variables.</p>
+<p>On va rajouter le nom des communes comme identifiant dans le tableau, c’est-à-dire dans le nom de la 1ère colonne, avec la fonction <code>column_to_rownames()</code>. Cela peut être conseillé pour la procédure de clustering, afin que chaque commune soit bien identifiée par son nom (label) ; on verra toutefois dans notre exemple que cela devient illisible si on a trop de communes/individus.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="12-Clustering-application.html#cb149-1" tabindex="-1"></a>cat_soc <span class="ot">&lt;-</span> cat_soc <span class="sc">%&gt;%</span> <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;COM&quot;</span>)</span>
+<span id="cb149-2"><a href="12-Clustering-application.html#cb149-2" tabindex="-1"></a>cat_soc</span></code></pre></div>
+<pre><code># A tibble: 136 × 8
+   nb_Arti_com `nb_Autres inactifs` nb_Cadres nb_Chômeurs nb_Employés
+         &lt;dbl&gt;                &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+ 1         828                 2249      4294         935        1268
+ 2        1086                 2320      7056        1375        1761
+ 3        1619                 4287     10160        2085        2617
+ 4        1247                 4100      7793        1863        2344
+ 5        1869                11010     15853        2611        3494
+ 6        1788                 8296     10170        1842        2348
+ 7        2462                 8257     12641        2165        3603
+ 8        1801                 5559      9702        1565        2846
+ 9        2736                 7069     19617        3478        4083
+10        2792                11091     24147        6343        6956
+# ℹ 126 more rows
+# ℹ 3 more variables: nb_Ouvriers &lt;dbl&gt;, nb_PI &lt;dbl&gt;, nb_Retraités &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div id="la-méthode-de-la-cah-appliquée-à-nos-données" class="section level2 hasAnchor" number="13.2">
+<h2><span class="header-section-number">13.2</span> La méthode de la CAH appliquée à nos données<a href="12-Clustering-application.html#la-méthode-de-la-cah-appliquée-à-nos-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="constitution-des-classes" class="section level3 hasAnchor" number="13.2.1">
+<h3><span class="header-section-number">13.2.1</span> Constitution des classes<a href="12-Clustering-application.html#constitution-des-classes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!--On reprend les étapes de la méthode décrite <a href="https://camille-sisi.github.io/Data-Mining-2022/14-Clustering-theorique.html" target="_blank">ici</a>, une par une. -->
+<p>Comme nos communes ont plus d’habitants que d’autres, pour éviter un effet taille de nos communes, on va utiliser la distance du khi-2. Pour cela, deux façons de faire avec deux packages différents : soit le package <strong><code>vegan()</code></strong> et la fonction <code>decostand()</code> avec l’argument <code>method="chi.square"</code> qui crée un tableau sur lequel on applique ensuite la méthode de distance euclidienne et dans ce cas on aura des distinces similaires à celles du khi-2 (voir <a href="https://pmarchand1.github.io/ECL7102/notes_cours/14-Analyses_multivariees_Partie2.html#mesures_de_distance_pour_les_abondances%5D">ici</a>) ; soit le package <strong><code>ade4</code></strong> et les fonctions combinées <code>dist.dudi(dudi.coa())</code> avec l’argument <code>amongrow=TRUE</code> (pour préciser que les distances doivent être calculées entre lignes, ici les communes).</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="12-Clustering-application.html#cb151-1" tabindex="-1"></a><span class="co"># Etape 1 : on transforme la table sur laquelle on obtiendra des distances du khi-deux</span></span>
+<span id="cb151-2"><a href="12-Clustering-application.html#cb151-2" tabindex="-1"></a><span class="co"># install.packages(&quot;vegan&quot;)</span></span>
+<span id="cb151-3"><a href="12-Clustering-application.html#cb151-3" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb151-4"><a href="12-Clustering-application.html#cb151-4" tabindex="-1"></a>cat_soc_chi2 <span class="ot">&lt;-</span> <span class="fu">decostand</span>(cat_soc, <span class="at">method =</span> <span class="st">&quot;chi.square&quot;</span>)</span>
+<span id="cb151-5"><a href="12-Clustering-application.html#cb151-5" tabindex="-1"></a></span>
+<span id="cb151-6"><a href="12-Clustering-application.html#cb151-6" tabindex="-1"></a><span class="co"># Etape 2 : on crée la matrice de distance, en utilisant la distance euclidienne </span></span>
+<span id="cb151-7"><a href="12-Clustering-application.html#cb151-7" tabindex="-1"></a><span class="co"># standard sur la table transformée, ce qui nous donnera des distances similaires </span></span>
+<span id="cb151-8"><a href="12-Clustering-application.html#cb151-8" tabindex="-1"></a><span class="co"># à celle du khi-2</span></span>
+<span id="cb151-9"><a href="12-Clustering-application.html#cb151-9" tabindex="-1"></a>dist_mat <span class="ot">&lt;-</span> <span class="fu">dist</span>(cat_soc_chi2, <span class="at">method =</span> <span class="st">&#39;euclidean&#39;</span>)</span>
+<span id="cb151-10"><a href="12-Clustering-application.html#cb151-10" tabindex="-1"></a></span>
+<span id="cb151-11"><a href="12-Clustering-application.html#cb151-11" tabindex="-1"></a><span class="co"># on peut vérifier qu&#39;on obtient la même matrice avec la seconde méthode évoquée</span></span>
+<span id="cb151-12"><a href="12-Clustering-application.html#cb151-12" tabindex="-1"></a><span class="co"># install.packages(&quot;ade4&quot;)</span></span>
+<span id="cb151-13"><a href="12-Clustering-application.html#cb151-13" tabindex="-1"></a><span class="fu">library</span>(ade4)</span>
+<span id="cb151-14"><a href="12-Clustering-application.html#cb151-14" tabindex="-1"></a>dist_mat_bis <span class="ot">&lt;-</span> <span class="fu">dist.dudi</span>(<span class="fu">dudi.coa</span>(cat_soc, <span class="at">scannf=</span><span class="cn">FALSE</span>, <span class="at">nf=</span><span class="dv">7</span>), <span class="at">amongrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb151-15"><a href="12-Clustering-application.html#cb151-15" tabindex="-1"></a></span>
+<span id="cb151-16"><a href="12-Clustering-application.html#cb151-16" tabindex="-1"></a><span class="co"># si on souhaite voir et comparer les matrices de distances, </span></span>
+<span id="cb151-17"><a href="12-Clustering-application.html#cb151-17" tabindex="-1"></a><span class="co"># on doit les transformer en matrice avec la fonction &#39;as.matrix&#39; :</span></span>
+<span id="cb151-18"><a href="12-Clustering-application.html#cb151-18" tabindex="-1"></a>cat_soc_chi2_m <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(dist_mat)</span>
+<span id="cb151-19"><a href="12-Clustering-application.html#cb151-19" tabindex="-1"></a>cat_soc_chi2_bis_m <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(dist_mat_bis)</span>
+<span id="cb151-20"><a href="12-Clustering-application.html#cb151-20" tabindex="-1"></a><span class="co"># elles sont bien similaires -&gt; on peut supprimer de l&#39;environnement la seconde</span></span>
+<span id="cb151-21"><a href="12-Clustering-application.html#cb151-21" tabindex="-1"></a><span class="fu">rm</span>(cat_soc_chi2_bis_m)</span>
+<span id="cb151-22"><a href="12-Clustering-application.html#cb151-22" tabindex="-1"></a></span>
+<span id="cb151-23"><a href="12-Clustering-application.html#cb151-23" tabindex="-1"></a></span>
+<span id="cb151-24"><a href="12-Clustering-application.html#cb151-24" tabindex="-1"></a><span class="co">#Etape 3 : on choisit la méthode d&#39;agrégation, ici la plus standard, le critère de Ward</span></span>
+<span id="cb151-25"><a href="12-Clustering-application.html#cb151-25" tabindex="-1"></a>classif_socioprof <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dist_mat, <span class="at">method =</span> <span class="st">&quot;ward.D2&quot;</span>)</span>
+<span id="cb151-26"><a href="12-Clustering-application.html#cb151-26" tabindex="-1"></a></span>
+<span id="cb151-27"><a href="12-Clustering-application.html#cb151-27" tabindex="-1"></a></span>
+<span id="cb151-28"><a href="12-Clustering-application.html#cb151-28" tabindex="-1"></a><span class="co">#Etape 4 : on visualise l&#39;arbre de classification ou dendogramme</span></span>
+<span id="cb151-29"><a href="12-Clustering-application.html#cb151-29" tabindex="-1"></a><span class="fu">plot</span>(classif_socioprof, <span class="at">xlab=</span><span class="st">&quot;Commune&quot;</span>,  <span class="at">main=</span><span class="st">&quot;Dendogramme&quot;</span>)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/Etapes_CAH-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="12-Clustering-application.html#cb152-1" tabindex="-1"></a><span class="co"># plot(classif_socioprof, xlab=&quot;Commune&quot;,  main=&quot;Dendogramme&quot;, labels=FALSE)</span></span></code></pre></div>
+<p>On remarque ici que comme nous avons mis en label le nom des communes, on peut tout de suite savoir quelles communes sont proches et vont former des classes. Toutefois, avec 136 communes ce n’est absolument pas lisible !! Donc on peut aussi les enlever avec l’option <code>label=FALSE</code> dans la fonction <code>plot()</code>.<br />
+Il existe aussi une fonction <em>via</em> <strong><code>ggplot2</code></strong> pour dessiner l’abre, mais il faut installer avant le package <strong><code>ggdendro</code></strong>.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="12-Clustering-application.html#cb153-1" tabindex="-1"></a><span class="fu">library</span>(ggdendro)</span>
+<span id="cb153-2"><a href="12-Clustering-application.html#cb153-2" tabindex="-1"></a><span class="fu">ggdendrogram</span>(classif_socioprof, <span class="at">labels=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-120-1.svg" width="672" /></p>
+<p>Il faut maintenant prendre une décision : où coupe-t-on l’arbre pour obtenir une partition de la population (ici nos communes), autrement dit combien de classes choisissons-nous ?<br />
+On peut d’abord s’appuyer sur la forme du dendogramme : plus une “branche” est haute et plus on perd en distance ou ici (critère de Ward) en inertie interclasse<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, il faudra donc couper l’arbre au niveau de cette branche. Il faut également prendre en compte ce qui peut être le mieux pour l’analyse : si on aboutit à une classification en 2 classes, cela risque d’être peu intéressant à analyser, mais si on a une classification en 5 classes ou plus, cela va devenir compliqué à interpréter…<br />
+Ici, dans les deux cas, il semble que choisir 2 classes soit très pertinent, mais on voit qu’on pourrait aussi choisir 4 classes (ou même 3 éventuellement) si l’on veut rentrer un peu plus dans le détail de l’analyse.</p>
+<p>On peut également s’aider de représentations des sauts d’inertie du dendrogramme selon le nombre de classes qui peut être retenu, avec la fonction plot et en récupérant l’information sur l’inertie (<code>height</code>).</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="12-Clustering-application.html#cb154-1" tabindex="-1"></a><span class="co"># On stocke l&#39;attribut `$height` dans l&#39;objet `inertie` en triant les valeurs par </span></span>
+<span id="cb154-2"><a href="12-Clustering-application.html#cb154-2" tabindex="-1"></a><span class="co"># ordre décroissant.</span></span>
+<span id="cb154-3"><a href="12-Clustering-application.html#cb154-3" tabindex="-1"></a>inertie_socioprof <span class="ot">&lt;-</span> <span class="fu">sort</span>(classif_socioprof<span class="sc">$</span>height, <span class="at">decreasing=</span><span class="cn">TRUE</span>)</span>
+<span id="cb154-4"><a href="12-Clustering-application.html#cb154-4" tabindex="-1"></a><span class="fu">plot</span>(inertie_socioprof, <span class="at">type=</span><span class="st">&quot;s&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Nombre de classes&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Inertie&quot;</span>, </span>
+<span id="cb154-5"><a href="12-Clustering-application.html#cb154-5" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">15</span>), <span class="at">xaxp =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">15</span>,<span class="dv">14</span>))</span>
+<span id="cb154-6"><a href="12-Clustering-application.html#cb154-6" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), inertie_socioprof[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)], </span>
+<span id="cb154-7"><a href="12-Clustering-application.html#cb154-7" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue3&quot;</span>, <span class="st">&quot;brown3&quot;</span>, <span class="st">&quot;chartreuse3&quot;</span>), <span class="at">cex =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/Plot_inertie-1.svg" width="672" /></p>
+<p>Ou encore créer d’autres indicateurs plus rigoureux, comme la part de la perte d’inertie interclasse dans l’inertie totale (on parle aussi de “semi-partial R-squared”).</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="12-Clustering-application.html#cb155-1" tabindex="-1"></a><span class="co">#on crée un indicateur de part en %</span></span>
+<span id="cb155-2"><a href="12-Clustering-application.html#cb155-2" tabindex="-1"></a>partinertie_socioprof <span class="ot">&lt;-</span> inertie_socioprof<span class="sc">/</span><span class="fu">sum</span>(inertie_socioprof)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb155-3"><a href="12-Clustering-application.html#cb155-3" tabindex="-1"></a><span class="fu">plot</span>(partinertie_socioprof, <span class="at">type=</span><span class="st">&quot;b&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Nombre de classes&quot;</span>, </span>
+<span id="cb155-4"><a href="12-Clustering-application.html#cb155-4" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Part dans l&#39;inertie totale en %&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">15</span>), <span class="at">xaxp =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">15</span>,<span class="dv">14</span>))</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/Plot_inertie_bis-1.svg" width="672" />
+On voit que les graphiques sont assez proches, qu’ils soient construits à partir de la mesure en valeur absolue ou en valeur relative. Il y a un saut important après 2 classes (hauteur sur le 1er graphique, ou importance de la pente sur le 2ème graphique) par exemple.</p>
+<p>Enfin, à savoir que des fonctions existent donnant une indication de la “meilleure” partition à choisir, mais attention le choix se fait aussi (et peut-être surtout) en fonction de l’analyse que l’on veut mener et de l’interprétation que l’on pourra faire des classes obtenues ! Pour l’exemple, je vous mets ci-dessous le code de Julien Larmarange pour tester ce type de fonctions ; la “meilleure” partition selon la perte d’inertie relative est représentée par un point noir et la seconde par un point gris. On voit qu’ici il est bien indiqué d’abord 2 classes, puis comme seconde “meilleure” partition 3 classes, ce qui correspond plutôt bien aux graphiques précédents.</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="12-Clustering-application.html#cb156-1" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb156-2"><a href="12-Clustering-application.html#cb156-2" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">url</span>(<span class="st">&quot;https://raw.githubusercontent.com/larmarange/JLutils/master/R/clustering.R&quot;</span>))</span>
+<span id="cb156-3"><a href="12-Clustering-application.html#cb156-3" tabindex="-1"></a><span class="co">#On a choisit un maximum de 15 classes ici...</span></span>
+<span id="cb156-4"><a href="12-Clustering-application.html#cb156-4" tabindex="-1"></a><span class="fu">best.cutree</span>(classif_socioprof, <span class="at">min=</span><span class="dv">2</span>, <span class="at">max=</span><span class="dv">15</span>, <span class="at">graph =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb156-5"><a href="12-Clustering-application.html#cb156-5" tabindex="-1"></a>            <span class="at">xlab =</span> <span class="st">&quot;Nombre de classes&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Inertie relative&quot;</span>)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/Best_cutree-1.svg" width="672" /></p>
+<pre><code>[1] 2</code></pre>
+<p>Finalement, au vu de la forme du dendogramme et des graphes sur l’inertie (et de la fonction d’aide à la décision précédente), on choisit de prendre 4 classes pour une analyse plus fine, mais on va stocker également les résultats pour 3 classes. On peut de nouveau visualiser le dendogramme en matérialisant les différents choix du nombre de classes.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="12-Clustering-application.html#cb158-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb158-2"><a href="12-Clustering-application.html#cb158-2" tabindex="-1"></a><span class="fu">plot</span>(classif_socioprof, <span class="at">xlab=</span><span class="st">&quot;Commune&quot;</span>,  <span class="at">main=</span><span class="st">&quot;Dendogramme&quot;</span>, <span class="at">label=</span><span class="cn">FALSE</span>)</span>
+<span id="cb158-3"><a href="12-Clustering-application.html#cb158-3" tabindex="-1"></a><span class="fu">rect.hclust</span>(classif_socioprof, <span class="at">k=</span><span class="dv">3</span>, <span class="at">border =</span> <span class="st">&#39;blue3&#39;</span>)</span>
+<span id="cb158-4"><a href="12-Clustering-application.html#cb158-4" tabindex="-1"></a><span class="fu">rect.hclust</span>(classif_socioprof, <span class="at">k=</span><span class="dv">4</span>, <span class="at">border =</span> <span class="st">&#39;brown3&#39;</span>)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/Choix_cut-1.svg" width="672" /></p>
+<p>On peut également utiliser la fonction <code>color_branches()</code> du package <code>dendextend()</code>, mais il faut appeler de nouveau <code>ggplot2</code> après.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="12-Clustering-application.html#cb159-1" tabindex="-1"></a><span class="co"># On peut encore également utiliser la fonction `color_branches()` du package </span></span>
+<span id="cb159-2"><a href="12-Clustering-application.html#cb159-2" tabindex="-1"></a><span class="co"># `dendextend()` mais il faut appeler de nouveau `ggplot2` après</span></span>
+<span id="cb159-3"><a href="12-Clustering-application.html#cb159-3" tabindex="-1"></a><span class="fu">library</span>(dendextend)</span>
+<span id="cb159-4"><a href="12-Clustering-application.html#cb159-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb159-5"><a href="12-Clustering-application.html#cb159-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">color_branches</span>(classif_socioprof, <span class="at">k =</span> <span class="dv">4</span>), <span class="at">labels =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/dendogramme%20color%C3%A9-1.svg" width="672" /></p>
+<p>On choisit donc d’abord d’analyser notre clustering en 3 ou 4 classes : pour découper l’arbre et obtenir la partition souhaitée, on utilise la fonction <code>cutree()</code>, et on peut ensuite visualiser quelle commune est dans quelle classe et le nombre (et la part) de communes par classe.<br />
+On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contient les variables utilisées, mais on pourra ensuite fusionner la table avec notre table initiale “RP_final” pour mener des analyses plus approfondies des classes, y compris avec des variables non utilisées dans le clustering.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="12-Clustering-application.html#cb160-1" tabindex="-1"></a><span class="co">#Découpage en k classes</span></span>
+<span id="cb160-2"><a href="12-Clustering-application.html#cb160-2" tabindex="-1"></a>classe3_socioprof <span class="ot">&lt;-</span> <span class="fu">cutree</span>(classif_socioprof, <span class="at">k=</span><span class="dv">3</span>)</span>
+<span id="cb160-3"><a href="12-Clustering-application.html#cb160-3" tabindex="-1"></a>classe4_socioprof <span class="ot">&lt;-</span> <span class="fu">cutree</span>(classif_socioprof, <span class="at">k=</span><span class="dv">4</span>)</span>
+<span id="cb160-4"><a href="12-Clustering-application.html#cb160-4" tabindex="-1"></a></span>
+<span id="cb160-5"><a href="12-Clustering-application.html#cb160-5" tabindex="-1"></a><span class="co">#Liste des groupes</span></span>
+<span id="cb160-6"><a href="12-Clustering-application.html#cb160-6" tabindex="-1"></a><span class="co">#library(janitor)</span></span>
+<span id="cb160-7"><a href="12-Clustering-application.html#cb160-7" tabindex="-1"></a><span class="fu">tabyl</span>(classe3_socioprof) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div>
+<div id="udxcgvmpbs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#udxcgvmpbs table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#udxcgvmpbs thead, #udxcgvmpbs tbody, #udxcgvmpbs tfoot, #udxcgvmpbs tr, #udxcgvmpbs td, #udxcgvmpbs th {
+  border-style: none;
+}
+
+#udxcgvmpbs p {
+  margin: 0;
+  padding: 0;
+}
+
+#udxcgvmpbs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#udxcgvmpbs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#udxcgvmpbs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#udxcgvmpbs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#udxcgvmpbs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#udxcgvmpbs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#udxcgvmpbs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#udxcgvmpbs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#udxcgvmpbs .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#udxcgvmpbs .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#udxcgvmpbs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#udxcgvmpbs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#udxcgvmpbs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#udxcgvmpbs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#udxcgvmpbs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#udxcgvmpbs .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#udxcgvmpbs .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#udxcgvmpbs .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#udxcgvmpbs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#udxcgvmpbs .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#udxcgvmpbs .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#udxcgvmpbs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#udxcgvmpbs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#udxcgvmpbs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#udxcgvmpbs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#udxcgvmpbs .gt_left {
+  text-align: left;
+}
+
+#udxcgvmpbs .gt_center {
+  text-align: center;
+}
+
+#udxcgvmpbs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#udxcgvmpbs .gt_font_normal {
+  font-weight: normal;
+}
+
+#udxcgvmpbs .gt_font_bold {
+  font-weight: bold;
+}
+
+#udxcgvmpbs .gt_font_italic {
+  font-style: italic;
+}
+
+#udxcgvmpbs .gt_super {
+  font-size: 65%;
+}
+
+#udxcgvmpbs .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#udxcgvmpbs .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#udxcgvmpbs .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#udxcgvmpbs .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#udxcgvmpbs .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#udxcgvmpbs .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#udxcgvmpbs .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#udxcgvmpbs .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#udxcgvmpbs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="classe3_socioprof">classe3_socioprof</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="percent">percent</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="classe3_socioprof" class="gt_row gt_right">1</td>
+<td headers="n" class="gt_row gt_right">39</td>
+<td headers="percent" class="gt_row gt_right">28.7%</td></tr>
+    <tr><td headers="classe3_socioprof" class="gt_row gt_right">2</td>
+<td headers="n" class="gt_row gt_right">41</td>
+<td headers="percent" class="gt_row gt_right">30.1%</td></tr>
+    <tr><td headers="classe3_socioprof" class="gt_row gt_right">3</td>
+<td headers="n" class="gt_row gt_right">56</td>
+<td headers="percent" class="gt_row gt_right">41.2%</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="12-Clustering-application.html#cb161-1" tabindex="-1"></a><span class="fu">tabyl</span>(classe4_socioprof) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div>
+<div id="nsquhupzze" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nsquhupzze table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#nsquhupzze thead, #nsquhupzze tbody, #nsquhupzze tfoot, #nsquhupzze tr, #nsquhupzze td, #nsquhupzze th {
+  border-style: none;
+}
+
+#nsquhupzze p {
+  margin: 0;
+  padding: 0;
+}
+
+#nsquhupzze .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#nsquhupzze .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nsquhupzze .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nsquhupzze .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nsquhupzze .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nsquhupzze .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nsquhupzze .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nsquhupzze .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nsquhupzze .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#nsquhupzze .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#nsquhupzze .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nsquhupzze .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nsquhupzze .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nsquhupzze .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nsquhupzze .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nsquhupzze .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#nsquhupzze .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#nsquhupzze .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#nsquhupzze .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nsquhupzze .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#nsquhupzze .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nsquhupzze .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nsquhupzze .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nsquhupzze .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nsquhupzze .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nsquhupzze .gt_left {
+  text-align: left;
+}
+
+#nsquhupzze .gt_center {
+  text-align: center;
+}
+
+#nsquhupzze .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nsquhupzze .gt_font_normal {
+  font-weight: normal;
+}
+
+#nsquhupzze .gt_font_bold {
+  font-weight: bold;
+}
+
+#nsquhupzze .gt_font_italic {
+  font-style: italic;
+}
+
+#nsquhupzze .gt_super {
+  font-size: 65%;
+}
+
+#nsquhupzze .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#nsquhupzze .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#nsquhupzze .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#nsquhupzze .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#nsquhupzze .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#nsquhupzze .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#nsquhupzze .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#nsquhupzze .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#nsquhupzze div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="classe4_socioprof">classe4_socioprof</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="percent">percent</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="classe4_socioprof" class="gt_row gt_right">1</td>
+<td headers="n" class="gt_row gt_right">39</td>
+<td headers="percent" class="gt_row gt_right">28.7%</td></tr>
+    <tr><td headers="classe4_socioprof" class="gt_row gt_right">2</td>
+<td headers="n" class="gt_row gt_right">41</td>
+<td headers="percent" class="gt_row gt_right">30.1%</td></tr>
+    <tr><td headers="classe4_socioprof" class="gt_row gt_right">3</td>
+<td headers="n" class="gt_row gt_right">28</td>
+<td headers="percent" class="gt_row gt_right">20.6%</td></tr>
+    <tr><td headers="classe4_socioprof" class="gt_row gt_right">4</td>
+<td headers="n" class="gt_row gt_right">28</td>
+<td headers="percent" class="gt_row gt_right">20.6%</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="12-Clustering-application.html#cb162-1" tabindex="-1"></a><span class="fu">sort</span>(classe4_socioprof) </span></code></pre></div>
+<pre><code>75101 75102 75103 75104 75105 75106 75107 75108 75109 75110 75111 75112 75114 
+    1     1     1     1     1     1     1     1     1     1     1     1     1 
+75115 75116 75117 92002 92012 92014 92020 92022 92026 92035 92040 92044 92049 
+    1     1     1     1     1     1     1     1     1     1     1     1     1 
+92051 92062 92063 92064 92071 92072 92073 92075 92076 92077 94052 94067 94080 
+    1     1     1     1     1     1     1     1     1     1     1     1     1 
+75113 75118 75119 75120 92004 92009 92019 92023 92024 92025 92032 92033 92046 
+    2     2     2     2     2     2     2     2     2     2     2     2     2 
+92048 92060 93033 93045 93049 93062 93077 94003 94015 94016 94018 94033 94037 
+    2     2     2     2     2     2     2     2     2     2     2     2     2 
+94038 94042 94043 94046 94048 94055 94058 94059 94065 94068 94069 94071 94073 
+    2     2     2     2     2     2     2     2     2     2     2     2     2 
+94075 94079 92007 92050 93006 93032 93046 93048 93050 93051 93055 93057 93061 
+    2     2     3     3     3     3     3     3     3     3     3     3     3 
+93063 93064 93070 93073 93074 94002 94017 94019 94021 94022 94028 94034 94041 
+    3     3     3     3     3     3     3     3     3     3     3     3     3 
+94044 94060 94076 94077 92036 92078 93001 93005 93007 93008 93010 93013 93014 
+    3     3     3     3     4     4     4     4     4     4     4     4     4 
+93027 93029 93030 93031 93039 93047 93053 93059 93066 93071 93072 93078 93079 
+    4     4     4     4     4     4     4     4     4     4     4     4     4 
+94004 94011 94054 94074 94078 94081 
+    4     4     4     4     4     4 </code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="12-Clustering-application.html#cb164-1" tabindex="-1"></a><span class="co">#Ajout des variables de classe dans la table initiale de clustering : on ne crée qu&#39;une</span></span>
+<span id="cb164-2"><a href="12-Clustering-application.html#cb164-2" tabindex="-1"></a><span class="co"># seule table qui aura nos 2 variables de typo selon 3 ou 4 classes</span></span>
+<span id="cb164-3"><a href="12-Clustering-application.html#cb164-3" tabindex="-1"></a>clust_socioprof <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(cat_soc_chi2, <span class="at">classe3_socioprof=</span><span class="fu">as.factor</span>(classe3_socioprof))</span>
+<span id="cb164-4"><a href="12-Clustering-application.html#cb164-4" tabindex="-1"></a>clust_socioprof <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(clust_socioprof, <span class="at">classe4_socioprof=</span><span class="fu">as.factor</span>(classe4_socioprof))</span></code></pre></div>
+<p>La 1ère classe comprend donc 39 communes soit 29% de l’ensemble des communes de Paris et sa petite couronne, la 2ème classe 41 communes ou 30%, et la 3ème classe rassemble 56 communes soit 41% lorsqu’elle est agrégée et sinon se divive en deux classes de même nombre (28 et 28) ou proportion dans la partition à 4 classes.
+La dernière sortie nous donne la place de chaque commune dans chacune des 4 classes, mais ce n’est pas super lisible comme cela.</p>
+</div>
+<div id="visualisation-sur-la-carte-des-communes-et-départements" class="section level3 hasAnchor" number="13.2.2">
+<h3><span class="header-section-number">13.2.2</span> Visualisation sur la carte des communes et départements<a href="12-Clustering-application.html#visualisation-sur-la-carte-des-communes-et-départements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Enfin, on peut visualiser sur la carte des communes et départements les quatre classes construites et choisies.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="12-Clustering-application.html#cb165-1" tabindex="-1"></a><span class="co">#library(geojsonsf)</span></span>
+<span id="cb165-2"><a href="12-Clustering-application.html#cb165-2" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb165-3"><a href="12-Clustering-application.html#cb165-3" tabindex="-1"></a><span class="fu">library</span>(mapsf)</span>
+<span id="cb165-4"><a href="12-Clustering-application.html#cb165-4" tabindex="-1"></a></span>
+<span id="cb165-5"><a href="12-Clustering-application.html#cb165-5" tabindex="-1"></a><span class="co"># on charge le fonds de carte des communes -&gt; vous pouvez reprendre les tables utilisées dans le cours de Claude Grasland, sinon la télécharger sur opendatasoft</span></span>
+<span id="cb165-6"><a href="12-Clustering-application.html#cb165-6" tabindex="-1"></a><span class="co"># map_com &lt;- geojson_sf(&quot;https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geoflar-communes-2015/exports/geojson?lang=fr&amp;refine=nom_reg%3A%22ILE-DE-FRANCE%22&amp;timezone=Europe%2FBerlin&quot;)</span></span>
+<span id="cb165-7"><a href="12-Clustering-application.html#cb165-7" tabindex="-1"></a>map_com <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/map_com.RDS&quot;</span>)</span>
+<span id="cb165-8"><a href="12-Clustering-application.html#cb165-8" tabindex="-1"></a>map_com <span class="ot">&lt;-</span> map_com <span class="sc">%&gt;%</span> </span>
+<span id="cb165-9"><a href="12-Clustering-application.html#cb165-9" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">COM=</span>com_code) <span class="sc">%&gt;%</span> </span>
+<span id="cb165-10"><a href="12-Clustering-application.html#cb165-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">COM=</span><span class="fu">as.character</span>(COM))</span>
+<span id="cb165-11"><a href="12-Clustering-application.html#cb165-11" tabindex="-1"></a>map_dept <span class="ot">&lt;-</span> map_com <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(dep_code, dep_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb165-12"><a href="12-Clustering-application.html#cb165-12" tabindex="-1"></a>                  <span class="fu">summarise</span>()</span>
+<span id="cb165-13"><a href="12-Clustering-application.html#cb165-13" tabindex="-1"></a><span class="co"># si ajout contours établissements publics territoriaux (EPT)</span></span>
+<span id="cb165-14"><a href="12-Clustering-application.html#cb165-14" tabindex="-1"></a><span class="co"># map_ept &lt;- readRDS(&quot;data/map_ept.RDS&quot;)</span></span>
+<span id="cb165-15"><a href="12-Clustering-application.html#cb165-15" tabindex="-1"></a></span>
+<span id="cb165-16"><a href="12-Clustering-application.html#cb165-16" tabindex="-1"></a>typo3 <span class="ot">&lt;-</span> clust_socioprof <span class="sc">%&gt;%</span> <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">&quot;COM&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb165-17"><a href="12-Clustering-application.html#cb165-17" tabindex="-1"></a>  <span class="fu">select</span>(COM, classe3_socioprof)</span>
+<span id="cb165-18"><a href="12-Clustering-application.html#cb165-18" tabindex="-1"></a>map_com_typo3 <span class="ot">&lt;-</span> map_com <span class="sc">%&gt;%</span> <span class="fu">select</span>(COM, com_name, geometry) <span class="sc">%&gt;%</span> </span>
+<span id="cb165-19"><a href="12-Clustering-application.html#cb165-19" tabindex="-1"></a>  <span class="fu">left_join</span>(typo3)</span>
+<span id="cb165-20"><a href="12-Clustering-application.html#cb165-20" tabindex="-1"></a><span class="fu">mf_theme</span>(<span class="st">&quot;agolalight&quot;</span>)</span>
+<span id="cb165-21"><a href="12-Clustering-application.html#cb165-21" tabindex="-1"></a><span class="fu">mf_map</span>(map_com_typo3, <span class="at">var=</span><span class="st">&quot;classe3_socioprof&quot;</span>, <span class="at">type=</span><span class="st">&quot;typo&quot;</span>, </span>
+<span id="cb165-22"><a href="12-Clustering-application.html#cb165-22" tabindex="-1"></a>       <span class="at">pal =</span> <span class="fu">c</span>(<span class="st">&quot;aquamarine3&quot;</span>, <span class="st">&quot;coral&quot;</span>, <span class="st">&quot;skyblue3&quot;</span>),</span>
+<span id="cb165-23"><a href="12-Clustering-application.html#cb165-23" tabindex="-1"></a>       <span class="at">leg_pos =</span> <span class="st">&quot;bottomleft&quot;</span>, <span class="at">leg_title=</span><span class="st">&quot;Cluster&quot;</span>,</span>
+<span id="cb165-24"><a href="12-Clustering-application.html#cb165-24" tabindex="-1"></a>       <span class="at">col_na =</span> <span class="st">&quot;gray80&quot;</span>, <span class="at">leg_no_data =</span> <span class="st">&quot;Données manquantes&quot;</span>)</span>
+<span id="cb165-25"><a href="12-Clustering-application.html#cb165-25" tabindex="-1"></a><span class="fu">mf_map</span>(map_dept, <span class="at">var=</span><span class="st">&quot;nom_dep&quot;</span>,  <span class="at">type =</span> <span class="st">&quot;base&quot;</span>,</span>
+<span id="cb165-26"><a href="12-Clustering-application.html#cb165-26" tabindex="-1"></a>       <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">col_na =</span> <span class="st">&quot;gray80&quot;</span>,</span>
+<span id="cb165-27"><a href="12-Clustering-application.html#cb165-27" tabindex="-1"></a>       <span class="at">border=</span><span class="st">&quot;black&quot;</span>,<span class="at">lwd=</span><span class="dv">1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb165-28"><a href="12-Clustering-application.html#cb165-28" tabindex="-1"></a><span class="fu">mf_layout</span>(<span class="at">title =</span> <span class="st">&quot;Profils PCS des communes de Paris et sa petite couronne&quot;</span>,</span>
+<span id="cb165-29"><a href="12-Clustering-application.html#cb165-29" tabindex="-1"></a>          <span class="at">frame =</span> <span class="cn">TRUE</span>, <span class="at">credits=</span><span class="st">&quot; &quot;</span>, <span class="at">arrow =</span> F)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/carto_clust-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="12-Clustering-application.html#cb166-1" tabindex="-1"></a>typo4 <span class="ot">&lt;-</span> clust_socioprof <span class="sc">%&gt;%</span> <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">&quot;COM&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb166-2"><a href="12-Clustering-application.html#cb166-2" tabindex="-1"></a>  <span class="fu">select</span>(COM, classe4_socioprof)</span>
+<span id="cb166-3"><a href="12-Clustering-application.html#cb166-3" tabindex="-1"></a>map_com_typo4 <span class="ot">&lt;-</span> map_com <span class="sc">%&gt;%</span> <span class="fu">select</span>(COM, com_name, geometry) <span class="sc">%&gt;%</span> </span>
+<span id="cb166-4"><a href="12-Clustering-application.html#cb166-4" tabindex="-1"></a>  <span class="fu">left_join</span>(typo4)</span>
+<span id="cb166-5"><a href="12-Clustering-application.html#cb166-5" tabindex="-1"></a><span class="fu">mf_theme</span>(<span class="st">&quot;agolalight&quot;</span>)</span>
+<span id="cb166-6"><a href="12-Clustering-application.html#cb166-6" tabindex="-1"></a><span class="fu">mf_map</span>(map_com_typo4, <span class="at">var=</span><span class="st">&quot;classe4_socioprof&quot;</span>, <span class="at">type=</span><span class="st">&quot;typo&quot;</span>, </span>
+<span id="cb166-7"><a href="12-Clustering-application.html#cb166-7" tabindex="-1"></a>       <span class="at">pal =</span> <span class="fu">c</span>(<span class="st">&quot;aquamarine3&quot;</span>, <span class="st">&quot;coral&quot;</span>, <span class="st">&quot;skyblue3&quot;</span>, <span class="st">&quot;brown4&quot;</span>),</span>
+<span id="cb166-8"><a href="12-Clustering-application.html#cb166-8" tabindex="-1"></a>       <span class="at">leg_pos =</span> <span class="st">&quot;bottomleft&quot;</span>, <span class="at">leg_title=</span><span class="st">&quot;Cluster&quot;</span>,</span>
+<span id="cb166-9"><a href="12-Clustering-application.html#cb166-9" tabindex="-1"></a>       <span class="at">col_na =</span> <span class="st">&quot;gray80&quot;</span>, <span class="at">leg_no_data =</span> <span class="st">&quot;Données manquantes&quot;</span>)</span>
+<span id="cb166-10"><a href="12-Clustering-application.html#cb166-10" tabindex="-1"></a><span class="co"># mf_map(map_ept, var=&quot;ept_name&quot;,  type = &quot;base&quot;,</span></span>
+<span id="cb166-11"><a href="12-Clustering-application.html#cb166-11" tabindex="-1"></a><span class="co">#        col = NA, col_na = &quot;gray80&quot;,</span></span>
+<span id="cb166-12"><a href="12-Clustering-application.html#cb166-12" tabindex="-1"></a><span class="co">#        border=&quot;blue&quot;,lwd=1, add = TRUE)</span></span>
+<span id="cb166-13"><a href="12-Clustering-application.html#cb166-13" tabindex="-1"></a><span class="fu">mf_map</span>(map_dept, <span class="at">var=</span><span class="st">&quot;nom_dep&quot;</span>,  <span class="at">type =</span> <span class="st">&quot;base&quot;</span>,</span>
+<span id="cb166-14"><a href="12-Clustering-application.html#cb166-14" tabindex="-1"></a>       <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">col_na =</span> <span class="st">&quot;gray80&quot;</span>,</span>
+<span id="cb166-15"><a href="12-Clustering-application.html#cb166-15" tabindex="-1"></a>       <span class="at">border=</span><span class="st">&quot;black&quot;</span>,<span class="at">lwd=</span><span class="dv">1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb166-16"><a href="12-Clustering-application.html#cb166-16" tabindex="-1"></a><span class="fu">mf_layout</span>(<span class="at">title =</span> <span class="st">&quot;Profils PCS des communes de Paris et sa petite couronne&quot;</span>,</span>
+<span id="cb166-17"><a href="12-Clustering-application.html#cb166-17" tabindex="-1"></a>          <span class="at">frame =</span> <span class="cn">TRUE</span>, <span class="at">credits=</span><span class="st">&quot; &quot;</span>, <span class="at">arrow =</span> F)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/carto_clust-2.svg" width="672" />
+On voit avec la seconde carte que la partition en 4 classes permet de préciser le clustering en particulier pour les communes du département de Seine-St-Denis. On va retenir définitivement cette partition en 4 classes pour l’interprétation.</p>
+</div>
+<div id="interprétation" class="section level3 hasAnchor" number="13.2.3">
+<h3><span class="header-section-number">13.2.3</span> Interprétation<a href="12-Clustering-application.html#interprétation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il faut maintenant comprendre la partition obtenue et interpréter nos 4 classes en les décrivant principalement ici à partir des variables utilisées dans le clustering. On peut pour cela utiliser le package <strong><code>FactoMineR</code></strong> qui permet avec la fonction <code>catdes</code> de sortir des résultats sur, d’une part, les liens les plus significatifs entre les variables actives de la CAH et la variable globale de cluster/classes, et, d’autre part de manière plus précise, sur les liens les plus significatifs entre les variables et chacune des classes. De manière générale, le package <strong><code>FactoMineR</code></strong> est presque indispensable pour toute analyse factorielle de données et/ou clustering (voir <a href="https://larmarange.github.io/guide-R/analyses_avancees/analyse-factorielle.html">ici</a>).</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="12-Clustering-application.html#cb167-1" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
+<span id="cb167-2"><a href="12-Clustering-application.html#cb167-2" tabindex="-1"></a><span class="co"># on retire la variable de classe qui ne nous intéresse pas (la type en 3 classes ici)</span></span>
+<span id="cb167-3"><a href="12-Clustering-application.html#cb167-3" tabindex="-1"></a><span class="fu">catdes</span>(clust_socioprof[, <span class="sc">-</span><span class="dv">9</span>], <span class="at">num.var =</span> <span class="dv">9</span>)</span></code></pre></div>
+<pre><code>
+Link between the cluster variable and the quantitative variables
+================================================================
+                        Eta2      P-value
+nb_Cadres          0.9075190 5.051344e-68
+nb_Ouvriers        0.8691562 4.369492e-58
+nb_Employés        0.8304926 1.125821e-50
+nb_Chômeurs        0.7194329 2.916476e-36
+nb_Autres.inactifs 0.6262392 4.530630e-28
+nb_PI              0.4836017 7.367933e-19
+nb_Retraités       0.3360390 9.898185e-12
+nb_Arti_com        0.2180956 3.920464e-07
+
+Description of each cluster by quantitative variables
+=====================================================
+$`1`
+                      v.test Mean in category Overall mean sd in category
+nb_Cadres           9.230631        0.6634648    0.3984220     0.05880146
+nb_Arti_com         5.077079        0.2140143    0.1772711     0.06795860
+nb_PI              -2.306082        0.3535017    0.3736918     0.05635525
+nb_Autres.inactifs -4.054787        0.3745396    0.4253899     0.06096658
+nb_Chômeurs        -5.972422        0.2115313    0.2844051     0.03021788
+nb_Ouvriers        -8.016067        0.1146623    0.2744024     0.02567630
+nb_Employés        -8.936187        0.2633226    0.3842266     0.03755561
+                   Overall sd      p.value
+nb_Cadres          0.21154267 2.690426e-20
+nb_Arti_com        0.05331831 3.832822e-07
+nb_PI              0.06450243 2.110606e-02
+nb_Autres.inactifs 0.09239296 5.018006e-05
+nb_Chômeurs        0.08989471 2.337566e-09
+nb_Ouvriers        0.14681341 1.091849e-15
+nb_Employés        0.09967854 4.028297e-19
+
+$`2`
+                      v.test Mean in category Overall mean sd in category
+nb_Retraités        5.082473        0.4869929    0.4357343     0.07511809
+nb_PI               4.885737        0.4149784    0.3736918     0.04466321
+nb_Ouvriers        -2.682174        0.2228135    0.2744024     0.05872551
+nb_Chômeurs        -3.677228        0.2410982    0.2844051     0.05158555
+nb_Autres.inactifs -4.130110        0.3753976    0.4253899     0.04916426
+                   Overall sd      p.value
+nb_Retraités       0.07698186 3.725522e-07
+nb_PI              0.06450243 1.030429e-06
+nb_Ouvriers        0.14681341 7.314544e-03
+nb_Chômeurs        0.08989471 2.357823e-04
+nb_Autres.inactifs 0.09239296 3.625898e-05
+
+$`3`
+               v.test Mean in category Overall mean sd in category Overall sd
+nb_Employés  4.935740        0.4673877    0.3842266     0.04304196 0.09967854
+nb_PI        3.618256        0.4131413    0.3736918     0.03912118 0.06450243
+nb_Ouvriers  3.596816        0.3636609    0.2744024     0.05800568 0.14681341
+nb_Chômeurs  2.306199        0.3194478    0.2844051     0.05270552 0.08989471
+nb_Arti_com -2.107284        0.1582793    0.1772711     0.02962413 0.05331831
+nb_Cadres   -4.040794        0.2539344    0.3984220     0.05845409 0.21154267
+                 p.value
+nb_Employés 7.984729e-07
+nb_PI       2.965946e-04
+nb_Ouvriers 3.221364e-04
+nb_Chômeurs 2.109949e-02
+nb_Arti_com 3.509293e-02
+nb_Cadres   5.327051e-05
+
+$`4`
+                      v.test Mean in category Overall mean sd in category
+nb_Autres.inactifs  8.744175        0.5619500    0.4253899     0.07117056
+nb_Chômeurs         8.547157        0.4142790    0.2844051     0.05537340
+nb_Ouvriers         8.413011        0.4831796    0.2744024     0.06607172
+nb_Employés         6.594694        0.4953390    0.3842266     0.03801306
+nb_Arti_com        -3.049291        0.1497896    0.1772711     0.02382982
+nb_Retraités       -5.374273        0.3658026    0.4357343     0.04702790
+nb_PI              -6.583845        0.3019088    0.3736918     0.03950428
+nb_Cadres          -7.743861        0.1215229    0.3984220     0.03903016
+                   Overall sd      p.value
+nb_Autres.inactifs 0.09239296 2.246510e-18
+nb_Chômeurs        0.08989471 1.261573e-17
+nb_Ouvriers        0.14681341 3.996168e-17
+nb_Employés        0.09967854 4.261338e-11
+nb_Arti_com        0.05331831 2.293824e-03
+nb_Retraités       0.07698186 7.689216e-08
+nb_PI              0.06450243 4.584360e-11
+nb_Cadres          0.21154267 9.644260e-15</code></pre>
+<p>On peut voir que la 1ère classe est marquée par une surreprésentation du nombre de personnes (de référence du ménage) cadres, puis artisans-commerçants ; et au contraire, une sous-représentation des employés, ouvriers, chômeurs ou encore autres inactifs. Sur la carte, on avait vu que cette classe était présente dans 16 des 20 arrondissements de Paris, ainsi que dans des communes des Hauts-de-Seine. C’est donc la classe correspond aux communes des catégories d’actifs en emploi plutôt favorisées.<br />
+<br />
+La seconde classe est, elle, caractérisée par une surreprésentation du nombre de retraités et de professions intermédiaires, et par une sous-représentation du nombte d’autres inactifs, chômeurs et ouvriers. Géographiquement, on avait vu qu’elle correspondait aux 4 autres arrondissements de Paris et à des communes disséminées surtout dans les Hauts-de-Seine et le Val-de-Marne. Cette classe pourraient correspondre à des classes moyennes supérieures soient en emploi (professions intermédiaires) soient à la retraite.<br />
+<br />
+Dans la troisième classe, on note une surreprésentation des employés, des professions intermédiaires, des ouvriers et des chômeurs, et au contraire une sous-représentation des cadres et artisans-commerçants. Elle semble ainsi à l’opposé de la 1ère classe. Elle est davantage présente dans les communes du Val-de-Marne et de la Seine-Saint-Denis. Cette troisième classe correspond probablement ainsi à des catégories sociales moyennes basses, voire à des défavorisées.<br />
+Enfin, la quatrième classe se caractérise par une surreprésentation des autres inactifs, des chômeurs, des ouvriers et des employés. Elle se retrouve plutôt dans les communes de la Seine-Saint-Denis, et un peu dans le Val-de-Marne. Elle correspondrait alors aux catégories sociales les plus défavorisées.</p>
+<p><br />
+</p>
+<p>On peut recupérer les statistiques de la moyenne de ces variables pour les visualiser sur un graphique comparant les 3 classes, ainsi que l’ensemble des communes, on va plutôt le faire à partir des variables centrées réduites, ce qui permet une une comparaison directe des profils de classe à partir de variables dont l’ordre de grandeur (l’écart-type) peut être différent.</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="12-Clustering-application.html#cb169-1" tabindex="-1"></a><span class="co"># La fonction `scale()` permet de normaliser par colonne les valeurs numériques</span></span>
+<span id="cb169-2"><a href="12-Clustering-application.html#cb169-2" tabindex="-1"></a>clust_socioprof_sc <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(clust_socioprof[, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">10</span>)])) </span>
+<span id="cb169-3"><a href="12-Clustering-application.html#cb169-3" tabindex="-1"></a>clust_socioprof_1 <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(clust_socioprof_sc, </span>
+<span id="cb169-4"><a href="12-Clustering-application.html#cb169-4" tabindex="-1"></a>                                      <span class="at">classe=</span><span class="fu">as.factor</span>(classe4_socioprof))</span>
+<span id="cb169-5"><a href="12-Clustering-application.html#cb169-5" tabindex="-1"></a></span>
+<span id="cb169-6"><a href="12-Clustering-application.html#cb169-6" tabindex="-1"></a>mean_var <span class="ot">&lt;-</span> clust_socioprof_1 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(classe) <span class="sc">%&gt;%</span> </span>
+<span id="cb169-7"><a href="12-Clustering-application.html#cb169-7" tabindex="-1"></a>    <span class="fu">summarise_all</span>(<span class="fu">list</span>(mean))</span>
+<span id="cb169-8"><a href="12-Clustering-application.html#cb169-8" tabindex="-1"></a></span>
+<span id="cb169-9"><a href="12-Clustering-application.html#cb169-9" tabindex="-1"></a>mean_var <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="sc">-</span>classe, <span class="at">names_to=</span><span class="st">&quot;Variable&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;Value&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb169-10"><a href="12-Clustering-application.html#cb169-10" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>Variable, <span class="at">y=</span>Value, <span class="at">fill=</span>classe) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb169-11"><a href="12-Clustering-application.html#cb169-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>classe) <span class="sc">+</span>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb169-12"><a href="12-Clustering-application.html#cb169-12" tabindex="-1"></a>  <span class="fu">theme_grey</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb169-13"><a href="12-Clustering-application.html#cb169-13" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Moyenne des variables actives selon les classes&quot;</span>,</span>
+<span id="cb169-14"><a href="12-Clustering-application.html#cb169-14" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;Variables&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb169-15"><a href="12-Clustering-application.html#cb169-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/Compar_mean_bis-1.svg" width="672" />
+Cela nous dit la même chose que la description précédente mais dans un format plus visuelle.</p>
+<p>Pour aller plus loin dans la compréhension des classes, il faut utiliser d’autres variables et procéder de même à des analyses descriptives croisant ces variables avec les 4 classes de la typologie obtenue. Pour cela, il faut récupérer des variables de la table initiale du RP et sortir des tableaux de statistiques ou des graphiques comme précédemment.
+<!--On peut aussi construire d'autres graphiques plus généraux et sur d'autres variables.--></p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="12-Clustering-application.html#cb170-1" tabindex="-1"></a><span class="co"># Pour d&#39;autres variables, tableau croisé en pourcentage à partir d&#39;une nouvelle</span></span>
+<span id="cb170-2"><a href="12-Clustering-application.html#cb170-2" tabindex="-1"></a><span class="co"># fonction</span></span>
+<span id="cb170-3"><a href="12-Clustering-application.html#cb170-3" tabindex="-1"></a>Tabcr_pctcol <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var1, var2, <span class="at">pond=</span>IPONDI, <span class="at">nom_var1=</span><span class="st">&quot;classe&quot;</span>){</span>
+<span id="cb170-4"><a href="12-Clustering-application.html#cb170-4" tabindex="-1"></a>  tabcroisefin <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>({{var2}})  <span class="sc">%&gt;%</span> </span>
+<span id="cb170-5"><a href="12-Clustering-application.html#cb170-5" tabindex="-1"></a>    <span class="fu">count</span>({{var1}}, <span class="at">wt=</span>{{pond}}) <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> {{var1}},</span>
+<span id="cb170-6"><a href="12-Clustering-application.html#cb170-6" tabindex="-1"></a>                                                 <span class="at">values_from =</span> <span class="st">&quot;n&quot;</span>, </span>
+<span id="cb170-7"><a href="12-Clustering-application.html#cb170-7" tabindex="-1"></a>                                                 <span class="at">names_prefix =</span> <span class="fu">paste0</span>(nom_var1,<span class="st">&quot;_&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-8"><a href="12-Clustering-application.html#cb170-8" tabindex="-1"></a>    <span class="fu">adorn_totals</span>(<span class="fu">c</span>(<span class="st">&quot;row&quot;</span>,<span class="st">&#39;col&#39;</span>)) <span class="sc">%&gt;%</span> <span class="fu">adorn_percentages</span>(<span class="st">&quot;col&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-9"><a href="12-Clustering-application.html#cb170-9" tabindex="-1"></a>    <span class="fu">adorn_pct_formatting</span>(<span class="at">digits=</span><span class="dv">2</span>) </span>
+<span id="cb170-10"><a href="12-Clustering-application.html#cb170-10" tabindex="-1"></a>  </span>
+<span id="cb170-11"><a href="12-Clustering-application.html#cb170-11" tabindex="-1"></a>  <span class="fu">return</span>(tabcroisefin)</span>
+<span id="cb170-12"><a href="12-Clustering-application.html#cb170-12" tabindex="-1"></a>}</span>
+<span id="cb170-13"><a href="12-Clustering-application.html#cb170-13" tabindex="-1"></a></span>
+<span id="cb170-14"><a href="12-Clustering-application.html#cb170-14" tabindex="-1"></a>clust_socioprof <span class="ot">&lt;-</span> clust_socioprof <span class="sc">%&gt;%</span> <span class="fu">rownames_to_column</span>(<span class="at">var=</span><span class="st">&quot;COM&quot;</span>)</span>
+<span id="cb170-15"><a href="12-Clustering-application.html#cb170-15" tabindex="-1"></a></span>
+<span id="cb170-16"><a href="12-Clustering-application.html#cb170-16" tabindex="-1"></a><span class="co"># Liste variable à étudier plus en détails par exemple: &quot;HLML&quot;,&quot;AGER20&quot;, &quot;DIPL&quot;, IMMI,</span></span>
+<span id="cb170-17"><a href="12-Clustering-application.html#cb170-17" tabindex="-1"></a><span class="co"># &quot;EMPL&quot;, &quot;RECH&quot;,  &quot;STAT_CONJ&quot;, &quot;STOCD&quot;,  &quot;TACTD16&quot;, &quot;TP&quot;,  &quot;TYPL&quot;, &quot;ETUD&quot;, SURF, CATL</span></span>
+<span id="cb170-18"><a href="12-Clustering-application.html#cb170-18" tabindex="-1"></a>clust_socioprof <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(RP_final[RP_final<span class="sc">$</span>CS1<span class="sc">!=</span><span class="st">&quot;1&quot;</span> <span class="sc">&amp;</span> </span>
+<span id="cb170-19"><a href="12-Clustering-application.html#cb170-19" tabindex="-1"></a>                                         RP_final<span class="sc">$</span>COM<span class="sc">!=</span><span class="st">&quot;ZZZZZ&quot;</span> <span class="sc">&amp;</span> </span>
+<span id="cb170-20"><a href="12-Clustering-application.html#cb170-20" tabindex="-1"></a>                                         <span class="sc">!</span>RP_final<span class="sc">$</span>AGER20 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;2&quot;</span>,<span class="st">&quot;5&quot;</span>,<span class="st">&quot;10&quot;</span>,<span class="st">&quot;14&quot;</span>),</span>
+<span id="cb170-21"><a href="12-Clustering-application.html#cb170-21" tabindex="-1"></a>                                       <span class="fu">c</span>(<span class="st">&quot;COM&quot;</span>, <span class="st">&quot;IPONDI&quot;</span>, <span class="st">&quot;DIPL&quot;</span>)],</span>
+<span id="cb170-22"><a href="12-Clustering-application.html#cb170-22" tabindex="-1"></a>                                   <span class="at">by=</span><span class="st">&quot;COM&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-23"><a href="12-Clustering-application.html#cb170-23" tabindex="-1"></a>  <span class="fu">libelles_var</span>(<span class="at">cod_var=</span><span class="st">&quot;DIPL&quot;</span>, <span class="at">new_var =</span> Diplome_nom) <span class="sc">%&gt;%</span>  </span>
+<span id="cb170-24"><a href="12-Clustering-application.html#cb170-24" tabindex="-1"></a>  <span class="fu">Tabcr_pctcol</span>(<span class="at">var1=</span>classe4_socioprof, <span class="at">var2=</span>Diplome_nom) <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div>
+<div id="gtsbbgvtxj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gtsbbgvtxj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#gtsbbgvtxj thead, #gtsbbgvtxj tbody, #gtsbbgvtxj tfoot, #gtsbbgvtxj tr, #gtsbbgvtxj td, #gtsbbgvtxj th {
+  border-style: none;
+}
+
+#gtsbbgvtxj p {
+  margin: 0;
+  padding: 0;
+}
+
+#gtsbbgvtxj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gtsbbgvtxj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gtsbbgvtxj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gtsbbgvtxj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gtsbbgvtxj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gtsbbgvtxj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gtsbbgvtxj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gtsbbgvtxj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gtsbbgvtxj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gtsbbgvtxj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gtsbbgvtxj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gtsbbgvtxj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gtsbbgvtxj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gtsbbgvtxj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gtsbbgvtxj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtsbbgvtxj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gtsbbgvtxj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gtsbbgvtxj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gtsbbgvtxj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtsbbgvtxj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gtsbbgvtxj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtsbbgvtxj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gtsbbgvtxj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtsbbgvtxj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gtsbbgvtxj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtsbbgvtxj .gt_left {
+  text-align: left;
+}
+
+#gtsbbgvtxj .gt_center {
+  text-align: center;
+}
+
+#gtsbbgvtxj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gtsbbgvtxj .gt_font_normal {
+  font-weight: normal;
+}
+
+#gtsbbgvtxj .gt_font_bold {
+  font-weight: bold;
+}
+
+#gtsbbgvtxj .gt_font_italic {
+  font-style: italic;
+}
+
+#gtsbbgvtxj .gt_super {
+  font-size: 65%;
+}
+
+#gtsbbgvtxj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gtsbbgvtxj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gtsbbgvtxj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gtsbbgvtxj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gtsbbgvtxj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gtsbbgvtxj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gtsbbgvtxj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gtsbbgvtxj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gtsbbgvtxj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Diplome_nom">Diplome_nom</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="classe_1">classe_1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="classe_2">classe_2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="classe_3">classe_3</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="classe_4">classe_4</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total">Total</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">Pas de scolarité ou arrêt avant la fin du primaire</td>
+<td headers="classe_1" class="gt_row gt_right">1.51%</td>
+<td headers="classe_2" class="gt_row gt_right">3.06%</td>
+<td headers="classe_3" class="gt_row gt_right">4.56%</td>
+<td headers="classe_4" class="gt_row gt_right">8.24%</td>
+<td headers="Total" class="gt_row gt_right">3.62%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">Aucun diplôme et scolarité interrompue à la fin du primaire ou avant la fin du collège</td>
+<td headers="classe_1" class="gt_row gt_right">2.29%</td>
+<td headers="classe_2" class="gt_row gt_right">3.90%</td>
+<td headers="classe_3" class="gt_row gt_right">5.67%</td>
+<td headers="classe_4" class="gt_row gt_right">8.93%</td>
+<td headers="Total" class="gt_row gt_right">4.46%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">Aucun diplôme et scolarité jusqu’à la fin du collège ou au-delà</td>
+<td headers="classe_1" class="gt_row gt_right">3.01%</td>
+<td headers="classe_2" class="gt_row gt_right">4.54%</td>
+<td headers="classe_3" class="gt_row gt_right">6.59%</td>
+<td headers="classe_4" class="gt_row gt_right">9.78%</td>
+<td headers="Total" class="gt_row gt_right">5.21%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">CEP (certificat d’études primaires)</td>
+<td headers="classe_1" class="gt_row gt_right">2.48%</td>
+<td headers="classe_2" class="gt_row gt_right">3.76%</td>
+<td headers="classe_3" class="gt_row gt_right">4.46%</td>
+<td headers="classe_4" class="gt_row gt_right">4.54%</td>
+<td headers="Total" class="gt_row gt_right">3.54%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">BEPC, brevet élémentaire, brevet des collèges, DNB</td>
+<td headers="classe_1" class="gt_row gt_right">6.04%</td>
+<td headers="classe_2" class="gt_row gt_right">7.39%</td>
+<td headers="classe_3" class="gt_row gt_right">8.24%</td>
+<td headers="classe_4" class="gt_row gt_right">9.00%</td>
+<td headers="Total" class="gt_row gt_right">7.31%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">CAP, BEP ou diplôme de niveau équivalent</td>
+<td headers="classe_1" class="gt_row gt_right">7.16%</td>
+<td headers="classe_2" class="gt_row gt_right">12.02%</td>
+<td headers="classe_3" class="gt_row gt_right">16.42%</td>
+<td headers="classe_4" class="gt_row gt_right">17.35%</td>
+<td headers="Total" class="gt_row gt_right">11.90%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">Baccalauréat général ou technologique, brevet supérieur, capacité en droit, DAEU, ESEU</td>
+<td headers="classe_1" class="gt_row gt_right">11.37%</td>
+<td headers="classe_2" class="gt_row gt_right">11.75%</td>
+<td headers="classe_3" class="gt_row gt_right">12.24%</td>
+<td headers="classe_4" class="gt_row gt_right">11.90%</td>
+<td headers="Total" class="gt_row gt_right">11.72%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">Baccalauréat professionnel, brevet professionnel, de technicien ou d’enseignement, diplôme équivalent</td>
+<td headers="classe_1" class="gt_row gt_right">3.66%</td>
+<td headers="classe_2" class="gt_row gt_right">5.43%</td>
+<td headers="classe_3" class="gt_row gt_right">6.95%</td>
+<td headers="classe_4" class="gt_row gt_right">7.28%</td>
+<td headers="Total" class="gt_row gt_right">5.36%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">BTS, DUT, Deug, Deust, diplôme de la santé ou du social de niveau bac+2, diplôme équivalent</td>
+<td headers="classe_1" class="gt_row gt_right">8.49%</td>
+<td headers="classe_2" class="gt_row gt_right">10.14%</td>
+<td headers="classe_3" class="gt_row gt_right">10.13%</td>
+<td headers="classe_4" class="gt_row gt_right">8.11%</td>
+<td headers="Total" class="gt_row gt_right">9.19%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">Licence, licence pro, maîtrise, diplôme équivalent de niveau bac+3 ou bac+4</td>
+<td headers="classe_1" class="gt_row gt_right">15.80%</td>
+<td headers="classe_2" class="gt_row gt_right">13.86%</td>
+<td headers="classe_3" class="gt_row gt_right">11.11%</td>
+<td headers="classe_4" class="gt_row gt_right">7.58%</td>
+<td headers="Total" class="gt_row gt_right">13.04%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">Master, DEA, DESS, diplôme grande école niveau bac+5, doctorat de santé</td>
+<td headers="classe_1" class="gt_row gt_right">35.20%</td>
+<td headers="classe_2" class="gt_row gt_right">22.10%</td>
+<td headers="classe_3" class="gt_row gt_right">12.57%</td>
+<td headers="classe_4" class="gt_row gt_right">6.71%</td>
+<td headers="Total" class="gt_row gt_right">22.68%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">Doctorat de recherche (hors santé)</td>
+<td headers="classe_1" class="gt_row gt_right">3.00%</td>
+<td headers="classe_2" class="gt_row gt_right">2.04%</td>
+<td headers="classe_3" class="gt_row gt_right">1.05%</td>
+<td headers="classe_4" class="gt_row gt_right">0.57%</td>
+<td headers="Total" class="gt_row gt_right">1.97%</td></tr>
+    <tr><td headers="Diplome_nom" class="gt_row gt_center">Total</td>
+<td headers="classe_1" class="gt_row gt_right">100.00%</td>
+<td headers="classe_2" class="gt_row gt_right">100.00%</td>
+<td headers="classe_3" class="gt_row gt_right">100.00%</td>
+<td headers="classe_4" class="gt_row gt_right">100.00%</td>
+<td headers="Total" class="gt_row gt_right">100.00%</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<p>Enfin, on a vu qu’il y avait plusieurs méthodes d’agrégation, ici nous avons utilisé le critère de Ward. Il est possible de tester d’autres méthodes et de comparer les dendogrammes alors obtenus.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="12-Clustering-application.html#cb171-1" tabindex="-1"></a><span class="co">#Etape 3 bis : on choisit d&#39;autres méthodes d&#39;agrégation</span></span>
+<span id="cb171-2"><a href="12-Clustering-application.html#cb171-2" tabindex="-1"></a>classif.s <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dist_mat, <span class="at">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb171-3"><a href="12-Clustering-application.html#cb171-3" tabindex="-1"></a>classif.c <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dist_mat, <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb171-4"><a href="12-Clustering-application.html#cb171-4" tabindex="-1"></a>classif.a <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dist_mat, <span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb171-5"><a href="12-Clustering-application.html#cb171-5" tabindex="-1"></a>classif.cd <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dist_mat, <span class="at">method =</span> <span class="st">&quot;centroid&quot;</span>)</span>
+<span id="cb171-6"><a href="12-Clustering-application.html#cb171-6" tabindex="-1"></a></span>
+<span id="cb171-7"><a href="12-Clustering-application.html#cb171-7" tabindex="-1"></a><span class="co">#Etape 4 bis : on visualise les dendogrammes des 4 nouvelles méthodes + la 1ère utilisée précédemment, et on les compare sur un même graphique</span></span>
+<span id="cb171-8"><a href="12-Clustering-application.html#cb171-8" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb171-9"><a href="12-Clustering-application.html#cb171-9" tabindex="-1"></a><span class="fu">plot</span>(classif.s, <span class="at">xlab=</span><span class="st">&quot;Commune&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Single&quot;</span>, <span class="at">label=</span><span class="cn">FALSE</span>)</span>
+<span id="cb171-10"><a href="12-Clustering-application.html#cb171-10" tabindex="-1"></a><span class="fu">plot</span>(classif.c, <span class="at">xlab=</span><span class="st">&quot;Commune&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Complete&quot;</span>, <span class="at">label=</span><span class="cn">FALSE</span>)</span>
+<span id="cb171-11"><a href="12-Clustering-application.html#cb171-11" tabindex="-1"></a><span class="fu">plot</span>(classif.a, <span class="at">xlab=</span><span class="st">&quot;Commune&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Average&quot;</span>, <span class="at">label=</span><span class="cn">FALSE</span>)</span>
+<span id="cb171-12"><a href="12-Clustering-application.html#cb171-12" tabindex="-1"></a><span class="fu">plot</span>(classif.cd, <span class="at">xlab=</span><span class="st">&quot;Commune&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Centroid&quot;</span>, <span class="at">label=</span><span class="cn">FALSE</span>)</span>
+<span id="cb171-13"><a href="12-Clustering-application.html#cb171-13" tabindex="-1"></a><span class="fu">plot</span>(classif_socioprof, <span class="at">xlab=</span><span class="st">&quot;Commune&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Ward&quot;</span>, <span class="at">label=</span><span class="cn">FALSE</span>)</span>
+<span id="cb171-14"><a href="12-Clustering-application.html#cb171-14" tabindex="-1"></a><span class="co">#par(mfrow = c(1, 1)</span></span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/Cght_agr-1.svg" width="672" /></p>
+<p>On observe donc de fortes différences entre les dendogrammes. Par exemple, la méthode du “lien simple” ou “minimum” va avoir tendance à construire une grosse classe et une autre plus petite, c’est bien ce que l’on voit ici ; alors qu’au contraire, la méthode d’agrégation dite “complete” tend à construire des groupes plutôt de taille égale, en revanche, il faut savoir qu’elle est sensible aux points aberrants (on voit que ce n’est pas le cas ici). Enfin, on voit également que la méthode du “centroïd” (barycentre/centre de gravité des classes) produit un dendogramme particulier et déséquilibré comme le premier graphe (méthode du “lien simple”). C’est bien la méthode de Ward qui est la plus utilisée en pratique.</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Plus précisément, à chaque étape d’agrégation, la part de l’inertie interclasse passe en inertie intraclasse.<a href="12-Clustering-application.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+<script src="js/tidyverse.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="11-Clustering-theorique.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
+"instapper": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Camille-Sisi/Data-Mining-2025/master/12-Clustering-application.Rmd",
+"text": "Source"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

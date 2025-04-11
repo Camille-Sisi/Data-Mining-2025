@@ -810,14 +810,26 @@ Il faut donc utiliser la fonction `observe()`, une condition `if ... else ...` e
 L'image suivante vous donne un aperçu de ce qu'on devrait avoir pour Paris : 
 ![ ](images/Ex.2_Shiny.png)
 ```{r eval=FALSE}
-library(janitor)
 
+# On corrige les codes communes avec la table de passage suivante
+tab_passage <- readRDS(file = "F:/Enseignements/Enseignements Univ. Paris Cite 2020-xx/Data Mining_M2 PISE/Cours 2023-2025/Tables passage géo/zip_code_to_com_code.RDS")
+
+tab_passage %>% filter(!zip_code %in% c("13382", "13591", "28011", "59708", "69307"))
+
+OffresPE_2020 <- OffresPE_2020 %>% rename(zip_code = location_zipcode, zip_name=location_label) %>% 
+  mutate(zip_code = as.character(zip_code)) %>% 
+  left_join(tab_passage, by=c("zip_code", "zip_name"))
+
+
+# On crée une variable de contrat avec moins de modalités
 OffresPE_2020 <- OffresPE_2020 %>% 
        mutate(type_contrat=as.factor(case_when(contractType=="MIS" ~ "Intérim",
                                                contractType %in% c("CDS","SAI","TTI", "DDI") ~ "CDD",
                                                contractType %in% c("CCE", "REP", "DIN") ~ "Autres types",
                                                contractType %in% c("Independant", "Franchise") ~ "Indépendant ou franchise",
-                                               TRUE ~ contractType)))
+                                               TRUE ~ contractType)),
+              com_code = as.factor(com_code))
+
 
 # Définition UI et Server de l'application Shiny
 ui <- fluidPage(
@@ -835,8 +847,8 @@ ui <- fluidPage(
                    selected = "75"),
       selectInput(inputId = "commune", 
                   label = "Choix de la commune pour le graphique", 
-                  choices = unique(OffresPE_2020$location_zipcode),
-                  selected = "75013")
+                  choices = unique(OffresPE_2020$com_code),
+                  selected = "75113")
       ),
 
     
@@ -854,26 +866,19 @@ ui <- fluidPage(
 
 
 server <- function(input, output) {
-  
-   OffresPE_2020_react <- reactive({
-    OffresPE_2020 %>% 
-      filter(location_departement==input$dept & location_zipcode==input$commune)
-     
-   })
 
-   
    observe({
      input$dept
      if(input$dept == "75"){
        updateSelectInput(inputId = "commune",
-                         choices = unique(OffresPE_2020[OffresPE_2020$location_departement=="75", ]$location_zipcode),
-                         selected = "75013")
+                         choices = unique(OffresPE_2020[OffresPE_2020$location_departement=="75", ]$com_code),
+                         selected = "75113")
       }
      else {updateSelectInput(inputId = "commune",
-                            choices = unique(OffresPE_2020[OffresPE_2020$location_departement==input$dept, ]$location_zipcode),
+                            choices = unique(OffresPE_2020[OffresPE_2020$location_departement==input$dept, ]$com_code),
                             selected = input$variable)
     }
-  })  
+  })
    
    
   output$tab <- render_gt({
@@ -890,9 +895,17 @@ server <- function(input, output) {
 
   })
 
+    
+   OffresPE_2020_react <- reactive({
+    OffresPE_2020 %>% 
+       filter(location_departement==input$dept & com_code==input$commune)
+     
+   })
+
+  
   output$barplot <- renderPlot({
   OffresPE_2020_react() %>% 
-      filter(location_zipcode==input$commune) %>% 
+      filter(com_code==input$commune) %>% 
       count(type_contrat) %>% 
       mutate(Pourcentage=round(prop.table(n)*100,1)) %>% 
       select(-n) %>%

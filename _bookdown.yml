@@ -20,3 +20,5 @@ rmd_files:
   - 08-Ggplot-pratique.Rmd
   - 09-Intro-a-Shiny-theorique.Rmd
   - 10-Intro-a-Shiny-exemples.Rmd
+  - 11-Clustering-theorique.Rmd
+  - 12-Clustering-application.Rmd

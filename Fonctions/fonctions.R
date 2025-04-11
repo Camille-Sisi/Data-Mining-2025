@@ -33,3 +33,14 @@ libelles_var <- function(data, cod_var, new_var){
   
 }
 
+
+tab_cont_n <- function(data, ..., nom_var, var, prefix_var)
+{
+  tab_n <- data %>% 
+    group_by(...) %>%
+    summarise({{ nom_var }} := round(sum(IPONDI))) %>% 
+    pivot_wider(names_from = {{ var }}, values_from = {{ nom_var }},
+                values_fill = 0, names_prefix = prefix_var)
+  
+  return(tab_n)
+}

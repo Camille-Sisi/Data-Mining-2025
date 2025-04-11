@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="09-Intro-a-Shiny-theorique.html"/>
-
+<link rel="next" href="11-Clustering-theorique.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -896,147 +896,124 @@ Il va falloir ici utiliser à l’intérieur de la fonction <code>observe()</cod
 <p>Il faut donc utiliser la fonction <code>observe()</code>, une condition <code>if ... else ...</code> et une actualisation des widgets avec la fonction <code>updateSelectInput()</code>.</p>
 <p>L’image suivante vous donne un aperçu de ce qu’on devrait avoir pour Paris :
 <img src="images/Ex.2_Shiny.png" /></p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="10-Intro-a-Shiny-exemples.html#cb142-1" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb142-2"><a href="10-Intro-a-Shiny-exemples.html#cb142-2" tabindex="-1"></a></span>
-<span id="cb142-3"><a href="10-Intro-a-Shiny-exemples.html#cb142-3" tabindex="-1"></a>OffresPE_2020 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
-<span id="cb142-4"><a href="10-Intro-a-Shiny-exemples.html#cb142-4" tabindex="-1"></a>       <span class="fu">mutate</span>(<span class="at">type_contrat=</span><span class="fu">as.factor</span>(<span class="fu">case_when</span>(contractType<span class="sc">==</span><span class="st">&quot;MIS&quot;</span> <span class="sc">~</span> <span class="st">&quot;Intérim&quot;</span>,</span>
-<span id="cb142-5"><a href="10-Intro-a-Shiny-exemples.html#cb142-5" tabindex="-1"></a>                                               contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDS&quot;</span>,<span class="st">&quot;SAI&quot;</span>,<span class="st">&quot;TTI&quot;</span>, <span class="st">&quot;DDI&quot;</span>) <span class="sc">~</span> <span class="st">&quot;CDD&quot;</span>,</span>
-<span id="cb142-6"><a href="10-Intro-a-Shiny-exemples.html#cb142-6" tabindex="-1"></a>                                               contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CCE&quot;</span>, <span class="st">&quot;REP&quot;</span>, <span class="st">&quot;DIN&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Autres types&quot;</span>,</span>
-<span id="cb142-7"><a href="10-Intro-a-Shiny-exemples.html#cb142-7" tabindex="-1"></a>                                               contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Independant&quot;</span>, <span class="st">&quot;Franchise&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Indépendant ou franchise&quot;</span>,</span>
-<span id="cb142-8"><a href="10-Intro-a-Shiny-exemples.html#cb142-8" tabindex="-1"></a>                                               <span class="cn">TRUE</span> <span class="sc">~</span> contractType)))</span>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="10-Intro-a-Shiny-exemples.html#cb142-1" tabindex="-1"></a><span class="co"># On corrige les codes communes avec la table de passage suivante</span></span>
+<span id="cb142-2"><a href="10-Intro-a-Shiny-exemples.html#cb142-2" tabindex="-1"></a>tab_passage <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">&quot;F:/Enseignements/Enseignements Univ. Paris Cite 2020-xx/Data Mining_M2 PISE/Cours 2023-2025/Tables passage géo/zip_code_to_com_code.RDS&quot;</span>)</span>
+<span id="cb142-3"><a href="10-Intro-a-Shiny-exemples.html#cb142-3" tabindex="-1"></a></span>
+<span id="cb142-4"><a href="10-Intro-a-Shiny-exemples.html#cb142-4" tabindex="-1"></a>tab_passage <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>zip_code <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;13382&quot;</span>, <span class="st">&quot;13591&quot;</span>, <span class="st">&quot;28011&quot;</span>, <span class="st">&quot;59708&quot;</span>, <span class="st">&quot;69307&quot;</span>))</span>
+<span id="cb142-5"><a href="10-Intro-a-Shiny-exemples.html#cb142-5" tabindex="-1"></a></span>
+<span id="cb142-6"><a href="10-Intro-a-Shiny-exemples.html#cb142-6" tabindex="-1"></a>OffresPE_2020 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">zip_code =</span> location_zipcode, <span class="at">zip_name=</span>location_label) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-7"><a href="10-Intro-a-Shiny-exemples.html#cb142-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip_code =</span> <span class="fu">as.character</span>(zip_code)) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-8"><a href="10-Intro-a-Shiny-exemples.html#cb142-8" tabindex="-1"></a>  <span class="fu">left_join</span>(tab_passage, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;zip_code&quot;</span>, <span class="st">&quot;zip_name&quot;</span>))</span>
 <span id="cb142-9"><a href="10-Intro-a-Shiny-exemples.html#cb142-9" tabindex="-1"></a></span>
-<span id="cb142-10"><a href="10-Intro-a-Shiny-exemples.html#cb142-10" tabindex="-1"></a><span class="co"># Définition UI et Server de l&#39;application Shiny</span></span>
-<span id="cb142-11"><a href="10-Intro-a-Shiny-exemples.html#cb142-11" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb142-12"><a href="10-Intro-a-Shiny-exemples.html#cb142-12" tabindex="-1"></a>  <span class="co"># Titre de l&#39;application</span></span>
-<span id="cb142-13"><a href="10-Intro-a-Shiny-exemples.html#cb142-13" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Types de contrat de travail des offres d&#39;emplois proposées par Pôle emploi en 2020 sur Paris et sa petite couronne&quot;</span>),</span>
-<span id="cb142-14"><a href="10-Intro-a-Shiny-exemples.html#cb142-14" tabindex="-1"></a>  </span>
-<span id="cb142-15"><a href="10-Intro-a-Shiny-exemples.html#cb142-15" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
-<span id="cb142-16"><a href="10-Intro-a-Shiny-exemples.html#cb142-16" tabindex="-1"></a>  </span>
-<span id="cb142-17"><a href="10-Intro-a-Shiny-exemples.html#cb142-17" tabindex="-1"></a>  <span class="co"># Définition du Widget</span></span>
-<span id="cb142-18"><a href="10-Intro-a-Shiny-exemples.html#cb142-18" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
-<span id="cb142-19"><a href="10-Intro-a-Shiny-exemples.html#cb142-19" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
-<span id="cb142-20"><a href="10-Intro-a-Shiny-exemples.html#cb142-20" tabindex="-1"></a>      <span class="fu">radioButtons</span>(<span class="at">inputId =</span> <span class="st">&quot;dept&quot;</span>, </span>
-<span id="cb142-21"><a href="10-Intro-a-Shiny-exemples.html#cb142-21" tabindex="-1"></a>                   <span class="at">label =</span> <span class="st">&quot;Choix du département pour le tableau et le graphique&quot;</span>,</span>
-<span id="cb142-22"><a href="10-Intro-a-Shiny-exemples.html#cb142-22" tabindex="-1"></a>                   <span class="at">choices =</span> <span class="fu">levels</span>(OffresPE_2020<span class="sc">$</span>location_departement),</span>
-<span id="cb142-23"><a href="10-Intro-a-Shiny-exemples.html#cb142-23" tabindex="-1"></a>                   <span class="at">selected =</span> <span class="st">&quot;75&quot;</span>),</span>
-<span id="cb142-24"><a href="10-Intro-a-Shiny-exemples.html#cb142-24" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;commune&quot;</span>, </span>
-<span id="cb142-25"><a href="10-Intro-a-Shiny-exemples.html#cb142-25" tabindex="-1"></a>                  <span class="at">label =</span> <span class="st">&quot;Choix de la commune pour le graphique&quot;</span>, </span>
-<span id="cb142-26"><a href="10-Intro-a-Shiny-exemples.html#cb142-26" tabindex="-1"></a>                  <span class="at">choices =</span> <span class="fu">unique</span>(OffresPE_2020<span class="sc">$</span>location_zipcode),</span>
-<span id="cb142-27"><a href="10-Intro-a-Shiny-exemples.html#cb142-27" tabindex="-1"></a>                  <span class="at">selected =</span> <span class="st">&quot;75013&quot;</span>)</span>
-<span id="cb142-28"><a href="10-Intro-a-Shiny-exemples.html#cb142-28" tabindex="-1"></a>      ),</span>
-<span id="cb142-29"><a href="10-Intro-a-Shiny-exemples.html#cb142-29" tabindex="-1"></a></span>
-<span id="cb142-30"><a href="10-Intro-a-Shiny-exemples.html#cb142-30" tabindex="-1"></a>    </span>
-<span id="cb142-31"><a href="10-Intro-a-Shiny-exemples.html#cb142-31" tabindex="-1"></a>    <span class="co"># Tableau et graphe montré à l&#39;utilisateur</span></span>
-<span id="cb142-32"><a href="10-Intro-a-Shiny-exemples.html#cb142-32" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
-<span id="cb142-33"><a href="10-Intro-a-Shiny-exemples.html#cb142-33" tabindex="-1"></a>      <span class="fu">gt_output</span>(<span class="st">&quot;tab&quot;</span>),</span>
-<span id="cb142-34"><a href="10-Intro-a-Shiny-exemples.html#cb142-34" tabindex="-1"></a></span>
-<span id="cb142-35"><a href="10-Intro-a-Shiny-exemples.html#cb142-35" tabindex="-1"></a>      <span class="fu">br</span>(),</span>
-<span id="cb142-36"><a href="10-Intro-a-Shiny-exemples.html#cb142-36" tabindex="-1"></a>      <span class="fu">br</span>(),</span>
-<span id="cb142-37"><a href="10-Intro-a-Shiny-exemples.html#cb142-37" tabindex="-1"></a>      </span>
-<span id="cb142-38"><a href="10-Intro-a-Shiny-exemples.html#cb142-38" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">&quot;barplot&quot;</span>)    </span>
-<span id="cb142-39"><a href="10-Intro-a-Shiny-exemples.html#cb142-39" tabindex="-1"></a>    )</span>
-<span id="cb142-40"><a href="10-Intro-a-Shiny-exemples.html#cb142-40" tabindex="-1"></a>  )</span>
-<span id="cb142-41"><a href="10-Intro-a-Shiny-exemples.html#cb142-41" tabindex="-1"></a>)</span>
-<span id="cb142-42"><a href="10-Intro-a-Shiny-exemples.html#cb142-42" tabindex="-1"></a></span>
-<span id="cb142-43"><a href="10-Intro-a-Shiny-exemples.html#cb142-43" tabindex="-1"></a></span>
-<span id="cb142-44"><a href="10-Intro-a-Shiny-exemples.html#cb142-44" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb142-45"><a href="10-Intro-a-Shiny-exemples.html#cb142-45" tabindex="-1"></a>  </span>
-<span id="cb142-46"><a href="10-Intro-a-Shiny-exemples.html#cb142-46" tabindex="-1"></a>   OffresPE_2020_react <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
-<span id="cb142-47"><a href="10-Intro-a-Shiny-exemples.html#cb142-47" tabindex="-1"></a>    OffresPE_2020 <span class="sc">%&gt;%</span> </span>
-<span id="cb142-48"><a href="10-Intro-a-Shiny-exemples.html#cb142-48" tabindex="-1"></a>      <span class="fu">filter</span>(location_departement<span class="sc">==</span>input<span class="sc">$</span>dept <span class="sc">&amp;</span> location_zipcode<span class="sc">==</span>input<span class="sc">$</span>commune)</span>
-<span id="cb142-49"><a href="10-Intro-a-Shiny-exemples.html#cb142-49" tabindex="-1"></a>     </span>
-<span id="cb142-50"><a href="10-Intro-a-Shiny-exemples.html#cb142-50" tabindex="-1"></a>   })</span>
-<span id="cb142-51"><a href="10-Intro-a-Shiny-exemples.html#cb142-51" tabindex="-1"></a></span>
-<span id="cb142-52"><a href="10-Intro-a-Shiny-exemples.html#cb142-52" tabindex="-1"></a>   </span>
-<span id="cb142-53"><a href="10-Intro-a-Shiny-exemples.html#cb142-53" tabindex="-1"></a>   <span class="fu">observe</span>({</span>
-<span id="cb142-54"><a href="10-Intro-a-Shiny-exemples.html#cb142-54" tabindex="-1"></a>     input<span class="sc">$</span>dept</span>
-<span id="cb142-55"><a href="10-Intro-a-Shiny-exemples.html#cb142-55" tabindex="-1"></a>     <span class="cf">if</span>(input<span class="sc">$</span>dept <span class="sc">==</span> <span class="st">&quot;75&quot;</span>){</span>
-<span id="cb142-56"><a href="10-Intro-a-Shiny-exemples.html#cb142-56" tabindex="-1"></a>       <span class="fu">updateSelectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;commune&quot;</span>,</span>
-<span id="cb142-57"><a href="10-Intro-a-Shiny-exemples.html#cb142-57" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">unique</span>(OffresPE_2020[OffresPE_2020<span class="sc">$</span>location_departement<span class="sc">==</span><span class="st">&quot;75&quot;</span>, ]<span class="sc">$</span>location_zipcode),</span>
-<span id="cb142-58"><a href="10-Intro-a-Shiny-exemples.html#cb142-58" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">&quot;75013&quot;</span>)</span>
-<span id="cb142-59"><a href="10-Intro-a-Shiny-exemples.html#cb142-59" tabindex="-1"></a>      }</span>
-<span id="cb142-60"><a href="10-Intro-a-Shiny-exemples.html#cb142-60" tabindex="-1"></a>     <span class="cf">else</span> {<span class="fu">updateSelectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;commune&quot;</span>,</span>
-<span id="cb142-61"><a href="10-Intro-a-Shiny-exemples.html#cb142-61" tabindex="-1"></a>                            <span class="at">choices =</span> <span class="fu">unique</span>(OffresPE_2020[OffresPE_2020<span class="sc">$</span>location_departement<span class="sc">==</span>input<span class="sc">$</span>dept, ]<span class="sc">$</span>location_zipcode),</span>
-<span id="cb142-62"><a href="10-Intro-a-Shiny-exemples.html#cb142-62" tabindex="-1"></a>                            <span class="at">selected =</span> input<span class="sc">$</span>variable)</span>
-<span id="cb142-63"><a href="10-Intro-a-Shiny-exemples.html#cb142-63" tabindex="-1"></a>    }</span>
-<span id="cb142-64"><a href="10-Intro-a-Shiny-exemples.html#cb142-64" tabindex="-1"></a>  })  </span>
-<span id="cb142-65"><a href="10-Intro-a-Shiny-exemples.html#cb142-65" tabindex="-1"></a>   </span>
-<span id="cb142-66"><a href="10-Intro-a-Shiny-exemples.html#cb142-66" tabindex="-1"></a>   </span>
-<span id="cb142-67"><a href="10-Intro-a-Shiny-exemples.html#cb142-67" tabindex="-1"></a>  output<span class="sc">$</span>tab <span class="ot">&lt;-</span> <span class="fu">render_gt</span>({</span>
-<span id="cb142-68"><a href="10-Intro-a-Shiny-exemples.html#cb142-68" tabindex="-1"></a>  OffresPE_2020 <span class="sc">%&gt;%</span> </span>
-<span id="cb142-69"><a href="10-Intro-a-Shiny-exemples.html#cb142-69" tabindex="-1"></a>      <span class="fu">filter</span>(location_departement<span class="sc">==</span>input<span class="sc">$</span>dept) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-70"><a href="10-Intro-a-Shiny-exemples.html#cb142-70" tabindex="-1"></a>      <span class="fu">count</span>(type_contrat) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-71"><a href="10-Intro-a-Shiny-exemples.html#cb142-71" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-72"><a href="10-Intro-a-Shiny-exemples.html#cb142-72" tabindex="-1"></a>      <span class="fu">arrange</span>(<span class="fu">desc</span>(Pourcentage)) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-73"><a href="10-Intro-a-Shiny-exemples.html#cb142-73" tabindex="-1"></a>      <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-74"><a href="10-Intro-a-Shiny-exemples.html#cb142-74" tabindex="-1"></a>      <span class="fu">rename</span>(<span class="at">Effectif=</span>n, <span class="st">&quot;Type de contrat&quot;</span><span class="ot">=</span>type_contrat) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-75"><a href="10-Intro-a-Shiny-exemples.html#cb142-75" tabindex="-1"></a>      <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb142-76"><a href="10-Intro-a-Shiny-exemples.html#cb142-76" tabindex="-1"></a>      <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">&quot; &quot;</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-77"><a href="10-Intro-a-Shiny-exemples.html#cb142-77" tabindex="-1"></a>      <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Département affiché :&quot;</span>, input<span class="sc">$</span>dept))</span>
-<span id="cb142-78"><a href="10-Intro-a-Shiny-exemples.html#cb142-78" tabindex="-1"></a></span>
-<span id="cb142-79"><a href="10-Intro-a-Shiny-exemples.html#cb142-79" tabindex="-1"></a>  })</span>
-<span id="cb142-80"><a href="10-Intro-a-Shiny-exemples.html#cb142-80" tabindex="-1"></a></span>
-<span id="cb142-81"><a href="10-Intro-a-Shiny-exemples.html#cb142-81" tabindex="-1"></a>  output<span class="sc">$</span>barplot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb142-82"><a href="10-Intro-a-Shiny-exemples.html#cb142-82" tabindex="-1"></a>  <span class="fu">OffresPE_2020_react</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb142-83"><a href="10-Intro-a-Shiny-exemples.html#cb142-83" tabindex="-1"></a>      <span class="fu">filter</span>(location_zipcode<span class="sc">==</span>input<span class="sc">$</span>commune) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-84"><a href="10-Intro-a-Shiny-exemples.html#cb142-84" tabindex="-1"></a>      <span class="fu">count</span>(type_contrat) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-85"><a href="10-Intro-a-Shiny-exemples.html#cb142-85" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-86"><a href="10-Intro-a-Shiny-exemples.html#cb142-86" tabindex="-1"></a>      <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
-<span id="cb142-87"><a href="10-Intro-a-Shiny-exemples.html#cb142-87" tabindex="-1"></a>      <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">fct_reorder</span>(type_contrat, <span class="fu">desc</span>(Pourcentage)), <span class="at">y=</span>Pourcentage)  <span class="sc">+</span> </span>
-<span id="cb142-88"><a href="10-Intro-a-Shiny-exemples.html#cb142-88" tabindex="-1"></a>      <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">fill=</span><span class="st">&quot;darkgoldenrod1&quot;</span>)  <span class="sc">+</span></span>
-<span id="cb142-89"><a href="10-Intro-a-Shiny-exemples.html#cb142-89" tabindex="-1"></a>      <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>Pourcentage), <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust=</span><span class="fl">0.5</span>), <span class="at">size=</span><span class="fl">4.5</span>) <span class="sc">+</span></span>
-<span id="cb142-90"><a href="10-Intro-a-Shiny-exemples.html#cb142-90" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste</span>(<span class="st">&quot;Répartition des offres d&#39;emploi par type de contrat de travail dans le&quot;</span>, input<span class="sc">$</span>commune), </span>
-<span id="cb142-91"><a href="10-Intro-a-Shiny-exemples.html#cb142-91" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot; &quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source : Base &#39;JOCAS&#39;, offres d&#39;emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020.&quot;</span>) <span class="sc">+</span></span>
-<span id="cb142-92"><a href="10-Intro-a-Shiny-exemples.html#cb142-92" tabindex="-1"></a>      <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb142-93"><a href="10-Intro-a-Shiny-exemples.html#cb142-93" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, <span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">17</span>),</span>
-<span id="cb142-94"><a href="10-Intro-a-Shiny-exemples.html#cb142-94" tabindex="-1"></a>            <span class="at">plot.caption=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">11.5</span>),</span>
-<span id="cb142-95"><a href="10-Intro-a-Shiny-exemples.html#cb142-95" tabindex="-1"></a>            <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">11.5</span>),</span>
-<span id="cb142-96"><a href="10-Intro-a-Shiny-exemples.html#cb142-96" tabindex="-1"></a>            <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">11.5</span>))</span>
-<span id="cb142-97"><a href="10-Intro-a-Shiny-exemples.html#cb142-97" tabindex="-1"></a></span>
-<span id="cb142-98"><a href="10-Intro-a-Shiny-exemples.html#cb142-98" tabindex="-1"></a>  })</span>
-<span id="cb142-99"><a href="10-Intro-a-Shiny-exemples.html#cb142-99" tabindex="-1"></a>  </span>
-<span id="cb142-100"><a href="10-Intro-a-Shiny-exemples.html#cb142-100" tabindex="-1"></a>}</span>
-<span id="cb142-101"><a href="10-Intro-a-Shiny-exemples.html#cb142-101" tabindex="-1"></a></span>
-<span id="cb142-102"><a href="10-Intro-a-Shiny-exemples.html#cb142-102" tabindex="-1"></a></span>
-<span id="cb142-103"><a href="10-Intro-a-Shiny-exemples.html#cb142-103" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<span id="cb142-10"><a href="10-Intro-a-Shiny-exemples.html#cb142-10" tabindex="-1"></a></span>
+<span id="cb142-11"><a href="10-Intro-a-Shiny-exemples.html#cb142-11" tabindex="-1"></a><span class="co"># On crée une variable de contrat avec moins de modalités</span></span>
+<span id="cb142-12"><a href="10-Intro-a-Shiny-exemples.html#cb142-12" tabindex="-1"></a>OffresPE_2020 <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb142-13"><a href="10-Intro-a-Shiny-exemples.html#cb142-13" tabindex="-1"></a>       <span class="fu">mutate</span>(<span class="at">type_contrat=</span><span class="fu">as.factor</span>(<span class="fu">case_when</span>(contractType<span class="sc">==</span><span class="st">&quot;MIS&quot;</span> <span class="sc">~</span> <span class="st">&quot;Intérim&quot;</span>,</span>
+<span id="cb142-14"><a href="10-Intro-a-Shiny-exemples.html#cb142-14" tabindex="-1"></a>                                               contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDS&quot;</span>,<span class="st">&quot;SAI&quot;</span>,<span class="st">&quot;TTI&quot;</span>, <span class="st">&quot;DDI&quot;</span>) <span class="sc">~</span> <span class="st">&quot;CDD&quot;</span>,</span>
+<span id="cb142-15"><a href="10-Intro-a-Shiny-exemples.html#cb142-15" tabindex="-1"></a>                                               contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CCE&quot;</span>, <span class="st">&quot;REP&quot;</span>, <span class="st">&quot;DIN&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Autres types&quot;</span>,</span>
+<span id="cb142-16"><a href="10-Intro-a-Shiny-exemples.html#cb142-16" tabindex="-1"></a>                                               contractType <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Independant&quot;</span>, <span class="st">&quot;Franchise&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Indépendant ou franchise&quot;</span>,</span>
+<span id="cb142-17"><a href="10-Intro-a-Shiny-exemples.html#cb142-17" tabindex="-1"></a>                                               <span class="cn">TRUE</span> <span class="sc">~</span> contractType)),</span>
+<span id="cb142-18"><a href="10-Intro-a-Shiny-exemples.html#cb142-18" tabindex="-1"></a>              <span class="at">com_code =</span> <span class="fu">as.factor</span>(com_code))</span>
+<span id="cb142-19"><a href="10-Intro-a-Shiny-exemples.html#cb142-19" tabindex="-1"></a></span>
+<span id="cb142-20"><a href="10-Intro-a-Shiny-exemples.html#cb142-20" tabindex="-1"></a></span>
+<span id="cb142-21"><a href="10-Intro-a-Shiny-exemples.html#cb142-21" tabindex="-1"></a><span class="co"># Définition UI et Server de l&#39;application Shiny</span></span>
+<span id="cb142-22"><a href="10-Intro-a-Shiny-exemples.html#cb142-22" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb142-23"><a href="10-Intro-a-Shiny-exemples.html#cb142-23" tabindex="-1"></a>  <span class="co"># Titre de l&#39;application</span></span>
+<span id="cb142-24"><a href="10-Intro-a-Shiny-exemples.html#cb142-24" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Types de contrat de travail des offres d&#39;emplois proposées par Pôle emploi en 2020 sur Paris et sa petite couronne&quot;</span>),</span>
+<span id="cb142-25"><a href="10-Intro-a-Shiny-exemples.html#cb142-25" tabindex="-1"></a>  </span>
+<span id="cb142-26"><a href="10-Intro-a-Shiny-exemples.html#cb142-26" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb142-27"><a href="10-Intro-a-Shiny-exemples.html#cb142-27" tabindex="-1"></a>  </span>
+<span id="cb142-28"><a href="10-Intro-a-Shiny-exemples.html#cb142-28" tabindex="-1"></a>  <span class="co"># Définition du Widget</span></span>
+<span id="cb142-29"><a href="10-Intro-a-Shiny-exemples.html#cb142-29" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb142-30"><a href="10-Intro-a-Shiny-exemples.html#cb142-30" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb142-31"><a href="10-Intro-a-Shiny-exemples.html#cb142-31" tabindex="-1"></a>      <span class="fu">radioButtons</span>(<span class="at">inputId =</span> <span class="st">&quot;dept&quot;</span>, </span>
+<span id="cb142-32"><a href="10-Intro-a-Shiny-exemples.html#cb142-32" tabindex="-1"></a>                   <span class="at">label =</span> <span class="st">&quot;Choix du département pour le tableau et le graphique&quot;</span>,</span>
+<span id="cb142-33"><a href="10-Intro-a-Shiny-exemples.html#cb142-33" tabindex="-1"></a>                   <span class="at">choices =</span> <span class="fu">levels</span>(OffresPE_2020<span class="sc">$</span>location_departement),</span>
+<span id="cb142-34"><a href="10-Intro-a-Shiny-exemples.html#cb142-34" tabindex="-1"></a>                   <span class="at">selected =</span> <span class="st">&quot;75&quot;</span>),</span>
+<span id="cb142-35"><a href="10-Intro-a-Shiny-exemples.html#cb142-35" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;commune&quot;</span>, </span>
+<span id="cb142-36"><a href="10-Intro-a-Shiny-exemples.html#cb142-36" tabindex="-1"></a>                  <span class="at">label =</span> <span class="st">&quot;Choix de la commune pour le graphique&quot;</span>, </span>
+<span id="cb142-37"><a href="10-Intro-a-Shiny-exemples.html#cb142-37" tabindex="-1"></a>                  <span class="at">choices =</span> <span class="fu">unique</span>(OffresPE_2020<span class="sc">$</span>com_code),</span>
+<span id="cb142-38"><a href="10-Intro-a-Shiny-exemples.html#cb142-38" tabindex="-1"></a>                  <span class="at">selected =</span> <span class="st">&quot;75113&quot;</span>)</span>
+<span id="cb142-39"><a href="10-Intro-a-Shiny-exemples.html#cb142-39" tabindex="-1"></a>      ),</span>
+<span id="cb142-40"><a href="10-Intro-a-Shiny-exemples.html#cb142-40" tabindex="-1"></a></span>
+<span id="cb142-41"><a href="10-Intro-a-Shiny-exemples.html#cb142-41" tabindex="-1"></a>    </span>
+<span id="cb142-42"><a href="10-Intro-a-Shiny-exemples.html#cb142-42" tabindex="-1"></a>    <span class="co"># Tableau et graphe montré à l&#39;utilisateur</span></span>
+<span id="cb142-43"><a href="10-Intro-a-Shiny-exemples.html#cb142-43" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb142-44"><a href="10-Intro-a-Shiny-exemples.html#cb142-44" tabindex="-1"></a>      <span class="fu">gt_output</span>(<span class="st">&quot;tab&quot;</span>),</span>
+<span id="cb142-45"><a href="10-Intro-a-Shiny-exemples.html#cb142-45" tabindex="-1"></a></span>
+<span id="cb142-46"><a href="10-Intro-a-Shiny-exemples.html#cb142-46" tabindex="-1"></a>      <span class="fu">br</span>(),</span>
+<span id="cb142-47"><a href="10-Intro-a-Shiny-exemples.html#cb142-47" tabindex="-1"></a>      <span class="fu">br</span>(),</span>
+<span id="cb142-48"><a href="10-Intro-a-Shiny-exemples.html#cb142-48" tabindex="-1"></a>      </span>
+<span id="cb142-49"><a href="10-Intro-a-Shiny-exemples.html#cb142-49" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">&quot;barplot&quot;</span>)    </span>
+<span id="cb142-50"><a href="10-Intro-a-Shiny-exemples.html#cb142-50" tabindex="-1"></a>    )</span>
+<span id="cb142-51"><a href="10-Intro-a-Shiny-exemples.html#cb142-51" tabindex="-1"></a>  )</span>
+<span id="cb142-52"><a href="10-Intro-a-Shiny-exemples.html#cb142-52" tabindex="-1"></a>)</span>
+<span id="cb142-53"><a href="10-Intro-a-Shiny-exemples.html#cb142-53" tabindex="-1"></a></span>
+<span id="cb142-54"><a href="10-Intro-a-Shiny-exemples.html#cb142-54" tabindex="-1"></a></span>
+<span id="cb142-55"><a href="10-Intro-a-Shiny-exemples.html#cb142-55" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb142-56"><a href="10-Intro-a-Shiny-exemples.html#cb142-56" tabindex="-1"></a></span>
+<span id="cb142-57"><a href="10-Intro-a-Shiny-exemples.html#cb142-57" tabindex="-1"></a>   <span class="fu">observe</span>({</span>
+<span id="cb142-58"><a href="10-Intro-a-Shiny-exemples.html#cb142-58" tabindex="-1"></a>     input<span class="sc">$</span>dept</span>
+<span id="cb142-59"><a href="10-Intro-a-Shiny-exemples.html#cb142-59" tabindex="-1"></a>     <span class="cf">if</span>(input<span class="sc">$</span>dept <span class="sc">==</span> <span class="st">&quot;75&quot;</span>){</span>
+<span id="cb142-60"><a href="10-Intro-a-Shiny-exemples.html#cb142-60" tabindex="-1"></a>       <span class="fu">updateSelectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;commune&quot;</span>,</span>
+<span id="cb142-61"><a href="10-Intro-a-Shiny-exemples.html#cb142-61" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">unique</span>(OffresPE_2020[OffresPE_2020<span class="sc">$</span>location_departement<span class="sc">==</span><span class="st">&quot;75&quot;</span>, ]<span class="sc">$</span>com_code),</span>
+<span id="cb142-62"><a href="10-Intro-a-Shiny-exemples.html#cb142-62" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">&quot;75113&quot;</span>)</span>
+<span id="cb142-63"><a href="10-Intro-a-Shiny-exemples.html#cb142-63" tabindex="-1"></a>      }</span>
+<span id="cb142-64"><a href="10-Intro-a-Shiny-exemples.html#cb142-64" tabindex="-1"></a>     <span class="cf">else</span> {<span class="fu">updateSelectInput</span>(<span class="at">inputId =</span> <span class="st">&quot;commune&quot;</span>,</span>
+<span id="cb142-65"><a href="10-Intro-a-Shiny-exemples.html#cb142-65" tabindex="-1"></a>                            <span class="at">choices =</span> <span class="fu">unique</span>(OffresPE_2020[OffresPE_2020<span class="sc">$</span>location_departement<span class="sc">==</span>input<span class="sc">$</span>dept, ]<span class="sc">$</span>com_code),</span>
+<span id="cb142-66"><a href="10-Intro-a-Shiny-exemples.html#cb142-66" tabindex="-1"></a>                            <span class="at">selected =</span> input<span class="sc">$</span>variable)</span>
+<span id="cb142-67"><a href="10-Intro-a-Shiny-exemples.html#cb142-67" tabindex="-1"></a>    }</span>
+<span id="cb142-68"><a href="10-Intro-a-Shiny-exemples.html#cb142-68" tabindex="-1"></a>  })</span>
+<span id="cb142-69"><a href="10-Intro-a-Shiny-exemples.html#cb142-69" tabindex="-1"></a>   </span>
+<span id="cb142-70"><a href="10-Intro-a-Shiny-exemples.html#cb142-70" tabindex="-1"></a>   </span>
+<span id="cb142-71"><a href="10-Intro-a-Shiny-exemples.html#cb142-71" tabindex="-1"></a>  output<span class="sc">$</span>tab <span class="ot">&lt;-</span> <span class="fu">render_gt</span>({</span>
+<span id="cb142-72"><a href="10-Intro-a-Shiny-exemples.html#cb142-72" tabindex="-1"></a>  OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb142-73"><a href="10-Intro-a-Shiny-exemples.html#cb142-73" tabindex="-1"></a>      <span class="fu">filter</span>(location_departement<span class="sc">==</span>input<span class="sc">$</span>dept) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-74"><a href="10-Intro-a-Shiny-exemples.html#cb142-74" tabindex="-1"></a>      <span class="fu">count</span>(type_contrat) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-75"><a href="10-Intro-a-Shiny-exemples.html#cb142-75" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-76"><a href="10-Intro-a-Shiny-exemples.html#cb142-76" tabindex="-1"></a>      <span class="fu">arrange</span>(<span class="fu">desc</span>(Pourcentage)) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-77"><a href="10-Intro-a-Shiny-exemples.html#cb142-77" tabindex="-1"></a>      <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-78"><a href="10-Intro-a-Shiny-exemples.html#cb142-78" tabindex="-1"></a>      <span class="fu">rename</span>(<span class="at">Effectif=</span>n, <span class="st">&quot;Type de contrat&quot;</span><span class="ot">=</span>type_contrat) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-79"><a href="10-Intro-a-Shiny-exemples.html#cb142-79" tabindex="-1"></a>      <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb142-80"><a href="10-Intro-a-Shiny-exemples.html#cb142-80" tabindex="-1"></a>      <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">&quot; &quot;</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-81"><a href="10-Intro-a-Shiny-exemples.html#cb142-81" tabindex="-1"></a>      <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Département affiché :&quot;</span>, input<span class="sc">$</span>dept))</span>
+<span id="cb142-82"><a href="10-Intro-a-Shiny-exemples.html#cb142-82" tabindex="-1"></a></span>
+<span id="cb142-83"><a href="10-Intro-a-Shiny-exemples.html#cb142-83" tabindex="-1"></a>  })</span>
+<span id="cb142-84"><a href="10-Intro-a-Shiny-exemples.html#cb142-84" tabindex="-1"></a></span>
+<span id="cb142-85"><a href="10-Intro-a-Shiny-exemples.html#cb142-85" tabindex="-1"></a>    </span>
+<span id="cb142-86"><a href="10-Intro-a-Shiny-exemples.html#cb142-86" tabindex="-1"></a>   OffresPE_2020_react <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb142-87"><a href="10-Intro-a-Shiny-exemples.html#cb142-87" tabindex="-1"></a>    OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb142-88"><a href="10-Intro-a-Shiny-exemples.html#cb142-88" tabindex="-1"></a>       <span class="fu">filter</span>(location_departement<span class="sc">==</span>input<span class="sc">$</span>dept <span class="sc">&amp;</span> com_code<span class="sc">==</span>input<span class="sc">$</span>commune)</span>
+<span id="cb142-89"><a href="10-Intro-a-Shiny-exemples.html#cb142-89" tabindex="-1"></a>     </span>
+<span id="cb142-90"><a href="10-Intro-a-Shiny-exemples.html#cb142-90" tabindex="-1"></a>   })</span>
+<span id="cb142-91"><a href="10-Intro-a-Shiny-exemples.html#cb142-91" tabindex="-1"></a></span>
+<span id="cb142-92"><a href="10-Intro-a-Shiny-exemples.html#cb142-92" tabindex="-1"></a>  </span>
+<span id="cb142-93"><a href="10-Intro-a-Shiny-exemples.html#cb142-93" tabindex="-1"></a>  output<span class="sc">$</span>barplot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb142-94"><a href="10-Intro-a-Shiny-exemples.html#cb142-94" tabindex="-1"></a>  <span class="fu">OffresPE_2020_react</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb142-95"><a href="10-Intro-a-Shiny-exemples.html#cb142-95" tabindex="-1"></a>      <span class="fu">filter</span>(com_code<span class="sc">==</span>input<span class="sc">$</span>commune) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-96"><a href="10-Intro-a-Shiny-exemples.html#cb142-96" tabindex="-1"></a>      <span class="fu">count</span>(type_contrat) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-97"><a href="10-Intro-a-Shiny-exemples.html#cb142-97" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-98"><a href="10-Intro-a-Shiny-exemples.html#cb142-98" tabindex="-1"></a>      <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
+<span id="cb142-99"><a href="10-Intro-a-Shiny-exemples.html#cb142-99" tabindex="-1"></a>      <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">fct_reorder</span>(type_contrat, <span class="fu">desc</span>(Pourcentage)), <span class="at">y=</span>Pourcentage)  <span class="sc">+</span> </span>
+<span id="cb142-100"><a href="10-Intro-a-Shiny-exemples.html#cb142-100" tabindex="-1"></a>      <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">fill=</span><span class="st">&quot;darkgoldenrod1&quot;</span>)  <span class="sc">+</span></span>
+<span id="cb142-101"><a href="10-Intro-a-Shiny-exemples.html#cb142-101" tabindex="-1"></a>      <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>Pourcentage), <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust=</span><span class="fl">0.5</span>), <span class="at">size=</span><span class="fl">4.5</span>) <span class="sc">+</span></span>
+<span id="cb142-102"><a href="10-Intro-a-Shiny-exemples.html#cb142-102" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste</span>(<span class="st">&quot;Répartition des offres d&#39;emploi par type de contrat de travail dans le&quot;</span>, input<span class="sc">$</span>commune), </span>
+<span id="cb142-103"><a href="10-Intro-a-Shiny-exemples.html#cb142-103" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot; &quot;</span>, <span class="at">caption=</span><span class="st">&quot;Source : Base &#39;JOCAS&#39;, offres d&#39;emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb142-104"><a href="10-Intro-a-Shiny-exemples.html#cb142-104" tabindex="-1"></a>      <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb142-105"><a href="10-Intro-a-Shiny-exemples.html#cb142-105" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, <span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">17</span>),</span>
+<span id="cb142-106"><a href="10-Intro-a-Shiny-exemples.html#cb142-106" tabindex="-1"></a>            <span class="at">plot.caption=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">11.5</span>),</span>
+<span id="cb142-107"><a href="10-Intro-a-Shiny-exemples.html#cb142-107" tabindex="-1"></a>            <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">11.5</span>),</span>
+<span id="cb142-108"><a href="10-Intro-a-Shiny-exemples.html#cb142-108" tabindex="-1"></a>            <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">11.5</span>))</span>
+<span id="cb142-109"><a href="10-Intro-a-Shiny-exemples.html#cb142-109" tabindex="-1"></a></span>
+<span id="cb142-110"><a href="10-Intro-a-Shiny-exemples.html#cb142-110" tabindex="-1"></a>  })</span>
+<span id="cb142-111"><a href="10-Intro-a-Shiny-exemples.html#cb142-111" tabindex="-1"></a>  </span>
+<span id="cb142-112"><a href="10-Intro-a-Shiny-exemples.html#cb142-112" tabindex="-1"></a>}</span>
+<span id="cb142-113"><a href="10-Intro-a-Shiny-exemples.html#cb142-113" tabindex="-1"></a></span>
+<span id="cb142-114"><a href="10-Intro-a-Shiny-exemples.html#cb142-114" tabindex="-1"></a></span>
+<span id="cb142-115"><a href="10-Intro-a-Shiny-exemples.html#cb142-115" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
 
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-
 
 
 
@@ -1046,8 +1023,8 @@ Il va falloir ici utiliser à l’intérieur de la fonction <code>observe()</cod
           </div>
         </div>
       </div>
-<a href="09-Intro-a-Shiny-theorique.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="09-Intro-a-Shiny-theorique.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="11-Clustering-theorique.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
