@@ -1,0 +1,2697 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section14 Modèles de régression : application sur les offres de Pôle emploi 2020 | DATA MINING</title>
+  <meta name="description" content="Titre du cours" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section14 Modèles de régression : application sur les offres de Pôle emploi 2020 | DATA MINING" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Titre du cours" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section14 Modèles de régression : application sur les offres de Pôle emploi 2020 | DATA MINING" />
+  
+  <meta name="twitter:description" content="Titre du cours" />
+  
+
+<meta name="author" content="Camille Signoretto, Maîtresse de conférences en économie, Université Paris Cité" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="12-Clustering-application.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/tidyverse.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Mining :  <em>Camille Signoretto</em></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="00-Presentation.html"><a href="00-Presentation.html"><i class="fa fa-check"></i>Présentation</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DATA MINING</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="c13-Modeles-regression" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">Section14</span> Modèles de régression : application sur les offres de Pôle emploi 2020<a href="13-Modeles-regression.html#c13-Modeles-regression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div align="justify">
+<p>On cherche maintenant à expliquer un phénomène ou une variable par rapport à d’autres. On va ici s’intéresser au fait qu’une offre de Pôle emploi corresponde à un CDI ou non.<br />
+On va repartir de la base <code>OffresPE_2020</code> en réduisant le champ pour améliorer les temps de calcul, par exemple en ne s’intéressant qu’à Paris, puis en retravaillant un peu les variables avant de lancer les modèles de régression.</p>
+<div id="la-création-des-bases-dapprentissage-et-de-test" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> La création des bases d’apprentissage et de test<a href="13-Modeles-regression.html#la-création-des-bases-dapprentissage-et-de-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On crée notre base de travail en ne prenant que les variables qui nous intéressent, dont certaines retravaillées avant (création de variables catégorielles plus pertinentes dans une régression logistique). La fonction <code>relevel()</code> permet d’indiquer la modalité de référence que l’on veut dans les régressions futures, ici pour la régression logistique.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="13-Modeles-regression.html#cb179-1" tabindex="-1"></a><span class="fu">library</span>(fancycut)</span>
+<span id="cb179-2"><a href="13-Modeles-regression.html#cb179-2" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb179-3"><a href="13-Modeles-regression.html#cb179-3" tabindex="-1"></a>OffresPE_2020<span class="sc">$</span>salary_cat <span class="ot">&lt;-</span> <span class="fu">fancycut</span>(OffresPE_2020<span class="sc">$</span>salary_hourly_mean,</span>
+<span id="cb179-4"><a href="13-Modeles-regression.html#cb179-4" tabindex="-1"></a>                                    <span class="st">&quot;Entre 0 et moins que le SMIC (10€)&quot;</span> <span class="ot">=</span> <span class="st">&quot;(0, 10]&quot;</span>,</span>
+<span id="cb179-5"><a href="13-Modeles-regression.html#cb179-5" tabindex="-1"></a>                                    <span class="st">&quot;Entre le SMIC et le Q1(11,6€)&quot;</span> <span class="ot">=</span> <span class="st">&quot;(10, 11.6]&quot;</span>, </span>
+<span id="cb179-6"><a href="13-Modeles-regression.html#cb179-6" tabindex="-1"></a>                                    <span class="st">&quot;Entre le Q1 et la moyenne (20,1€)&quot;</span> <span class="ot">=</span> <span class="st">&quot;(11.6, 20.1]&quot;</span>,</span>
+<span id="cb179-7"><a href="13-Modeles-regression.html#cb179-7" tabindex="-1"></a>                                    <span class="st">&quot;Entre la moyenne et le D9 observée en France(15€)&quot;</span> <span class="ot">=</span> <span class="st">&quot;(20.1, 28]&quot;</span>,</span>
+<span id="cb179-8"><a href="13-Modeles-regression.html#cb179-8" tabindex="-1"></a>                                    <span class="st">&quot;Entre le D9 et le maximum (40200€)&quot;</span> <span class="ot">=</span> <span class="st">&quot;(28, 40200)&quot;</span>,</span>
+<span id="cb179-9"><a href="13-Modeles-regression.html#cb179-9" tabindex="-1"></a>                                    <span class="at">na.bucket =</span> <span class="st">&quot;Manquant&quot;</span>)</span>
+<span id="cb179-10"><a href="13-Modeles-regression.html#cb179-10" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span>  <span class="fu">tabyl</span>(salary_cat) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>()</span></code></pre></div>
+<pre><code># A tibble: 7 × 3
+  salary_cat                                             n percent
+  &lt;fct&gt;                                              &lt;dbl&gt; &lt;chr&gt;  
+1 Entre 0 et moins que le SMIC (10€)                  3489 0.8%   
+2 Entre le SMIC et le Q1(11,6€)                      21857 5.2%   
+3 Entre le Q1 et la moyenne (20,1€)                  46963 11.2%  
+4 Entre la moyenne et le D9 observée en France(15€)  17354 4.1%   
+5 Entre le D9 et le maximum (40200€)                 10933 2.6%   
+6 Manquant                                          319884 76.1%  
+7 &lt;NA&gt;                                                   1 0.0%   </code></pre>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="13-Modeles-regression.html#cb181-1" tabindex="-1"></a>OffresPE_reg <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb181-2"><a href="13-Modeles-regression.html#cb181-2" tabindex="-1"></a>  <span class="fu">filter</span>(location_departement<span class="sc">==</span><span class="st">&quot;75&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb181-3"><a href="13-Modeles-regression.html#cb181-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
+<span id="cb181-4"><a href="13-Modeles-regression.html#cb181-4" tabindex="-1"></a>         <span class="at">mois_publication=</span> <span class="fu">factor</span>(mois_publication,</span>
+<span id="cb181-5"><a href="13-Modeles-regression.html#cb181-5" tabindex="-1"></a>                                  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;janv.&quot;</span>, <span class="st">&quot;févr.&quot;</span>, <span class="st">&quot;mars&quot;</span>, <span class="st">&quot;avr.&quot;</span>, <span class="st">&quot;mai&quot;</span>, <span class="st">&quot;juin&quot;</span>, <span class="st">&quot;juil.&quot;</span>, </span>
+<span id="cb181-6"><a href="13-Modeles-regression.html#cb181-6" tabindex="-1"></a>                                             <span class="st">&quot;août&quot;</span>, <span class="st">&quot;sept.&quot;</span>, <span class="st">&quot;oct.&quot;</span>, <span class="st">&quot;nov.&quot;</span>, <span class="st">&quot;déc.&quot;</span>)),</span>
+<span id="cb181-7"><a href="13-Modeles-regression.html#cb181-7" tabindex="-1"></a>         <span class="at">secteurs=</span><span class="fu">as.factor</span>(<span class="fu">case_when</span>(entrepriseSecteur_NAF21 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Industrie&quot;</span>,</span>
+<span id="cb181-8"><a href="13-Modeles-regression.html#cb181-8" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;F&quot;</span> <span class="sc">~</span> <span class="st">&quot;Construction&quot;</span>,</span>
+<span id="cb181-9"><a href="13-Modeles-regression.html#cb181-9" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;G&quot;</span> <span class="sc">~</span> <span class="st">&quot;Commerce&quot;</span>,</span>
+<span id="cb181-10"><a href="13-Modeles-regression.html#cb181-10" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;H&quot;</span> <span class="sc">~</span> <span class="st">&quot;Transports&quot;</span>,</span>
+<span id="cb181-11"><a href="13-Modeles-regression.html#cb181-11" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;I&quot;</span> <span class="sc">~</span> <span class="st">&quot;Hébergement/restauration&quot;</span>,</span>
+<span id="cb181-12"><a href="13-Modeles-regression.html#cb181-12" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;J&quot;</span> <span class="sc">~</span> <span class="st">&quot;Info/com&quot;</span>,</span>
+<span id="cb181-13"><a href="13-Modeles-regression.html#cb181-13" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;K&quot;</span>, <span class="st">&quot;L&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Activités fi et immo&quot;</span>,</span>
+<span id="cb181-14"><a href="13-Modeles-regression.html#cb181-14" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;M&quot;</span> <span class="sc">~</span> <span class="st">&quot;Activités spé, scientifiques et techniques&quot;</span>,</span>
+<span id="cb181-15"><a href="13-Modeles-regression.html#cb181-15" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;N&quot;</span> <span class="sc">~</span> <span class="st">&quot;Activités services administratifs et soutien&quot;</span>,</span>
+<span id="cb181-16"><a href="13-Modeles-regression.html#cb181-16" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;O&quot;</span> <span class="sc">~</span> <span class="st">&quot;Administration publique&quot;</span>,</span>
+<span id="cb181-17"><a href="13-Modeles-regression.html#cb181-17" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;P&quot;</span> <span class="sc">~</span> <span class="st">&quot;Enseignement&quot;</span>,</span>
+<span id="cb181-18"><a href="13-Modeles-regression.html#cb181-18" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;Q&quot;</span> <span class="sc">~</span> <span class="st">&quot;Santé humaine et action sociale&quot;</span>,</span>
+<span id="cb181-19"><a href="13-Modeles-regression.html#cb181-19" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;R&quot;</span> <span class="sc">~</span> <span class="st">&quot;Arts, spectacles et activités récréatives&quot;</span>,</span>
+<span id="cb181-20"><a href="13-Modeles-regression.html#cb181-20" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;S&quot;</span> <span class="sc">~</span> <span class="st">&quot;Autres activités de service&quot;</span>,</span>
+<span id="cb181-21"><a href="13-Modeles-regression.html#cb181-21" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">&quot;T&quot;</span> <span class="sc">~</span> <span class="st">&quot;Activités des ménages en tant qu&#39;employeurs&quot;</span>,</span>
+<span id="cb181-22"><a href="13-Modeles-regression.html#cb181-22" tabindex="-1"></a>                                      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Manquant ou U&quot;</span>)),</span>
+<span id="cb181-23"><a href="13-Modeles-regression.html#cb181-23" tabindex="-1"></a>         <span class="at">CDI =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(contractType <span class="sc">==</span> <span class="st">&quot;CDI&quot;</span> <span class="sc">~</span>  <span class="st">&quot;Oui&quot;</span>,</span>
+<span id="cb181-24"><a href="13-Modeles-regression.html#cb181-24" tabindex="-1"></a>                                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Non&quot;</span>)),</span>
+<span id="cb181-25"><a href="13-Modeles-regression.html#cb181-25" tabindex="-1"></a>         <span class="at">salary_cat=</span><span class="fu">relevel</span>(salary_cat, <span class="at">ref=</span><span class="st">&quot;Entre le D9 et le maximum (40200€)&quot;</span>),</span>
+<span id="cb181-26"><a href="13-Modeles-regression.html#cb181-26" tabindex="-1"></a>         <span class="at">secteurs=</span><span class="fu">relevel</span>(secteurs, <span class="at">ref=</span><span class="st">&quot;Construction&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb181-27"><a href="13-Modeles-regression.html#cb181-27" tabindex="-1"></a>  <span class="fu">select</span>(mois_publication, salary_cat, CDI, secteurs)</span></code></pre></div>
+<p>De manière traditionnelle, dans les modèles de prédiction ou <em>machine learning</em>, on n’applique pas le modèle sur l’ensemble de la base de données mais d’abord sur un échantillon dit d’apprentissage puis on le “teste” sur l’échantillon restant. On va donc ici suivre ce schéma et diviser notre base de données en deux pour avoir un échantillon d’apprentissage ou d’entraînement, et un autre test.<br />
+<br />
+On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions existent) en lui spécifiant la façon de diviser la base avec l’argument <code>prob=</code> : ici on choisit de diviser notre base selon un rapport 70% <em>vs</em> 30%, autrement dit notre base d’apprentissage comprendra 70% des données de la base initiale, alors que la base de test comprendra les 30% restants. On pourrait procéder à un rapport du type 80% <em>vs</em> 20%, ou 75% <em>vs</em> 25%, etc.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="13-Modeles-regression.html#cb182-1" tabindex="-1"></a><span class="co"># On choisit la façon de diviser notre base et on l&#39;applique en créant 2 bases</span></span>
+<span id="cb182-2"><a href="13-Modeles-regression.html#cb182-2" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="fu">nrow</span>(OffresPE_reg), <span class="at">replace=</span><span class="cn">TRUE</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.70</span>,<span class="fl">0.3</span>))</span>
+<span id="cb182-3"><a href="13-Modeles-regression.html#cb182-3" tabindex="-1"></a>OffresPE_train <span class="ot">&lt;-</span> OffresPE_reg[sample, ]</span>
+<span id="cb182-4"><a href="13-Modeles-regression.html#cb182-4" tabindex="-1"></a>OffresPE_test  <span class="ot">&lt;-</span> OffresPE_reg[<span class="sc">!</span>sample, ]</span>
+<span id="cb182-5"><a href="13-Modeles-regression.html#cb182-5" tabindex="-1"></a></span>
+<span id="cb182-6"><a href="13-Modeles-regression.html#cb182-6" tabindex="-1"></a><span class="co"># On regarde quelle est la taille de nos deux bases</span></span>
+<span id="cb182-7"><a href="13-Modeles-regression.html#cb182-7" tabindex="-1"></a><span class="fu">dim</span>(OffresPE_train)</span></code></pre></div>
+<pre><code>[1] 122974      4</code></pre>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="13-Modeles-regression.html#cb184-1" tabindex="-1"></a><span class="fu">dim</span>(OffresPE_test)</span></code></pre></div>
+<pre><code>[1] 52778     4</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="13-Modeles-regression.html#cb186-1" tabindex="-1"></a><span class="co"># On vérifie que les proportions de notre variable d&#39;intérêt sont assez proches</span></span>
+<span id="cb186-2"><a href="13-Modeles-regression.html#cb186-2" tabindex="-1"></a><span class="co"># entre les deux bases</span></span>
+<span id="cb186-3"><a href="13-Modeles-regression.html#cb186-3" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb186-4"><a href="13-Modeles-regression.html#cb186-4" tabindex="-1"></a>OffresPE_train <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(CDI) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb186-5"><a href="13-Modeles-regression.html#cb186-5" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div>
+<div id="lvatekebpe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lvatekebpe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#lvatekebpe thead, #lvatekebpe tbody, #lvatekebpe tfoot, #lvatekebpe tr, #lvatekebpe td, #lvatekebpe th {
+  border-style: none;
+}
+
+#lvatekebpe p {
+  margin: 0;
+  padding: 0;
+}
+
+#lvatekebpe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#lvatekebpe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lvatekebpe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lvatekebpe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lvatekebpe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lvatekebpe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lvatekebpe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lvatekebpe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lvatekebpe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#lvatekebpe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#lvatekebpe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lvatekebpe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lvatekebpe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lvatekebpe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lvatekebpe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lvatekebpe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#lvatekebpe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#lvatekebpe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#lvatekebpe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lvatekebpe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#lvatekebpe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lvatekebpe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lvatekebpe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lvatekebpe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lvatekebpe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lvatekebpe .gt_left {
+  text-align: left;
+}
+
+#lvatekebpe .gt_center {
+  text-align: center;
+}
+
+#lvatekebpe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lvatekebpe .gt_font_normal {
+  font-weight: normal;
+}
+
+#lvatekebpe .gt_font_bold {
+  font-weight: bold;
+}
+
+#lvatekebpe .gt_font_italic {
+  font-style: italic;
+}
+
+#lvatekebpe .gt_super {
+  font-size: 65%;
+}
+
+#lvatekebpe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#lvatekebpe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#lvatekebpe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#lvatekebpe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#lvatekebpe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#lvatekebpe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#lvatekebpe .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#lvatekebpe .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#lvatekebpe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CDI">CDI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="percent">percent</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="CDI" class="gt_row gt_center">Non</td>
+<td headers="n" class="gt_row gt_right">26939</td>
+<td headers="percent" class="gt_row gt_right">21.9%</td></tr>
+    <tr><td headers="CDI" class="gt_row gt_center">Oui</td>
+<td headers="n" class="gt_row gt_right">96035</td>
+<td headers="percent" class="gt_row gt_right">78.1%</td></tr>
+    <tr><td headers="CDI" class="gt_row gt_center">Total</td>
+<td headers="n" class="gt_row gt_right">122974</td>
+<td headers="percent" class="gt_row gt_right">-</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="13-Modeles-regression.html#cb187-1" tabindex="-1"></a>OffresPE_test <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(CDI) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb187-2"><a href="13-Modeles-regression.html#cb187-2" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div>
+<div id="mltoubsdjp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mltoubsdjp table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mltoubsdjp thead, #mltoubsdjp tbody, #mltoubsdjp tfoot, #mltoubsdjp tr, #mltoubsdjp td, #mltoubsdjp th {
+  border-style: none;
+}
+
+#mltoubsdjp p {
+  margin: 0;
+  padding: 0;
+}
+
+#mltoubsdjp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mltoubsdjp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mltoubsdjp .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mltoubsdjp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mltoubsdjp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mltoubsdjp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mltoubsdjp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mltoubsdjp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mltoubsdjp .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mltoubsdjp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mltoubsdjp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mltoubsdjp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mltoubsdjp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mltoubsdjp .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mltoubsdjp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mltoubsdjp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mltoubsdjp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mltoubsdjp .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mltoubsdjp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mltoubsdjp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mltoubsdjp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mltoubsdjp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mltoubsdjp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mltoubsdjp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mltoubsdjp .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mltoubsdjp .gt_left {
+  text-align: left;
+}
+
+#mltoubsdjp .gt_center {
+  text-align: center;
+}
+
+#mltoubsdjp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mltoubsdjp .gt_font_normal {
+  font-weight: normal;
+}
+
+#mltoubsdjp .gt_font_bold {
+  font-weight: bold;
+}
+
+#mltoubsdjp .gt_font_italic {
+  font-style: italic;
+}
+
+#mltoubsdjp .gt_super {
+  font-size: 65%;
+}
+
+#mltoubsdjp .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mltoubsdjp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mltoubsdjp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mltoubsdjp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mltoubsdjp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mltoubsdjp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mltoubsdjp .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mltoubsdjp .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mltoubsdjp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CDI">CDI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="percent">percent</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="CDI" class="gt_row gt_center">Non</td>
+<td headers="n" class="gt_row gt_right">11614</td>
+<td headers="percent" class="gt_row gt_right">22.0%</td></tr>
+    <tr><td headers="CDI" class="gt_row gt_center">Oui</td>
+<td headers="n" class="gt_row gt_right">41164</td>
+<td headers="percent" class="gt_row gt_right">78.0%</td></tr>
+    <tr><td headers="CDI" class="gt_row gt_center">Total</td>
+<td headers="n" class="gt_row gt_right">52778</td>
+<td headers="percent" class="gt_row gt_right">-</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<p>Les deux bases présentent une répartition CDI/pas CDI très proche : dans le 75, environ 78% des offres d’emploi émises sur le site de Pôle emploi sont en CDI.</p>
+</div>
+<div id="un-modèle-à-visée-principale-explicative-la-régression-logistique" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Un modèle à visée principale explicative : la régression logistique<a href="13-Modeles-regression.html#un-modèle-à-visée-principale-explicative-la-régression-logistique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La fonction <code>glm</code> du package <strong><code>stats</code></strong> (à installer avant appel dans la librarie) est principalement utilisée pour modéliser différents types de régression : l’argument <code>family=binomial("logit")</code> permet d’utiliser un modèle logit.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="13-Modeles-regression.html#cb188-1" tabindex="-1"></a><span class="co"># install.packages(&quot;stats&quot;)</span></span>
+<span id="cb188-2"><a href="13-Modeles-regression.html#cb188-2" tabindex="-1"></a><span class="fu">library</span>(stats)</span></code></pre></div>
+<div id="le-modèle-initial" class="section level3 hasAnchor" number="14.2.1">
+<h3><span class="header-section-number">14.2.1</span> Le modèle initial<a href="13-Modeles-regression.html#le-modèle-initial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>On crée le modèle en spécifiant la variable d’intérêt puis les variables explicatives ou l’ensemble des variables présentes dans la base si nous avons déjà procédé à une sélection des variables : c’est le cas ici donc c’est pour cela que l’on indique juste un “.” après le “~”, sinon on devrait écrire les variables une par une, ou les sctoker dans une liste et appeler la liste.</p>
+<p>Même si ce type modèle doit permettre essentiellement d’expliquer un phénomène, ici qu’une offre d’emploi soit en CDI ou non, on peut l’utiliser aussi pour prédire les données. C’est pourquoi nous appliquons d’abord le logit sur la base (réduite) d’apprentissage.</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="13-Modeles-regression.html#cb189-1" tabindex="-1"></a>logit_1 <span class="ot">&lt;-</span> <span class="fu">glm</span> (CDI <span class="sc">~</span> ., </span>
+<span id="cb189-2"><a href="13-Modeles-regression.html#cb189-2" tabindex="-1"></a>                <span class="at">data=</span>OffresPE_train, </span>
+<span id="cb189-3"><a href="13-Modeles-regression.html#cb189-3" tabindex="-1"></a>                <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb189-4"><a href="13-Modeles-regression.html#cb189-4" tabindex="-1"></a><span class="fu">summary</span>(logit_1)</span></code></pre></div>
+<pre><code>
+Call:
+glm(formula = CDI ~ ., family = binomial(&quot;logit&quot;), data = OffresPE_train)
+
+Coefficients:
+                                                            Estimate Std. Error
+(Intercept)                                                  3.30284    0.13655
+mois_publicationfévr.                                       -0.25382    0.03371
+mois_publicationmars                                        -0.07880    0.03613
+mois_publicationavr.                                        -0.14645    0.04174
+mois_publicationmai                                         -0.46855    0.04010
+mois_publicationjuin                                        -0.58961    0.03522
+mois_publicationjuil.                                       -0.54183    0.03432
+mois_publicationaoût                                        -0.25894    0.03605
+mois_publicationsept.                                       -0.03206    0.03540
+mois_publicationoct.                                         0.04936    0.03561
+mois_publicationnov.                                         0.11797    0.04290
+mois_publicationdéc.                                        -0.13607    0.04339
+salary_catEntre 0 et moins que le SMIC (10€)                -3.14933    0.10333
+salary_catEntre le SMIC et le Q1(11,6€)                     -2.06969    0.07797
+salary_catEntre le Q1 et la moyenne (20,1€)                 -1.61161    0.07219
+salary_catEntre la moyenne et le D9 observée en France(15€) -0.70701    0.07882
+salary_catManquant                                          -2.08996    0.07115
+secteursActivités des ménages en tant qu&#39;employeurs         -5.40917    0.19804
+secteursActivités fi et immo                                 0.13463    0.13391
+secteursActivités services administratifs et soutien        -1.88121    0.11793
+secteursActivités spé, scientifiques et techniques           0.07158    0.12241
+secteursAdministration publique                             -2.23063    0.14778
+secteursArts, spectacles et activités récréatives           -1.45760    0.18371
+secteursAutres activités de service                         -0.61719    0.12883
+secteursCommerce                                             0.05629    0.13115
+secteursEnseignement                                        -2.59656    0.12992
+secteursHébergement/restauration                             0.27528    0.14064
+secteursIndustrie                                            0.16616    0.14587
+secteursInfo/com                                             0.99984    0.13896
+secteursManquant ou U                                        0.81640    0.11836
+secteursSanté humaine et action sociale                     -0.68963    0.12182
+secteursTransports                                          -0.16905    0.19713
+                                                            z value Pr(&gt;|z|)
+(Intercept)                                                  24.187  &lt; 2e-16
+mois_publicationfévr.                                        -7.530 5.09e-14
+mois_publicationmars                                         -2.181 0.029184
+mois_publicationavr.                                         -3.509 0.000451
+mois_publicationmai                                         -11.684  &lt; 2e-16
+mois_publicationjuin                                        -16.743  &lt; 2e-16
+mois_publicationjuil.                                       -15.786  &lt; 2e-16
+mois_publicationaoût                                         -7.183 6.84e-13
+mois_publicationsept.                                        -0.906 0.365186
+mois_publicationoct.                                          1.386 0.165682
+mois_publicationnov.                                          2.750 0.005962
+mois_publicationdéc.                                         -3.136 0.001714
+salary_catEntre 0 et moins que le SMIC (10€)                -30.479  &lt; 2e-16
+salary_catEntre le SMIC et le Q1(11,6€)                     -26.545  &lt; 2e-16
+salary_catEntre le Q1 et la moyenne (20,1€)                 -22.326  &lt; 2e-16
+salary_catEntre la moyenne et le D9 observée en France(15€)  -8.970  &lt; 2e-16
+salary_catManquant                                          -29.375  &lt; 2e-16
+secteursActivités des ménages en tant qu&#39;employeurs         -27.314  &lt; 2e-16
+secteursActivités fi et immo                                  1.005 0.314729
+secteursActivités services administratifs et soutien        -15.951  &lt; 2e-16
+secteursActivités spé, scientifiques et techniques            0.585 0.558742
+secteursAdministration publique                             -15.094  &lt; 2e-16
+secteursArts, spectacles et activités récréatives            -7.934 2.12e-15
+secteursAutres activités de service                          -4.791 1.66e-06
+secteursCommerce                                              0.429 0.667795
+secteursEnseignement                                        -19.986  &lt; 2e-16
+secteursHébergement/restauration                              1.957 0.050304
+secteursIndustrie                                             1.139 0.254658
+secteursInfo/com                                              7.195 6.23e-13
+secteursManquant ou U                                         6.898 5.29e-12
+secteursSanté humaine et action sociale                      -5.661 1.50e-08
+secteursTransports                                           -0.858 0.391125
+                                                               
+(Intercept)                                                 ***
+mois_publicationfévr.                                       ***
+mois_publicationmars                                        *  
+mois_publicationavr.                                        ***
+mois_publicationmai                                         ***
+mois_publicationjuin                                        ***
+mois_publicationjuil.                                       ***
+mois_publicationaoût                                        ***
+mois_publicationsept.                                          
+mois_publicationoct.                                           
+mois_publicationnov.                                        ** 
+mois_publicationdéc.                                        ** 
+salary_catEntre 0 et moins que le SMIC (10€)                ***
+salary_catEntre le SMIC et le Q1(11,6€)                     ***
+salary_catEntre le Q1 et la moyenne (20,1€)                 ***
+salary_catEntre la moyenne et le D9 observée en France(15€) ***
+salary_catManquant                                          ***
+secteursActivités des ménages en tant qu&#39;employeurs         ***
+secteursActivités fi et immo                                   
+secteursActivités services administratifs et soutien        ***
+secteursActivités spé, scientifiques et techniques             
+secteursAdministration publique                             ***
+secteursArts, spectacles et activités récréatives           ***
+secteursAutres activités de service                         ***
+secteursCommerce                                               
+secteursEnseignement                                        ***
+secteursHébergement/restauration                            .  
+secteursIndustrie                                              
+secteursInfo/com                                            ***
+secteursManquant ou U                                       ***
+secteursSanté humaine et action sociale                     ***
+secteursTransports                                             
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 129300  on 122973  degrees of freedom
+Residual deviance: 102653  on 122942  degrees of freedom
+AIC: 102717
+
+Number of Fisher Scoring iterations: 6</code></pre>
+<p>Certaines modalités des variables ne sont pas significatives (voir les étoiles), mais la grande majorité le sont.</p>
+<!--On peut ensuite évaluer la significativité globale du modèle, : -->
+<p>On va donc l’appliquer maintenant à la base test, en créant des indicateurs mesurant le taux de prédiction ou au contraire d’erreur.</p>
+<p>Le modèle <code>predict</code> permet d’abord d’abord de calculer la probabilité qu’une offre d’emploi soit en CDI pour chaque offre, l’argument <code>type="response"</code> permettant d’appliquer le modèle logistique. Il est plus intéressant d’avoir la probabilité d’une variable de type qualitative, “oui”/“non” comme la variable d’intérêt du modèle, il faut donc procéder à une transformation aboutissant à une nouvelle variable (on considère alors que si la probabilité est strictement supérieure à 0.50 alors cela équivaut à une modalité “oui”). Enfin, on crée une matrice de confusion qui est en réalité un tableau croisé entre les valeurs observées et les prédicitions du modèle ; et on calcule un taux d’erreur en rapportant la somme des éléments hors diagonale principale à la somme des observations totales (de la matrice donc).</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="13-Modeles-regression.html#cb191-1" tabindex="-1"></a><span class="co"># Modèle de prédiction pour récupérer les probabilités individuelles d&#39;être en couple</span></span>
+<span id="cb191-2"><a href="13-Modeles-regression.html#cb191-2" tabindex="-1"></a>pred.proba <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_1, <span class="at">newdata =</span> OffresPE_test, <span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb191-3"><a href="13-Modeles-regression.html#cb191-3" tabindex="-1"></a></span>
+<span id="cb191-4"><a href="13-Modeles-regression.html#cb191-4" tabindex="-1"></a><span class="co"># On transforme les probas en variable qualitative</span></span>
+<span id="cb191-5"><a href="13-Modeles-regression.html#cb191-5" tabindex="-1"></a>pred.moda <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">case_when</span>(pred.proba<span class="sc">&gt;</span><span class="fl">0.5</span> <span class="sc">~</span> <span class="st">&quot;oui&quot;</span>, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;non&quot;</span>))</span>
+<span id="cb191-6"><a href="13-Modeles-regression.html#cb191-6" tabindex="-1"></a></span>
+<span id="cb191-7"><a href="13-Modeles-regression.html#cb191-7" tabindex="-1"></a><span class="co"># On crée la matrice de confusion</span></span>
+<span id="cb191-8"><a href="13-Modeles-regression.html#cb191-8" tabindex="-1"></a>matrice_conf <span class="ot">&lt;-</span> <span class="fu">table</span>(OffresPE_test<span class="sc">$</span>CDI, pred.moda)</span>
+<span id="cb191-9"><a href="13-Modeles-regression.html#cb191-9" tabindex="-1"></a>matrice_conf</span></code></pre></div>
+<pre><code>     pred.moda
+        non   oui
+  Non  4452  7162
+  Oui  1528 39636</code></pre>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="13-Modeles-regression.html#cb193-1" tabindex="-1"></a><span class="co"># On calcule le taux d&#39;erreur</span></span>
+<span id="cb193-2"><a href="13-Modeles-regression.html#cb193-2" tabindex="-1"></a>tx_erreur <span class="ot">&lt;-</span> (matrice_conf[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">+</span>matrice_conf[<span class="dv">1</span>,<span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(matrice_conf)</span>
+<span id="cb193-3"><a href="13-Modeles-regression.html#cb193-3" tabindex="-1"></a>tx_erreur <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
+<pre><code>[1] 16.46519</code></pre>
+<p>On voit que parmi la modalité observée “Oui” de la base de données, le modèle prédit environ 39 000 oui soit 96% de cette modalité, c’est la grande majorité ; la prédiction est moins bonne si on regarde la modalité “Non”, puisque environ 4 500 observations, soit 39% de cette modalité, se retrouvent bien en “non”. Le taux d’erreur de 16,3% montre bien néanmoins que le modèle prédit plutôt bien.<br />
+<br />
+</p>
+<p>Une autre façon de faire est d’ajouter, après les deux premières étapes réécrites ici, la variable de prédiction à la table initiale et de créer une nouvelle variable qui indique si on a bien une correspondance entre les modalités des deux variables : l’initiale et celle prédite. Cela nous donne donc le taux d’erreur calculé au-dessus, on retrouve bien 16,3% de correspondances inexactes.</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="13-Modeles-regression.html#cb195-1" tabindex="-1"></a><span class="co"># Modèle de prédiction pour récupérer les probabilités individuelles d&#39;être en couple</span></span>
+<span id="cb195-2"><a href="13-Modeles-regression.html#cb195-2" tabindex="-1"></a><span class="co">#pred.proba &lt;- predict(logit_1, newdata = OffresPE_test, type=&quot;response&quot;)</span></span>
+<span id="cb195-3"><a href="13-Modeles-regression.html#cb195-3" tabindex="-1"></a></span>
+<span id="cb195-4"><a href="13-Modeles-regression.html#cb195-4" tabindex="-1"></a><span class="co"># On transforme les probas en variable qualitative</span></span>
+<span id="cb195-5"><a href="13-Modeles-regression.html#cb195-5" tabindex="-1"></a><span class="co">#pred.moda &lt;- factor(case_when(pred.proba&gt;0.5 ~ &quot;oui&quot;, TRUE ~ &quot;non&quot;))</span></span>
+<span id="cb195-6"><a href="13-Modeles-regression.html#cb195-6" tabindex="-1"></a></span>
+<span id="cb195-7"><a href="13-Modeles-regression.html#cb195-7" tabindex="-1"></a><span class="co"># On ajoute la variable de prédiction dans la table test initiale</span></span>
+<span id="cb195-8"><a href="13-Modeles-regression.html#cb195-8" tabindex="-1"></a>OffresPE_test_bis <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(OffresPE_test, <span class="at">var_predict=</span>pred.moda)</span>
+<span id="cb195-9"><a href="13-Modeles-regression.html#cb195-9" tabindex="-1"></a><span class="co"># et on créer une variable indiquant ou non la correspondance entre</span></span>
+<span id="cb195-10"><a href="13-Modeles-regression.html#cb195-10" tabindex="-1"></a><span class="co"># les modalités des deux variables</span></span>
+<span id="cb195-11"><a href="13-Modeles-regression.html#cb195-11" tabindex="-1"></a>OffresPE_test_bis <span class="sc">%&gt;%</span> </span>
+<span id="cb195-12"><a href="13-Modeles-regression.html#cb195-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predict_OK=</span><span class="fu">as.factor</span>(<span class="fu">case_when</span>(CDI<span class="sc">==</span><span class="st">&quot;Oui&quot;</span> <span class="sc">&amp;</span> var_predict<span class="sc">==</span><span class="st">&quot;oui&quot;</span> <span class="sc">~</span> <span class="st">&quot;oui&quot;</span>, </span>
+<span id="cb195-13"><a href="13-Modeles-regression.html#cb195-13" tabindex="-1"></a>                                        CDI<span class="sc">==</span><span class="st">&quot;Non&quot;</span> <span class="sc">&amp;</span> var_predict<span class="sc">==</span><span class="st">&quot;non&quot;</span> <span class="sc">~</span> <span class="st">&quot;oui&quot;</span>,</span>
+<span id="cb195-14"><a href="13-Modeles-regression.html#cb195-14" tabindex="-1"></a>                                        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;non&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-15"><a href="13-Modeles-regression.html#cb195-15" tabindex="-1"></a>  <span class="fu">tabyl</span>(predict_OK) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> <span class="fu">adorn_totals</span>(<span class="st">&quot;row&quot;</span>)</span></code></pre></div>
+<pre><code># A tibble: 3 × 3
+  predict_OK     n percent
+  &lt;fct&gt;      &lt;dbl&gt; &lt;chr&gt;  
+1 non         8690 16.5%  
+2 oui        44088 83.5%  
+3 Total      52778 -      </code></pre>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="13-Modeles-regression.html#cb197-1" tabindex="-1"></a><span class="co"># On supprime la table créée en test</span></span>
+<span id="cb197-2"><a href="13-Modeles-regression.html#cb197-2" tabindex="-1"></a><span class="fu">rm</span>(OffresPE_test_bis)</span></code></pre></div>
+</div>
+<div id="lévaluation-du-modèle-et-la-recherche-éventuelle-dun-meilleur-modèle" class="section level3 hasAnchor" number="14.2.2">
+<h3><span class="header-section-number">14.2.2</span> L’évaluation du modèle et la recherche éventuelle d’un “meilleur” modèle<a href="13-Modeles-regression.html#lévaluation-du-modèle-et-la-recherche-éventuelle-dun-meilleur-modèle" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>On peut améliorer le modèle en recherchant celui qui est le “meilleur” en faisant une sélection sur les variables, plus précisément en demandant au modèle de choisir les variables les plus explicatives, car peut-être que certaines ne sont pas nécessaires à l’explication du modèle (dans notre cas, nous avons néanmoins vu que toutes les variables étaient significatives donc a priori utiles dans le modèle).</p>
+<p>Pour une sélection “pas à pas”, il faut utiliser le package <strong><code>MASS</code></strong> et la fonction <code>stepAIC</code> car c’est à travers le critère AIC (“Akaike Information Criterion”,) que le modèle va chercher à être “meilleur” : plus il sera faible, meilleur il sera. On va d’abord faire cette sélection de façon “descendante” c’est-à-dire en partant du modèle initial “logit_1” ici : on part du modèle avec l’ensemble des variables et on en supprime une au fur et à mesure pour voir si le modèle est “meilleur”.</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="13-Modeles-regression.html#cb198-1" tabindex="-1"></a><span class="co"># install.packages(&quot;MASS)</span></span>
+<span id="cb198-2"><a href="13-Modeles-regression.html#cb198-2" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb198-3"><a href="13-Modeles-regression.html#cb198-3" tabindex="-1"></a>logit_backward <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(logit_1, </span>
+<span id="cb198-4"><a href="13-Modeles-regression.html#cb198-4" tabindex="-1"></a>                          <span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span><span class="st">&quot;CDI ~ 1&quot;</span>, </span>
+<span id="cb198-5"><a href="13-Modeles-regression.html#cb198-5" tabindex="-1"></a>                          <span class="at">upper=</span><span class="st">&quot;CDI ~ mois_publication + secteurs + salary_cat&quot;</span>),</span>
+<span id="cb198-6"><a href="13-Modeles-regression.html#cb198-6" tabindex="-1"></a>                          <span class="at">direction=</span><span class="st">&quot;backward&quot;</span>)</span></code></pre></div>
+<pre><code>Start:  AIC=102717.3
+CDI ~ mois_publication + salary_cat + secteurs
+
+                   Df Deviance    AIC
+&lt;none&gt;                  102653 102717
+- mois_publication 11   103450 103492
+- salary_cat        5   105034 105088
+- secteurs         15   125365 125399</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="13-Modeles-regression.html#cb200-1" tabindex="-1"></a>logit_backward</span></code></pre></div>
+<pre><code>
+Call:  glm(formula = CDI ~ mois_publication + salary_cat + secteurs, 
+    family = binomial(&quot;logit&quot;), data = OffresPE_train)
+
+Coefficients:
+                                                (Intercept)  
+                                                    3.30284  
+                                      mois_publicationfévr.  
+                                                   -0.25382  
+                                       mois_publicationmars  
+                                                   -0.07880  
+                                       mois_publicationavr.  
+                                                   -0.14645  
+                                        mois_publicationmai  
+                                                   -0.46855  
+                                       mois_publicationjuin  
+                                                   -0.58961  
+                                      mois_publicationjuil.  
+                                                   -0.54183  
+                                       mois_publicationaoût  
+                                                   -0.25894  
+                                      mois_publicationsept.  
+                                                   -0.03206  
+                                       mois_publicationoct.  
+                                                    0.04936  
+                                       mois_publicationnov.  
+                                                    0.11797  
+                                       mois_publicationdéc.  
+                                                   -0.13607  
+               salary_catEntre 0 et moins que le SMIC (10€)  
+                                                   -3.14933  
+                    salary_catEntre le SMIC et le Q1(11,6€)  
+                                                   -2.06969  
+                salary_catEntre le Q1 et la moyenne (20,1€)  
+                                                   -1.61161  
+salary_catEntre la moyenne et le D9 observée en France(15€)  
+                                                   -0.70701  
+                                         salary_catManquant  
+                                                   -2.08996  
+        secteursActivités des ménages en tant qu&#39;employeurs  
+                                                   -5.40917  
+                               secteursActivités fi et immo  
+                                                    0.13463  
+       secteursActivités services administratifs et soutien  
+                                                   -1.88121  
+         secteursActivités spé, scientifiques et techniques  
+                                                    0.07158  
+                            secteursAdministration publique  
+                                                   -2.23063  
+          secteursArts, spectacles et activités récréatives  
+                                                   -1.45760  
+                        secteursAutres activités de service  
+                                                   -0.61719  
+                                           secteursCommerce  
+                                                    0.05629  
+                                       secteursEnseignement  
+                                                   -2.59656  
+                           secteursHébergement/restauration  
+                                                    0.27528  
+                                          secteursIndustrie  
+                                                    0.16616  
+                                           secteursInfo/com  
+                                                    0.99984  
+                                      secteursManquant ou U  
+                                                    0.81640  
+                    secteursSanté humaine et action sociale  
+                                                   -0.68963  
+                                         secteursTransports  
+                                                   -0.16905  
+
+Degrees of Freedom: 122973 Total (i.e. Null);  122942 Residual
+Null Deviance:      129300 
+Residual Deviance: 102700   AIC: 102700</code></pre>
+<p>La sortie n’affiche que le “meilleur” modèle, et c’est donc bien celui qu’on avait mis avec l’ensemble des variables.</p>
+<p>Pour une sélection des variables de façon “ascendante”, en partant d’un modèle sans variable puis on ajoute une à une les variables. On utilise la même fonction mais en changeant les paramètres et en créant un modèle “vide” avant :</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="13-Modeles-regression.html#cb202-1" tabindex="-1"></a>logit_0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(CDI <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>OffresPE_train, <span class="at">family=</span><span class="fu">binomial</span>(<span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb202-2"><a href="13-Modeles-regression.html#cb202-2" tabindex="-1"></a>logit_forward <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(logit_0, </span>
+<span id="cb202-3"><a href="13-Modeles-regression.html#cb202-3" tabindex="-1"></a>                         <span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span><span class="st">&quot;CDI ~ 1&quot;</span>, </span>
+<span id="cb202-4"><a href="13-Modeles-regression.html#cb202-4" tabindex="-1"></a>                         <span class="at">upper=</span><span class="st">&quot;CDI ~ mois_publication + secteurs + salary_cat&quot;</span>),</span>
+<span id="cb202-5"><a href="13-Modeles-regression.html#cb202-5" tabindex="-1"></a>                         <span class="at">direction=</span><span class="st">&quot;forward&quot;</span>)</span></code></pre></div>
+<pre><code>Start:  AIC=129301.5
+CDI ~ 1
+
+                   Df Deviance    AIC
++ secteurs         15   105842 105874
++ salary_cat        5   125917 125929
++ mois_publication 11   128675 128699
+&lt;none&gt;                  129300 129302
+
+Step:  AIC=105874.4
+CDI ~ secteurs
+
+                   Df Deviance    AIC
++ salary_cat        5   103450 103492
++ mois_publication 11   105034 105088
+&lt;none&gt;                  105842 105874
+
+Step:  AIC=103491.9
+CDI ~ secteurs + salary_cat
+
+                   Df Deviance    AIC
++ mois_publication 11   102653 102717
+&lt;none&gt;                  103450 103492
+
+Step:  AIC=102717.3
+CDI ~ secteurs + salary_cat + mois_publication</code></pre>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="13-Modeles-regression.html#cb204-1" tabindex="-1"></a>logit_forward</span></code></pre></div>
+<pre><code>
+Call:  glm(formula = CDI ~ secteurs + salary_cat + mois_publication, 
+    family = binomial(&quot;logit&quot;), data = OffresPE_train)
+
+Coefficients:
+                                                (Intercept)  
+                                                    3.30284  
+        secteursActivités des ménages en tant qu&#39;employeurs  
+                                                   -5.40917  
+                               secteursActivités fi et immo  
+                                                    0.13463  
+       secteursActivités services administratifs et soutien  
+                                                   -1.88121  
+         secteursActivités spé, scientifiques et techniques  
+                                                    0.07158  
+                            secteursAdministration publique  
+                                                   -2.23063  
+          secteursArts, spectacles et activités récréatives  
+                                                   -1.45760  
+                        secteursAutres activités de service  
+                                                   -0.61719  
+                                           secteursCommerce  
+                                                    0.05629  
+                                       secteursEnseignement  
+                                                   -2.59656  
+                           secteursHébergement/restauration  
+                                                    0.27528  
+                                          secteursIndustrie  
+                                                    0.16616  
+                                           secteursInfo/com  
+                                                    0.99984  
+                                      secteursManquant ou U  
+                                                    0.81640  
+                    secteursSanté humaine et action sociale  
+                                                   -0.68963  
+                                         secteursTransports  
+                                                   -0.16905  
+               salary_catEntre 0 et moins que le SMIC (10€)  
+                                                   -3.14933  
+                    salary_catEntre le SMIC et le Q1(11,6€)  
+                                                   -2.06969  
+                salary_catEntre le Q1 et la moyenne (20,1€)  
+                                                   -1.61161  
+salary_catEntre la moyenne et le D9 observée en France(15€)  
+                                                   -0.70701  
+                                         salary_catManquant  
+                                                   -2.08996  
+                                      mois_publicationfévr.  
+                                                   -0.25382  
+                                       mois_publicationmars  
+                                                   -0.07880  
+                                       mois_publicationavr.  
+                                                   -0.14645  
+                                        mois_publicationmai  
+                                                   -0.46855  
+                                       mois_publicationjuin  
+                                                   -0.58961  
+                                      mois_publicationjuil.  
+                                                   -0.54183  
+                                       mois_publicationaoût  
+                                                   -0.25894  
+                                      mois_publicationsept.  
+                                                   -0.03206  
+                                       mois_publicationoct.  
+                                                    0.04936  
+                                       mois_publicationnov.  
+                                                    0.11797  
+                                       mois_publicationdéc.  
+                                                   -0.13607  
+
+Degrees of Freedom: 122973 Total (i.e. Null);  122942 Residual
+Null Deviance:      129300 
+Residual Deviance: 102700   AIC: 102700</code></pre>
+<p>Le taux d’AIC diminue à chaque variable ajoutée donc le meilleur modèle est bien celui avec l’ensemble des variables explicatives mises dans le modèle initial.</p>
+</div>
+<div id="le-modèle-final-et-linterprétation-des-résultats" class="section level3 hasAnchor" number="14.2.3">
+<h3><span class="header-section-number">14.2.3</span> Le modèle final et l’interprétation des résultats<a href="13-Modeles-regression.html#le-modèle-final-et-linterprétation-des-résultats" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Finalement, dans une visée plus explicative que prédictive, on peut estimer notre modèle sur l’ensemble de la base et étudier plus précisément les résultats avec les <em>odds-ratios</em> ou rapports des côtes par exemple pour commenter plus directement les coefficients. Ces <em>odds-ratios</em> correspondent à l’exponentiel des coefficients initiaux de la régression. Ils se lisent par rapport à 1 : il est égale à 1 si les deux côtes sont identiques donc s’il n’y a pas de différence de probabilité d’être en couple selon qu’on est une femme ou un homme, il est supérieur à 1 si ici la femme a une probabilité supérieure à celle de l’homme d’être en couple, et il est inférieur à 1 si la femme a une probabilité inférieure à celle de l’homme d’être en couple.</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="13-Modeles-regression.html#cb206-1" tabindex="-1"></a>logit_VF <span class="ot">&lt;-</span> <span class="fu">glm</span> (CDI <span class="sc">~</span> mois_publication <span class="sc">+</span> secteurs <span class="sc">+</span> salary_cat,</span>
+<span id="cb206-2"><a href="13-Modeles-regression.html#cb206-2" tabindex="-1"></a>                 <span class="at">data=</span>OffresPE_reg, </span>
+<span id="cb206-3"><a href="13-Modeles-regression.html#cb206-3" tabindex="-1"></a>                 <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb206-4"><a href="13-Modeles-regression.html#cb206-4" tabindex="-1"></a><span class="fu">summary</span>(logit_VF)</span></code></pre></div>
+<pre><code>
+Call:
+glm(formula = CDI ~ mois_publication + secteurs + salary_cat, 
+    family = binomial(&quot;logit&quot;), data = OffresPE_reg)
+
+Coefficients:
+                                                            Estimate Std. Error
+(Intercept)                                                  3.30673    0.11585
+mois_publicationfévr.                                       -0.24908    0.02816
+mois_publicationmars                                        -0.08524    0.03020
+mois_publicationavr.                                        -0.14646    0.03481
+mois_publicationmai                                         -0.45003    0.03357
+mois_publicationjuin                                        -0.60182    0.02931
+mois_publicationjuil.                                       -0.51350    0.02867
+mois_publicationaoût                                        -0.24974    0.03016
+mois_publicationsept.                                       -0.03271    0.02954
+mois_publicationoct.                                         0.03961    0.02967
+mois_publicationnov.                                         0.12577    0.03593
+mois_publicationdéc.                                        -0.11366    0.03626
+secteursActivités des ménages en tant qu&#39;employeurs         -5.48264    0.16836
+secteursActivités fi et immo                                 0.05110    0.11449
+secteursActivités services administratifs et soutien        -1.93861    0.10134
+secteursActivités spé, scientifiques et techniques          -0.01354    0.10502
+secteursAdministration publique                             -2.43852    0.12611
+secteursArts, spectacles et activités récréatives           -1.55449    0.15529
+secteursAutres activités de service                         -0.77519    0.11004
+secteursCommerce                                            -0.07379    0.11183
+secteursEnseignement                                        -2.68939    0.11108
+secteursHébergement/restauration                             0.21497    0.12019
+secteursIndustrie                                            0.09105    0.12412
+secteursInfo/com                                             0.98224    0.11908
+secteursManquant ou U                                        0.74977    0.10171
+secteursSanté humaine et action sociale                     -0.76999    0.10452
+secteursTransports                                          -0.36389    0.16240
+salary_catEntre 0 et moins que le SMIC (10€)                -3.01973    0.08535
+salary_catEntre le SMIC et le Q1(11,6€)                     -1.98965    0.06406
+salary_catEntre le Q1 et la moyenne (20,1€)                 -1.52589    0.05904
+salary_catEntre la moyenne et le D9 observée en France(15€) -0.60418    0.06489
+salary_catManquant                                          -2.03923    0.05817
+                                                            z value Pr(&gt;|z|)
+(Intercept)                                                  28.542  &lt; 2e-16
+mois_publicationfévr.                                        -8.845  &lt; 2e-16
+mois_publicationmars                                         -2.822 0.004771
+mois_publicationavr.                                         -4.207 2.59e-05
+mois_publicationmai                                         -13.407  &lt; 2e-16
+mois_publicationjuin                                        -20.530  &lt; 2e-16
+mois_publicationjuil.                                       -17.912  &lt; 2e-16
+mois_publicationaoût                                         -8.279  &lt; 2e-16
+mois_publicationsept.                                        -1.107 0.268212
+mois_publicationoct.                                          1.335 0.181851
+mois_publicationnov.                                          3.501 0.000464
+mois_publicationdéc.                                         -3.135 0.001720
+secteursActivités des ménages en tant qu&#39;employeurs         -32.566  &lt; 2e-16
+secteursActivités fi et immo                                  0.446 0.655354
+secteursActivités services administratifs et soutien        -19.131  &lt; 2e-16
+secteursActivités spé, scientifiques et techniques           -0.129 0.897432
+secteursAdministration publique                             -19.336  &lt; 2e-16
+secteursArts, spectacles et activités récréatives           -10.010  &lt; 2e-16
+secteursAutres activités de service                          -7.044 1.86e-12
+secteursCommerce                                             -0.660 0.509362
+secteursEnseignement                                        -24.212  &lt; 2e-16
+secteursHébergement/restauration                              1.789 0.073682
+secteursIndustrie                                             0.734 0.463181
+secteursInfo/com                                              8.248  &lt; 2e-16
+secteursManquant ou U                                         7.371 1.69e-13
+secteursSanté humaine et action sociale                      -7.367 1.75e-13
+secteursTransports                                           -2.241 0.025049
+salary_catEntre 0 et moins que le SMIC (10€)                -35.381  &lt; 2e-16
+salary_catEntre le SMIC et le Q1(11,6€)                     -31.059  &lt; 2e-16
+salary_catEntre le Q1 et la moyenne (20,1€)                 -25.843  &lt; 2e-16
+salary_catEntre la moyenne et le D9 observée en France(15€)  -9.311  &lt; 2e-16
+salary_catManquant                                          -35.054  &lt; 2e-16
+                                                               
+(Intercept)                                                 ***
+mois_publicationfévr.                                       ***
+mois_publicationmars                                        ** 
+mois_publicationavr.                                        ***
+mois_publicationmai                                         ***
+mois_publicationjuin                                        ***
+mois_publicationjuil.                                       ***
+mois_publicationaoût                                        ***
+mois_publicationsept.                                          
+mois_publicationoct.                                           
+mois_publicationnov.                                        ***
+mois_publicationdéc.                                        ** 
+secteursActivités des ménages en tant qu&#39;employeurs         ***
+secteursActivités fi et immo                                   
+secteursActivités services administratifs et soutien        ***
+secteursActivités spé, scientifiques et techniques             
+secteursAdministration publique                             ***
+secteursArts, spectacles et activités récréatives           ***
+secteursAutres activités de service                         ***
+secteursCommerce                                               
+secteursEnseignement                                        ***
+secteursHébergement/restauration                            .  
+secteursIndustrie                                              
+secteursInfo/com                                            ***
+secteursManquant ou U                                       ***
+secteursSanté humaine et action sociale                     ***
+secteursTransports                                          *  
+salary_catEntre 0 et moins que le SMIC (10€)                ***
+salary_catEntre le SMIC et le Q1(11,6€)                     ***
+salary_catEntre le Q1 et la moyenne (20,1€)                 ***
+salary_catEntre la moyenne et le D9 observée en France(15€) ***
+salary_catManquant                                          ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 184925  on 175751  degrees of freedom
+Residual deviance: 147114  on 175720  degrees of freedom
+AIC: 147178
+
+Number of Fisher Scoring iterations: 6</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="13-Modeles-regression.html#cb208-1" tabindex="-1"></a><span class="co"># Résumé des résultats sous forme de tableau avec les odds-ratio</span></span>
+<span id="cb208-2"><a href="13-Modeles-regression.html#cb208-2" tabindex="-1"></a><span class="co"># avec la librairie &quot;questionr&quot; d&#39;abord</span></span>
+<span id="cb208-3"><a href="13-Modeles-regression.html#cb208-3" tabindex="-1"></a><span class="co">#install.packages(questionr)</span></span>
+<span id="cb208-4"><a href="13-Modeles-regression.html#cb208-4" tabindex="-1"></a><span class="fu">library</span>(questionr)</span>
+<span id="cb208-5"><a href="13-Modeles-regression.html#cb208-5" tabindex="-1"></a><span class="fu">odds.ratio</span>(logit_VF)</span></code></pre></div>
+<pre><code># A tibble: 32 × 4
+       OR `2.5 %` `97.5 %`         p
+    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 27.3    21.8     34.4   3.51e-179
+ 2  0.780   0.738    0.824 9.13e- 19
+ 3  0.918   0.866    0.974 4.77e-  3
+ 4  0.864   0.807    0.925 2.59e-  5
+ 5  0.638   0.597    0.681 5.52e- 41
+ 6  0.548   0.517    0.580 1.16e- 93
+ 7  0.598   0.566    0.633 9.48e- 72
+ 8  0.779   0.734    0.826 1.24e- 16
+ 9  0.968   0.913    1.03  2.68e-  1
+10  1.04    0.982    1.10  1.82e-  1
+# ℹ 22 more rows</code></pre>
+<!-- ![ ](images/Graphique_Odds-ratio.png) -->
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="13-Modeles-regression.html#cb210-1" tabindex="-1"></a><span class="co"># puis avec la librarie &quot;forestmodel&quot; pour avoir un meilleur rendu</span></span>
+<span id="cb210-2"><a href="13-Modeles-regression.html#cb210-2" tabindex="-1"></a><span class="co">#install.packages(&quot;forestmodel&quot;)</span></span>
+<span id="cb210-3"><a href="13-Modeles-regression.html#cb210-3" tabindex="-1"></a><span class="fu">library</span>(forestmodel)</span>
+<span id="cb210-4"><a href="13-Modeles-regression.html#cb210-4" tabindex="-1"></a><span class="fu">forest_model</span>(logit_VF, </span>
+<span id="cb210-5"><a href="13-Modeles-regression.html#cb210-5" tabindex="-1"></a>             <span class="at">format_options =</span> <span class="fu">forest_model_format_options</span>(<span class="at">point_size=</span><span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb210-6"><a href="13-Modeles-regression.html#cb210-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">7</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>))</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-134-1.svg" width="672" />
+<!-- ![ ](images/Graphique_Forest_model.png) --></p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="13-Modeles-regression.html#cb211-1" tabindex="-1"></a><span class="co"># ou encore avec &quot;gt_summary&quot; pour avoir un autre rendu</span></span>
+<span id="cb211-2"><a href="13-Modeles-regression.html#cb211-2" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb211-3"><a href="13-Modeles-regression.html#cb211-3" tabindex="-1"></a><span class="fu">theme_gtsummary_language</span>(<span class="st">&quot;fr&quot;</span>, <span class="at">decimal.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">big.mark=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb211-4"><a href="13-Modeles-regression.html#cb211-4" tabindex="-1"></a>logit_VF <span class="sc">%&gt;%</span> </span>
+<span id="cb211-5"><a href="13-Modeles-regression.html#cb211-5" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb211-6"><a href="13-Modeles-regression.html#cb211-6" tabindex="-1"></a>  <span class="fu">add_global_p</span>(<span class="at">keep=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb211-7"><a href="13-Modeles-regression.html#cb211-7" tabindex="-1"></a>  <span class="fu">modify_header</span>(label <span class="sc">~</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb211-8"><a href="13-Modeles-regression.html#cb211-8" tabindex="-1"></a>  <span class="fu">modify_caption</span>(<span class="st">&quot;**Tableau de résultats. Variables expliquant le fait qu&#39;une offre d&#39;emploi soit en CDI dans le 75**&quot;</span>)</span></code></pre></div>
+<div id="htbdzummii" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#htbdzummii table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#htbdzummii thead, #htbdzummii tbody, #htbdzummii tfoot, #htbdzummii tr, #htbdzummii td, #htbdzummii th {
+  border-style: none;
+}
+
+#htbdzummii p {
+  margin: 0;
+  padding: 0;
+}
+
+#htbdzummii .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#htbdzummii .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#htbdzummii .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#htbdzummii .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#htbdzummii .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#htbdzummii .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htbdzummii .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#htbdzummii .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#htbdzummii .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#htbdzummii .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#htbdzummii .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#htbdzummii .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#htbdzummii .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#htbdzummii .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#htbdzummii .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#htbdzummii .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#htbdzummii .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#htbdzummii .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#htbdzummii .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htbdzummii .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#htbdzummii .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#htbdzummii .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#htbdzummii .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htbdzummii .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#htbdzummii .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#htbdzummii .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htbdzummii .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htbdzummii .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#htbdzummii .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htbdzummii .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#htbdzummii .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#htbdzummii .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#htbdzummii .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htbdzummii .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#htbdzummii .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#htbdzummii .gt_left {
+  text-align: left;
+}
+
+#htbdzummii .gt_center {
+  text-align: center;
+}
+
+#htbdzummii .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#htbdzummii .gt_font_normal {
+  font-weight: normal;
+}
+
+#htbdzummii .gt_font_bold {
+  font-weight: bold;
+}
+
+#htbdzummii .gt_font_italic {
+  font-style: italic;
+}
+
+#htbdzummii .gt_super {
+  font-size: 65%;
+}
+
+#htbdzummii .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#htbdzummii .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#htbdzummii .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#htbdzummii .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#htbdzummii .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#htbdzummii .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#htbdzummii .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#htbdzummii .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#htbdzummii div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <caption><span id="tab:unnamed-chunk-135">Table 14.1: </span><span class='gt_from_md'><strong>Tableau de résultats. Variables expliquant le fait qu’une offre d’emploi soit en CDI dans le 75</strong></span></caption>
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class='gt_from_md'><strong>Variable</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class='gt_from_md'><strong>OR</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class='gt_from_md'><strong>95% IC</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class='gt_from_md'><strong>p-valeur</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">mois_publication</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    janv.</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    févr.</td>
+<td headers="estimate" class="gt_row gt_center">0,78</td>
+<td headers="conf.low" class="gt_row gt_center">0,74 – 0,82</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    mars</td>
+<td headers="estimate" class="gt_row gt_center">0,92</td>
+<td headers="conf.low" class="gt_row gt_center">0,87 – 0,97</td>
+<td headers="p.value" class="gt_row gt_center">0,005</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    avr.</td>
+<td headers="estimate" class="gt_row gt_center">0,86</td>
+<td headers="conf.low" class="gt_row gt_center">0,81 – 0,92</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    mai</td>
+<td headers="estimate" class="gt_row gt_center">0,64</td>
+<td headers="conf.low" class="gt_row gt_center">0,60 – 0,68</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    juin</td>
+<td headers="estimate" class="gt_row gt_center">0,55</td>
+<td headers="conf.low" class="gt_row gt_center">0,52 – 0,58</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    juil.</td>
+<td headers="estimate" class="gt_row gt_center">0,60</td>
+<td headers="conf.low" class="gt_row gt_center">0,57 – 0,63</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    août</td>
+<td headers="estimate" class="gt_row gt_center">0,78</td>
+<td headers="conf.low" class="gt_row gt_center">0,73 – 0,83</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    sept.</td>
+<td headers="estimate" class="gt_row gt_center">0,97</td>
+<td headers="conf.low" class="gt_row gt_center">0,91 – 1,03</td>
+<td headers="p.value" class="gt_row gt_center">0,3</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    oct.</td>
+<td headers="estimate" class="gt_row gt_center">1,04</td>
+<td headers="conf.low" class="gt_row gt_center">0,98 – 1,10</td>
+<td headers="p.value" class="gt_row gt_center">0,2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    nov.</td>
+<td headers="estimate" class="gt_row gt_center">1,13</td>
+<td headers="conf.low" class="gt_row gt_center">1,06 – 1,22</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    déc.</td>
+<td headers="estimate" class="gt_row gt_center">0,89</td>
+<td headers="conf.low" class="gt_row gt_center">0,83 – 0,96</td>
+<td headers="p.value" class="gt_row gt_center">0,002</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">secteurs</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Construction</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Activités des ménages en tant qu'employeurs</td>
+<td headers="estimate" class="gt_row gt_center">0,00</td>
+<td headers="conf.low" class="gt_row gt_center">0,00 – 0,01</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Activités fi et immo</td>
+<td headers="estimate" class="gt_row gt_center">1,05</td>
+<td headers="conf.low" class="gt_row gt_center">0,84 – 1,31</td>
+<td headers="p.value" class="gt_row gt_center">0,7</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Activités services administratifs et soutien</td>
+<td headers="estimate" class="gt_row gt_center">0,14</td>
+<td headers="conf.low" class="gt_row gt_center">0,12 – 0,17</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Activités spé, scientifiques et techniques</td>
+<td headers="estimate" class="gt_row gt_center">0,99</td>
+<td headers="conf.low" class="gt_row gt_center">0,80 – 1,21</td>
+<td headers="p.value" class="gt_row gt_center">0,9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Administration publique</td>
+<td headers="estimate" class="gt_row gt_center">0,09</td>
+<td headers="conf.low" class="gt_row gt_center">0,07 – 0,11</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Arts, spectacles et activités récréatives</td>
+<td headers="estimate" class="gt_row gt_center">0,21</td>
+<td headers="conf.low" class="gt_row gt_center">0,16 – 0,29</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Autres activités de service</td>
+<td headers="estimate" class="gt_row gt_center">0,46</td>
+<td headers="conf.low" class="gt_row gt_center">0,37 – 0,57</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Commerce</td>
+<td headers="estimate" class="gt_row gt_center">0,93</td>
+<td headers="conf.low" class="gt_row gt_center">0,74 – 1,15</td>
+<td headers="p.value" class="gt_row gt_center">0,5</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Enseignement</td>
+<td headers="estimate" class="gt_row gt_center">0,07</td>
+<td headers="conf.low" class="gt_row gt_center">0,05 – 0,08</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Hébergement/restauration</td>
+<td headers="estimate" class="gt_row gt_center">1,24</td>
+<td headers="conf.low" class="gt_row gt_center">0,98 – 1,57</td>
+<td headers="p.value" class="gt_row gt_center">0,074</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Industrie</td>
+<td headers="estimate" class="gt_row gt_center">1,10</td>
+<td headers="conf.low" class="gt_row gt_center">0,86 – 1,39</td>
+<td headers="p.value" class="gt_row gt_center">0,5</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Info/com</td>
+<td headers="estimate" class="gt_row gt_center">2,67</td>
+<td headers="conf.low" class="gt_row gt_center">2,11 – 3,37</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Manquant ou U</td>
+<td headers="estimate" class="gt_row gt_center">2,12</td>
+<td headers="conf.low" class="gt_row gt_center">1,73 – 2,57</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Santé humaine et action sociale</td>
+<td headers="estimate" class="gt_row gt_center">0,46</td>
+<td headers="conf.low" class="gt_row gt_center">0,38 – 0,57</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Transports</td>
+<td headers="estimate" class="gt_row gt_center">0,69</td>
+<td headers="conf.low" class="gt_row gt_center">0,51 – 0,96</td>
+<td headers="p.value" class="gt_row gt_center">0,025</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">salary_cat</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Entre le D9 et le maximum (40200€)</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Entre 0 et moins que le SMIC (10€)</td>
+<td headers="estimate" class="gt_row gt_center">0,05</td>
+<td headers="conf.low" class="gt_row gt_center">0,04 – 0,06</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Entre le SMIC et le Q1(11,6€)</td>
+<td headers="estimate" class="gt_row gt_center">0,14</td>
+<td headers="conf.low" class="gt_row gt_center">0,12 – 0,15</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Entre le Q1 et la moyenne (20,1€)</td>
+<td headers="estimate" class="gt_row gt_center">0,22</td>
+<td headers="conf.low" class="gt_row gt_center">0,19 – 0,24</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Entre la moyenne et le D9 observée en France(15€)</td>
+<td headers="estimate" class="gt_row gt_center">0,55</td>
+<td headers="conf.low" class="gt_row gt_center">0,48 – 0,62</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Manquant</td>
+<td headers="estimate" class="gt_row gt_center">0,13</td>
+<td headers="conf.low" class="gt_row gt_center">0,12 – 0,15</td>
+<td headers="p.value" class="gt_row gt_center"><0,001</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="4"><span class='gt_from_md'>Abréviations: IC = intervalle de confiance, OR = rapport de cotes</span></td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+<p>On privilégiera plutôt les deux derniers types de tableaux : ainsi, on note que la probabilité qu’une offre d’emploi soit en CDI est 1,24 fois plus élevée si l’emploi est dans le secteur de l’hébergement/restauration et 2,67 fois plus élevée dans le secteur de l’information/communication. Concernant le salaire, par rapport à la référence “Entre le D9 et le maximum (40200€)”, si l’offre d’emploi se situe dans une tranche de salaire plus faible, alors la probabilité que cette offre soit en CDI est plus faible, de 0,05 fois à 0,55 fois, soit une baisse de 45% <code>((1-0,55)*100)</code> à 95% <code>((1-0,05)*100)</code>. Par rapport au mois de janvier, là aussi, la probabilité qu’une offre d’emploi soit en CDI est plus faible pour tous les autres mois sauf novembre, les odds-ratio étant toujours inférieurs à 1.</p>
+<p>On peut aussi vouloir visualiser ces résultats, on peut pour cela utiliser la librarie <strong><code>GGally</code></strong> et la fonction <code>ggcoef_model()</code>.</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="13-Modeles-regression.html#cb212-1" tabindex="-1"></a><span class="co"># Résumé des résultats sous forme graphqiue</span></span>
+<span id="cb212-2"><a href="13-Modeles-regression.html#cb212-2" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb212-3"><a href="13-Modeles-regression.html#cb212-3" tabindex="-1"></a><span class="fu">ggcoef_model</span>(logit_VF, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb212-4"><a href="13-Modeles-regression.html#cb212-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Variables expliquant le fait </span><span class="sc">\n</span><span class="st">qu&#39;une offre d&#39;emploi soit en </span><span class="sc">\n</span><span class="st">CDI dans le 75&quot;</span>)<span class="sc">+</span></span>
+<span id="cb212-5"><a href="13-Modeles-regression.html#cb212-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>))</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-136-1.svg" width="672" />
+C’est peut-être le meilleur rendu…</p>
+</div>
+</div>
+<div id="un-modèle-à-visée-principale-prédictive-labre-de-décision" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Un modèle à visée principale prédictive : l’abre de décision<a href="13-Modeles-regression.html#un-modèle-à-visée-principale-prédictive-labre-de-décision" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On va procéder à la même analyse en cherchant, cette fois, à prédire si une offre d’emploi sera en CDI ou non à partir des variables sélectionnées précédemment.<br />
+On repart donc des deux tables créées et on va utiliser un modèle dit d’apprentissage supervisé, l’abre de décision. Sa construction repose sur un partitionnement récursif des observations qui se fait à partir de noeuds coupés, ces coupures pourront répondre à des règles et des conditions à spécifier ou faire varier pour avoir un meilleur modèle.<br />
+Ici on va utiliser un arbre de classification puisque notre variable est qualitative (binaire).</p>
+<p>C’est le package <strong><code>rpart</code></strong> qui est spécialisé dans les modèles d’arbres de décision, à installer donc d’abord puis à appeler dans la librairie ; le package <strong><code>rpart.plot</code></strong> permet, lui, d’avoir un arbre plus esthétique et informatif.</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="13-Modeles-regression.html#cb213-1" tabindex="-1"></a><span class="co"># install.packages(&quot;rpart&quot;)</span></span>
+<span id="cb213-2"><a href="13-Modeles-regression.html#cb213-2" tabindex="-1"></a><span class="co"># install.packages(&quot;rpart.plot&quot;)</span></span>
+<span id="cb213-3"><a href="13-Modeles-regression.html#cb213-3" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb213-4"><a href="13-Modeles-regression.html#cb213-4" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span></code></pre></div>
+<div id="le-modèle-initial-1" class="section level3 hasAnchor" number="14.3.1">
+<h3><span class="header-section-number">14.3.1</span> Le modèle initial<a href="13-Modeles-regression.html#le-modèle-initial-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La spécification du modèle est assez simple, on précise la variable d’intérêt, les éventuelles variables explicatives ou toutes celles qui sont dans la table avec le <code>.</code> (comme précédemment pour le modèle logit), la base de données sur laquelle appliquer le modèle, et dans l’argument <code>method=</code> on spécifie le type de modèle, soit “class” pour une variable d’intérêt qualitative ou binaire, soit “anova” pour une variable d’intérêt quantitative ou continue.</p>
+<p>On va d’abord appliquer le modèle sur notre échantillon d’apprentissage ou d’entraînement :</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="13-Modeles-regression.html#cb214-1" tabindex="-1"></a>arbre_1 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(CDI <span class="sc">~</span> ., </span>
+<span id="cb214-2"><a href="13-Modeles-regression.html#cb214-2" tabindex="-1"></a>                 <span class="at">data=</span>OffresPE_train, </span>
+<span id="cb214-3"><a href="13-Modeles-regression.html#cb214-3" tabindex="-1"></a>                 <span class="at">method=</span><span class="st">&quot;class&quot;</span>)</span>
+<span id="cb214-4"><a href="13-Modeles-regression.html#cb214-4" tabindex="-1"></a>arbre_1</span></code></pre></div>
+<pre><code>n= 122974 
+
+node), split, n, loss, yval, (yprob)
+      * denotes terminal node
+
+ 1) root 122974 26939 Oui (0.2190626 0.7809374)  
+   2) secteurs=Activités des ménages en tant qu&#39;employeurs,Activités services administratifs et soutien,Administration publique,Arts, spectacles et activités récréatives,Enseignement 16241  5184 Non (0.6808078 0.3191922)  
+     4) salary_cat=Entre 0 et moins que le SMIC (10€),Manquant 7949   934 Non (0.8825009 0.1174991) *
+     5) salary_cat=Entre le D9 et le maximum (40200€),Entre le SMIC et le Q1(11,6€),Entre le Q1 et la moyenne (20,1€),Entre la moyenne et le D9 observée en France(15€) 8292  4042 Oui (0.4874578 0.5125422)  
+      10) salary_cat=Entre le SMIC et le Q1(11,6€),Entre le Q1 et la moyenne (20,1€) 5616  2373 Non (0.5774573 0.4225427) *
+      11) salary_cat=Entre le D9 et le maximum (40200€),Entre la moyenne et le D9 observée en France(15€) 2676   799 Oui (0.2985800 0.7014200) *
+   3) secteurs=Construction,Activités fi et immo,Activités spé, scientifiques et techniques,Autres activités de service,Commerce,Hébergement/restauration,Industrie,Info/com,Manquant ou U,Santé humaine et action sociale,Transports 106733 15882 Oui (0.1488012 0.8511988) *</code></pre>
+<p>Le modèle nous donne d’abord les résultats en format texte, ce sont des indications sur les différentes “noeuds” puis “branches” de l’arbre, etc. : “node” pour noeud et son numéro, “split” pour la condition de coupure/le critère de décision, “n” pour le nombre total d’observations dans un noeud, “loss” le nombre d’observations qui n’appartient pas à la modalité prédite, “yval” la modalité prédite pour les individus présents à l’étape du noeud, et “yprob” la proportion d’observations pour les individus présents à l’étape du noeud qui prend la valeur prédite en seconde position. Le petit astérix “*” précise que le noeud est une feuille (“terminal”).</p>
+<p>Par exemple, ici le premier noeud indiqué “root” représente l’ensemble de l’échantillon (c’est la “racine” de l’arbre), soit environ 123 000 observations, et comme la modalité prédite est “Oui”, il y a 78% d’offres d’emploi qui sont en CDI, contre 22% qui le sont pas soit environ 27 000 observations (celles qu’on perd à cette étape donc). La première variable discriminante est le secteur d’activité : celles qui se situent dans les secteurs “Activités des ménages en tant qu’employeurs”, ou “Activités services administratifs et soutien”, ou “Administration publique”, ou “Arts, spectacles et activités récréatives”, ou encore “Enseignement” forment une première branche et un groupe d’offres qui ne sont pas en CDI, alors que les secteurs de la “Construction”, ou des “Activités fi et immo”, ou des “Activités spé, scientifiques et techniques”, ou des “Autres activités de service”, ou du “Commerce”, ou de l’“Hébergement/restauration”, ou de l’“Industrie”, ou de l’“Info/com”, ou “manquant ou U”, ou de la “Santé humaine et action sociale”, et enfin des “Transports” forment l’autre branche et un groupe d’offres en CDI. Ensuite, pour le premier groupe de secteurs, une autre division se forme selon le niveau de salaire : si l’offre propose un salaire “Entre 0 et moins que le SMIC (10€)” ou est manquant un autre groupe va se former qui ne sera pas en CDI, alors que si l’offre propose un salaire au-dessus du SMIC alors l’offre sera en CDI, ce dernier groupe se divisera lui-même encore en deux groupes selon d’autres modalités du salaire.</p>
+<p>On peut regarder quelles sont les variables les plus importantes dans le modèle par ordre :</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="13-Modeles-regression.html#cb216-1" tabindex="-1"></a>arbre_1<span class="sc">$</span>variable.importance</span></code></pre></div>
+<pre><code>        secteurs       salary_cat mois_publication 
+      8459.86781       1548.62245         92.63391 </code></pre>
+<p>Le secteur d’activité est la variable la plus discriminante, comme on l’avait supposé puisque c’était la première variable qui divisait notre échantillon, ensuite vient le niveau de salaire et enfin le mois de publication de l’offre.<br />
+<br />
+</p>
+<p>On va mieux étudier cela avec le résultat visuel.<br />
+Pour avoir ainsi graphiquement l’arbre, il faut appeler la fonction <code>rpart.plot()</code> du même package, l’argument “extra” permettant de préciser le type de modèle : “106” pour des modèles en classes avec une variable qualitative et binaire, “104” pour des modèles en classes mais avec une variable d’intérêt qualitative avec plus de 2 modalités, et “100” pour les autres modèles.</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="13-Modeles-regression.html#cb218-1" tabindex="-1"></a><span class="co"># On dessine l&#39;arbre</span></span>
+<span id="cb218-2"><a href="13-Modeles-regression.html#cb218-2" tabindex="-1"></a><span class="fu">rpart.plot</span>(arbre_1, <span class="at">extra=</span><span class="dv">106</span>,</span>
+<span id="cb218-3"><a href="13-Modeles-regression.html#cb218-3" tabindex="-1"></a>           <span class="at">faclen =</span> <span class="dv">8</span>,  <span class="co"># abrège les modalités de variables</span></span>
+<span id="cb218-4"><a href="13-Modeles-regression.html#cb218-4" tabindex="-1"></a>           <span class="at">cex =</span> <span class="fl">0.75</span>)  <span class="co"># permet de réduire la taille du texte</span></span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-140-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="13-Modeles-regression.html#cb219-1" tabindex="-1"></a><span class="co"># ou avec la librarie `rattle`</span></span>
+<span id="cb219-2"><a href="13-Modeles-regression.html#cb219-2" tabindex="-1"></a><span class="co">#install.packages(&quot;rattle&quot;)</span></span>
+<span id="cb219-3"><a href="13-Modeles-regression.html#cb219-3" tabindex="-1"></a><span class="fu">library</span>(rattle)</span>
+<span id="cb219-4"><a href="13-Modeles-regression.html#cb219-4" tabindex="-1"></a><span class="fu">fancyRpartPlot</span>(arbre_1) </span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-140-2.svg" width="672" />
+Au sommet de l’arbre on a donc la racine (qui est le 1er noeud), puis il se divise en 2 branches pour aboutir à deux autres noeuds, etc.<br />
+On voit donc que la branche partant sur la gauche, c’est le cas où la variable de secteurs est égale aux modalités “Activités des ménages en tant qu’employeurs”, ou “Activités services administratifs et soutien”, ou “Administration publique”, ou “Arts, spectacles et activités récréatives”, ou “Enseignement” (on voit un “yes” qui est encadré ; ça sera le cas à chaque fois même si ce n’est pas de nouveau inscrit, autrement dit la branche partant sur la gauche sera la modalité “oui” de la variable).<br />
+Il y a chaque fois 3 données indiquées :</p>
+<ul>
+<li>d’abord, la modalité prédite par le modèle lorsqu’on est dans le groupe considéré, par exemple pour la feuille terminale à droite, donc pour les autres secteurs d’activité que ceux indiqués, la modalité prédite sera le “oui” donc une offre en CDI, on pourra vérifier dans les données en récupérant la modalité prédite pour chaque observation, c’est-à-dire pour toutes les offres se situant dans ces secteurs, la modalité prédite est bien “oui” ;</li>
+<li>ensuite, parmi les offres de ce groupe, 85% sont en CDI, ;</li>
+<li>et enfin, ces secteurs représentent 87% de la population (de notre base d’apprentissage).<br />
+Autrement dit, 87% des offres se situent dans ces secteurs avec une probabilité d’être en CDI de 85%.</li>
+</ul>
+<p>L’autre branche indique les offres qui prennent les modalités “Activités des ménages en tant qu’employeurs”, ou “Activités services administratifs et soutien”, ou “Administration publique”, ou “Arts, spectacles et activités récréatives”, ou encore “Enseignement” de la variable de secteurs, elles représentent 13% de la base et la probabilité prédite qu’elles soient en CDI sera de 32%.<br />
+Tout en bas, se trouvent les feuilles de l’arbre, c’est lorsqu’il n’y a plus aucune branche qui part du noeud en question.</p>
+<p>Ainsi, 5% de la base (d’apprentissage) représentent des offres d’emploi des secteurs “Activités des ménages en tant qu’employeurs”, ou “Activités services administratifs et soutien”, ou “Administration publique”, ou “Arts, spectacles et activités récréatives”, ou encore “Enseignement”, avec des niveaux de salaire “Entre le SMIC et le Q1(11,6€)” ou “Entre le Q1 et la moyenne (20,1€)”, qui ont une probabilité de 42% d’être en CDI.</p>
+</div>
+<div id="lévaluation-du-modèle" class="section level3 hasAnchor" number="14.3.2">
+<h3><span class="header-section-number">14.3.2</span> L’évaluation du modèle<a href="13-Modeles-regression.html#lévaluation-du-modèle" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>De la même façon que précédemment, on peut vérifier la bonne (ou non) prédiction du modèle en l’appliquant sur l’échantillon dit test, puis en comparant les proportions prédites avec celles effectivement observées dans la base dans la matrice de confusion et enfin en calculant un taux de concordance ou au contraire un taux d’erreur à partir de cette une matrice de confusion :</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="13-Modeles-regression.html#cb220-1" tabindex="-1"></a><span class="co"># Modèle appliqué sur l&#39;échantillon test</span></span>
+<span id="cb220-2"><a href="13-Modeles-regression.html#cb220-2" tabindex="-1"></a>predict_test <span class="ot">&lt;-</span> <span class="fu">predict</span>(arbre_1, OffresPE_test, <span class="at">type=</span><span class="st">&quot;class&quot;</span>)</span>
+<span id="cb220-3"><a href="13-Modeles-regression.html#cb220-3" tabindex="-1"></a></span>
+<span id="cb220-4"><a href="13-Modeles-regression.html#cb220-4" tabindex="-1"></a><span class="co"># Comparaison des résultats - Matrice de confusion</span></span>
+<span id="cb220-5"><a href="13-Modeles-regression.html#cb220-5" tabindex="-1"></a>mat_confusion <span class="ot">&lt;-</span> <span class="fu">table</span>(OffresPE_test<span class="sc">$</span>CDI, predict_test)</span>
+<span id="cb220-6"><a href="13-Modeles-regression.html#cb220-6" tabindex="-1"></a>mat_confusion</span></code></pre></div>
+<pre><code>     predict_test
+        Non   Oui
+  Non  4339  7275
+  Oui  1404 39760</code></pre>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="13-Modeles-regression.html#cb222-1" tabindex="-1"></a><span class="co"># Taux de concordance : rapport entre la somme des éléments </span></span>
+<span id="cb222-2"><a href="13-Modeles-regression.html#cb222-2" tabindex="-1"></a><span class="co"># de la diagonale principale et la somme des observations </span></span>
+<span id="cb222-3"><a href="13-Modeles-regression.html#cb222-3" tabindex="-1"></a><span class="co"># totales (soit de la matrice)</span></span>
+<span id="cb222-4"><a href="13-Modeles-regression.html#cb222-4" tabindex="-1"></a>tx_concordance <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(mat_confusion) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion))</span>
+<span id="cb222-5"><a href="13-Modeles-regression.html#cb222-5" tabindex="-1"></a>tx_concordance <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
+<pre><code>[1] 83.55565</code></pre>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="13-Modeles-regression.html#cb224-1" tabindex="-1"></a><span class="co"># Taux d&#39;erreur</span></span>
+<span id="cb224-2"><a href="13-Modeles-regression.html#cb224-2" tabindex="-1"></a>tx_erreur <span class="ot">&lt;-</span> (mat_confusion[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion)</span>
+<span id="cb224-3"><a href="13-Modeles-regression.html#cb224-3" tabindex="-1"></a>tx_erreur <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
+<pre><code>[1] 16.44435</code></pre>
+<p>On peut regarder aussi ce que cela donne sur la base d’apprentissage.</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="13-Modeles-regression.html#cb226-1" tabindex="-1"></a>predict_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(arbre_1, OffresPE_train, <span class="at">type=</span><span class="st">&quot;class&quot;</span>)</span>
+<span id="cb226-2"><a href="13-Modeles-regression.html#cb226-2" tabindex="-1"></a>mat_confusion_1 <span class="ot">&lt;-</span> <span class="fu">table</span>(OffresPE_train<span class="sc">$</span>CDI, predict_train)</span>
+<span id="cb226-3"><a href="13-Modeles-regression.html#cb226-3" tabindex="-1"></a>mat_confusion_1</span></code></pre></div>
+<pre><code>     predict_train
+        Non   Oui
+  Non 10258 16681
+  Oui  3307 92728</code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="13-Modeles-regression.html#cb228-1" tabindex="-1"></a>tx_erreur_1 <span class="ot">&lt;-</span> (mat_confusion_1[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion_1[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion_1)</span>
+<span id="cb228-2"><a href="13-Modeles-regression.html#cb228-2" tabindex="-1"></a>tx_erreur_1 <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
+<pre><code>[1] 16.25384</code></pre>
+<p>Dans les deux cas, les taux d’erreur sont relativement faible, d’environ 16%. Le modèle ne prédit pas trop mal. On peut noter qu’on a pratiquement le même taux d’erreur que le modèle logit réalisé précédemment…</p>
+<p>Vérifions si nous pouvons l’améliorer en modifiant les paramètres de construction de l’arbre, c’est-à-dire en jouant sur les conditions de coupure d’un noeud et sur les règles d’arrêt de ces coupures. On l’effectue avec la fonction <code>rpart.control()</code> avec les arguments suivants (règles d’arrêt principalement) : <code>minsplit=</code> donne le nombre minimum d’observations (individus) présentes à l’étape d’un noeud pour envisager une coupure ; <code>minbucket=</code> qui donne le nombre minimum d’observations/individus présentes à l’étape d’un noeud qu’engendrerait la coupure du noeud parent ; <code>maxdepth</code> qui donne la profondeur de l’arbre ; et <code>cp=</code> qui est un paramètre de complexité (plus il est petit, plus grand est l’arbre de régression).</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="13-Modeles-regression.html#cb230-1" tabindex="-1"></a><span class="co"># Définition des règles de décision</span></span>
+<span id="cb230-2"><a href="13-Modeles-regression.html#cb230-2" tabindex="-1"></a>ajust_param <span class="ot">&lt;-</span> <span class="fu">rpart.control</span>(<span class="at">minsplit =</span> <span class="dv">50</span>, <span class="at">minbucket =</span> <span class="dv">50</span>, <span class="at">maxdepth =</span> <span class="dv">10</span>, <span class="at">cp=</span><span class="dv">0</span>)</span>
+<span id="cb230-3"><a href="13-Modeles-regression.html#cb230-3" tabindex="-1"></a></span>
+<span id="cb230-4"><a href="13-Modeles-regression.html#cb230-4" tabindex="-1"></a><span class="co"># Ajustement du modèle en indiquant le paramètre &quot;control&quot;</span></span>
+<span id="cb230-5"><a href="13-Modeles-regression.html#cb230-5" tabindex="-1"></a>arbre_2 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(CDI <span class="sc">~</span> mois_publication <span class="sc">+</span> secteurs <span class="sc">+</span> salary_cat, </span>
+<span id="cb230-6"><a href="13-Modeles-regression.html#cb230-6" tabindex="-1"></a>                 <span class="at">data=</span>OffresPE_train, <span class="at">method=</span><span class="st">&quot;class&quot;</span>, </span>
+<span id="cb230-7"><a href="13-Modeles-regression.html#cb230-7" tabindex="-1"></a>                 <span class="at">control =</span> ajust_param)</span>
+<span id="cb230-8"><a href="13-Modeles-regression.html#cb230-8" tabindex="-1"></a></span>
+<span id="cb230-9"><a href="13-Modeles-regression.html#cb230-9" tabindex="-1"></a><span class="co"># On étudie de nouveau la matrice de confusion et </span></span>
+<span id="cb230-10"><a href="13-Modeles-regression.html#cb230-10" tabindex="-1"></a><span class="co"># le taux d&#39;erreur associé au nouveau modèle sur la base test</span></span>
+<span id="cb230-11"><a href="13-Modeles-regression.html#cb230-11" tabindex="-1"></a>predict_test_1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(arbre_2, OffresPE_test, <span class="at">type=</span><span class="st">&quot;class&quot;</span>)</span>
+<span id="cb230-12"><a href="13-Modeles-regression.html#cb230-12" tabindex="-1"></a>mat_confusion_ajust <span class="ot">&lt;-</span> <span class="fu">table</span>(OffresPE_test<span class="sc">$</span>CDI, predict_test_1)</span>
+<span id="cb230-13"><a href="13-Modeles-regression.html#cb230-13" tabindex="-1"></a>mat_confusion_ajust</span></code></pre></div>
+<pre><code>     predict_test_1
+        Non   Oui
+  Non  4407  7207
+  Oui  1292 39872</code></pre>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="13-Modeles-regression.html#cb232-1" tabindex="-1"></a>tx_erreur_1 <span class="ot">&lt;-</span> (mat_confusion_ajust[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion_ajust[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion_ajust) <span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb232-2"><a href="13-Modeles-regression.html#cb232-2" tabindex="-1"></a>tx_erreur_1</span></code></pre></div>
+<pre><code>[1] 16.1033</code></pre>
+<p>On peut l’appliquer de même à l’échantillon d’apprentissage :</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="13-Modeles-regression.html#cb234-1" tabindex="-1"></a><span class="co"># Modèle appliqué sur l&#39;échantillon test</span></span>
+<span id="cb234-2"><a href="13-Modeles-regression.html#cb234-2" tabindex="-1"></a>predict_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(arbre_2, OffresPE_train, <span class="at">type=</span><span class="st">&quot;class&quot;</span>)</span>
+<span id="cb234-3"><a href="13-Modeles-regression.html#cb234-3" tabindex="-1"></a></span>
+<span id="cb234-4"><a href="13-Modeles-regression.html#cb234-4" tabindex="-1"></a><span class="co"># Comparaison des résultats - Matrice de confusion</span></span>
+<span id="cb234-5"><a href="13-Modeles-regression.html#cb234-5" tabindex="-1"></a>mat_confusion_ajust1 <span class="ot">&lt;-</span> <span class="fu">table</span>(OffresPE_train<span class="sc">$</span>CDI, predict_train)</span>
+<span id="cb234-6"><a href="13-Modeles-regression.html#cb234-6" tabindex="-1"></a>mat_confusion_ajust1</span></code></pre></div>
+<pre><code>     predict_train
+        Non   Oui
+  Non 10487 16452
+  Oui  2960 93075</code></pre>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="13-Modeles-regression.html#cb236-1" tabindex="-1"></a><span class="co"># Taux d&#39;erreur</span></span>
+<span id="cb236-2"><a href="13-Modeles-regression.html#cb236-2" tabindex="-1"></a>tx_erreur_2 <span class="ot">&lt;-</span> (mat_confusion_ajust1[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion_ajust1[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion_ajust1)<span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb236-3"><a href="13-Modeles-regression.html#cb236-3" tabindex="-1"></a>tx_erreur_2 </span></code></pre></div>
+<pre><code>[1] 15.78545</code></pre>
+<p>Le taux d’erreur est un peu plus faible, la différence est légère, mais c’est toujours ça de pris !</p>
+<p>L’arbre correspondant est le suivant:</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="13-Modeles-regression.html#cb238-1" tabindex="-1"></a><span class="fu">rpart.plot</span>(arbre_2, <span class="at">extra=</span><span class="dv">106</span>)</span></code></pre></div>
+<pre><code>Warning: labs do not fit even at cex 0.15, there may be some overplotting</code></pre>
+<p><img src="Data-Mining_files/figure-html/unnamed-chunk-145-1.svg" width="672" />
+On voit qu’il n’est absolument pas lisible car plus profond, mais il prédit mieux (mais peut-être trop bien - cf. risque de surapprentissage en <em>matching learning</em>).</p>
+<!--Enfin, on peut chercher à minimiser l'erreur de prédiction de l'arbre afin de définir le niveau d'élagage optimal permettant ensuite de simplifier l'arbre.
+
+``` r
+# 2 fonctions liées à l'argument "cp=" de notre modèle
+printcp(arbre_1)
+```
+
+```
+
+Classification tree:
+rpart(formula = CDI ~ ., data = OffresPE_train, method = "class")
+
+Variables actually used in tree construction:
+[1] salary_cat secteurs  
+
+Root node error: 26939/122974 = 0.21906
+
+n= 122974 
+
+        CP nsplit rel error  xerror      xstd
+1 0.218011      0   1.00000 1.00000 0.0053842
+2 0.020008      1   0.78199 0.78199 0.0049046
+3 0.010000      3   0.74197 0.74197 0.0048027
+```
+
+``` r
+plotcp(arbre_1)
+```
+
+<img src="Data-Mining_files/figure-html/unnamed-chunk-146-1.svg" width="672" />
+Ici il faut donc indiquer la valeur 0.010 dans l'argument `cp=` pour minimiser l'erreur relative, c'est notre nouvelle règle d'arrêt. On va par conséquent reconstruire l'abre à partir de la fonction `prune()` en indiquant cette valeur optimale pour l'élaguer :  
+
+``` r
+min(arbre_1$cptable[, "xerror"]) + (1*arbre_1$cptable[ which.min(arbre_1$cptable[, "xerror"]), "xstd"])
+```
+
+```
+[1] 0.7467753
+```
+
+``` r
+opt <- which.min(arbre_1$cptable[, "xerror"])
+opt
+```
+
+```
+3 
+3 
+```
+
+``` r
+cp <- arbre_1$cptable[opt, "CP"]
+
+arbre_VF <- prune(arbre_1, cp=cp)
+rpart.plot(arbre_VF)
+```
+
+<img src="Data-Mining_files/figure-html/unnamed-chunk-147-1.svg" width="672" />
+Cela ne change en réalité rien ici ! -->
+<p>Vous pouvez réitérer l’exercice en introduisant d’autres variables dans l’analyse, en changeant la variable cible, etc.</p>
+<p>Pour aller plus loin, on utilise maintenant beaucoup en analyse prédictive les forêts d’arbre de décision, qui constituent comme son nom l’indique, un ensemble d’arbres de régression, ce qui permet d’avoir un taux d’erreur global moindre, car la principale critique de l’arbre de décision est son potentiel d’erreur.</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<script src="js/tidyverse.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="12-Clustering-application.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
+    "instapper": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/Camille-Sisi/Data-Mining-2025/master/13-Modeles-regression.Rmd",
+    "text": "Source"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

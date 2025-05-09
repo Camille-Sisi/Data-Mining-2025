@@ -201,7 +201,7 @@ logit_VF <- glm (CDI ~ mois_publication + secteurs + salary_cat,
 summary(logit_VF)
 ```
 
-```{r warning=FALSE, message=FALSE, eval=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE}
 # Résumé des résultats sous forme de tableau avec les odds-ratio
 # avec la librairie "questionr" d'abord
 #install.packages(questionr)
@@ -210,7 +210,7 @@ odds.ratio(logit_VF)
 ```
 <!-- ![ ](images/Graphique_Odds-ratio.png) -->
 
-```{r warning=FALSE, message=FALSE, eval=FALSE, include=FALSE}
+```{r warning=FALSE, message=FALSE}
 # puis avec la librarie "forestmodel" pour avoir un meilleur rendu
 #install.packages("forestmodel")
 library(forestmodel)

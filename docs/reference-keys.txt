@@ -1,3 +1,4 @@
+tab:unnamed-chunk-135
 c01-Base-de-donnees
 les-données-du-recensement-de-la-population-rp
 quelles-informations-intéressantes-dans-cette-base
@@ -69,3 +70,12 @@ constitution-des-classes
 visualisation-sur-la-carte-des-communes-et-départements
 interprétation
 la-méthode-des-k-means-appliquée-à-nos-données
+c13-Modeles-regression
+la-création-des-bases-dapprentissage-et-de-test
+un-modèle-à-visée-principale-explicative-la-régression-logistique
+le-modèle-initial
+lévaluation-du-modèle-et-la-recherche-éventuelle-dun-meilleur-modèle
+le-modèle-final-et-linterprétation-des-résultats
+un-modèle-à-visée-principale-prédictive-labre-de-décision
+le-modèle-initial-1
+lévaluation-du-modèle
