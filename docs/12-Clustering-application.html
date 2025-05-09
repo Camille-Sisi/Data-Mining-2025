@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Section13 Clustering : application sur le RP 2019 | DATA MINING</title>
   <meta name="description" content="Titre du cours" />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Section13 Clustering : application sur le RP 2019 | DATA MINING" />
   <meta property="og:type" content="book" />
@@ -168,8 +168,8 @@ code span.wa { color: #bf0303; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="c12-Clustering-application" class="section level1 hasAnchor" number="13">
-<h1><span class="header-section-number">Section13</span> Clustering : application sur le RP 2019<a href="12-Clustering-application.html#c12-Clustering-application" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="c11-Clustering-application" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">Section13</span> Clustering : application sur le RP 2019<a href="12-Clustering-application.html#c11-Clustering-application" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div align="justify">
 <!--Pour un rappel des fondements théoriques des techniques de clustering, voir par exemple <a href="https://camille-sisi.github.io/Data-Mining-2022/14-Clustering-theorique.html" target="_blank">ici</a>, ou <a href="https://larmarange.github.io/analyse-R/classification-ascendante-hierarchique.html" target="_blank">là</a>.  
 Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il n'y a pas de variable d'intérêt ou variable cible, on cherche plutôt à rassembler des observations qui "se ressemblent" mais pas d'expliquer une variable/un phénomène par rapport à d'autres.-->
@@ -812,7 +812,7 @@ Il existe aussi une fonction <em>via</em> <strong><code>ggplot2</code></strong> 
 <span id="cb153-2"><a href="12-Clustering-application.html#cb153-2" tabindex="-1"></a><span class="fu">ggdendrogram</span>(classif_socioprof, <span class="at">labels=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="Data-Mining_files/figure-html/unnamed-chunk-120-1.svg" width="672" /></p>
 <p>Il faut maintenant prendre une décision : où coupe-t-on l’arbre pour obtenir une partition de la population (ici nos communes), autrement dit combien de classes choisissons-nous ?<br />
-On peut d’abord s’appuyer sur la forme du dendogramme : plus une “branche” est haute et plus on perd en distance ou ici (critère de Ward) en inertie interclasse<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, il faudra donc couper l’arbre au niveau de cette branche. Il faut également prendre en compte ce qui peut être le mieux pour l’analyse : si on aboutit à une classification en 2 classes, cela risque d’être peu intéressant à analyser, mais si on a une classification en 5 classes ou plus, cela va devenir compliqué à interpréter…<br />
+On peut d’abord s’appuyer sur la forme du dendogramme : plus une “branche” est haute et plus on perd en distance ou ici (critère de Ward) en inertie intraclasse<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, il faudra donc couper l’arbre au niveau de cette branche. Il faut également prendre en compte ce qui peut être le mieux pour l’analyse : si on aboutit à une classification en 2 classes, cela risque d’être peu intéressant à analyser, mais si on a une classification en 5 classes ou plus, cela va devenir compliqué à interpréter…<br />
 Ici, dans les deux cas, il semble que choisir 2 classes soit très pertinent, mais on voit qu’on pourrait aussi choisir 4 classes (ou même 3 éventuellement) si l’on veut rentrer un peu plus dans le détail de l’analyse.</p>
 <p>On peut également s’aider de représentations des sauts d’inertie du dendrogramme selon le nombre de classes qui peut être retenu, avec la fonction plot et en récupérant l’information sur l’inertie (<code>height</code>).</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="12-Clustering-application.html#cb154-1" tabindex="-1"></a><span class="co"># On stocke l&#39;attribut `$height` dans l&#39;objet `inertie` en triant les valeurs par </span></span>
@@ -2592,8 +2592,115 @@ Cela nous dit la même chose que la description précédente mais dans un format
 <span id="cb171-14"><a href="12-Clustering-application.html#cb171-14" tabindex="-1"></a><span class="co">#par(mfrow = c(1, 1)</span></span></code></pre></div>
 <p><img src="Data-Mining_files/figure-html/Cght_agr-1.svg" width="672" /></p>
 <p>On observe donc de fortes différences entre les dendogrammes. Par exemple, la méthode du “lien simple” ou “minimum” va avoir tendance à construire une grosse classe et une autre plus petite, c’est bien ce que l’on voit ici ; alors qu’au contraire, la méthode d’agrégation dite “complete” tend à construire des groupes plutôt de taille égale, en revanche, il faut savoir qu’elle est sensible aux points aberrants (on voit que ce n’est pas le cas ici). Enfin, on voit également que la méthode du “centroïd” (barycentre/centre de gravité des classes) produit un dendogramme particulier et déséquilibré comme le premier graphe (méthode du “lien simple”). C’est bien la méthode de Ward qui est la plus utilisée en pratique.</p>
-
 </div>
+</div>
+<div id="la-méthode-des-k-means-appliquée-à-nos-données" class="section level2 hasAnchor" number="13.3">
+<h2><span class="header-section-number">13.3</span> La méthode des <em>k-means</em> appliquée à nos données<a href="12-Clustering-application.html#la-méthode-des-k-means-appliquée-à-nos-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On repart de notre table de données transformée (“cat_soc_chi2”) et on lui applique la fonction <code>kmeans</code> de <code>R</code>. Comme décrit dans la section précédente de manière théorique, il faut : i) choisir le nombre de classes que l’on souhaite avoir avec l’option <code>centers=k</code>, pour pouvoir comparer avec la méthode précédente de la CAH, on va donc choisir le même nombre de groupe, soit 4 ; ii) et réitérer toute la procédure plusieurs fois avec des individus pris au départ qui soient différents, avec l’option <code>nstart=</code>, ici on choisit 100 essais, et la fonction prendra le meilleur pour l’algorithme.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="12-Clustering-application.html#cb172-1" tabindex="-1"></a>clust.kmeans <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(cat_soc_chi2, <span class="at">centers=</span><span class="dv">4</span>, <span class="at">nstart=</span><span class="dv">100</span>)</span>
+<span id="cb172-2"><a href="12-Clustering-application.html#cb172-2" tabindex="-1"></a></span>
+<span id="cb172-3"><a href="12-Clustering-application.html#cb172-3" tabindex="-1"></a><span class="co"># On affiche ensuite les résultats principaux : effectif des classes, moyenne des </span></span>
+<span id="cb172-4"><a href="12-Clustering-application.html#cb172-4" tabindex="-1"></a><span class="co"># variables actives, groupes d&#39;affectation des individus, </span></span>
+<span id="cb172-5"><a href="12-Clustering-application.html#cb172-5" tabindex="-1"></a><span class="co"># proportion d&#39;inertie expliquée par la partition (ici 62%)</span></span>
+<span id="cb172-6"><a href="12-Clustering-application.html#cb172-6" tabindex="-1"></a>clust.kmeans</span></code></pre></div>
+<pre><code>K-means clustering with 4 clusters of sizes 35, 33, 26, 42
+
+Cluster means:
+  nb_Arti_com nb_Autres inactifs nb_Cadres nb_Chômeurs nb_Employés nb_Ouvriers
+1   0.1581992          0.4296114 0.2578518   0.3090005   0.4645667   0.3610936
+2   0.1742342          0.3735899 0.4404954   0.2416735   0.3630235   0.2120586
+3   0.1495512          0.5676564 0.1166422   0.4207642   0.4941888   0.4881346
+4   0.2127105          0.3745023 0.6569413   0.2130710   0.2658643   0.1188337
+      nb_PI nb_Retraités
+1 0.4116066    0.4216620
+2 0.4154235    0.4903174
+3 0.2981977    0.3623884
+4 0.3560413    0.4499791
+
+Clustering vector:
+75101 75102 75103 75104 75105 75106 75107 75108 75109 75110 75111 75112 75113 
+    4     4     4     4     4     4     4     4     4     4     4     4     2 
+75114 75115 75116 75117 75118 75119 75120 92002 92004 92007 92009 92012 92014 
+    4     4     4     4     4     2     2     4     2     1     4     4     4 
+92019 92020 92022 92023 92024 92025 92026 92032 92033 92035 92036 92040 92044 
+    2     4     4     2     2     2     4     2     4     4     3     4     4 
+92046 92048 92049 92050 92051 92060 92062 92063 92064 92071 92072 92073 92075 
+    2     2     4     1     4     2     4     4     4     4     4     4     4 
+92076 92077 92078 93001 93005 93006 93007 93008 93010 93013 93014 93027 93029 
+    4     4     3     3     3     1     3     3     3     3     3     3     3 
+93030 93031 93032 93033 93039 93045 93046 93047 93048 93049 93050 93051 93053 
+    3     3     1     2     3     2     1     3     1     2     1     1     3 
+93055 93057 93059 93061 93062 93063 93064 93066 93070 93071 93072 93073 93074 
+    1     1     3     1     2     1     1     3     1     3     3     1     1 
+93077 93078 93079 94002 94003 94004 94011 94015 94016 94017 94018 94019 94021 
+    1     3     3     1     2     1     3     2     2     1     2     1     1 
+94022 94028 94033 94034 94037 94038 94041 94042 94043 94044 94046 94048 94052 
+    1     1     2     1     1     2     1     2     2     1     2     2     4 
+94054 94055 94058 94059 94060 94065 94067 94068 94069 94071 94073 94074 94075 
+    3     2     2     1     1     2     4     2     2     2     1     3     2 
+94076 94077 94078 94079 94080 94081 
+    1     1     3     1     4     1 
+
+Within cluster sum of squares by cluster:
+[1] 0.6789536 0.7875165 0.4950321 0.9539909
+ (between_SS / total_SS =  79.7 %)
+
+Available components:
+
+[1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+[6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;      </code></pre>
+<p>On peut comparer avec les classes obtenues précédemment avec la CAH, simplement en croisant les deux variables de classe :</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="12-Clustering-application.html#cb174-1" tabindex="-1"></a><span class="co">#correspondance avec les groupes de la CAH</span></span>
+<span id="cb174-2"><a href="12-Clustering-application.html#cb174-2" tabindex="-1"></a><span class="fu">table</span>(classe4_socioprof, clust.kmeans<span class="sc">$</span>cluster)</span></code></pre></div>
+<pre><code>                 
+classe4_socioprof  1  2  3  4
+                1  0  0  0 39
+                2  5 33  0  3
+                3 28  0  0  0
+                4  2  0 26  0</code></pre>
+<p>On voit ainsi que certaines classes de la <em>CAH</em> (les 4 lignes du tableau) coïncident exactement ou quasi-exactement avec les classes des <em>K-means</em> (en colonne), et une un peu moins car un peu plus distribuée entre plusieurs classes de la typologie des <em>K-means</em> . Autrement dit, on conclut à un changement de classes à la marge.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="12-Clustering-application.html#cb176-1" tabindex="-1"></a>clust_kmeans <span class="ot">&lt;-</span> clust.kmeans<span class="sc">$</span>cluster <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="st">&quot;classe4_socioprof&quot;</span><span class="ot">=</span><span class="st">&quot;.&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">rownames_to_column</span>(<span class="st">&quot;COM&quot;</span>)</span>
+<span id="cb176-2"><a href="12-Clustering-application.html#cb176-2" tabindex="-1"></a></span>
+<span id="cb176-3"><a href="12-Clustering-application.html#cb176-3" tabindex="-1"></a>map_com_typo_1 <span class="ot">&lt;-</span> map_com <span class="sc">%&gt;%</span> <span class="fu">select</span>(COM, com_name, geometry) <span class="sc">%&gt;%</span> </span>
+<span id="cb176-4"><a href="12-Clustering-application.html#cb176-4" tabindex="-1"></a>  <span class="fu">left_join</span>(clust_kmeans)</span>
+<span id="cb176-5"><a href="12-Clustering-application.html#cb176-5" tabindex="-1"></a><span class="fu">mf_theme</span>(<span class="st">&quot;agolalight&quot;</span>)</span>
+<span id="cb176-6"><a href="12-Clustering-application.html#cb176-6" tabindex="-1"></a><span class="fu">mf_map</span>(map_com_typo_1, <span class="at">var=</span><span class="st">&quot;classe4_socioprof&quot;</span>, <span class="at">type=</span><span class="st">&quot;typo&quot;</span>, </span>
+<span id="cb176-7"><a href="12-Clustering-application.html#cb176-7" tabindex="-1"></a>       <span class="at">pal =</span> <span class="fu">c</span>(<span class="st">&quot;aquamarine3&quot;</span>, <span class="st">&quot;coral&quot;</span>, <span class="st">&quot;skyblue3&quot;</span>, <span class="st">&quot;brown4&quot;</span>),</span>
+<span id="cb176-8"><a href="12-Clustering-application.html#cb176-8" tabindex="-1"></a>       <span class="at">leg_pos =</span> <span class="st">&quot;bottomleft&quot;</span>, <span class="at">leg_title=</span><span class="st">&quot;Cluster&quot;</span>,</span>
+<span id="cb176-9"><a href="12-Clustering-application.html#cb176-9" tabindex="-1"></a>       <span class="at">col_na =</span> <span class="st">&quot;gray80&quot;</span>, <span class="at">leg_no_data =</span> <span class="st">&quot;Données manquantes&quot;</span>)</span>
+<span id="cb176-10"><a href="12-Clustering-application.html#cb176-10" tabindex="-1"></a><span class="fu">mf_map</span>(map_dept, <span class="at">var=</span><span class="st">&quot;nom_dep&quot;</span>,  <span class="at">type =</span> <span class="st">&quot;base&quot;</span>,</span>
+<span id="cb176-11"><a href="12-Clustering-application.html#cb176-11" tabindex="-1"></a>       <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">col_na =</span> <span class="st">&quot;gray80&quot;</span>,</span>
+<span id="cb176-12"><a href="12-Clustering-application.html#cb176-12" tabindex="-1"></a>       <span class="at">border=</span><span class="st">&quot;black&quot;</span>,<span class="at">lwd=</span><span class="dv">1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb176-13"><a href="12-Clustering-application.html#cb176-13" tabindex="-1"></a><span class="fu">mf_layout</span>(<span class="at">title =</span> <span class="st">&quot;Profils PCS des communes de Paris et sa petite couronne&quot;</span>,</span>
+<span id="cb176-14"><a href="12-Clustering-application.html#cb176-14" tabindex="-1"></a>          <span class="at">frame =</span> <span class="cn">TRUE</span>, <span class="at">credits=</span><span class="st">&quot; &quot;</span>, <span class="at">arrow =</span> F)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/carto%20kmeans-1.svg" width="672" /></p>
+<p>On a vu avec la description de la méthode, que ce qui est difficile ici c’est qu’on choisit nous-mêmes le nombre de classes dans une première étape sans savoir parfois pourquoi. Il faut donc souvent faire varier le nombre de classes de départ (<code>centers=k</code>), à ne pas confondre avec les individus centres initiaux de classes (ce que l’on a fait précédemment en indiquant l’option <code>nstart=100</code>). A partir d’un exemple de code récupéré sur un document de cours externe (<a href="https://eric.univ-lyon2.fr/ricco/cours/didacticiels/R/cah_kmeans_avec_r.pdf">ici</a>), on peut créer une boucle pour répéter la procédure en changeant le nombre de classes, et ensuite construire un graphique visualisant l’indicateur de pourcentage d’inertie expliquée. Plus précisément, on fait tourner plusieurs fois la méthode des K-means sur notre base de données centrées-réduites pour un nombre de classes souhaitées variant entre 2 et 6, et on récupère la part de l’inertie expliquée par la partition obtenue (indicateur <code>between_SS / total_SS</code> que l’on a vu dans la sortie précédente). Puis, on crée un graphique représentant cette part pour chacune des partitions construites.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="12-Clustering-application.html#cb177-1" tabindex="-1"></a><span class="co"># Boucle pour calculer la part de l&#39;inertie expliquée par la partition, selon le  </span></span>
+<span id="cb177-2"><a href="12-Clustering-application.html#cb177-2" tabindex="-1"></a><span class="co"># nombre de classes souhaitées</span></span>
+<span id="cb177-3"><a href="12-Clustering-application.html#cb177-3" tabindex="-1"></a>inertie.expl <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="at">times=</span><span class="dv">6</span>)</span>
+<span id="cb177-4"><a href="12-Clustering-application.html#cb177-4" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>){</span>
+<span id="cb177-5"><a href="12-Clustering-application.html#cb177-5" tabindex="-1"></a>  clus <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(cat_soc_chi2, <span class="at">centers=</span>k, <span class="at">nstart=</span><span class="dv">100</span>)  </span>
+<span id="cb177-6"><a href="12-Clustering-application.html#cb177-6" tabindex="-1"></a>  inertie.expl[k] <span class="ot">&lt;-</span> clus<span class="sc">$</span>betweenss<span class="sc">/</span>clus<span class="sc">$</span>totss}</span>
+<span id="cb177-7"><a href="12-Clustering-application.html#cb177-7" tabindex="-1"></a></span>
+<span id="cb177-8"><a href="12-Clustering-application.html#cb177-8" tabindex="-1"></a><span class="co">#Création du graphique</span></span>
+<span id="cb177-9"><a href="12-Clustering-application.html#cb177-9" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, inertie.expl, <span class="at">type=</span><span class="st">&quot;b&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Nombre de classes choisies&quot;</span>, </span>
+<span id="cb177-10"><a href="12-Clustering-application.html#cb177-10" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Pourcentage d&#39;inertie expliquée par la partition&quot;</span>)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/Compar_clK-means-1.svg" width="672" />
+On observe sur ce graphique qu’à partir de k=3, autrement dit de 3 classes, la “création” d’une classe supplémentaire ne semble pas augmenter significativement la part d’inertie expliquée par la partition. Pour comprendre ce que revêt ce “significativement”, on peut regarder notamment la pente de chaque droite reliant les points d’une partition à une autre : pour la droite reliant le nombre de classes “2” et “3”, on voit que sa pente diminue déjà pas mal par rapport à la droite reliant les deux classes précédentes, et cela est encore plus visible pour les pentes suivantes.</p>
+<p>Une autre méthode évoquée par le même document de cours propose d’utiliser le package <code>fpc</code> qui propose une fonction <code>kmeansruns</code> évaluant les différentes partitions à partir de 2 critères à choisir : l’indice de Calinski Harabasz - option <code>criterion="ch"</code>, ou celui de la “average silhouette width” (largeur moyenne de la silhouette) - option <code>criterion="asw"</code>. On peut ensuite construire un graphique comme précédemment pour visualiser l’évolution de cet indice selon le nombre de classes de la partition.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="12-Clustering-application.html#cb178-1" tabindex="-1"></a><span class="co"># OU utilisation du package fpc et de l&#39;indice de Calinski Harabasz  </span></span>
+<span id="cb178-2"><a href="12-Clustering-application.html#cb178-2" tabindex="-1"></a><span class="fu">library</span>(fpc)</span>
+<span id="cb178-3"><a href="12-Clustering-application.html#cb178-3" tabindex="-1"></a><span class="co">#Evaluation des solutions</span></span>
+<span id="cb178-4"><a href="12-Clustering-application.html#cb178-4" tabindex="-1"></a>eval.kmeans <span class="ot">&lt;-</span> <span class="fu">kmeansruns</span>(cat_soc_chi2,</span>
+<span id="cb178-5"><a href="12-Clustering-application.html#cb178-5" tabindex="-1"></a>                         <span class="at">krange=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb178-6"><a href="12-Clustering-application.html#cb178-6" tabindex="-1"></a>                         <span class="at">criterion=</span><span class="st">&quot;ch&quot;</span>,)</span>
+<span id="cb178-7"><a href="12-Clustering-application.html#cb178-7" tabindex="-1"></a></span>
+<span id="cb178-8"><a href="12-Clustering-application.html#cb178-8" tabindex="-1"></a><span class="co">#Graphique</span></span>
+<span id="cb178-9"><a href="12-Clustering-application.html#cb178-9" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, eval.kmeans<span class="sc">$</span>crit,<span class="at">type=</span><span class="st">&quot;b&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Nombre de classes&quot;</span>, </span>
+<span id="cb178-10"><a href="12-Clustering-application.html#cb178-10" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Indice de Calinski Harabasz &quot;</span>)</span></code></pre></div>
+<p><img src="Data-Mining_files/figure-html/Compar_clK-means_bis-1.svg" width="672" />
+Pour lire et choisir le “bon” nombre de classes selon ce critère, il faut maximiser l’indice donc trouver le point le plus haut : ici, c’est la partition à 2 classes qui semble la “meilleure” typologie comme on l’avait vu dans la CAH avec le dendogramme, mais une partition a minima en 3 classes semble plus intéressante pour l’interprétation.</p>
+
 </div>
 </div>
 </div>
@@ -2679,43 +2786,43 @@ Cela nous dit la même chose que la description précédente mais dans un format
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
-"instapper": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/Camille-Sisi/Data-Mining-2025/master/12-Clustering-application.Rmd",
-"text": "Source"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
+    "instapper": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/Camille-Sisi/Data-Mining-2025/master/12-Clustering-application.Rmd",
+    "text": "Source"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

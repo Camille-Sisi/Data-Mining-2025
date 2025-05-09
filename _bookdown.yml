@@ -22,3 +22,4 @@ rmd_files:
   - 10-Intro-a-Shiny-exemples.Rmd
   - 11-Clustering-theorique.Rmd
   - 12-Clustering-application.Rmd
+  - 13-Modeles-regression.Rmd

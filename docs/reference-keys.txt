@@ -60,7 +60,7 @@ introduction-dune-réactivité-sur-les-inputs-contexte-réactif
 c11-Clustering-theorique
 la-classification-ascendante-hiérarchique-cah
 la-méthode-des-centres-mobiles-et-sa-variante-les-k-means
-c12-Clustering-application
+c11-Clustering-application
 choix-des-variables-et-préparation-du-tableau-final
 variable-socio-professionnelle-caractérisant-la-personne-de-référence-du-ménage
 création-du-tableau-de-contingence
@@ -68,3 +68,4 @@ la-méthode-de-la-cah-appliquée-à-nos-données
 constitution-des-classes
 visualisation-sur-la-carte-des-communes-et-départements
 interprétation
+la-méthode-des-k-means-appliquée-à-nos-données
