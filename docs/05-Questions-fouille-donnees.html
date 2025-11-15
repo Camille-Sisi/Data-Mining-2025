@@ -447,23 +447,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Séance 7</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13-Modeles-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles de régression : application sur les offres de Pôle emploi 2020</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -503,15 +486,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Chargement des librairies</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Chargement des tables</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>RP_final <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"data/RP_final.Rdata"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"data/meta.Rdata"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 <p>Quelles sont les questions intéressantes que l’on peut se poser ? Qu’est-ce qu’on va pouvoir mettre en évidence à partir de ces données ?</p>
 <p>D’abord, on peut caractériser la population de Paris et sa petite couronne selon des variables socio-démographiques (sexe, âge, diplôme, statut conjugal, nombre d’enfants, …) et d’emploi (statut d’activité, PCS, condition d’emploi - contrat, temps de travail -, secteur d’activité, …). Ensuite, on peut décrire les logements de Paris et sa petite couronne, selon le type (appartement, maison, HLM, …), la superficie, le nombre de pièces, le nombre de personnes y habitant, le statut d’occupation (propriétaire, locataire, …), l’ancienneté d’occupation. Enifn, on peut décrire plus précisément les pièces du logement en termes de confort (baignoire / douche, salle climatisée, moyen de chauffage), ainsi que les parties communes de l’immeuble (ascenseur, place de stationnement). Enfin, on pourrait étudier les caractéristiques des occupants de ces logements, et en premier lieu ici ce que l’Insee appelle la “personne de référence du ménage”. Par ailleurs, toutes ces analyses peuvent être réalisées en comparant les différentes communes de Paris et sa petite couronne, ou à un niveau géographique plus fin par quartiers, arrondissements ou encore IRIS.</p>
 <p>Pour manipuler cette base et répondre à quelques-unes de ces questions, nous allons nous concentrer sur la commune de Paris, et allons chercher à reproduire des statistiques publiées sur le site de l’Insee. Nous produirons principalement, lors de cette séance, des tableaux de statistiques, l’analyse graphique fera en effet l’objet de la séance suivante car elle nécessite la présentation détaillée de la “grammaire” <strong><code>Ggplot</code></strong>.</p>
@@ -532,23 +506,23 @@ Attachement du package : 'janitor'</code></pre>
     chisq.test, fisher.test</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="xjkbdpyzzw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xjkbdpyzzw table {
+<div id="zcqpgmpiep" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zcqpgmpiep table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xjkbdpyzzw thead, #xjkbdpyzzw tbody, #xjkbdpyzzw tfoot, #xjkbdpyzzw tr, #xjkbdpyzzw td, #xjkbdpyzzw th {
+#zcqpgmpiep thead, #zcqpgmpiep tbody, #zcqpgmpiep tfoot, #zcqpgmpiep tr, #zcqpgmpiep td, #zcqpgmpiep th {
   border-style: none;
 }
 
-#xjkbdpyzzw p {
+#zcqpgmpiep p {
   margin: 0;
   padding: 0;
 }
 
-#xjkbdpyzzw .gt_table {
+#zcqpgmpiep .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -574,12 +548,12 @@ Attachement du package : 'janitor'</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_caption {
+#zcqpgmpiep .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xjkbdpyzzw .gt_title {
+#zcqpgmpiep .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -591,7 +565,7 @@ Attachement du package : 'janitor'</code></pre>
   border-bottom-width: 0;
 }
 
-#xjkbdpyzzw .gt_subtitle {
+#zcqpgmpiep .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -603,7 +577,7 @@ Attachement du package : 'janitor'</code></pre>
   border-top-width: 0;
 }
 
-#xjkbdpyzzw .gt_heading {
+#zcqpgmpiep .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -615,13 +589,13 @@ Attachement du package : 'janitor'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_bottom_border {
+#zcqpgmpiep .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_col_headings {
+#zcqpgmpiep .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -636,7 +610,7 @@ Attachement du package : 'janitor'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_col_heading {
+#zcqpgmpiep .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -656,7 +630,7 @@ Attachement du package : 'janitor'</code></pre>
   overflow-x: hidden;
 }
 
-#xjkbdpyzzw .gt_column_spanner_outer {
+#zcqpgmpiep .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -668,15 +642,15 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 4px;
 }
 
-#xjkbdpyzzw .gt_column_spanner_outer:first-child {
+#zcqpgmpiep .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xjkbdpyzzw .gt_column_spanner_outer:last-child {
+#zcqpgmpiep .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xjkbdpyzzw .gt_column_spanner {
+#zcqpgmpiep .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -688,11 +662,11 @@ Attachement du package : 'janitor'</code></pre>
   width: 100%;
 }
 
-#xjkbdpyzzw .gt_spanner_row {
+#zcqpgmpiep .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xjkbdpyzzw .gt_group_heading {
+#zcqpgmpiep .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -718,7 +692,7 @@ Attachement du package : 'janitor'</code></pre>
   text-align: left;
 }
 
-#xjkbdpyzzw .gt_empty_group_heading {
+#zcqpgmpiep .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -733,15 +707,15 @@ Attachement du package : 'janitor'</code></pre>
   vertical-align: middle;
 }
 
-#xjkbdpyzzw .gt_from_md > :first-child {
+#zcqpgmpiep .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xjkbdpyzzw .gt_from_md > :last-child {
+#zcqpgmpiep .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xjkbdpyzzw .gt_row {
+#zcqpgmpiep .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -760,7 +734,7 @@ Attachement du package : 'janitor'</code></pre>
   overflow-x: hidden;
 }
 
-#xjkbdpyzzw .gt_stub {
+#zcqpgmpiep .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -773,7 +747,7 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 5px;
 }
 
-#xjkbdpyzzw .gt_stub_row_group {
+#zcqpgmpiep .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -787,15 +761,15 @@ Attachement du package : 'janitor'</code></pre>
   vertical-align: top;
 }
 
-#xjkbdpyzzw .gt_row_group_first td {
+#zcqpgmpiep .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xjkbdpyzzw .gt_row_group_first th {
+#zcqpgmpiep .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xjkbdpyzzw .gt_summary_row {
+#zcqpgmpiep .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -805,16 +779,16 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 5px;
 }
 
-#xjkbdpyzzw .gt_first_summary_row {
+#zcqpgmpiep .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_first_summary_row.thick {
+#zcqpgmpiep .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xjkbdpyzzw .gt_last_summary_row {
+#zcqpgmpiep .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -824,7 +798,7 @@ Attachement du package : 'janitor'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_grand_summary_row {
+#zcqpgmpiep .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -834,7 +808,7 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 5px;
 }
 
-#xjkbdpyzzw .gt_first_grand_summary_row {
+#zcqpgmpiep .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -844,7 +818,7 @@ Attachement du package : 'janitor'</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_last_grand_summary_row_top {
+#zcqpgmpiep .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -854,11 +828,11 @@ Attachement du package : 'janitor'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_striped {
+#zcqpgmpiep .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xjkbdpyzzw .gt_table_body {
+#zcqpgmpiep .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -867,7 +841,7 @@ Attachement du package : 'janitor'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_footnotes {
+#zcqpgmpiep .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -881,7 +855,7 @@ Attachement du package : 'janitor'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_footnote {
+#zcqpgmpiep .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -890,7 +864,7 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 5px;
 }
 
-#xjkbdpyzzw .gt_sourcenotes {
+#zcqpgmpiep .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -904,7 +878,7 @@ Attachement du package : 'janitor'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xjkbdpyzzw .gt_sourcenote {
+#zcqpgmpiep .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -912,72 +886,72 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 5px;
 }
 
-#xjkbdpyzzw .gt_left {
+#zcqpgmpiep .gt_left {
   text-align: left;
 }
 
-#xjkbdpyzzw .gt_center {
+#zcqpgmpiep .gt_center {
   text-align: center;
 }
 
-#xjkbdpyzzw .gt_right {
+#zcqpgmpiep .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xjkbdpyzzw .gt_font_normal {
+#zcqpgmpiep .gt_font_normal {
   font-weight: normal;
 }
 
-#xjkbdpyzzw .gt_font_bold {
+#zcqpgmpiep .gt_font_bold {
   font-weight: bold;
 }
 
-#xjkbdpyzzw .gt_font_italic {
+#zcqpgmpiep .gt_font_italic {
   font-style: italic;
 }
 
-#xjkbdpyzzw .gt_super {
+#zcqpgmpiep .gt_super {
   font-size: 65%;
 }
 
-#xjkbdpyzzw .gt_footnote_marks {
+#zcqpgmpiep .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xjkbdpyzzw .gt_asterisk {
+#zcqpgmpiep .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xjkbdpyzzw .gt_indent_1 {
+#zcqpgmpiep .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xjkbdpyzzw .gt_indent_2 {
+#zcqpgmpiep .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xjkbdpyzzw .gt_indent_3 {
+#zcqpgmpiep .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xjkbdpyzzw .gt_indent_4 {
+#zcqpgmpiep .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xjkbdpyzzw .gt_indent_5 {
+#zcqpgmpiep .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xjkbdpyzzw .katex-display {
+#zcqpgmpiep .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xjkbdpyzzw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zcqpgmpiep div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1033,45 +1007,45 @@ Attachement du package : 'janitor'</code></pre>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SEXE=</span><span class="fu">case_when</span>(SEXE<span class="sc">==</span><span class="st">"1"</span> <span class="sc">~</span> <span class="st">"Hommes"</span>, SEXE<span class="sc">==</span><span class="st">"2"</span> <span class="sc">~</span> <span class="st">"Femmes"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(SEXE, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Effectif=</span>n, <span class="st">'Sexe'</span><span class="ot">=</span>SEXE) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">" "</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">"Source : Insee, RP 2019 ; Champ : Paris."</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Population par sexe en 2019"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SEXE=</span><span class="fu">case_when</span>(SEXE<span class="sc">==</span><span class="st">"1"</span> <span class="sc">~</span> <span class="st">"Hommes"</span>, SEXE<span class="sc">==</span><span class="st">"2"</span> <span class="sc">~</span> <span class="st">"Femmes"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(SEXE, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Effectif=</span>n, <span class="st">'Sexe'</span><span class="ot">=</span>SEXE) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">" "</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">"Source : Insee, RP 2019 ; Champ : Paris."</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Population par sexe en 2019"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
-<p>&nbsp; Il y a plus de femmes habitant Paris en 2019, environ 53%.</p>
+<p>Il y a plus de femmes habitant Paris en 2019, environ 53%.</p>
 <p>Cherchons maintenant la répartition de la population parisienne par type d’activité : quelle est la proportion d’actifs ayant un emploi par rapport à la part des chômeurs ou encore des retraités ? Attention au champ sur lequel porte ces statistiques (lire le titre du tableau pour cela…).</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tjojetblri" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tjojetblri table {
+<div id="zmnredsgnk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zmnredsgnk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tjojetblri thead, #tjojetblri tbody, #tjojetblri tfoot, #tjojetblri tr, #tjojetblri td, #tjojetblri th {
+#zmnredsgnk thead, #zmnredsgnk tbody, #zmnredsgnk tfoot, #zmnredsgnk tr, #zmnredsgnk td, #zmnredsgnk th {
   border-style: none;
 }
 
-#tjojetblri p {
+#zmnredsgnk p {
   margin: 0;
   padding: 0;
 }
 
-#tjojetblri .gt_table {
+#zmnredsgnk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1097,12 +1071,12 @@ Attachement du package : 'janitor'</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#tjojetblri .gt_caption {
+#zmnredsgnk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tjojetblri .gt_title {
+#zmnredsgnk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1114,7 +1088,7 @@ Attachement du package : 'janitor'</code></pre>
   border-bottom-width: 0;
 }
 
-#tjojetblri .gt_subtitle {
+#zmnredsgnk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1126,7 +1100,7 @@ Attachement du package : 'janitor'</code></pre>
   border-top-width: 0;
 }
 
-#tjojetblri .gt_heading {
+#zmnredsgnk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1138,13 +1112,13 @@ Attachement du package : 'janitor'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tjojetblri .gt_bottom_border {
+#zmnredsgnk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tjojetblri .gt_col_headings {
+#zmnredsgnk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1159,7 +1133,7 @@ Attachement du package : 'janitor'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tjojetblri .gt_col_heading {
+#zmnredsgnk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1179,7 +1153,7 @@ Attachement du package : 'janitor'</code></pre>
   overflow-x: hidden;
 }
 
-#tjojetblri .gt_column_spanner_outer {
+#zmnredsgnk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1191,15 +1165,15 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 4px;
 }
 
-#tjojetblri .gt_column_spanner_outer:first-child {
+#zmnredsgnk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tjojetblri .gt_column_spanner_outer:last-child {
+#zmnredsgnk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tjojetblri .gt_column_spanner {
+#zmnredsgnk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1211,11 +1185,11 @@ Attachement du package : 'janitor'</code></pre>
   width: 100%;
 }
 
-#tjojetblri .gt_spanner_row {
+#zmnredsgnk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tjojetblri .gt_group_heading {
+#zmnredsgnk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1241,7 +1215,7 @@ Attachement du package : 'janitor'</code></pre>
   text-align: left;
 }
 
-#tjojetblri .gt_empty_group_heading {
+#zmnredsgnk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1256,15 +1230,15 @@ Attachement du package : 'janitor'</code></pre>
   vertical-align: middle;
 }
 
-#tjojetblri .gt_from_md > :first-child {
+#zmnredsgnk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tjojetblri .gt_from_md > :last-child {
+#zmnredsgnk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tjojetblri .gt_row {
+#zmnredsgnk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1283,7 +1257,7 @@ Attachement du package : 'janitor'</code></pre>
   overflow-x: hidden;
 }
 
-#tjojetblri .gt_stub {
+#zmnredsgnk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1296,7 +1270,7 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 5px;
 }
 
-#tjojetblri .gt_stub_row_group {
+#zmnredsgnk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1310,15 +1284,15 @@ Attachement du package : 'janitor'</code></pre>
   vertical-align: top;
 }
 
-#tjojetblri .gt_row_group_first td {
+#zmnredsgnk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tjojetblri .gt_row_group_first th {
+#zmnredsgnk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tjojetblri .gt_summary_row {
+#zmnredsgnk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1328,16 +1302,16 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 5px;
 }
 
-#tjojetblri .gt_first_summary_row {
+#zmnredsgnk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tjojetblri .gt_first_summary_row.thick {
+#zmnredsgnk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tjojetblri .gt_last_summary_row {
+#zmnredsgnk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1347,7 +1321,7 @@ Attachement du package : 'janitor'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tjojetblri .gt_grand_summary_row {
+#zmnredsgnk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1357,7 +1331,7 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 5px;
 }
 
-#tjojetblri .gt_first_grand_summary_row {
+#zmnredsgnk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1367,7 +1341,7 @@ Attachement du package : 'janitor'</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#tjojetblri .gt_last_grand_summary_row_top {
+#zmnredsgnk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1377,11 +1351,11 @@ Attachement du package : 'janitor'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tjojetblri .gt_striped {
+#zmnredsgnk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tjojetblri .gt_table_body {
+#zmnredsgnk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1390,7 +1364,7 @@ Attachement du package : 'janitor'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tjojetblri .gt_footnotes {
+#zmnredsgnk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1404,7 +1378,7 @@ Attachement du package : 'janitor'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tjojetblri .gt_footnote {
+#zmnredsgnk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1413,7 +1387,7 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 5px;
 }
 
-#tjojetblri .gt_sourcenotes {
+#zmnredsgnk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1427,7 +1401,7 @@ Attachement du package : 'janitor'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tjojetblri .gt_sourcenote {
+#zmnredsgnk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1435,72 +1409,72 @@ Attachement du package : 'janitor'</code></pre>
   padding-right: 5px;
 }
 
-#tjojetblri .gt_left {
+#zmnredsgnk .gt_left {
   text-align: left;
 }
 
-#tjojetblri .gt_center {
+#zmnredsgnk .gt_center {
   text-align: center;
 }
 
-#tjojetblri .gt_right {
+#zmnredsgnk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tjojetblri .gt_font_normal {
+#zmnredsgnk .gt_font_normal {
   font-weight: normal;
 }
 
-#tjojetblri .gt_font_bold {
+#zmnredsgnk .gt_font_bold {
   font-weight: bold;
 }
 
-#tjojetblri .gt_font_italic {
+#zmnredsgnk .gt_font_italic {
   font-style: italic;
 }
 
-#tjojetblri .gt_super {
+#zmnredsgnk .gt_super {
   font-size: 65%;
 }
 
-#tjojetblri .gt_footnote_marks {
+#zmnredsgnk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tjojetblri .gt_asterisk {
+#zmnredsgnk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tjojetblri .gt_indent_1 {
+#zmnredsgnk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tjojetblri .gt_indent_2 {
+#zmnredsgnk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tjojetblri .gt_indent_3 {
+#zmnredsgnk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tjojetblri .gt_indent_4 {
+#zmnredsgnk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tjojetblri .gt_indent_5 {
+#zmnredsgnk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tjojetblri .katex-display {
+#zmnredsgnk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tjojetblri div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zmnredsgnk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1571,25 +1545,25 @@ Attachement du package : 'janitor'</code></pre>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span> <span class="sc">&amp;</span> <span class="sc">!</span>AGEREVQ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"5"</span>, <span class="st">"10"</span>, <span class="st">"65"</span>, <span class="st">"70"</span>, <span class="st">"75"</span>, <span class="st">"80"</span>, <span class="st">"85"</span>, <span class="st">"90"</span>, <span class="st">"95"</span>, </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"100"</span>, <span class="st">"105"</span>, <span class="st">"110"</span>, <span class="st">"115"</span>, <span class="st">"120"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TACT=</span><span class="fu">case_when</span>(TACT <span class="sc">==</span> <span class="st">"11"</span> <span class="sc">~</span> <span class="st">"Actifs ayant un emploi"</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">"12"</span> <span class="sc">~</span> <span class="st">"Chômeurs"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">"22"</span> <span class="sc">~</span> <span class="st">"Élèves, étudiants et stagiaires non rémunérés"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">"21"</span> <span class="sc">~</span> <span class="st">"Retraités ou préretraités"</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Autres inactifs"</span>),</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">TACT=</span><span class="fu">fct_relevel</span>(TACT, <span class="fu">c</span>(<span class="st">"Actifs ayant un emploi"</span>, <span class="st">"Chômeurs"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"Élèves, étudiants et stagiaires non rémunérés"</span>, </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"Retraités ou préretraités"</span>, <span class="st">"Autres inactifs"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(TACT, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Effectif=</span>n, <span class="st">"Type d'activité"</span><span class="ot">=</span>TACT) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">" "</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Population des 15-64 ans par type d'activité en 2019"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">"Source : Insee, RP 2019 ; Champ : Paris."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span> <span class="sc">&amp;</span> <span class="sc">!</span>AGEREVQ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"5"</span>, <span class="st">"10"</span>, <span class="st">"65"</span>, <span class="st">"70"</span>, <span class="st">"75"</span>, <span class="st">"80"</span>, <span class="st">"85"</span>, <span class="st">"90"</span>, <span class="st">"95"</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"100"</span>, <span class="st">"105"</span>, <span class="st">"110"</span>, <span class="st">"115"</span>, <span class="st">"120"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TACT=</span><span class="fu">case_when</span>(TACT <span class="sc">==</span> <span class="st">"11"</span> <span class="sc">~</span> <span class="st">"Actifs ayant un emploi"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">"12"</span> <span class="sc">~</span> <span class="st">"Chômeurs"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">"22"</span> <span class="sc">~</span> <span class="st">"Élèves, étudiants et stagiaires non rémunérés"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                             TACT <span class="sc">==</span> <span class="st">"21"</span> <span class="sc">~</span> <span class="st">"Retraités ou préretraités"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Autres inactifs"</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">TACT=</span><span class="fu">fct_relevel</span>(TACT, <span class="fu">c</span>(<span class="st">"Actifs ayant un emploi"</span>, <span class="st">"Chômeurs"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"Élèves, étudiants et stagiaires non rémunérés"</span>, </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"Retraités ou préretraités"</span>, <span class="st">"Autres inactifs"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(TACT, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pourcentage=</span><span class="fu">round</span>(<span class="fu">prop.table</span>(n)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Effectif=</span>n, <span class="st">"Type d'activité"</span><span class="ot">=</span>TACT) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">sep_mark =</span> <span class="st">" "</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Population des 15-64 ans par type d'activité en 2019"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">"Source : Insee, RP 2019 ; Champ : Paris."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1619,43 +1593,43 @@ Attachement du package : 'janitor'</code></pre>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On va récupérer les libellés des modalités de la variable CS1 à partir du </span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  fichier meta :</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>levels_CS1 <span class="ot">&lt;-</span> meta[meta<span class="sc">$</span>COD_VAR<span class="sc">==</span><span class="st">"CS1"</span>, ]<span class="sc">$</span>COD_MOD</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>labels_CS1 <span class="ot">&lt;-</span> meta[meta<span class="sc">$</span>COD_VAR<span class="sc">==</span><span class="st">"CS1"</span>, ]<span class="sc">$</span>LIB_MOD</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>RP_final <span class="ot">&lt;-</span> RP_final <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">CS1_moda=</span><span class="fu">factor</span>(CS1, <span class="at">levels =</span> levels_CS1, </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">labels =</span> labels_CS1))</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>col2 <span class="ot">&lt;-</span> RP_final <span class="sc">%&gt;%</span> </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span> <span class="sc">&amp;</span> <span class="sc">!</span>AGEREVQ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"5"</span>, <span class="st">"10"</span>, <span class="st">"65"</span>, <span class="st">"70"</span>, <span class="st">"75"</span>, <span class="st">"80"</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"85"</span>, <span class="st">"90"</span>, <span class="st">"95"</span>, <span class="st">"100"</span>, <span class="st">"105"</span>, <span class="st">"110"</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"115"</span>, <span class="st">"120"</span>) <span class="sc">&amp;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>           TACT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"11"</span>, <span class="st">"12"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(CS1_moda, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">round</span>(n)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">'2019'</span><span class="ot">=</span>n, <span class="st">'PCS'</span><span class="ot">=</span>CS1_moda) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">7</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>col3 <span class="ot">&lt;-</span> RP_final <span class="sc">%&gt;%</span> </span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span> <span class="sc">&amp;</span> <span class="sc">!</span>AGEREVQ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"5"</span>, <span class="st">"10"</span>, <span class="st">"65"</span>, <span class="st">"70"</span>, <span class="st">"75"</span>, <span class="st">"80"</span>,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"85"</span>, <span class="st">"90"</span>, <span class="st">"95"</span>, <span class="st">"100"</span>, <span class="st">"105"</span>, <span class="st">"110"</span>, </span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"115"</span>, <span class="st">"120"</span>) <span class="sc">&amp;</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>           TACT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"11"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(CS1_moda, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">round</span>(n)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">'dont actifs ayant un emploi'</span><span class="ot">=</span>n, <span class="st">'PCS'</span><span class="ot">=</span>CS1_moda) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>)</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>col2 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(col3) <span class="sc">%&gt;%</span>  </span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()  <span class="sc">%&gt;%</span> </span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">sep_mark =</span> <span class="st">" "</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Population active de 15-64 ans selon la </span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="st">             catégorie socioprofessionnelle en 2019"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">"Source : Insee, RP 2019 ; Champ : Paris."</span>)</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co"># On supprime les tableaux intermédiaires</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(col2, col3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On va récupérer les libellés des modalités de la variable CS1 à partir du </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  fichier meta :</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>levels_CS1 <span class="ot">&lt;-</span> meta[meta<span class="sc">$</span>COD_VAR<span class="sc">==</span><span class="st">"CS1"</span>, ]<span class="sc">$</span>COD_MOD</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>labels_CS1 <span class="ot">&lt;-</span> meta[meta<span class="sc">$</span>COD_VAR<span class="sc">==</span><span class="st">"CS1"</span>, ]<span class="sc">$</span>LIB_MOD</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>RP_final <span class="ot">&lt;-</span> RP_final <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">CS1_moda=</span><span class="fu">factor</span>(CS1, <span class="at">levels =</span> levels_CS1, </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">labels =</span> labels_CS1))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>col2 <span class="ot">&lt;-</span> RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span> <span class="sc">&amp;</span> <span class="sc">!</span>AGEREVQ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"5"</span>, <span class="st">"10"</span>, <span class="st">"65"</span>, <span class="st">"70"</span>, <span class="st">"75"</span>, <span class="st">"80"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"85"</span>, <span class="st">"90"</span>, <span class="st">"95"</span>, <span class="st">"100"</span>, <span class="st">"105"</span>, <span class="st">"110"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"115"</span>, <span class="st">"120"</span>) <span class="sc">&amp;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>           TACT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"11"</span>, <span class="st">"12"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(CS1_moda, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">round</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">'2019'</span><span class="ot">=</span>n, <span class="st">'PCS'</span><span class="ot">=</span>CS1_moda) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">7</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>col3 <span class="ot">&lt;-</span> RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span> <span class="sc">&amp;</span> <span class="sc">!</span>AGEREVQ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"5"</span>, <span class="st">"10"</span>, <span class="st">"65"</span>, <span class="st">"70"</span>, <span class="st">"75"</span>, <span class="st">"80"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"85"</span>, <span class="st">"90"</span>, <span class="st">"95"</span>, <span class="st">"100"</span>, <span class="st">"105"</span>, <span class="st">"110"</span>, </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"115"</span>, <span class="st">"120"</span>) <span class="sc">&amp;</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>           TACT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"11"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(CS1_moda, <span class="at">wt=</span>IPONDI) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">round</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">'dont actifs ayant un emploi'</span><span class="ot">=</span>n, <span class="st">'PCS'</span><span class="ot">=</span>CS1_moda) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>col2 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(col3) <span class="sc">%&gt;%</span>  </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()  <span class="sc">%&gt;%</span> </span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">sep_mark =</span> <span class="st">" "</span>, <span class="at">decimals =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Population active de 15-64 ans selon la </span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="st">             catégorie socioprofessionnelle en 2019"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">"Source : Insee, RP 2019 ; Champ : Paris."</span>)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co"># On supprime les tableaux intermédiaires</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(col2, col3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1685,22 +1659,22 @@ Attachement du package : 'janitor'</code></pre>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span> <span class="sc">&amp;</span> LPRM<span class="sc">==</span><span class="st">"1"</span> <span class="sc">&amp;</span> CATL<span class="sc">==</span><span class="st">"1"</span> <span class="sc">&amp;</span> TYPL <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(TYPL) <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Moy_pieces =</span> <span class="fu">weighted.mean</span>(<span class="fu">as.numeric</span>(<span class="fu">as.character</span>(NBPI)), </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                                       IPONDI, <span class="at">na.rm=</span>T)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="fu">summarise</span>(<span class="at">TYPL =</span> <span class="st">"Ensemble des résidences principales"</span>, </span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                      RP_final[RP_final<span class="sc">$</span>DEPT <span class="sc">==</span> <span class="st">"75"</span> <span class="sc">&amp;</span> RP_final<span class="sc">$</span>LPRM<span class="sc">==</span><span class="st">"1"</span> <span class="sc">&amp;</span> </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                                 RP_final<span class="sc">$</span>CATL <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">&amp;</span> RP_final<span class="sc">$</span>TYPL <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), ], </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Moy_pieces =</span> <span class="fu">weighted.mean</span>(<span class="fu">as.numeric</span>(<span class="fu">as.character</span>(NBPI)), </span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                                                 IPONDI, <span class="at">na.rm=</span>T))) <span class="sc">%&gt;%</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">dec_mark =</span> <span class="st">","</span>, <span class="at">decimals =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">TYPL=</span><span class="st">"Type de logement"</span>, <span class="at">Moy_pieces=</span><span class="st">"2019"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">text_case_match</span>(<span class="st">"1"</span> <span class="sc">~</span> <span class="st">"Maison"</span>, <span class="st">"2"</span> <span class="sc">~</span> (<span class="st">"Appartement"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Nombre moyen de pièces des résidences principales"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">"Source : Insee, RP 2019 ; Champ : Paris."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span> <span class="sc">&amp;</span> LPRM<span class="sc">==</span><span class="st">"1"</span> <span class="sc">&amp;</span> CATL<span class="sc">==</span><span class="st">"1"</span> <span class="sc">&amp;</span> TYPL <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(TYPL) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Moy_pieces =</span> <span class="fu">weighted.mean</span>(<span class="fu">as.numeric</span>(<span class="fu">as.character</span>(NBPI)), </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                       IPONDI, <span class="at">na.rm=</span>T)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="fu">summarise</span>(<span class="at">TYPL =</span> <span class="st">"Ensemble des résidences principales"</span>, </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                      RP_final[RP_final<span class="sc">$</span>DEPT <span class="sc">==</span> <span class="st">"75"</span> <span class="sc">&amp;</span> RP_final<span class="sc">$</span>LPRM<span class="sc">==</span><span class="st">"1"</span> <span class="sc">&amp;</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                 RP_final<span class="sc">$</span>CATL <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">&amp;</span> RP_final<span class="sc">$</span>TYPL <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), ], </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Moy_pieces =</span> <span class="fu">weighted.mean</span>(<span class="fu">as.numeric</span>(<span class="fu">as.character</span>(NBPI)), </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                                                 IPONDI, <span class="at">na.rm=</span>T))) <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="dv">2</span>, <span class="at">dec_mark =</span> <span class="st">","</span>, <span class="at">decimals =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">TYPL=</span><span class="st">"Type de logement"</span>, <span class="at">Moy_pieces=</span><span class="st">"2019"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">text_case_match</span>(<span class="st">"1"</span> <span class="sc">~</span> <span class="st">"Maison"</span>, <span class="st">"2"</span> <span class="sc">~</span> (<span class="st">"Appartement"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Nombre moyen de pièces des résidences principales"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">"Source : Insee, RP 2019 ; Champ : Paris."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>

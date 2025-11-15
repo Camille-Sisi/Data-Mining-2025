@@ -65,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./13-Modeles-regression.html" rel="next">
 <link href="./11-Clustering-theorique.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -447,23 +446,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Séance 7</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13-Modeles-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles de régression : application sur les offres de Pôle emploi 2020</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -577,23 +559,23 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>AGER20 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>,<span class="st">"5"</span>, <span class="st">"10"</span>,<span class="st">"14"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tableau</span>(<span class="at">var_quali =</span> CS1, <span class="at">nom_var_quali =</span> <span class="st">"PCS"</span>) <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="aaeiwyuerg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aaeiwyuerg table {
+<div id="jgkgtxgcex" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jgkgtxgcex table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aaeiwyuerg thead, #aaeiwyuerg tbody, #aaeiwyuerg tfoot, #aaeiwyuerg tr, #aaeiwyuerg td, #aaeiwyuerg th {
+#jgkgtxgcex thead, #jgkgtxgcex tbody, #jgkgtxgcex tfoot, #jgkgtxgcex tr, #jgkgtxgcex td, #jgkgtxgcex th {
   border-style: none;
 }
 
-#aaeiwyuerg p {
+#jgkgtxgcex p {
   margin: 0;
   padding: 0;
 }
 
-#aaeiwyuerg .gt_table {
+#jgkgtxgcex .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -619,12 +601,12 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-left-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_caption {
+#jgkgtxgcex .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aaeiwyuerg .gt_title {
+#jgkgtxgcex .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -636,7 +618,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-bottom-width: 0;
 }
 
-#aaeiwyuerg .gt_subtitle {
+#jgkgtxgcex .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -648,7 +630,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-top-width: 0;
 }
 
-#aaeiwyuerg .gt_heading {
+#jgkgtxgcex .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -660,13 +642,13 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-right-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_bottom_border {
+#jgkgtxgcex .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_col_headings {
+#jgkgtxgcex .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -681,7 +663,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-right-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_col_heading {
+#jgkgtxgcex .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -701,7 +683,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   overflow-x: hidden;
 }
 
-#aaeiwyuerg .gt_column_spanner_outer {
+#jgkgtxgcex .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -713,15 +695,15 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   padding-right: 4px;
 }
 
-#aaeiwyuerg .gt_column_spanner_outer:first-child {
+#jgkgtxgcex .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aaeiwyuerg .gt_column_spanner_outer:last-child {
+#jgkgtxgcex .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aaeiwyuerg .gt_column_spanner {
+#jgkgtxgcex .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -733,11 +715,11 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   width: 100%;
 }
 
-#aaeiwyuerg .gt_spanner_row {
+#jgkgtxgcex .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aaeiwyuerg .gt_group_heading {
+#jgkgtxgcex .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -763,7 +745,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   text-align: left;
 }
 
-#aaeiwyuerg .gt_empty_group_heading {
+#jgkgtxgcex .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -778,15 +760,15 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   vertical-align: middle;
 }
 
-#aaeiwyuerg .gt_from_md > :first-child {
+#jgkgtxgcex .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aaeiwyuerg .gt_from_md > :last-child {
+#jgkgtxgcex .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aaeiwyuerg .gt_row {
+#jgkgtxgcex .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -805,7 +787,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   overflow-x: hidden;
 }
 
-#aaeiwyuerg .gt_stub {
+#jgkgtxgcex .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -818,7 +800,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   padding-right: 5px;
 }
 
-#aaeiwyuerg .gt_stub_row_group {
+#jgkgtxgcex .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -832,15 +814,15 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   vertical-align: top;
 }
 
-#aaeiwyuerg .gt_row_group_first td {
+#jgkgtxgcex .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aaeiwyuerg .gt_row_group_first th {
+#jgkgtxgcex .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aaeiwyuerg .gt_summary_row {
+#jgkgtxgcex .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -850,16 +832,16 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   padding-right: 5px;
 }
 
-#aaeiwyuerg .gt_first_summary_row {
+#jgkgtxgcex .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_first_summary_row.thick {
+#jgkgtxgcex .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aaeiwyuerg .gt_last_summary_row {
+#jgkgtxgcex .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -869,7 +851,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-bottom-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_grand_summary_row {
+#jgkgtxgcex .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -879,7 +861,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   padding-right: 5px;
 }
 
-#aaeiwyuerg .gt_first_grand_summary_row {
+#jgkgtxgcex .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -889,7 +871,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-top-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_last_grand_summary_row_top {
+#jgkgtxgcex .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -899,11 +881,11 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-bottom-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_striped {
+#jgkgtxgcex .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aaeiwyuerg .gt_table_body {
+#jgkgtxgcex .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -912,7 +894,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-bottom-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_footnotes {
+#jgkgtxgcex .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -926,7 +908,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-right-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_footnote {
+#jgkgtxgcex .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -935,7 +917,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   padding-right: 5px;
 }
 
-#aaeiwyuerg .gt_sourcenotes {
+#jgkgtxgcex .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -949,7 +931,7 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   border-right-color: #D3D3D3;
 }
 
-#aaeiwyuerg .gt_sourcenote {
+#jgkgtxgcex .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -957,72 +939,72 @@ Ces techniques font partie des méthodes d'apprentissage dit non supervisé, il 
   padding-right: 5px;
 }
 
-#aaeiwyuerg .gt_left {
+#jgkgtxgcex .gt_left {
   text-align: left;
 }
 
-#aaeiwyuerg .gt_center {
+#jgkgtxgcex .gt_center {
   text-align: center;
 }
 
-#aaeiwyuerg .gt_right {
+#jgkgtxgcex .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aaeiwyuerg .gt_font_normal {
+#jgkgtxgcex .gt_font_normal {
   font-weight: normal;
 }
 
-#aaeiwyuerg .gt_font_bold {
+#jgkgtxgcex .gt_font_bold {
   font-weight: bold;
 }
 
-#aaeiwyuerg .gt_font_italic {
+#jgkgtxgcex .gt_font_italic {
   font-style: italic;
 }
 
-#aaeiwyuerg .gt_super {
+#jgkgtxgcex .gt_super {
   font-size: 65%;
 }
 
-#aaeiwyuerg .gt_footnote_marks {
+#jgkgtxgcex .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aaeiwyuerg .gt_asterisk {
+#jgkgtxgcex .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aaeiwyuerg .gt_indent_1 {
+#jgkgtxgcex .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aaeiwyuerg .gt_indent_2 {
+#jgkgtxgcex .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aaeiwyuerg .gt_indent_3 {
+#jgkgtxgcex .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aaeiwyuerg .gt_indent_4 {
+#jgkgtxgcex .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aaeiwyuerg .gt_indent_5 {
+#jgkgtxgcex .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aaeiwyuerg .katex-display {
+#jgkgtxgcex .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aaeiwyuerg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jgkgtxgcex div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1573,23 +1555,23 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#library(janitor)</span></span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(classe3_socioprof) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="djfhjaktcp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#djfhjaktcp table {
+<div id="odttgiiywb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#odttgiiywb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#djfhjaktcp thead, #djfhjaktcp tbody, #djfhjaktcp tfoot, #djfhjaktcp tr, #djfhjaktcp td, #djfhjaktcp th {
+#odttgiiywb thead, #odttgiiywb tbody, #odttgiiywb tfoot, #odttgiiywb tr, #odttgiiywb td, #odttgiiywb th {
   border-style: none;
 }
 
-#djfhjaktcp p {
+#odttgiiywb p {
   margin: 0;
   padding: 0;
 }
 
-#djfhjaktcp .gt_table {
+#odttgiiywb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1615,12 +1597,12 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-left-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_caption {
+#odttgiiywb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#djfhjaktcp .gt_title {
+#odttgiiywb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1632,7 +1614,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-bottom-width: 0;
 }
 
-#djfhjaktcp .gt_subtitle {
+#odttgiiywb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1644,7 +1626,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-top-width: 0;
 }
 
-#djfhjaktcp .gt_heading {
+#odttgiiywb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1656,13 +1638,13 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-right-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_bottom_border {
+#odttgiiywb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_col_headings {
+#odttgiiywb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1677,7 +1659,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-right-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_col_heading {
+#odttgiiywb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1697,7 +1679,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   overflow-x: hidden;
 }
 
-#djfhjaktcp .gt_column_spanner_outer {
+#odttgiiywb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1709,15 +1691,15 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 4px;
 }
 
-#djfhjaktcp .gt_column_spanner_outer:first-child {
+#odttgiiywb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#djfhjaktcp .gt_column_spanner_outer:last-child {
+#odttgiiywb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#djfhjaktcp .gt_column_spanner {
+#odttgiiywb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1729,11 +1711,11 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   width: 100%;
 }
 
-#djfhjaktcp .gt_spanner_row {
+#odttgiiywb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#djfhjaktcp .gt_group_heading {
+#odttgiiywb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1759,7 +1741,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   text-align: left;
 }
 
-#djfhjaktcp .gt_empty_group_heading {
+#odttgiiywb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1774,15 +1756,15 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   vertical-align: middle;
 }
 
-#djfhjaktcp .gt_from_md > :first-child {
+#odttgiiywb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#djfhjaktcp .gt_from_md > :last-child {
+#odttgiiywb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#djfhjaktcp .gt_row {
+#odttgiiywb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1801,7 +1783,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   overflow-x: hidden;
 }
 
-#djfhjaktcp .gt_stub {
+#odttgiiywb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1814,7 +1796,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 5px;
 }
 
-#djfhjaktcp .gt_stub_row_group {
+#odttgiiywb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1828,15 +1810,15 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   vertical-align: top;
 }
 
-#djfhjaktcp .gt_row_group_first td {
+#odttgiiywb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#djfhjaktcp .gt_row_group_first th {
+#odttgiiywb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#djfhjaktcp .gt_summary_row {
+#odttgiiywb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1846,16 +1828,16 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 5px;
 }
 
-#djfhjaktcp .gt_first_summary_row {
+#odttgiiywb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_first_summary_row.thick {
+#odttgiiywb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#djfhjaktcp .gt_last_summary_row {
+#odttgiiywb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1865,7 +1847,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-bottom-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_grand_summary_row {
+#odttgiiywb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1875,7 +1857,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 5px;
 }
 
-#djfhjaktcp .gt_first_grand_summary_row {
+#odttgiiywb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1885,7 +1867,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-top-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_last_grand_summary_row_top {
+#odttgiiywb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1895,11 +1877,11 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-bottom-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_striped {
+#odttgiiywb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#djfhjaktcp .gt_table_body {
+#odttgiiywb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1908,7 +1890,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-bottom-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_footnotes {
+#odttgiiywb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1922,7 +1904,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-right-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_footnote {
+#odttgiiywb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1931,7 +1913,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 5px;
 }
 
-#djfhjaktcp .gt_sourcenotes {
+#odttgiiywb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1945,7 +1927,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-right-color: #D3D3D3;
 }
 
-#djfhjaktcp .gt_sourcenote {
+#odttgiiywb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1953,72 +1935,72 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 5px;
 }
 
-#djfhjaktcp .gt_left {
+#odttgiiywb .gt_left {
   text-align: left;
 }
 
-#djfhjaktcp .gt_center {
+#odttgiiywb .gt_center {
   text-align: center;
 }
 
-#djfhjaktcp .gt_right {
+#odttgiiywb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#djfhjaktcp .gt_font_normal {
+#odttgiiywb .gt_font_normal {
   font-weight: normal;
 }
 
-#djfhjaktcp .gt_font_bold {
+#odttgiiywb .gt_font_bold {
   font-weight: bold;
 }
 
-#djfhjaktcp .gt_font_italic {
+#odttgiiywb .gt_font_italic {
   font-style: italic;
 }
 
-#djfhjaktcp .gt_super {
+#odttgiiywb .gt_super {
   font-size: 65%;
 }
 
-#djfhjaktcp .gt_footnote_marks {
+#odttgiiywb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#djfhjaktcp .gt_asterisk {
+#odttgiiywb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#djfhjaktcp .gt_indent_1 {
+#odttgiiywb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#djfhjaktcp .gt_indent_2 {
+#odttgiiywb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#djfhjaktcp .gt_indent_3 {
+#odttgiiywb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#djfhjaktcp .gt_indent_4 {
+#odttgiiywb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#djfhjaktcp .gt_indent_5 {
+#odttgiiywb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#djfhjaktcp .katex-display {
+#odttgiiywb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#djfhjaktcp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#odttgiiywb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2054,23 +2036,23 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(classe4_socioprof) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="gvmmuzupau" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gvmmuzupau table {
+<div id="chjgymudvx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#chjgymudvx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gvmmuzupau thead, #gvmmuzupau tbody, #gvmmuzupau tfoot, #gvmmuzupau tr, #gvmmuzupau td, #gvmmuzupau th {
+#chjgymudvx thead, #chjgymudvx tbody, #chjgymudvx tfoot, #chjgymudvx tr, #chjgymudvx td, #chjgymudvx th {
   border-style: none;
 }
 
-#gvmmuzupau p {
+#chjgymudvx p {
   margin: 0;
   padding: 0;
 }
 
-#gvmmuzupau .gt_table {
+#chjgymudvx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2096,12 +2078,12 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-left-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_caption {
+#chjgymudvx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gvmmuzupau .gt_title {
+#chjgymudvx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2113,7 +2095,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-bottom-width: 0;
 }
 
-#gvmmuzupau .gt_subtitle {
+#chjgymudvx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2125,7 +2107,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-top-width: 0;
 }
 
-#gvmmuzupau .gt_heading {
+#chjgymudvx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2137,13 +2119,13 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-right-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_bottom_border {
+#chjgymudvx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_col_headings {
+#chjgymudvx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2158,7 +2140,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-right-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_col_heading {
+#chjgymudvx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2178,7 +2160,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   overflow-x: hidden;
 }
 
-#gvmmuzupau .gt_column_spanner_outer {
+#chjgymudvx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2190,15 +2172,15 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 4px;
 }
 
-#gvmmuzupau .gt_column_spanner_outer:first-child {
+#chjgymudvx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gvmmuzupau .gt_column_spanner_outer:last-child {
+#chjgymudvx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gvmmuzupau .gt_column_spanner {
+#chjgymudvx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2210,11 +2192,11 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   width: 100%;
 }
 
-#gvmmuzupau .gt_spanner_row {
+#chjgymudvx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gvmmuzupau .gt_group_heading {
+#chjgymudvx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2240,7 +2222,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   text-align: left;
 }
 
-#gvmmuzupau .gt_empty_group_heading {
+#chjgymudvx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2255,15 +2237,15 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   vertical-align: middle;
 }
 
-#gvmmuzupau .gt_from_md > :first-child {
+#chjgymudvx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gvmmuzupau .gt_from_md > :last-child {
+#chjgymudvx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gvmmuzupau .gt_row {
+#chjgymudvx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2282,7 +2264,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   overflow-x: hidden;
 }
 
-#gvmmuzupau .gt_stub {
+#chjgymudvx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2295,7 +2277,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 5px;
 }
 
-#gvmmuzupau .gt_stub_row_group {
+#chjgymudvx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2309,15 +2291,15 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   vertical-align: top;
 }
 
-#gvmmuzupau .gt_row_group_first td {
+#chjgymudvx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gvmmuzupau .gt_row_group_first th {
+#chjgymudvx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gvmmuzupau .gt_summary_row {
+#chjgymudvx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2327,16 +2309,16 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 5px;
 }
 
-#gvmmuzupau .gt_first_summary_row {
+#chjgymudvx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_first_summary_row.thick {
+#chjgymudvx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gvmmuzupau .gt_last_summary_row {
+#chjgymudvx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2346,7 +2328,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-bottom-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_grand_summary_row {
+#chjgymudvx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2356,7 +2338,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 5px;
 }
 
-#gvmmuzupau .gt_first_grand_summary_row {
+#chjgymudvx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2366,7 +2348,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-top-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_last_grand_summary_row_top {
+#chjgymudvx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2376,11 +2358,11 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-bottom-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_striped {
+#chjgymudvx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gvmmuzupau .gt_table_body {
+#chjgymudvx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2389,7 +2371,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-bottom-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_footnotes {
+#chjgymudvx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2403,7 +2385,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-right-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_footnote {
+#chjgymudvx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2412,7 +2394,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 5px;
 }
 
-#gvmmuzupau .gt_sourcenotes {
+#chjgymudvx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2426,7 +2408,7 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   border-right-color: #D3D3D3;
 }
 
-#gvmmuzupau .gt_sourcenote {
+#chjgymudvx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2434,72 +2416,72 @@ On intègre ensuite la variable au tableau initial “cat_soc_chi2” qui contie
   padding-right: 5px;
 }
 
-#gvmmuzupau .gt_left {
+#chjgymudvx .gt_left {
   text-align: left;
 }
 
-#gvmmuzupau .gt_center {
+#chjgymudvx .gt_center {
   text-align: center;
 }
 
-#gvmmuzupau .gt_right {
+#chjgymudvx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gvmmuzupau .gt_font_normal {
+#chjgymudvx .gt_font_normal {
   font-weight: normal;
 }
 
-#gvmmuzupau .gt_font_bold {
+#chjgymudvx .gt_font_bold {
   font-weight: bold;
 }
 
-#gvmmuzupau .gt_font_italic {
+#chjgymudvx .gt_font_italic {
   font-style: italic;
 }
 
-#gvmmuzupau .gt_super {
+#chjgymudvx .gt_super {
   font-size: 65%;
 }
 
-#gvmmuzupau .gt_footnote_marks {
+#chjgymudvx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gvmmuzupau .gt_asterisk {
+#chjgymudvx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gvmmuzupau .gt_indent_1 {
+#chjgymudvx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gvmmuzupau .gt_indent_2 {
+#chjgymudvx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gvmmuzupau .gt_indent_3 {
+#chjgymudvx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gvmmuzupau .gt_indent_4 {
+#chjgymudvx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gvmmuzupau .gt_indent_5 {
+#chjgymudvx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gvmmuzupau .katex-display {
+#chjgymudvx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gvmmuzupau div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#chjgymudvx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2785,23 +2767,23 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
 <span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">libelles_var</span>(<span class="at">cod_var=</span><span class="st">"DIPL"</span>, <span class="at">new_var =</span> Diplome_nom) <span class="sc">%&gt;%</span>  </span>
 <span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Tabcr_pctcol</span>(<span class="at">var1=</span>classe4_socioprof, <span class="at">var2=</span>Diplome_nom) <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="igwylgqtcv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#igwylgqtcv table {
+<div id="ppkpculqdn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ppkpculqdn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#igwylgqtcv thead, #igwylgqtcv tbody, #igwylgqtcv tfoot, #igwylgqtcv tr, #igwylgqtcv td, #igwylgqtcv th {
+#ppkpculqdn thead, #ppkpculqdn tbody, #ppkpculqdn tfoot, #ppkpculqdn tr, #ppkpculqdn td, #ppkpculqdn th {
   border-style: none;
 }
 
-#igwylgqtcv p {
+#ppkpculqdn p {
   margin: 0;
   padding: 0;
 }
 
-#igwylgqtcv .gt_table {
+#ppkpculqdn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2827,12 +2809,12 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_caption {
+#ppkpculqdn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#igwylgqtcv .gt_title {
+#ppkpculqdn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2844,7 +2826,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-bottom-width: 0;
 }
 
-#igwylgqtcv .gt_subtitle {
+#ppkpculqdn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2856,7 +2838,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-top-width: 0;
 }
 
-#igwylgqtcv .gt_heading {
+#ppkpculqdn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2868,13 +2850,13 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_bottom_border {
+#ppkpculqdn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_col_headings {
+#ppkpculqdn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2889,7 +2871,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_col_heading {
+#ppkpculqdn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2909,7 +2891,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   overflow-x: hidden;
 }
 
-#igwylgqtcv .gt_column_spanner_outer {
+#ppkpculqdn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2921,15 +2903,15 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   padding-right: 4px;
 }
 
-#igwylgqtcv .gt_column_spanner_outer:first-child {
+#ppkpculqdn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#igwylgqtcv .gt_column_spanner_outer:last-child {
+#ppkpculqdn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#igwylgqtcv .gt_column_spanner {
+#ppkpculqdn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2941,11 +2923,11 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   width: 100%;
 }
 
-#igwylgqtcv .gt_spanner_row {
+#ppkpculqdn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#igwylgqtcv .gt_group_heading {
+#ppkpculqdn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2971,7 +2953,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   text-align: left;
 }
 
-#igwylgqtcv .gt_empty_group_heading {
+#ppkpculqdn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2986,15 +2968,15 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   vertical-align: middle;
 }
 
-#igwylgqtcv .gt_from_md > :first-child {
+#ppkpculqdn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#igwylgqtcv .gt_from_md > :last-child {
+#ppkpculqdn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#igwylgqtcv .gt_row {
+#ppkpculqdn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3013,7 +2995,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   overflow-x: hidden;
 }
 
-#igwylgqtcv .gt_stub {
+#ppkpculqdn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3026,7 +3008,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   padding-right: 5px;
 }
 
-#igwylgqtcv .gt_stub_row_group {
+#ppkpculqdn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3040,15 +3022,15 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   vertical-align: top;
 }
 
-#igwylgqtcv .gt_row_group_first td {
+#ppkpculqdn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#igwylgqtcv .gt_row_group_first th {
+#ppkpculqdn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#igwylgqtcv .gt_summary_row {
+#ppkpculqdn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3058,16 +3040,16 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   padding-right: 5px;
 }
 
-#igwylgqtcv .gt_first_summary_row {
+#ppkpculqdn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_first_summary_row.thick {
+#ppkpculqdn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#igwylgqtcv .gt_last_summary_row {
+#ppkpculqdn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3077,7 +3059,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_grand_summary_row {
+#ppkpculqdn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3087,7 +3069,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   padding-right: 5px;
 }
 
-#igwylgqtcv .gt_first_grand_summary_row {
+#ppkpculqdn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3097,7 +3079,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_last_grand_summary_row_top {
+#ppkpculqdn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3107,11 +3089,11 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_striped {
+#ppkpculqdn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#igwylgqtcv .gt_table_body {
+#ppkpculqdn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3120,7 +3102,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_footnotes {
+#ppkpculqdn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3134,7 +3116,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_footnote {
+#ppkpculqdn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3143,7 +3125,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   padding-right: 5px;
 }
 
-#igwylgqtcv .gt_sourcenotes {
+#ppkpculqdn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3157,7 +3139,7 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#igwylgqtcv .gt_sourcenote {
+#ppkpculqdn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3165,72 +3147,72 @@ nb_Cadres          0.21154267 9.644260e-15</code></pre>
   padding-right: 5px;
 }
 
-#igwylgqtcv .gt_left {
+#ppkpculqdn .gt_left {
   text-align: left;
 }
 
-#igwylgqtcv .gt_center {
+#ppkpculqdn .gt_center {
   text-align: center;
 }
 
-#igwylgqtcv .gt_right {
+#ppkpculqdn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#igwylgqtcv .gt_font_normal {
+#ppkpculqdn .gt_font_normal {
   font-weight: normal;
 }
 
-#igwylgqtcv .gt_font_bold {
+#ppkpculqdn .gt_font_bold {
   font-weight: bold;
 }
 
-#igwylgqtcv .gt_font_italic {
+#ppkpculqdn .gt_font_italic {
   font-style: italic;
 }
 
-#igwylgqtcv .gt_super {
+#ppkpculqdn .gt_super {
   font-size: 65%;
 }
 
-#igwylgqtcv .gt_footnote_marks {
+#ppkpculqdn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#igwylgqtcv .gt_asterisk {
+#ppkpculqdn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#igwylgqtcv .gt_indent_1 {
+#ppkpculqdn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#igwylgqtcv .gt_indent_2 {
+#ppkpculqdn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#igwylgqtcv .gt_indent_3 {
+#ppkpculqdn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#igwylgqtcv .gt_indent_4 {
+#ppkpculqdn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#igwylgqtcv .gt_indent_5 {
+#ppkpculqdn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#igwylgqtcv .katex-display {
+#ppkpculqdn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#igwylgqtcv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ppkpculqdn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3953,9 +3935,6 @@ classe4_socioprof  1  2  3  4
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./13-Modeles-regression.html" class="pagination-link" aria-label="Modèles de régression : application sur les offres de Pôle emploi 2020">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles de régression : application sur les offres de Pôle emploi 2020</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

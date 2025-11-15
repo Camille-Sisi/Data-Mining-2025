@@ -23,7 +23,7 @@ La fonction `str()` ou son équivalent en langage `dplyr` la fonction `glimpse` 
 RP %>% glimpse()
 ```
 
-Les variables sont en format, soit 'int' ("integer" - nombres entiers), soit 'fct' ("factor"), ou encore 'dbl' ("double" - nombres réels).  On remarque que la plupart des variables ont des modalités en chiffres et/ou lettres, ce qui signifie qu'il faudra probablement recoder ces modalités pour leur donner des libellés dans nos analyses descriptives (tableaux ou graphiques).
+Les variables sont en format, soit 'int' ("integer" - nombres entiers), soit 'fct' ("factor"), ou encore 'dbl' ("double" - nombres réels). On remarque que la plupart des variables ont des modalités en chiffres et/ou lettres, ce qui signifie qu'il faudra probablement recoder ces modalités pour leur donner des libellés dans nos analyses descriptives (tableaux ou graphiques).
 
 Par ailleurs, certaines variables ont été laissées en format 'integer' bien que l'on avait mis l'option `stringsAsFactors=TRUE` lors du chargement des données, or ces chiffres correspondent bien à des modalités d'une variable catégorielle, il faudra donc le corriger ultérieurement.
 
@@ -50,7 +50,7 @@ On peut aussi choisir de séparer les données en créant 2 tables selon l'unit�
 
 Comme vous le savez très probablement, dans le langage `tidyverse`, pour faire des sélections sur les lignes ou observations dans une table de données, on utilise la fonction `filter()` ; pour faire des sélections sur les colonnes ou variables, on utilise la fonction `select()` ; pour supprimer des variables, on utilise également `select()` avec un "-" devant la (ou les) variable(s) à supprimer (dans le langage `R` de base, on peut aussi utiliser la fonction `subset()`).
 
-**EXERCICES** :  Créer trois nouvelles bases selon les indications suivantes :
+**EXERCICES** : Créer trois nouvelles bases selon les indications suivantes :
 
 -   la première que vous nommerez "RP_Paris" et qui rassemblera les données pour le seul département de Paris ;
 -   la deuxième que nous nommerez "RP_indiv" et qui comprendra les données pour les seules variables décrivant l'individu (et ce sera celle de la personne de référence du ménage) ;
@@ -111,7 +111,6 @@ RP_indiv <- subset(RP, select=c("AEMMR", "AGED", "AGER20", "AGEREV","AGEREVQ",
                                 "TACTD16","TP","TRANS"))
 ```
 
- 
 
 On va dorénavant travailler sur cette dernière table `RP_final`, on l'enregistre donc dans notre dossier "data", ainsi que le fichier `meta` que nous avons modifié précédemments :
 

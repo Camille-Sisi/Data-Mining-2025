@@ -476,23 +476,6 @@ window.Quarto = {
 </li>
       </ul>
   </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Séance 7</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13-Modeles-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles de régression : application sur les offres de Pôle emploi 2020</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -595,23 +578,23 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RP_final %&gt;% select_if(is.numeric) %&gt;% head() %&gt;% gt()</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>RP_final <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="ezjzwflvfv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ezjzwflvfv table {
+<div id="jfiijnqifx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jfiijnqifx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ezjzwflvfv thead, #ezjzwflvfv tbody, #ezjzwflvfv tfoot, #ezjzwflvfv tr, #ezjzwflvfv td, #ezjzwflvfv th {
+#jfiijnqifx thead, #jfiijnqifx tbody, #jfiijnqifx tfoot, #jfiijnqifx tr, #jfiijnqifx td, #jfiijnqifx th {
   border-style: none;
 }
 
-#ezjzwflvfv p {
+#jfiijnqifx p {
   margin: 0;
   padding: 0;
 }
 
-#ezjzwflvfv .gt_table {
+#jfiijnqifx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -637,12 +620,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_caption {
+#jfiijnqifx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ezjzwflvfv .gt_title {
+#jfiijnqifx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -654,7 +637,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ezjzwflvfv .gt_subtitle {
+#jfiijnqifx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -666,7 +649,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ezjzwflvfv .gt_heading {
+#jfiijnqifx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -678,13 +661,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_bottom_border {
+#jfiijnqifx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_col_headings {
+#jfiijnqifx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -699,7 +682,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_col_heading {
+#jfiijnqifx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -719,7 +702,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ezjzwflvfv .gt_column_spanner_outer {
+#jfiijnqifx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -731,15 +714,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ezjzwflvfv .gt_column_spanner_outer:first-child {
+#jfiijnqifx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ezjzwflvfv .gt_column_spanner_outer:last-child {
+#jfiijnqifx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ezjzwflvfv .gt_column_spanner {
+#jfiijnqifx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -751,11 +734,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ezjzwflvfv .gt_spanner_row {
+#jfiijnqifx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ezjzwflvfv .gt_group_heading {
+#jfiijnqifx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -781,7 +764,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ezjzwflvfv .gt_empty_group_heading {
+#jfiijnqifx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -796,15 +779,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ezjzwflvfv .gt_from_md > :first-child {
+#jfiijnqifx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ezjzwflvfv .gt_from_md > :last-child {
+#jfiijnqifx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ezjzwflvfv .gt_row {
+#jfiijnqifx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -823,7 +806,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ezjzwflvfv .gt_stub {
+#jfiijnqifx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -836,7 +819,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ezjzwflvfv .gt_stub_row_group {
+#jfiijnqifx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -850,15 +833,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ezjzwflvfv .gt_row_group_first td {
+#jfiijnqifx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ezjzwflvfv .gt_row_group_first th {
+#jfiijnqifx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ezjzwflvfv .gt_summary_row {
+#jfiijnqifx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -868,16 +851,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ezjzwflvfv .gt_first_summary_row {
+#jfiijnqifx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_first_summary_row.thick {
+#jfiijnqifx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ezjzwflvfv .gt_last_summary_row {
+#jfiijnqifx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -887,7 +870,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_grand_summary_row {
+#jfiijnqifx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -897,7 +880,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ezjzwflvfv .gt_first_grand_summary_row {
+#jfiijnqifx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -907,7 +890,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_last_grand_summary_row_top {
+#jfiijnqifx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -917,11 +900,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_striped {
+#jfiijnqifx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ezjzwflvfv .gt_table_body {
+#jfiijnqifx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -930,7 +913,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_footnotes {
+#jfiijnqifx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -944,7 +927,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_footnote {
+#jfiijnqifx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -953,7 +936,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ezjzwflvfv .gt_sourcenotes {
+#jfiijnqifx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -967,7 +950,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ezjzwflvfv .gt_sourcenote {
+#jfiijnqifx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -975,72 +958,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ezjzwflvfv .gt_left {
+#jfiijnqifx .gt_left {
   text-align: left;
 }
 
-#ezjzwflvfv .gt_center {
+#jfiijnqifx .gt_center {
   text-align: center;
 }
 
-#ezjzwflvfv .gt_right {
+#jfiijnqifx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ezjzwflvfv .gt_font_normal {
+#jfiijnqifx .gt_font_normal {
   font-weight: normal;
 }
 
-#ezjzwflvfv .gt_font_bold {
+#jfiijnqifx .gt_font_bold {
   font-weight: bold;
 }
 
-#ezjzwflvfv .gt_font_italic {
+#jfiijnqifx .gt_font_italic {
   font-style: italic;
 }
 
-#ezjzwflvfv .gt_super {
+#jfiijnqifx .gt_super {
   font-size: 65%;
 }
 
-#ezjzwflvfv .gt_footnote_marks {
+#jfiijnqifx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ezjzwflvfv .gt_asterisk {
+#jfiijnqifx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ezjzwflvfv .gt_indent_1 {
+#jfiijnqifx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ezjzwflvfv .gt_indent_2 {
+#jfiijnqifx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ezjzwflvfv .gt_indent_3 {
+#jfiijnqifx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ezjzwflvfv .gt_indent_4 {
+#jfiijnqifx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ezjzwflvfv .gt_indent_5 {
+#jfiijnqifx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ezjzwflvfv .katex-display {
+#jfiijnqifx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ezjzwflvfv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jfiijnqifx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1380,23 +1363,23 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>OffresPE_2020 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span><span class="st">"data/OffresPE_2020.Rdata"</span>)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="srneumjtto" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#srneumjtto table {
+<div id="sskxpfblnd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sskxpfblnd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#srneumjtto thead, #srneumjtto tbody, #srneumjtto tfoot, #srneumjtto tr, #srneumjtto td, #srneumjtto th {
+#sskxpfblnd thead, #sskxpfblnd tbody, #sskxpfblnd tfoot, #sskxpfblnd tr, #sskxpfblnd td, #sskxpfblnd th {
   border-style: none;
 }
 
-#srneumjtto p {
+#sskxpfblnd p {
   margin: 0;
   padding: 0;
 }
 
-#srneumjtto .gt_table {
+#sskxpfblnd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1422,12 +1405,12 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-left-color: #D3D3D3;
 }
 
-#srneumjtto .gt_caption {
+#sskxpfblnd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#srneumjtto .gt_title {
+#sskxpfblnd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1439,7 +1422,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-bottom-width: 0;
 }
 
-#srneumjtto .gt_subtitle {
+#sskxpfblnd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1451,7 +1434,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-top-width: 0;
 }
 
-#srneumjtto .gt_heading {
+#sskxpfblnd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1463,13 +1446,13 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-right-color: #D3D3D3;
 }
 
-#srneumjtto .gt_bottom_border {
+#sskxpfblnd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#srneumjtto .gt_col_headings {
+#sskxpfblnd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1484,7 +1467,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-right-color: #D3D3D3;
 }
 
-#srneumjtto .gt_col_heading {
+#sskxpfblnd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1504,7 +1487,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   overflow-x: hidden;
 }
 
-#srneumjtto .gt_column_spanner_outer {
+#sskxpfblnd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1516,15 +1499,15 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   padding-right: 4px;
 }
 
-#srneumjtto .gt_column_spanner_outer:first-child {
+#sskxpfblnd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#srneumjtto .gt_column_spanner_outer:last-child {
+#sskxpfblnd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#srneumjtto .gt_column_spanner {
+#sskxpfblnd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1536,11 +1519,11 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   width: 100%;
 }
 
-#srneumjtto .gt_spanner_row {
+#sskxpfblnd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#srneumjtto .gt_group_heading {
+#sskxpfblnd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1566,7 +1549,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   text-align: left;
 }
 
-#srneumjtto .gt_empty_group_heading {
+#sskxpfblnd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1581,15 +1564,15 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   vertical-align: middle;
 }
 
-#srneumjtto .gt_from_md > :first-child {
+#sskxpfblnd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#srneumjtto .gt_from_md > :last-child {
+#sskxpfblnd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#srneumjtto .gt_row {
+#sskxpfblnd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1608,7 +1591,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   overflow-x: hidden;
 }
 
-#srneumjtto .gt_stub {
+#sskxpfblnd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1621,7 +1604,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   padding-right: 5px;
 }
 
-#srneumjtto .gt_stub_row_group {
+#sskxpfblnd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1635,15 +1618,15 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   vertical-align: top;
 }
 
-#srneumjtto .gt_row_group_first td {
+#sskxpfblnd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#srneumjtto .gt_row_group_first th {
+#sskxpfblnd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#srneumjtto .gt_summary_row {
+#sskxpfblnd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1653,16 +1636,16 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   padding-right: 5px;
 }
 
-#srneumjtto .gt_first_summary_row {
+#sskxpfblnd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#srneumjtto .gt_first_summary_row.thick {
+#sskxpfblnd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#srneumjtto .gt_last_summary_row {
+#sskxpfblnd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1672,7 +1655,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-bottom-color: #D3D3D3;
 }
 
-#srneumjtto .gt_grand_summary_row {
+#sskxpfblnd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1682,7 +1665,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   padding-right: 5px;
 }
 
-#srneumjtto .gt_first_grand_summary_row {
+#sskxpfblnd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1692,7 +1675,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-top-color: #D3D3D3;
 }
 
-#srneumjtto .gt_last_grand_summary_row_top {
+#sskxpfblnd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1702,11 +1685,11 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-bottom-color: #D3D3D3;
 }
 
-#srneumjtto .gt_striped {
+#sskxpfblnd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#srneumjtto .gt_table_body {
+#sskxpfblnd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1715,7 +1698,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-bottom-color: #D3D3D3;
 }
 
-#srneumjtto .gt_footnotes {
+#sskxpfblnd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1729,7 +1712,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-right-color: #D3D3D3;
 }
 
-#srneumjtto .gt_footnote {
+#sskxpfblnd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1738,7 +1721,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   padding-right: 5px;
 }
 
-#srneumjtto .gt_sourcenotes {
+#sskxpfblnd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1752,7 +1735,7 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   border-right-color: #D3D3D3;
 }
 
-#srneumjtto .gt_sourcenote {
+#sskxpfblnd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1760,72 +1743,72 @@ Créer donc un tableau qui aura 3 colonnes <code>COM</code>, <code>TACT_moda</co
   padding-right: 5px;
 }
 
-#srneumjtto .gt_left {
+#sskxpfblnd .gt_left {
   text-align: left;
 }
 
-#srneumjtto .gt_center {
+#sskxpfblnd .gt_center {
   text-align: center;
 }
 
-#srneumjtto .gt_right {
+#sskxpfblnd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#srneumjtto .gt_font_normal {
+#sskxpfblnd .gt_font_normal {
   font-weight: normal;
 }
 
-#srneumjtto .gt_font_bold {
+#sskxpfblnd .gt_font_bold {
   font-weight: bold;
 }
 
-#srneumjtto .gt_font_italic {
+#sskxpfblnd .gt_font_italic {
   font-style: italic;
 }
 
-#srneumjtto .gt_super {
+#sskxpfblnd .gt_super {
   font-size: 65%;
 }
 
-#srneumjtto .gt_footnote_marks {
+#sskxpfblnd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#srneumjtto .gt_asterisk {
+#sskxpfblnd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#srneumjtto .gt_indent_1 {
+#sskxpfblnd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#srneumjtto .gt_indent_2 {
+#sskxpfblnd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#srneumjtto .gt_indent_3 {
+#sskxpfblnd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#srneumjtto .gt_indent_4 {
+#sskxpfblnd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#srneumjtto .gt_indent_5 {
+#sskxpfblnd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#srneumjtto .katex-display {
+#sskxpfblnd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#srneumjtto div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sskxpfblnd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2206,23 +2189,23 @@ contractDuration_period  contractDuration_value          workTime_hours
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">where</span>(is.numeric), <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.)))) <span class="sc">%&gt;%</span> </span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="qcsbbaawpm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qcsbbaawpm table {
+<div id="ncqztqetye" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ncqztqetye table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qcsbbaawpm thead, #qcsbbaawpm tbody, #qcsbbaawpm tfoot, #qcsbbaawpm tr, #qcsbbaawpm td, #qcsbbaawpm th {
+#ncqztqetye thead, #ncqztqetye tbody, #ncqztqetye tfoot, #ncqztqetye tr, #ncqztqetye td, #ncqztqetye th {
   border-style: none;
 }
 
-#qcsbbaawpm p {
+#ncqztqetye p {
   margin: 0;
   padding: 0;
 }
 
-#qcsbbaawpm .gt_table {
+#ncqztqetye .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2248,12 +2231,12 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-left-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_caption {
+#ncqztqetye .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qcsbbaawpm .gt_title {
+#ncqztqetye .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2265,7 +2248,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-width: 0;
 }
 
-#qcsbbaawpm .gt_subtitle {
+#ncqztqetye .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2277,7 +2260,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-width: 0;
 }
 
-#qcsbbaawpm .gt_heading {
+#ncqztqetye .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2289,13 +2272,13 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_bottom_border {
+#ncqztqetye .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_col_headings {
+#ncqztqetye .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2310,7 +2293,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_col_heading {
+#ncqztqetye .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2330,7 +2313,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#qcsbbaawpm .gt_column_spanner_outer {
+#ncqztqetye .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2342,15 +2325,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 4px;
 }
 
-#qcsbbaawpm .gt_column_spanner_outer:first-child {
+#ncqztqetye .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qcsbbaawpm .gt_column_spanner_outer:last-child {
+#ncqztqetye .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qcsbbaawpm .gt_column_spanner {
+#ncqztqetye .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2362,11 +2345,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   width: 100%;
 }
 
-#qcsbbaawpm .gt_spanner_row {
+#ncqztqetye .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qcsbbaawpm .gt_group_heading {
+#ncqztqetye .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2392,7 +2375,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   text-align: left;
 }
 
-#qcsbbaawpm .gt_empty_group_heading {
+#ncqztqetye .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2407,15 +2390,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: middle;
 }
 
-#qcsbbaawpm .gt_from_md > :first-child {
+#ncqztqetye .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qcsbbaawpm .gt_from_md > :last-child {
+#ncqztqetye .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qcsbbaawpm .gt_row {
+#ncqztqetye .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2434,7 +2417,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#qcsbbaawpm .gt_stub {
+#ncqztqetye .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2447,7 +2430,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#qcsbbaawpm .gt_stub_row_group {
+#ncqztqetye .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2461,15 +2444,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: top;
 }
 
-#qcsbbaawpm .gt_row_group_first td {
+#ncqztqetye .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qcsbbaawpm .gt_row_group_first th {
+#ncqztqetye .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qcsbbaawpm .gt_summary_row {
+#ncqztqetye .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2479,16 +2462,16 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#qcsbbaawpm .gt_first_summary_row {
+#ncqztqetye .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_first_summary_row.thick {
+#ncqztqetye .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qcsbbaawpm .gt_last_summary_row {
+#ncqztqetye .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2498,7 +2481,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_grand_summary_row {
+#ncqztqetye .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2508,7 +2491,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#qcsbbaawpm .gt_first_grand_summary_row {
+#ncqztqetye .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2518,7 +2501,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_last_grand_summary_row_top {
+#ncqztqetye .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2528,11 +2511,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_striped {
+#ncqztqetye .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qcsbbaawpm .gt_table_body {
+#ncqztqetye .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2541,7 +2524,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_footnotes {
+#ncqztqetye .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2555,7 +2538,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_footnote {
+#ncqztqetye .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2564,7 +2547,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#qcsbbaawpm .gt_sourcenotes {
+#ncqztqetye .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2578,7 +2561,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#qcsbbaawpm .gt_sourcenote {
+#ncqztqetye .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2586,72 +2569,72 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#qcsbbaawpm .gt_left {
+#ncqztqetye .gt_left {
   text-align: left;
 }
 
-#qcsbbaawpm .gt_center {
+#ncqztqetye .gt_center {
   text-align: center;
 }
 
-#qcsbbaawpm .gt_right {
+#ncqztqetye .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qcsbbaawpm .gt_font_normal {
+#ncqztqetye .gt_font_normal {
   font-weight: normal;
 }
 
-#qcsbbaawpm .gt_font_bold {
+#ncqztqetye .gt_font_bold {
   font-weight: bold;
 }
 
-#qcsbbaawpm .gt_font_italic {
+#ncqztqetye .gt_font_italic {
   font-style: italic;
 }
 
-#qcsbbaawpm .gt_super {
+#ncqztqetye .gt_super {
   font-size: 65%;
 }
 
-#qcsbbaawpm .gt_footnote_marks {
+#ncqztqetye .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qcsbbaawpm .gt_asterisk {
+#ncqztqetye .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qcsbbaawpm .gt_indent_1 {
+#ncqztqetye .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qcsbbaawpm .gt_indent_2 {
+#ncqztqetye .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qcsbbaawpm .gt_indent_3 {
+#ncqztqetye .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qcsbbaawpm .gt_indent_4 {
+#ncqztqetye .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qcsbbaawpm .gt_indent_5 {
+#ncqztqetye .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qcsbbaawpm .katex-display {
+#ncqztqetye .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qcsbbaawpm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ncqztqetye div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2877,23 +2860,23 @@ contractDuration_period  contractDuration_value          workTime_hours
 <span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>                    <span class="at">show=</span><span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"mean"</span>, <span class="st">"median"</span>, <span class="st">"min"</span>, <span class="st">"max"</span>,<span class="st">"q1"</span>, <span class="st">"q3"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fdesuperld" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fdesuperld table {
+<div id="idhtmliwve" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#idhtmliwve table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fdesuperld thead, #fdesuperld tbody, #fdesuperld tfoot, #fdesuperld tr, #fdesuperld td, #fdesuperld th {
+#idhtmliwve thead, #idhtmliwve tbody, #idhtmliwve tfoot, #idhtmliwve tr, #idhtmliwve td, #idhtmliwve th {
   border-style: none;
 }
 
-#fdesuperld p {
+#idhtmliwve p {
   margin: 0;
   padding: 0;
 }
 
-#fdesuperld .gt_table {
+#idhtmliwve .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2919,12 +2902,12 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-left-color: #D3D3D3;
 }
 
-#fdesuperld .gt_caption {
+#idhtmliwve .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fdesuperld .gt_title {
+#idhtmliwve .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2936,7 +2919,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-width: 0;
 }
 
-#fdesuperld .gt_subtitle {
+#idhtmliwve .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2948,7 +2931,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-width: 0;
 }
 
-#fdesuperld .gt_heading {
+#idhtmliwve .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2960,13 +2943,13 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#fdesuperld .gt_bottom_border {
+#idhtmliwve .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fdesuperld .gt_col_headings {
+#idhtmliwve .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2981,7 +2964,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#fdesuperld .gt_col_heading {
+#idhtmliwve .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3001,7 +2984,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#fdesuperld .gt_column_spanner_outer {
+#idhtmliwve .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3013,15 +2996,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 4px;
 }
 
-#fdesuperld .gt_column_spanner_outer:first-child {
+#idhtmliwve .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fdesuperld .gt_column_spanner_outer:last-child {
+#idhtmliwve .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fdesuperld .gt_column_spanner {
+#idhtmliwve .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3033,11 +3016,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   width: 100%;
 }
 
-#fdesuperld .gt_spanner_row {
+#idhtmliwve .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fdesuperld .gt_group_heading {
+#idhtmliwve .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3063,7 +3046,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   text-align: left;
 }
 
-#fdesuperld .gt_empty_group_heading {
+#idhtmliwve .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3078,15 +3061,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: middle;
 }
 
-#fdesuperld .gt_from_md > :first-child {
+#idhtmliwve .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fdesuperld .gt_from_md > :last-child {
+#idhtmliwve .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fdesuperld .gt_row {
+#idhtmliwve .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3105,7 +3088,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#fdesuperld .gt_stub {
+#idhtmliwve .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3118,7 +3101,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#fdesuperld .gt_stub_row_group {
+#idhtmliwve .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3132,15 +3115,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: top;
 }
 
-#fdesuperld .gt_row_group_first td {
+#idhtmliwve .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fdesuperld .gt_row_group_first th {
+#idhtmliwve .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fdesuperld .gt_summary_row {
+#idhtmliwve .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3150,16 +3133,16 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#fdesuperld .gt_first_summary_row {
+#idhtmliwve .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fdesuperld .gt_first_summary_row.thick {
+#idhtmliwve .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fdesuperld .gt_last_summary_row {
+#idhtmliwve .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3169,7 +3152,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#fdesuperld .gt_grand_summary_row {
+#idhtmliwve .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3179,7 +3162,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#fdesuperld .gt_first_grand_summary_row {
+#idhtmliwve .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3189,7 +3172,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-color: #D3D3D3;
 }
 
-#fdesuperld .gt_last_grand_summary_row_top {
+#idhtmliwve .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3199,11 +3182,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#fdesuperld .gt_striped {
+#idhtmliwve .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fdesuperld .gt_table_body {
+#idhtmliwve .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3212,7 +3195,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#fdesuperld .gt_footnotes {
+#idhtmliwve .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3226,7 +3209,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#fdesuperld .gt_footnote {
+#idhtmliwve .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3235,7 +3218,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#fdesuperld .gt_sourcenotes {
+#idhtmliwve .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3249,7 +3232,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#fdesuperld .gt_sourcenote {
+#idhtmliwve .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3257,72 +3240,72 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#fdesuperld .gt_left {
+#idhtmliwve .gt_left {
   text-align: left;
 }
 
-#fdesuperld .gt_center {
+#idhtmliwve .gt_center {
   text-align: center;
 }
 
-#fdesuperld .gt_right {
+#idhtmliwve .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fdesuperld .gt_font_normal {
+#idhtmliwve .gt_font_normal {
   font-weight: normal;
 }
 
-#fdesuperld .gt_font_bold {
+#idhtmliwve .gt_font_bold {
   font-weight: bold;
 }
 
-#fdesuperld .gt_font_italic {
+#idhtmliwve .gt_font_italic {
   font-style: italic;
 }
 
-#fdesuperld .gt_super {
+#idhtmliwve .gt_super {
   font-size: 65%;
 }
 
-#fdesuperld .gt_footnote_marks {
+#idhtmliwve .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fdesuperld .gt_asterisk {
+#idhtmliwve .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fdesuperld .gt_indent_1 {
+#idhtmliwve .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fdesuperld .gt_indent_2 {
+#idhtmliwve .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fdesuperld .gt_indent_3 {
+#idhtmliwve .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fdesuperld .gt_indent_4 {
+#idhtmliwve .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fdesuperld .gt_indent_5 {
+#idhtmliwve .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fdesuperld .katex-display {
+#idhtmliwve .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fdesuperld div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#idhtmliwve div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3524,23 +3507,23 @@ contractDuration_period  contractDuration_value          workTime_hours
 <span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="shlacuyoif" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#shlacuyoif table {
+<div id="jodntqayrc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jodntqayrc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#shlacuyoif thead, #shlacuyoif tbody, #shlacuyoif tfoot, #shlacuyoif tr, #shlacuyoif td, #shlacuyoif th {
+#jodntqayrc thead, #jodntqayrc tbody, #jodntqayrc tfoot, #jodntqayrc tr, #jodntqayrc td, #jodntqayrc th {
   border-style: none;
 }
 
-#shlacuyoif p {
+#jodntqayrc p {
   margin: 0;
   padding: 0;
 }
 
-#shlacuyoif .gt_table {
+#jodntqayrc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3566,12 +3549,12 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-left-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_caption {
+#jodntqayrc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#shlacuyoif .gt_title {
+#jodntqayrc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3583,7 +3566,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-width: 0;
 }
 
-#shlacuyoif .gt_subtitle {
+#jodntqayrc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3595,7 +3578,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-width: 0;
 }
 
-#shlacuyoif .gt_heading {
+#jodntqayrc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3607,13 +3590,13 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_bottom_border {
+#jodntqayrc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_col_headings {
+#jodntqayrc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3628,7 +3611,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_col_heading {
+#jodntqayrc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3648,7 +3631,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#shlacuyoif .gt_column_spanner_outer {
+#jodntqayrc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3660,15 +3643,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 4px;
 }
 
-#shlacuyoif .gt_column_spanner_outer:first-child {
+#jodntqayrc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#shlacuyoif .gt_column_spanner_outer:last-child {
+#jodntqayrc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#shlacuyoif .gt_column_spanner {
+#jodntqayrc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3680,11 +3663,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   width: 100%;
 }
 
-#shlacuyoif .gt_spanner_row {
+#jodntqayrc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#shlacuyoif .gt_group_heading {
+#jodntqayrc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3710,7 +3693,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   text-align: left;
 }
 
-#shlacuyoif .gt_empty_group_heading {
+#jodntqayrc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3725,15 +3708,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: middle;
 }
 
-#shlacuyoif .gt_from_md > :first-child {
+#jodntqayrc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#shlacuyoif .gt_from_md > :last-child {
+#jodntqayrc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#shlacuyoif .gt_row {
+#jodntqayrc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3752,7 +3735,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#shlacuyoif .gt_stub {
+#jodntqayrc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3765,7 +3748,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#shlacuyoif .gt_stub_row_group {
+#jodntqayrc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3779,15 +3762,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: top;
 }
 
-#shlacuyoif .gt_row_group_first td {
+#jodntqayrc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#shlacuyoif .gt_row_group_first th {
+#jodntqayrc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#shlacuyoif .gt_summary_row {
+#jodntqayrc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3797,16 +3780,16 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#shlacuyoif .gt_first_summary_row {
+#jodntqayrc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_first_summary_row.thick {
+#jodntqayrc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#shlacuyoif .gt_last_summary_row {
+#jodntqayrc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3816,7 +3799,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_grand_summary_row {
+#jodntqayrc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3826,7 +3809,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#shlacuyoif .gt_first_grand_summary_row {
+#jodntqayrc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3836,7 +3819,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_last_grand_summary_row_top {
+#jodntqayrc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3846,11 +3829,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_striped {
+#jodntqayrc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#shlacuyoif .gt_table_body {
+#jodntqayrc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3859,7 +3842,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_footnotes {
+#jodntqayrc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3873,7 +3856,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_footnote {
+#jodntqayrc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3882,7 +3865,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#shlacuyoif .gt_sourcenotes {
+#jodntqayrc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3896,7 +3879,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#shlacuyoif .gt_sourcenote {
+#jodntqayrc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3904,72 +3887,72 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#shlacuyoif .gt_left {
+#jodntqayrc .gt_left {
   text-align: left;
 }
 
-#shlacuyoif .gt_center {
+#jodntqayrc .gt_center {
   text-align: center;
 }
 
-#shlacuyoif .gt_right {
+#jodntqayrc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#shlacuyoif .gt_font_normal {
+#jodntqayrc .gt_font_normal {
   font-weight: normal;
 }
 
-#shlacuyoif .gt_font_bold {
+#jodntqayrc .gt_font_bold {
   font-weight: bold;
 }
 
-#shlacuyoif .gt_font_italic {
+#jodntqayrc .gt_font_italic {
   font-style: italic;
 }
 
-#shlacuyoif .gt_super {
+#jodntqayrc .gt_super {
   font-size: 65%;
 }
 
-#shlacuyoif .gt_footnote_marks {
+#jodntqayrc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#shlacuyoif .gt_asterisk {
+#jodntqayrc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#shlacuyoif .gt_indent_1 {
+#jodntqayrc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#shlacuyoif .gt_indent_2 {
+#jodntqayrc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#shlacuyoif .gt_indent_3 {
+#jodntqayrc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#shlacuyoif .gt_indent_4 {
+#jodntqayrc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#shlacuyoif .gt_indent_5 {
+#jodntqayrc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#shlacuyoif .katex-display {
+#jodntqayrc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#shlacuyoif div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jodntqayrc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4013,23 +3996,23 @@ contractDuration_period  contractDuration_value          workTime_hours
 <span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="filofcjixu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#filofcjixu table {
+<div id="dolaczbxxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dolaczbxxq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#filofcjixu thead, #filofcjixu tbody, #filofcjixu tfoot, #filofcjixu tr, #filofcjixu td, #filofcjixu th {
+#dolaczbxxq thead, #dolaczbxxq tbody, #dolaczbxxq tfoot, #dolaczbxxq tr, #dolaczbxxq td, #dolaczbxxq th {
   border-style: none;
 }
 
-#filofcjixu p {
+#dolaczbxxq p {
   margin: 0;
   padding: 0;
 }
 
-#filofcjixu .gt_table {
+#dolaczbxxq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4055,12 +4038,12 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-left-color: #D3D3D3;
 }
 
-#filofcjixu .gt_caption {
+#dolaczbxxq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#filofcjixu .gt_title {
+#dolaczbxxq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4072,7 +4055,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-width: 0;
 }
 
-#filofcjixu .gt_subtitle {
+#dolaczbxxq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4084,7 +4067,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-width: 0;
 }
 
-#filofcjixu .gt_heading {
+#dolaczbxxq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4096,13 +4079,13 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#filofcjixu .gt_bottom_border {
+#dolaczbxxq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#filofcjixu .gt_col_headings {
+#dolaczbxxq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4117,7 +4100,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#filofcjixu .gt_col_heading {
+#dolaczbxxq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4137,7 +4120,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#filofcjixu .gt_column_spanner_outer {
+#dolaczbxxq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4149,15 +4132,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 4px;
 }
 
-#filofcjixu .gt_column_spanner_outer:first-child {
+#dolaczbxxq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#filofcjixu .gt_column_spanner_outer:last-child {
+#dolaczbxxq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#filofcjixu .gt_column_spanner {
+#dolaczbxxq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4169,11 +4152,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   width: 100%;
 }
 
-#filofcjixu .gt_spanner_row {
+#dolaczbxxq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#filofcjixu .gt_group_heading {
+#dolaczbxxq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4199,7 +4182,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   text-align: left;
 }
 
-#filofcjixu .gt_empty_group_heading {
+#dolaczbxxq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4214,15 +4197,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: middle;
 }
 
-#filofcjixu .gt_from_md > :first-child {
+#dolaczbxxq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#filofcjixu .gt_from_md > :last-child {
+#dolaczbxxq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#filofcjixu .gt_row {
+#dolaczbxxq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4241,7 +4224,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#filofcjixu .gt_stub {
+#dolaczbxxq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4254,7 +4237,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#filofcjixu .gt_stub_row_group {
+#dolaczbxxq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4268,15 +4251,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: top;
 }
 
-#filofcjixu .gt_row_group_first td {
+#dolaczbxxq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#filofcjixu .gt_row_group_first th {
+#dolaczbxxq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#filofcjixu .gt_summary_row {
+#dolaczbxxq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4286,16 +4269,16 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#filofcjixu .gt_first_summary_row {
+#dolaczbxxq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#filofcjixu .gt_first_summary_row.thick {
+#dolaczbxxq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#filofcjixu .gt_last_summary_row {
+#dolaczbxxq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4305,7 +4288,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#filofcjixu .gt_grand_summary_row {
+#dolaczbxxq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4315,7 +4298,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#filofcjixu .gt_first_grand_summary_row {
+#dolaczbxxq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4325,7 +4308,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-color: #D3D3D3;
 }
 
-#filofcjixu .gt_last_grand_summary_row_top {
+#dolaczbxxq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4335,11 +4318,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#filofcjixu .gt_striped {
+#dolaczbxxq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#filofcjixu .gt_table_body {
+#dolaczbxxq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4348,7 +4331,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#filofcjixu .gt_footnotes {
+#dolaczbxxq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4362,7 +4345,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#filofcjixu .gt_footnote {
+#dolaczbxxq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4371,7 +4354,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#filofcjixu .gt_sourcenotes {
+#dolaczbxxq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4385,7 +4368,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#filofcjixu .gt_sourcenote {
+#dolaczbxxq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4393,72 +4376,72 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#filofcjixu .gt_left {
+#dolaczbxxq .gt_left {
   text-align: left;
 }
 
-#filofcjixu .gt_center {
+#dolaczbxxq .gt_center {
   text-align: center;
 }
 
-#filofcjixu .gt_right {
+#dolaczbxxq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#filofcjixu .gt_font_normal {
+#dolaczbxxq .gt_font_normal {
   font-weight: normal;
 }
 
-#filofcjixu .gt_font_bold {
+#dolaczbxxq .gt_font_bold {
   font-weight: bold;
 }
 
-#filofcjixu .gt_font_italic {
+#dolaczbxxq .gt_font_italic {
   font-style: italic;
 }
 
-#filofcjixu .gt_super {
+#dolaczbxxq .gt_super {
   font-size: 65%;
 }
 
-#filofcjixu .gt_footnote_marks {
+#dolaczbxxq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#filofcjixu .gt_asterisk {
+#dolaczbxxq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#filofcjixu .gt_indent_1 {
+#dolaczbxxq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#filofcjixu .gt_indent_2 {
+#dolaczbxxq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#filofcjixu .gt_indent_3 {
+#dolaczbxxq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#filofcjixu .gt_indent_4 {
+#dolaczbxxq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#filofcjixu .gt_indent_5 {
+#dolaczbxxq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#filofcjixu .katex-display {
+#dolaczbxxq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#filofcjixu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dolaczbxxq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4500,23 +4483,23 @@ contractDuration_period  contractDuration_value          workTime_hours
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(salary_hourly_mean) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="tabhwnsgvg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tabhwnsgvg table {
+<div id="zmqafjkuhf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zmqafjkuhf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tabhwnsgvg thead, #tabhwnsgvg tbody, #tabhwnsgvg tfoot, #tabhwnsgvg tr, #tabhwnsgvg td, #tabhwnsgvg th {
+#zmqafjkuhf thead, #zmqafjkuhf tbody, #zmqafjkuhf tfoot, #zmqafjkuhf tr, #zmqafjkuhf td, #zmqafjkuhf th {
   border-style: none;
 }
 
-#tabhwnsgvg p {
+#zmqafjkuhf p {
   margin: 0;
   padding: 0;
 }
 
-#tabhwnsgvg .gt_table {
+#zmqafjkuhf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4542,12 +4525,12 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-left-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_caption {
+#zmqafjkuhf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tabhwnsgvg .gt_title {
+#zmqafjkuhf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4559,7 +4542,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-width: 0;
 }
 
-#tabhwnsgvg .gt_subtitle {
+#zmqafjkuhf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4571,7 +4554,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-width: 0;
 }
 
-#tabhwnsgvg .gt_heading {
+#zmqafjkuhf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4583,13 +4566,13 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_bottom_border {
+#zmqafjkuhf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_col_headings {
+#zmqafjkuhf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4604,7 +4587,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_col_heading {
+#zmqafjkuhf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4624,7 +4607,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#tabhwnsgvg .gt_column_spanner_outer {
+#zmqafjkuhf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4636,15 +4619,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 4px;
 }
 
-#tabhwnsgvg .gt_column_spanner_outer:first-child {
+#zmqafjkuhf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tabhwnsgvg .gt_column_spanner_outer:last-child {
+#zmqafjkuhf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tabhwnsgvg .gt_column_spanner {
+#zmqafjkuhf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4656,11 +4639,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   width: 100%;
 }
 
-#tabhwnsgvg .gt_spanner_row {
+#zmqafjkuhf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tabhwnsgvg .gt_group_heading {
+#zmqafjkuhf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4686,7 +4669,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   text-align: left;
 }
 
-#tabhwnsgvg .gt_empty_group_heading {
+#zmqafjkuhf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4701,15 +4684,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: middle;
 }
 
-#tabhwnsgvg .gt_from_md > :first-child {
+#zmqafjkuhf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tabhwnsgvg .gt_from_md > :last-child {
+#zmqafjkuhf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tabhwnsgvg .gt_row {
+#zmqafjkuhf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4728,7 +4711,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#tabhwnsgvg .gt_stub {
+#zmqafjkuhf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4741,7 +4724,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#tabhwnsgvg .gt_stub_row_group {
+#zmqafjkuhf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4755,15 +4738,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: top;
 }
 
-#tabhwnsgvg .gt_row_group_first td {
+#zmqafjkuhf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tabhwnsgvg .gt_row_group_first th {
+#zmqafjkuhf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tabhwnsgvg .gt_summary_row {
+#zmqafjkuhf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4773,16 +4756,16 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#tabhwnsgvg .gt_first_summary_row {
+#zmqafjkuhf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_first_summary_row.thick {
+#zmqafjkuhf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tabhwnsgvg .gt_last_summary_row {
+#zmqafjkuhf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4792,7 +4775,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_grand_summary_row {
+#zmqafjkuhf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4802,7 +4785,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#tabhwnsgvg .gt_first_grand_summary_row {
+#zmqafjkuhf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4812,7 +4795,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_last_grand_summary_row_top {
+#zmqafjkuhf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4822,11 +4805,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_striped {
+#zmqafjkuhf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tabhwnsgvg .gt_table_body {
+#zmqafjkuhf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4835,7 +4818,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_footnotes {
+#zmqafjkuhf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4849,7 +4832,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_footnote {
+#zmqafjkuhf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4858,7 +4841,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#tabhwnsgvg .gt_sourcenotes {
+#zmqafjkuhf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4872,7 +4855,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#tabhwnsgvg .gt_sourcenote {
+#zmqafjkuhf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4880,72 +4863,72 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#tabhwnsgvg .gt_left {
+#zmqafjkuhf .gt_left {
   text-align: left;
 }
 
-#tabhwnsgvg .gt_center {
+#zmqafjkuhf .gt_center {
   text-align: center;
 }
 
-#tabhwnsgvg .gt_right {
+#zmqafjkuhf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tabhwnsgvg .gt_font_normal {
+#zmqafjkuhf .gt_font_normal {
   font-weight: normal;
 }
 
-#tabhwnsgvg .gt_font_bold {
+#zmqafjkuhf .gt_font_bold {
   font-weight: bold;
 }
 
-#tabhwnsgvg .gt_font_italic {
+#zmqafjkuhf .gt_font_italic {
   font-style: italic;
 }
 
-#tabhwnsgvg .gt_super {
+#zmqafjkuhf .gt_super {
   font-size: 65%;
 }
 
-#tabhwnsgvg .gt_footnote_marks {
+#zmqafjkuhf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tabhwnsgvg .gt_asterisk {
+#zmqafjkuhf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tabhwnsgvg .gt_indent_1 {
+#zmqafjkuhf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tabhwnsgvg .gt_indent_2 {
+#zmqafjkuhf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tabhwnsgvg .gt_indent_3 {
+#zmqafjkuhf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tabhwnsgvg .gt_indent_4 {
+#zmqafjkuhf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tabhwnsgvg .gt_indent_5 {
+#zmqafjkuhf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tabhwnsgvg .katex-display {
+#zmqafjkuhf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tabhwnsgvg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zmqafjkuhf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4988,23 +4971,23 @@ contractDuration_period  contractDuration_value          workTime_hours
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(salary_hourly_mean)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="eqzbgevkra" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#eqzbgevkra table {
+<div id="pzwuqcfhnp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pzwuqcfhnp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#eqzbgevkra thead, #eqzbgevkra tbody, #eqzbgevkra tfoot, #eqzbgevkra tr, #eqzbgevkra td, #eqzbgevkra th {
+#pzwuqcfhnp thead, #pzwuqcfhnp tbody, #pzwuqcfhnp tfoot, #pzwuqcfhnp tr, #pzwuqcfhnp td, #pzwuqcfhnp th {
   border-style: none;
 }
 
-#eqzbgevkra p {
+#pzwuqcfhnp p {
   margin: 0;
   padding: 0;
 }
 
-#eqzbgevkra .gt_table {
+#pzwuqcfhnp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5030,12 +5013,12 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-left-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_caption {
+#pzwuqcfhnp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#eqzbgevkra .gt_title {
+#pzwuqcfhnp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5047,7 +5030,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-width: 0;
 }
 
-#eqzbgevkra .gt_subtitle {
+#pzwuqcfhnp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5059,7 +5042,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-width: 0;
 }
 
-#eqzbgevkra .gt_heading {
+#pzwuqcfhnp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5071,13 +5054,13 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_bottom_border {
+#pzwuqcfhnp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_col_headings {
+#pzwuqcfhnp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5092,7 +5075,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_col_heading {
+#pzwuqcfhnp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5112,7 +5095,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#eqzbgevkra .gt_column_spanner_outer {
+#pzwuqcfhnp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5124,15 +5107,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 4px;
 }
 
-#eqzbgevkra .gt_column_spanner_outer:first-child {
+#pzwuqcfhnp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#eqzbgevkra .gt_column_spanner_outer:last-child {
+#pzwuqcfhnp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#eqzbgevkra .gt_column_spanner {
+#pzwuqcfhnp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5144,11 +5127,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   width: 100%;
 }
 
-#eqzbgevkra .gt_spanner_row {
+#pzwuqcfhnp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#eqzbgevkra .gt_group_heading {
+#pzwuqcfhnp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5174,7 +5157,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   text-align: left;
 }
 
-#eqzbgevkra .gt_empty_group_heading {
+#pzwuqcfhnp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5189,15 +5172,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: middle;
 }
 
-#eqzbgevkra .gt_from_md > :first-child {
+#pzwuqcfhnp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#eqzbgevkra .gt_from_md > :last-child {
+#pzwuqcfhnp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#eqzbgevkra .gt_row {
+#pzwuqcfhnp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5216,7 +5199,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   overflow-x: hidden;
 }
 
-#eqzbgevkra .gt_stub {
+#pzwuqcfhnp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5229,7 +5212,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#eqzbgevkra .gt_stub_row_group {
+#pzwuqcfhnp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5243,15 +5226,15 @@ contractDuration_period  contractDuration_value          workTime_hours
   vertical-align: top;
 }
 
-#eqzbgevkra .gt_row_group_first td {
+#pzwuqcfhnp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#eqzbgevkra .gt_row_group_first th {
+#pzwuqcfhnp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#eqzbgevkra .gt_summary_row {
+#pzwuqcfhnp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5261,16 +5244,16 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#eqzbgevkra .gt_first_summary_row {
+#pzwuqcfhnp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_first_summary_row.thick {
+#pzwuqcfhnp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#eqzbgevkra .gt_last_summary_row {
+#pzwuqcfhnp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5280,7 +5263,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_grand_summary_row {
+#pzwuqcfhnp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5290,7 +5273,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#eqzbgevkra .gt_first_grand_summary_row {
+#pzwuqcfhnp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5300,7 +5283,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-top-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_last_grand_summary_row_top {
+#pzwuqcfhnp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5310,11 +5293,11 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_striped {
+#pzwuqcfhnp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#eqzbgevkra .gt_table_body {
+#pzwuqcfhnp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5323,7 +5306,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-bottom-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_footnotes {
+#pzwuqcfhnp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5337,7 +5320,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_footnote {
+#pzwuqcfhnp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5346,7 +5329,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#eqzbgevkra .gt_sourcenotes {
+#pzwuqcfhnp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5360,7 +5343,7 @@ contractDuration_period  contractDuration_value          workTime_hours
   border-right-color: #D3D3D3;
 }
 
-#eqzbgevkra .gt_sourcenote {
+#pzwuqcfhnp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5368,72 +5351,72 @@ contractDuration_period  contractDuration_value          workTime_hours
   padding-right: 5px;
 }
 
-#eqzbgevkra .gt_left {
+#pzwuqcfhnp .gt_left {
   text-align: left;
 }
 
-#eqzbgevkra .gt_center {
+#pzwuqcfhnp .gt_center {
   text-align: center;
 }
 
-#eqzbgevkra .gt_right {
+#pzwuqcfhnp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#eqzbgevkra .gt_font_normal {
+#pzwuqcfhnp .gt_font_normal {
   font-weight: normal;
 }
 
-#eqzbgevkra .gt_font_bold {
+#pzwuqcfhnp .gt_font_bold {
   font-weight: bold;
 }
 
-#eqzbgevkra .gt_font_italic {
+#pzwuqcfhnp .gt_font_italic {
   font-style: italic;
 }
 
-#eqzbgevkra .gt_super {
+#pzwuqcfhnp .gt_super {
   font-size: 65%;
 }
 
-#eqzbgevkra .gt_footnote_marks {
+#pzwuqcfhnp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#eqzbgevkra .gt_asterisk {
+#pzwuqcfhnp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#eqzbgevkra .gt_indent_1 {
+#pzwuqcfhnp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#eqzbgevkra .gt_indent_2 {
+#pzwuqcfhnp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#eqzbgevkra .gt_indent_3 {
+#pzwuqcfhnp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#eqzbgevkra .gt_indent_4 {
+#pzwuqcfhnp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#eqzbgevkra .gt_indent_5 {
+#pzwuqcfhnp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#eqzbgevkra .katex-display {
+#pzwuqcfhnp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#eqzbgevkra div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pzwuqcfhnp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5575,23 +5558,23 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
 <span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(salary_cat) <span class="sc">%&gt;%</span> <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb70-16"><a href="#cb70-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="logoydisdb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#logoydisdb table {
+<div id="bhcofsqaid" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bhcofsqaid table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#logoydisdb thead, #logoydisdb tbody, #logoydisdb tfoot, #logoydisdb tr, #logoydisdb td, #logoydisdb th {
+#bhcofsqaid thead, #bhcofsqaid tbody, #bhcofsqaid tfoot, #bhcofsqaid tr, #bhcofsqaid td, #bhcofsqaid th {
   border-style: none;
 }
 
-#logoydisdb p {
+#bhcofsqaid p {
   margin: 0;
   padding: 0;
 }
 
-#logoydisdb .gt_table {
+#bhcofsqaid .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5617,12 +5600,12 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-left-color: #D3D3D3;
 }
 
-#logoydisdb .gt_caption {
+#bhcofsqaid .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#logoydisdb .gt_title {
+#bhcofsqaid .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5634,7 +5617,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-bottom-width: 0;
 }
 
-#logoydisdb .gt_subtitle {
+#bhcofsqaid .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5646,7 +5629,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-top-width: 0;
 }
 
-#logoydisdb .gt_heading {
+#bhcofsqaid .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5658,13 +5641,13 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-right-color: #D3D3D3;
 }
 
-#logoydisdb .gt_bottom_border {
+#bhcofsqaid .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#logoydisdb .gt_col_headings {
+#bhcofsqaid .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5679,7 +5662,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-right-color: #D3D3D3;
 }
 
-#logoydisdb .gt_col_heading {
+#bhcofsqaid .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5699,7 +5682,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   overflow-x: hidden;
 }
 
-#logoydisdb .gt_column_spanner_outer {
+#bhcofsqaid .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5711,15 +5694,15 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   padding-right: 4px;
 }
 
-#logoydisdb .gt_column_spanner_outer:first-child {
+#bhcofsqaid .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#logoydisdb .gt_column_spanner_outer:last-child {
+#bhcofsqaid .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#logoydisdb .gt_column_spanner {
+#bhcofsqaid .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5731,11 +5714,11 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   width: 100%;
 }
 
-#logoydisdb .gt_spanner_row {
+#bhcofsqaid .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#logoydisdb .gt_group_heading {
+#bhcofsqaid .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5761,7 +5744,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   text-align: left;
 }
 
-#logoydisdb .gt_empty_group_heading {
+#bhcofsqaid .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5776,15 +5759,15 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   vertical-align: middle;
 }
 
-#logoydisdb .gt_from_md > :first-child {
+#bhcofsqaid .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#logoydisdb .gt_from_md > :last-child {
+#bhcofsqaid .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#logoydisdb .gt_row {
+#bhcofsqaid .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5803,7 +5786,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   overflow-x: hidden;
 }
 
-#logoydisdb .gt_stub {
+#bhcofsqaid .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5816,7 +5799,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   padding-right: 5px;
 }
 
-#logoydisdb .gt_stub_row_group {
+#bhcofsqaid .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5830,15 +5813,15 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   vertical-align: top;
 }
 
-#logoydisdb .gt_row_group_first td {
+#bhcofsqaid .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#logoydisdb .gt_row_group_first th {
+#bhcofsqaid .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#logoydisdb .gt_summary_row {
+#bhcofsqaid .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5848,16 +5831,16 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   padding-right: 5px;
 }
 
-#logoydisdb .gt_first_summary_row {
+#bhcofsqaid .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#logoydisdb .gt_first_summary_row.thick {
+#bhcofsqaid .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#logoydisdb .gt_last_summary_row {
+#bhcofsqaid .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5867,7 +5850,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-bottom-color: #D3D3D3;
 }
 
-#logoydisdb .gt_grand_summary_row {
+#bhcofsqaid .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5877,7 +5860,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   padding-right: 5px;
 }
 
-#logoydisdb .gt_first_grand_summary_row {
+#bhcofsqaid .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5887,7 +5870,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-top-color: #D3D3D3;
 }
 
-#logoydisdb .gt_last_grand_summary_row_top {
+#bhcofsqaid .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5897,11 +5880,11 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-bottom-color: #D3D3D3;
 }
 
-#logoydisdb .gt_striped {
+#bhcofsqaid .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#logoydisdb .gt_table_body {
+#bhcofsqaid .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5910,7 +5893,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-bottom-color: #D3D3D3;
 }
 
-#logoydisdb .gt_footnotes {
+#bhcofsqaid .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5924,7 +5907,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-right-color: #D3D3D3;
 }
 
-#logoydisdb .gt_footnote {
+#bhcofsqaid .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5933,7 +5916,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   padding-right: 5px;
 }
 
-#logoydisdb .gt_sourcenotes {
+#bhcofsqaid .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5947,7 +5930,7 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   border-right-color: #D3D3D3;
 }
 
-#logoydisdb .gt_sourcenote {
+#bhcofsqaid .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5955,72 +5938,72 @@ Sinon, on les isole en créant une variable dichotomique “0/1” ou “Faux/Vr
   padding-right: 5px;
 }
 
-#logoydisdb .gt_left {
+#bhcofsqaid .gt_left {
   text-align: left;
 }
 
-#logoydisdb .gt_center {
+#bhcofsqaid .gt_center {
   text-align: center;
 }
 
-#logoydisdb .gt_right {
+#bhcofsqaid .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#logoydisdb .gt_font_normal {
+#bhcofsqaid .gt_font_normal {
   font-weight: normal;
 }
 
-#logoydisdb .gt_font_bold {
+#bhcofsqaid .gt_font_bold {
   font-weight: bold;
 }
 
-#logoydisdb .gt_font_italic {
+#bhcofsqaid .gt_font_italic {
   font-style: italic;
 }
 
-#logoydisdb .gt_super {
+#bhcofsqaid .gt_super {
   font-size: 65%;
 }
 
-#logoydisdb .gt_footnote_marks {
+#bhcofsqaid .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#logoydisdb .gt_asterisk {
+#bhcofsqaid .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#logoydisdb .gt_indent_1 {
+#bhcofsqaid .gt_indent_1 {
   text-indent: 5px;
 }
 
-#logoydisdb .gt_indent_2 {
+#bhcofsqaid .gt_indent_2 {
   text-indent: 10px;
 }
 
-#logoydisdb .gt_indent_3 {
+#bhcofsqaid .gt_indent_3 {
   text-indent: 15px;
 }
 
-#logoydisdb .gt_indent_4 {
+#bhcofsqaid .gt_indent_4 {
   text-indent: 20px;
 }
 
-#logoydisdb .gt_indent_5 {
+#bhcofsqaid .gt_indent_5 {
   text-indent: 25px;
 }
 
-#logoydisdb .katex-display {
+#bhcofsqaid .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#logoydisdb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bhcofsqaid div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
