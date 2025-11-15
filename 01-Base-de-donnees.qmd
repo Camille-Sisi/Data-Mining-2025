@@ -1,0 +1,95 @@
+# Récupération de la base de données {#sec-base-donnees}
+
+On va travailler cette année sur les données du Recensement de la Population (RP). C'est une base de données riche en informations, qui s'appuie sur les enquêtes annuelles du recensement et est produite par l'Insee. Les fichiers mis à disposition sur leur site sont au nombre de 9 : ils rassemblent des informations différentes, sur des espaces géographiques différents (canton ou ville, région), et à des niveaux d'analyse différents (individus, ménages/logements). Les derniers fichiers disponibles portent sur l'année 2021 mais nous allons travailer sur l'année 2019 qui rassemble les enquêtes annuelles du recensement (EAR) des années 2017 à 2021.
+
+Avant de rentrer plus dans les détails, on va charger les librairies principales que l'on va utiliser lors de cette séance (si elles ne sont pas installées sur votre RStudio, il faut le faire avant en utilisant la commande `install.packages("nom.du.package")`, on pourra en appeler d'autres dans les deux sections suivantes.
+
+```{r message=FALSE, warning=FALSE}
+# Chargement des librairies
+library(tidyverse)
+library(data.table)
+library(gt)
+```
+
+## Les données du Recensement de la Population (RP)
+
+```{r include=FALSE}
+RP <- readRDS(file ="data/indiv2019.Rdata") 
+meta <- readRDS(file="data/meta.Rdata")
+```
+
+On va travailler plus précisément à partir du fichier "Individus localisés au canton-ou-ville" qui décrit les caractéristiques des individus et celles des ménages qui les occupent. Les données sont localisées au niveau de la commune et de l'IRIS. On ne va pas s'intéresser à l'ensemble de la France, pour des questions d'intérêt et d'analyse, ainsi que des questions pratiques (ces fichiers étant lourds). On va donc télécharger uniquement ce fichier pour la zone A, c'est-à-dire l'Île-de-France.
+
+Le mieux est de télécharger le fichier puis le dézipper directement dans `R` comme ci-dessous en copiant le lien URL sur le site de l'Insee ; et on le stock dans le dossier "data" de notre projet `R`. Sinon, il reste possible de le télécharger *via* internet et de l'enregistrer dans un de vos dossiers bien spécifiés pour le "dézipper" ensuite.
+
+```{r eval=FALSE}
+download.file(url="https://www.insee.fr/fr/statistiques/fichier/6544333/RP2019_INDCVIZA_csv.zip",
+              destfile = "data/RP2019_INDCVIZA_csv.zip")
+
+# Le fichier a donc été téléchargé dans le dossier intitulé "data" du projet R, on va
+# maintenant le dézipper et enregistrer les fichiers extraits dans le même dossier.
+unzip("data/RP2019_INDCVIZA_csv.zip", exdir = "data")
+
+```
+
+Il nous reste plus qu'à charger les données dans notre environnement RStudio : pour cela on utilise la commande `fread` du package **`data.table`** (à installer avant), car cela va bien plus vite que les fonctions habituelles du type `read.csv` lorsqu'on a de gros fichiers. On indique également l'option `stringsAsFactors=TRUE` pour que les variables caractères soient directement transformées en variables "factor" (dont l'utilité est indéniable dans `R`, on en reparlera plus loin), et on transforme l'objet obtenu en `data.frame`.
+
+```{r eval=FALSE}
+# install.packages("data.table")
+library(data.table)
+RP <- fread("data/FD_INDCVIZA_2019.csv", stringsAsFactors=TRUE)
+RP <- as.data.frame(RP)
+```
+
+On a donc `r ncol(RP)` variables et `r format(nrow(RP), big.mark=" ")` observations.
+
+Pour se renseigner sur les variables de la table, on peut télécharger également le fichier des métadonnées avec la commande `read.csv` cette fois, ce qui nous permet de voir quelles options sont utiles ici : l'argument `sep =` nous permet d'indiquer comment sont séparées les informations dans le fichier initial, l'argument `encoding =` permet que les accents aigus soient compris par `R` comme tel, et enfin la même option `stringsAsFactors=TRUE` peut être utilisée ici.
+
+```{r eval=FALSE}
+# Lecture du fichier de métadonnées
+meta <- read.csv(file = 'data/Varmod_INDCVI_2019.csv',
+                 sep = ";",
+                 encoding = "UTF-8",
+                 stringsAsFactors = TRUE)
+```
+
+On peut enregistrer ce fichier, ainsi que celui contenant les métadonnées, dans le dossier `R` au format RDS.
+
+```{r  eval=FALSE}
+# Enregistrement des fichiers
+saveRDS(object = RP, file = "data/indiv2019.Rdata")
+saveRDS(object = meta, file = "data/meta.Rdata")
+```
+
+## Quelles informations intéressantes dans cette base ?
+
+On peut regarder plus précisément les variables disponibles dans cette base de données à partir de la table de métadonnées : on peut le faire avec la fonction `view()` et dans ce cas la table s'affichera dans un nouvel onglet dans votre RStudio ; sinon pour l'afficher sur notre document notebook, on peut utiliser la fonction `head()` et/ou `tail()` qui affiche respectivement les premières lignes et les dernières lignes de la table.
+
+```{r}
+# view(meta)
+meta %>% head() %>% gt() #La fonction gt() permet un affichage plus joli pour le document html
+```
+
+On peut établir la liste des variables de la base de données en utilisant la fonction `levels` qui donne les niveaux de la variable "COD_VAR" puisque c'est une variable 'factor'.
+
+```{r}
+levels(meta$COD_VAR) 
+```
+
+Les codes des variables n'étant pas très parlant, on va les afficher avec leur intitulé : pour cela, il suffit de repartir de la table `meta` en sélectionnant les 2 colonnes qui nous intéressent et en n'affichant pas les valeurs dupliquées avec la fonction `unique()`.
+
+```{r}
+meta %>% select(COD_VAR, LIB_VAR) %>% unique() %>% gt()
+```
+
+Ou si on veut les afficher par ordre alphabétique selon le nom de la variable, on peut utiliser la fonction `arrange()` qui permet de trier une table de données selon la variable indiquée :
+
+```{r eval=FALSE}
+meta %>% select(COD_VAR, LIB_VAR) %>% unique() %>% arrange(COD_VAR) %>% gt()
+```
+
+L'une des difficultés pour l'analyse de cette base de données réside dans les différents niveaux présents : "individu" pour la personne de référence du ménage ; "ménage" regroupant l'ensemble des occupants d'une résidence principale, qu'ils aient ou non des liens de parenté ; "famille" partie d'un ménage comprenant au moins 2 personnes (par exemple, un couple, ou un adulte avec un enfant...) ; et enfin "logement" qui comprend ici les résidences principales et rassemble des informations décrivant les types de logement.
+
+Il faut bien comprendre comment utiliser à bon escient ces différents niveaux, en particulier ici le niveau logement : pour toute variable de ce niveau, il faudra utiliser un filtre, c'est-à-dire ne prendre que la personne de référence du ménage (`LPRM=="1"`).
+
+Il faut également penser que les données sont pondérées, donc pour sortir des statistiques descriptives, il faut à chaque fois mettre la variable de pondération `IPONDI`.

@@ -1,0 +1,131 @@
+# Manipulation de la base {#sec-manipulation-base}
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+# Chargement des librairies
+library(tidyverse)
+library(gt)
+
+# Chargement des tables
+RP <- readRDS(file ="data/indiv2019.Rdata") 
+meta <- readRDS(file="data/meta.Rdata")
+```
+
+On peut maintenant regarder à quoi ressemble la table principale, celle des données.
+
+```{r}
+RP %>% head() %>% gt()
+```
+
+La fonction `str()` ou son équivalent en langage `dplyr` la fonction `glimpse` nous donne la liste des variables avec cette fois leur format et leurs modalités (les premières seulement s'il y en a beaucoup).
+
+```{r}
+# str(RP)
+RP %>% glimpse()
+```
+
+Les variables sont en format, soit 'int' ("integer" - nombres entiers), soit 'fct' ("factor"), ou encore 'dbl' ("double" - nombres réels).  On remarque que la plupart des variables ont des modalités en chiffres et/ou lettres, ce qui signifie qu'il faudra probablement recoder ces modalités pour leur donner des libellés dans nos analyses descriptives (tableaux ou graphiques).
+
+Par ailleurs, certaines variables ont été laissées en format 'integer' bien que l'on avait mis l'option `stringsAsFactors=TRUE` lors du chargement des données, or ces chiffres correspondent bien à des modalités d'une variable catégorielle, il faudra donc le corriger ultérieurement.
+
+Dernière remarque, si on avait eu des valeurs manquantes sur certaines variables, elles se seraient ici affichées avec la modalité `NA`, cela ne semble pas le cas, à vérifier par la suite. En revanche, on voit parfois des modalités "z" ou "zz", il faudra vérifier ce qu'elles indiquent.
+
+## Format des données - WIDE ou LONG
+
+La question du **format de la table de données** est importante, on distingue généralement le format *wide* du format *long* :
+
+-   le premier renvoie au cas où chaque ligne correspond a un et un seul individu (ou autre niveau de l'analyse : une entreprise, un ménage, un logement, etc.), et toutes les informations le concernant sont données en colonnes (ce qui peut augmenter rapidement le nombre de colonnes), c'est l'exemple d'une information que l'on a sur plusieurs années, chaque colonne correspondant à l'information de l'année en question ;
+-   le second, au contraire, multiplie les lignes pour un seul individu, mais il y a alors moins de colonnes, à partir du même exemple précédent, il y aura cette fois une colonne indiquant l'année et une colonne contenant l'information.
+
+Ici, chaque ligne correspond à un **individu** auquel est associé un **logement**, un **ménage** ou encore une **famille** ; on est bien dans un format `wide`. L'unité statistique de base est donc l'individu, mais on peut vouloir choisir de se mettre au niveau logement ou ménage ou famille, pour étudier les caractéristiques de ces unités. Autre exemple, on peut aussi considérer que notre niveau d'analyse est la commune, on verra alors qu'on dispose de plusieurs lignes par commune et si l'on veut garder quelques informations à ce niveau en n'ayant plus qu'une ligne par commune, il faudra sommer ces informations.
+
+Le package `tidyverse` contient deux fonctions qui permettent de passer d'un format à un autre : `pivot_longer()` et `pivot_wider()` présentés en détails <a href="https://tidyr.tidyverse.org/articles/pivot.html" target="_blank">ici</a>. Nous aurons l'occasion de les utiliser ultérieurement dans ce cours.
+
+## Sélectionner un champ réduit de la base, séparer les données
+
+Manipuler une base de données, c'est aussi travailler ou créer une table réduite, surtout quand on a des données volumineuses comme ici : c'est donc choisir un champ particulier de la base.
+
+On peut par exemple choisir un champ géographique plus réduit au sein de l'Île-de-France, à partir de la commune : Paris et sa petite couronne.
+
+On peut aussi choisir de séparer les données en créant 2 tables selon l'unité statistique : l'individu ; ou le logement avec la seule personne de référence du ménage.
+
+Comme vous le savez très probablement, dans le langage `tidyverse`, pour faire des sélections sur les lignes ou observations dans une table de données, on utilise la fonction `filter()` ; pour faire des sélections sur les colonnes ou variables, on utilise la fonction `select()` ; pour supprimer des variables, on utilise également `select()` avec un "-" devant la (ou les) variable(s) à supprimer (dans le langage `R` de base, on peut aussi utiliser la fonction `subset()`).
+
+**EXERCICES** :  Créer trois nouvelles bases selon les indications suivantes :
+
+-   la première que vous nommerez "RP_Paris" et qui rassemblera les données pour le seul département de Paris ;
+-   la deuxième que nous nommerez "RP_indiv" et qui comprendra les données pour les seules variables décrivant l'individu (et ce sera celle de la personne de référence du ménage) ;
+-   la troisième que vous nommerez "RP_final", qui rassemblera les données pour les départements de Paris et de sa petite couronne, et qui comprendra toutes les variables décrivant l'individu, le logement et enfin les variables géographiques.
+
+<!-- Les premières lignes de ces trois tables devront ressembler à cela : -->
+
+```{r exo1, echo=FALSE, include=FALSE}
+RP_Paris <- RP %>% filter(DEPT == "75")
+
+RP_indiv <- RP %>% select("AEMMR", "AGED", "AGER20", "AGEREV","AGEREVQ","ANAI",
+                          "ANEMR","APAF","COUPLE","CS1","DIPL","DNAI","EMPL",
+                          "ETUD","ILETUD","ILT","IMMI","INAI","INATC","IPONDI",
+                          "IRAN","LPRF","LPRM","MOCO","MODV","NA17",
+                          "NA5","NAIDT","ORIDT","RECH","SEXE","STAT_CONJ",
+                          "STATR","TACT","TACTD16","TP","TRANS")
+  
+RP_final  <- RP %>% filter(DEPT %in% c("75","92","93","94")) %>% 
+                        select(-c("NUMMI","INPERF","DEROU","LIENF","INFAM",
+                                  "NE17FR","INPER",	"NE24FR","NPERR",	"NE3FR",
+                                  "SFM",	"NE5FR", "TYPMC",	"NENFR","TYPMR",
+                                  "NUMF","VOIT",	"TYPFC"))
+RP_Paris %>% head(4) %>% gt()
+RP_indiv %>% head(4) %>% gt()
+RP_final%>% head(4) %>% gt()
+```
+
+::: {.callout-tip collapse="true"}
+## Solution
+
+```{r exo1-sol, eval=FALSE}
+RP_Paris <- RP %>% filter(DEPT == "75")
+
+RP_indiv <- RP %>% select("AEMMR", "AGED", "AGER20", "AGEREV","AGEREVQ","ANAI",
+                          "ANEMR","APAF","COUPLE","CS1","DIPL","DNAI","EMPL",
+                          "ETUD","ILETUD","ILT","IMMI","INAI","INATC","IPONDI",
+                          "IRAN","LPRF","LPRM","MOCO","MODV","NA17",
+                          "NA5","NAIDT","ORIDT","RECH","SEXE","STAT_CONJ",
+                          "STATR","TACT","TACTD16","TP","TRANS")
+  
+RP_final  <- RP %>% filter(DEPT %in% c("75","92","93","94")) %>% 
+                        select(-c("NUMMI","INPERF","DEROU","LIENF","INFAM",
+                                  "NE17FR","INPER",	"NE24FR","NPERR",	"NE3FR",
+                                  "SFM",	"NE5FR", "TYPMC",	"NENFR","TYPMR",
+                                  "NUMF","VOIT",	"TYPFC"))
+```
+:::
+
+```{r eval=FALSE, include=FALSE}
+# Par exemple pour les 2 premières bases avec "subset":
+RP_Paris <- subset(RP, DEPT == "75")
+RP_indiv <- subset(RP, select=c("AEMMR", "AGED", "AGER20", "AGEREV","AGEREVQ",
+                                "ANAI", "ANEMR","APAF","COUPLE","CS1","DIPL",
+                                "DNAI","EMPL","ETUD","ILETUD","ILT","IMMI",
+                                "INAI","INATC","IPONDI","IRAN","LPRF","LPRM",
+                                "MOCO","MODV","NA17","NA5","NAIDT","ORIDT",
+                                "RECH","SEXE","STAT_CONJ","STATR","TACT",
+                                "TACTD16","TP","TRANS"))
+```
+
+ 
+
+On va dorénavant travailler sur cette dernière table `RP_final`, on l'enregistre donc dans notre dossier "data", ainsi que le fichier `meta` que nous avons modifié précédemments :
+
+```{r eval=FALSE}
+# Enregistrement des fichiers
+saveRDS(object = RP_final , file = "data/RP_final.Rdata") 
+saveRDS(object = meta, file = "data/meta.Rdata")
+```
+
+```{r include=FALSE}
+# Suppression du fichier RP trop lourd
+rm(RP)
+# Appel de la table RP_final
+RP_final <- readRDS(file ="data/RP_final.Rdata") 
+meta <- readRDS(file ="data/meta.Rdata")
+#RP <- readRDS(file ="data/indiv2019.Rdata") 
+```

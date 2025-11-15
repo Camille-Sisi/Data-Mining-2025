@@ -1,0 +1,922 @@
+# La création d'une application Shiny "pas à pas" avec l'une de nos bases de données {#sec-Intro-a-Shiny-exemples}
+
+On va de nouveau utiliser la base du RP sur laquelle nous travaillons depuis le début, mais en créant des tableaux de contingence à partir des fonctions sauvegardées dans la section précédente.
+
+## Application vide
+
+Faisons tourner une application vide et ajoutons au fur et à mesure les éléments qui permettrons de construire une vraie application :
+
+```{r eval=FALSE}
+library(shiny)
+
+ui <- fluidPage(
+                )
+
+server <- function(input, 
+                   output) {
+  
+                   }
+
+shinyApp(ui = ui, server = server)
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+library(janitor)
+library(gt)
+RP_final <- readRDS(file = "data/RP_final.Rdata")
+```
+
+## Ajout d'un titre et d'un widget
+
+Ajoutons un titre et un widget, par exemple une barre "slider" :
+
+```{r eval=FALSE}
+#library(shiny)
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Nombre de propriétaires agrégé au niveau communal dans Paris et sa petite couronne"),
+  
+  # Définition du Widget - ici un slider en vue de construire un histogramme
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(inputId = "Classes",
+                  label = "Choix du nombre de classes : ",
+                  min = 1,
+                  max = 50,
+                  value = 25)
+      ),
+    
+  mainPanel(
+    plotOutput("histPlot")
+    
+    )
+  )
+)
+
+server <- function(input, output) {
+  
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Ajout d'un graphique
+
+Ajoutons un graphique ; il faut pour cela charger la base de données sur laquelle nous allons travailler ; pour l'exemple ici, nous allons créer un tableau de contingence à partir des fonctions créées précédemment (qu'on appelle donc avant) et donnant le nombre de propriétaires par commune de l'Île-de-France, en considérant les arrondissements de Paris comme des communes :
+
+```{r}
+# appel fonctions enregistrées
+source("fonctions/fonctions.R")
+
+# création de la table de données
+tab_proprio_com <- RP_final %>% filter(STOCD == "10") %>% 
+                                      somme(var_gpe=COM, nom_var=STOCD) %>% 
+                                      rename(nb_proprio = '10') %>% 
+                                      filter(COM!="ZZZZZ")
+```
+
+```{r eval=FALSE}
+#library(shiny)
+
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Nombre de propriétaires agrégé au niveau communal dans Paris et sa petite couronne"),
+  
+  # Définition du Widget - ici un slider en vue de construire un histogramme
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput(inputId = "classes",
+                        label = "Choix du nombre de classes :",
+                        min = 1,
+                        max = 50,
+                        value = 25)
+        ),
+
+        # Graphe montré à l'utilisateur
+        mainPanel(
+           plotOutput("histPlot")
+        )
+  )
+)
+
+server <- function(input, output) {
+  
+output$histPlot <- renderPlot({
+  tab_proprio_com %>%  
+    ggplot() + aes(x=nb_proprio) + geom_histogram(bins=25)
+})
+
+  }
+
+shinyApp(ui = ui, server = server)
+```
+
+On a bien maintenant le graphique qui s'affiche mais lorsqu'on change le nombre de classes dans la barre slider, rien ne se passe... C'est normal, nous n'avons pas encore introduit de réactivité dans l'application.
+
+Pour cela, il va falloir modifier le code dans la fonction **`server`** et ainsi mettre en lien des informations indiquées dans la fonction **`UI`** avec les arguments utilisés dans le graphique développé dans la fonction **`server`**. Pour l'instant, on veut pouvoir modifier le nombre de classes, l'argument pour cela dans la fonction `geom_histogram()` dans le `ggplot()` est `bins=` ; on a indiqué '50' jusqu'ici ; maintenant il faut lui indiquer le nombre que l'utilisateur va lui-même indiquer dans la barre slider ; cela se fait avec l'argument `input$...`, les "..." devant être remplacés par le nom que l'on a donné à l'`inputId` dans le `sliderInput()`, donc ici "classes".
+
+```{r eval=FALSE}
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Nombre de propriétaires agrégé au niveau communal dans Paris et sa petite couronne"),
+  
+  # Définition du Widget - ici un slider en vue de construire un histogramme
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(inputId = "classes",
+                  label = "Choix du nombre de classes :",
+                  min = 1,
+                  max = 50,
+                  value = 25)
+    ),
+    
+    # Graphe montré à l'utilisateur
+    mainPanel(
+      plotOutput("histPlot")
+    )
+  )
+)
+
+  server <- function(input, output) {
+  
+    output$histPlot <- renderPlot({
+      tab_proprio_com %>%  
+        ggplot() + aes(x=nb_proprio) + geom_histogram(bins=input$classes)
+    })
+    
+  }
+  
+shinyApp(ui = ui, server = server)
+```
+
+Ça y est, maintenant lorsqu'on modifie le curseur dans la barre slider, le graphique change !
+
+## Modification du graphique : filtrer selon une variable
+
+Essayons ensuite d'ajouter un filtre sur le département pour n'avoir que la distribution du nombre de propriétaires pour un département donné. Comme on n'a pas de variable de département, il faut la créer, ce que l'on peut faire assez facilement à partir des deux premiers chiffres de la commune, et ensuite il suffit d'ajouter un filtre sur cette nouvelle variable créée.
+
+De même, on peut procéder par étapes : présentons d'abord le graphique pour le seul département de l'Île-de-France (75).
+
+```{r eval=FALSE}
+
+# Création de la variable et donc remplacement de la table de données
+tab_proprio_com <- tab_proprio_com %>%
+  mutate(DEPT=as.factor(substr(COM, 1,2)))
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Nombre de propriétaires agrégé au niveau communal dans Paris et sa petite couronne"),
+  
+  # Définition du Widget - ici un slider en vue de construire un histogramme
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(inputId = "classes",
+                  label = "Choix du nombre de classes :",
+                  min = 1,
+                  max = 50,
+                  value = 25)
+    ),
+    
+    # Graphe montré à l'utilisateur
+    mainPanel(
+      plotOutput("histPlot")
+    )
+  )
+)
+
+  server <- function(input, output) {
+  
+    output$histPlot <- renderPlot({
+      tab_proprio_com %>%  
+        filter(DEPT == "75") %>% 
+        ggplot() + aes(x=nb_proprio) + geom_histogram(bins=input$classes)
+    })
+    
+  }
+  
+shinyApp(ui = ui, server = server)
+```
+
+Ensuite, donnons la possibilité à l'utilisateur de choisir le département qu'il veut : il faut pour cela ajouter un widget dans la fonction **`UI`** ; comme on ne veut laisser qu'un choix de département à l'utilisateur, on peut utiliser un "Radio buttons" ; on regarde alors quels sont les arguments de la fonction `radioButtons()`, on voit qu'il faut indiquer les choix possibles donc ici la liste des départements dans `choices =` et indiquer une valeur par défaut dans `selected =` ; pour cela, on peut indiquer la variable correspondante `choices = tab_proprio$DEPT`, mais attention si on laisse comme ceci, on va avoir une répétition de noms des départements comme lorsqu'on ouvre la table, ce qu'on veut c'est uniquement les niveaux... deux possibilités alors : soit créer avant l'appel de la fonction **`UI`** une variable avec simplement les niveaux de cette variable ; soit passer par la fonction `unique()` dans l'argument donné.
+
+```{r eval=FALSE}
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Nombre de propriétaires agrégé au niveau communal dans Paris et sa petite couronne"),
+  
+  # Définition du Widget - ici un slider en vue de construire un histogramme
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(inputId = "classes",
+                  label = "Choix du nombre de classes :",
+                  min = 1,
+                  max = 50,
+                  value = 25),
+      radioButtons(inputId = "dept", 
+                   label = "Choix du département :",
+                   choices = levels(tab_proprio_com$DEPT), #ou indiquer unique(tab_proprio_com$DEPT)
+                   selected = "75"),
+    ),
+    
+    # Graphe montré à l'utilisateur
+    mainPanel(
+      plotOutput("histPlot")
+    )
+  )
+)
+
+  server <- function(input, output) {
+  
+    output$histPlot <- renderPlot({
+      tab_proprio_com %>%  
+        filter(DEPT == "75") %>% 
+        ggplot() + aes(x=nb_proprio) + geom_histogram(bins=input$classes)
+    })
+    
+  }
+  
+shinyApp(ui = ui, server = server)
+```
+
+Enfin, là encore, il faut introduire la réactivité et "connecter" la partie **`UI`** et la partie **`server`**, en remplaçant le nom du département dans le `filter(dept == )` par le nom de l'`inputId` indiqué dans notre "radioButtons" :
+
+```{r eval=FALSE}
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Nombre de propriétaires agrégé au niveau communal dans Paris et sa petite couronne"),
+  
+  # Définition du Widget - ici un slider en vue de construire un histogramme
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(inputId = "classes",
+                  label = "Choix du nombre de classes :",
+                  min = 1,
+                  max = 50,
+                  value = 25),
+      radioButtons(inputId = "dept", 
+                   label = "Choix du département :",
+                   choices = levels(tab_proprio_com$DEPT), #ou indiquer unique(tab_proprio_com$DEPT)
+                   selected = "75"),
+    ),
+    
+    # Graphe montré à l'utilisateur
+    mainPanel(
+      plotOutput("histPlot")
+    )
+  )
+)
+
+  server <- function(input, output) {
+  
+    output$histPlot <- renderPlot({
+      tab_proprio_com %>%  
+        filter(DEPT == input$dept) %>% 
+        ggplot() + aes(x=nb_proprio) + geom_histogram(bins=input$classes)
+    })
+    
+  }
+  
+shinyApp(ui = ui, server = server)
+```
+
+On peut voir que le nombre de classes maximum de 50 n'est absolument pas pertinent pour certains départements qui ont peu de communes, c'est quelque chose qui pourra être modifiée bien sûr ultérieurement.
+
+## Modification du graphique : selon une variable au choix parmi deux
+
+On peut maintenant vouloir montrer un graphique (toujours le même histogramme) selon au choix deux variables : soit le nombre de propriétaires, soit le nombre de locataires. Il faut donc créer cette dernière variable de la même façon que précédemment pour les propriétaires, et l'ajouter au tableau précédent (qu'on renommera puisqu'il ne concerne plus les seuls propriétaires...).
+
+```{r}
+tab_locataires_com <- RP_final %>% 
+              filter(STOCD %in% c("21","22","23")) %>% 
+              mutate(STOCD=case_when(STOCD %in% c("21","22","23") ~ "nb_locataires")) %>% 
+              somme(var_gpe=COM, nom_var=STOCD) %>% 
+              filter(COM!="ZZZZZ")
+
+tab_st_occ <- tab_proprio_com %>% 
+  left_join(tab_locataires_com, by="COM")
+
+# pour supprimer les tables intermédiaires
+rm(tab_locataires_com, tab_proprio_com)
+```
+
+Procédons comme précédemment : créons un nouveau widget avec par exemple `selectInput()`, dont l'`inputID` sera "variable" et l'argument `choices =` donne les deux variables choisies ; pour cela, on peut utiliser une fonction `list()` et indiquer le nom des deux variables, soient `nb_proprio` et `nb_locataires`.\
+Et ensuite, dans la fonction **server**, remplaçons `x=nb_proprio` par `x=input$variable` et voyons si cela marche !
+
+```{r eval=FALSE}
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Statut d'occupation des logements agrégé au niveau communal, selon le département"),
+  
+  # Définition du Widget - ici un slider en vue de construire un histogramme
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(inputId = "classes",
+                  label = "Choix du nombre de classes:",
+                  min = 1,
+                  max = 50,
+                  value = 25),
+      radioButtons(inputId = "dept", 
+                   label = "Choix du département :",
+                   choices = levels(tab_st_occ$DEPT),
+                   selected = "75"),
+      selectInput(inputId = "variable", 
+                  label = "Choix de la variable :", 
+                  choices = list("nb_proprio", "nb_locataires"), 
+                  selected = "nb_proprio"),
+    ),
+    
+    # Graphe montré à l'utilisateur
+    mainPanel(
+      plotOutput("histPlot")
+    )
+  )
+)
+
+  server <- function(input, output) {
+  
+    output$histPlot <- renderPlot({
+      tab_st_occ %>%  
+        filter(DEPT == input$dept) %>% 
+        ggplot() + aes(x=input$variable) + 
+                   geom_histogram(bins=input$classes)
+    })
+    
+  }
+  
+shinyApp(ui = ui, server = server)
+```
+
+Et non cela ne fonctionne pas. En réalité, comme nous avons utilisé dans `choices =` une fonction `list()` qui fait appel à des variables de type caractère, la fonction `ggplot() + aes(x = )` ne comprend pas que la variable appelée est bien une variable numérique (son contenu), elle croît en quelque sorte que c'est une variable caractère. Il faut donc dire à la fonction `ggplot()` ici que le nom de la variable est de type "string" mais qu'elle comporte bien des valeurs numériques donc compatible avec un histogramme : pour cela, au lieu de `ggplot() + aes(x = )`, il faut utiliser `ggplot() + aes_string(x = )`.
+
+Réessayons :
+
+```{r eval=FALSE}
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Statut d'occupation des logements agrégé au niveau communal, selon le département"),
+  
+  # Définition du Widget - ici un slider en vue de construire un histogramme
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(inputId = "classes",
+                  label = "Choix du nombre de classes :",
+                  min = 1,
+                  max = 50,
+                  value = 25),
+      radioButtons(inputId = "dept", 
+                   label = "Choix du département :",
+                   choices = unique(tab_st_occ$DEPT),
+                   selected = "75"),
+      selectInput(inputId = "variable", 
+                  label = "Choix de la variable :", 
+                  choices = list("nb_proprio", "nb_locataires"), 
+                  selected = "nb_proprio"),
+    ),
+    
+    # Graphe montré à l'utilisateur
+    mainPanel(
+      plotOutput("histPlot")
+    )
+  )
+)
+
+  server <- function(input, output) {
+  
+    output$histPlot <- renderPlot({
+      tab_st_occ %>%  
+        filter(DEPT == input$dept) %>% 
+        ggplot() + aes_string(x=input$variable) + 
+                   geom_histogram(bins=input$classes)
+    })
+    
+  }
+  
+shinyApp(ui = ui, server = server)
+```
+
+Enfin, on peut ajouter en-dessous de l'histogramme un autre graphique, en l'occurence une boîte à moustache, et introduire une réactivité sur la base de données, ce qui permet un gain d'efficacité (en particulier en cas de base de données volumineuse) et ici d'éviter de réécrire deux fois le filtre dans les deux fonctions créant les deux graphiques :
+
+```{r eval=FALSE}
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Statut d'occupation des logements au niveau communal, selon le département"),
+  
+  # Définition du Widget - ici un slider en vue de construire un histogramme
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(inputId = "classes",
+                  label = "Nombres de classes pour l'histogramme :",
+                  min = 1,
+                  max = 50,
+                  value = 25),
+      radioButtons(inputId = "dept", 
+                   label = "Choix du département :",
+                   choices = unique(tab_st_occ$DEPT), #ou indiquer 'nom_dept'
+                   selected = "75"),
+      selectInput(inputId = "variable", 
+                  label = "Choix de la variable :", 
+                  choices = list("nb_proprio", "nb_locataires"), 
+                  selected = "nb_proprio"),
+    ),
+    
+    # Graphe montré à l'utilisateur
+    mainPanel(
+      plotOutput("histPlot"),
+      plotOutput("boxPlot")
+    )
+  )
+)
+
+  server <- function(input, output) {
+    
+    # Base réactive
+    tab_st_occ_react <- reactive({
+      tab_st_occ %>%  
+      filter(DEPT == input$dept)
+    })
+    
+    output$histPlot <- renderPlot({
+      tab_st_occ_react() %>% 
+        ggplot() + aes_string(x=input$variable) + geom_histogram(bins=input$classes)
+      
+    })
+    
+    output$boxPlot <- renderPlot({
+      tab_st_occ_react() %>%  
+        ggplot() + aes_string(x = input$variable) + 
+        geom_boxplot() + 
+        scale_x_continuous(limits=c(0,quantile(tab_st_occ_react()[[input$variable]], 0.75)*2)) +
+        labs(caption="Rq : les valeurs supérieures à 2 fois le Q3 de la distribution ne sont pas affichées sur le graphique", x="", y="") +
+        theme(plot.caption = element_text(hjust=0, size=11.5))
+    })
+    
+  }
+  
+shinyApp(ui = ui, server = server)
+```
+
+# Applications plus poussées sur Shiny
+
+## Application avec un tableau et un graphique sur une autre base de données
+
+En repartant de la base JOCAS des offres d'emplois reçues via Pôle emploi en 2020 sur Paris et sa petite couronne, nous allons créer une autre application en mettant en haut un tableau général récapitulant les informations suivantes : le nombre d'offres en CDD, le nombre d'offres en intérim, la durée moyenne des offres en CDD et la durée moyenne des offres en intérim ; puis en-dessous de ce tableau, on va ajouter un graphique (barplot) qui va représenter le "top 5" de la durée moyenne la plus élevée des offres en CDD ou intérim selon le mois de publication et selon le département.
+
+Ainsi, le premier tableau ne sera pas à ce stade réactif, alors que le graphique le sera. Il y aura par conséquent deux widgets, l'un pour choisir le mois de publication considéré et l'autre pour choisir le département. Pour le tableau, vous pouvez utiliser le package **`gt()`** et la fonction `gt_output()` pour l'appel du tableau dans la partie **UI** associée à la fonction `render_gt()` dans la partie **server**.
+
+Cela doit vous donner ceci :
+
+![](images/Ex.1_Shiny.png)
+
+```{r eval=FALSE}
+# Chargement des librairies
+library(shiny)
+library(tidyverse)
+library(gt)
+library(RColorBrewer)
+library(forcats)
+
+
+# Chargement du fichier et création variables"
+OffresPE_2020 <- readRDS("data/OffresPE_2020.Rdata")
+OffresPE_2020 <- OffresPE_2020  %>% 
+  mutate(mois_publication = months(date_sitePublicationDay),
+         mois_publication = factor(mois_publication, 
+                                   levels = c( "janvier","février","mars","avril", "mai", "juin","juillet",
+                                                "août","septembre", "octobre", "novembre", "décembre")),
+         location_departement = factor(OffresPE_2020$location_departement),
+         secteurs=as.factor(case_when(entrepriseSecteur_NAF21 %in% c("C", "D", "E") ~ "Industrie",
+                                      entrepriseSecteur_NAF21 =="F" ~ "Construction",
+                                      entrepriseSecteur_NAF21 =="G" ~ "Commerce",
+                                      entrepriseSecteur_NAF21 =="H" ~ "Transports",
+                                      entrepriseSecteur_NAF21 =="I" ~ "Hébergement/restauration",
+                                      entrepriseSecteur_NAF21 =="J" ~ "Info/com",
+                                      entrepriseSecteur_NAF21 %in% c("K", "L") ~ "Activités financières et immo",
+                                      entrepriseSecteur_NAF21 =="M" ~ "Activités spécialisées, scientifiques et techniques",
+                                      entrepriseSecteur_NAF21 =="N" ~ "Activités de services administratifs et de soutien",
+                                      entrepriseSecteur_NAF21 =="O" ~ "Administration publique",
+                                      entrepriseSecteur_NAF21 =="P" ~ "Enseignement",
+                                      entrepriseSecteur_NAF21 =="Q" ~ "Santé humaine et action sociale",
+                                      entrepriseSecteur_NAF21 =="R" ~ "Arts, spectacles et activités récréatives",
+                                      entrepriseSecteur_NAF21 =="S" ~ "Autres activités de service",
+                                      entrepriseSecteur_NAF21 =="T" ~ "Activités des ménages en tant qu'employeurs",
+                                      entrepriseSecteur_NAF21 == "" ~ "Inconnu",
+                                      TRUE ~ entrepriseSecteur_NAF21)))
+
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Caractéristiques des offres d'emplois en CDD et intérim en 2020 sur Paris et sa petite couronne"),
+  
+  br(),
+  
+  # Définition du ou des Widgets
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(inputId = "mois", 
+                  label = "Choix du mois de publication de l'offre", 
+                  choices = levels(OffresPE_2020$mois_publication),
+                  selected = "janvier"),
+      radioButtons(inputId = "dept", 
+                   label = "Choix du département",
+                   choices = levels(OffresPE_2020$location_departement),
+                   selected = "75")
+
+      ),
+    
+    # Tableau et graphe montré à l'utilisateur
+    mainPanel(
+      gt_output("tab"),
+
+      br(),
+      br(),
+      
+      plotOutput("barplot")    
+    )
+  )
+)
+
+
+server <- function(input, output) {
+  
+  output$tab <- render_gt({
+  OffresPE_2020 %>% 
+      filter(contractType %in% c("CDD", "MIS") & !is.na(contractDuration_value) & 
+               entrepriseSecteur_NAF21!="U") %>% 
+      count(contractType) %>% 
+      pivot_wider(names_from = contractType, values_from = n) %>% 
+      rename("Nombre de missions d'intérim"="MIS",
+             "Nombre de CDD"="CDD") %>% 
+      add_column("Durée moyenne des contrats, en jours" = round(mean(OffresPE_2020[OffresPE_2020$contractType %in% c("CDD", "MIS") & 
+                                                                                     !is.na(OffresPE_2020$contractDuration_value), ]$contractDuration_value)),
+                 "Durée médiane des contrats, en jours" = round(median(OffresPE_2020[OffresPE_2020$contractType %in% c("CDD", "MIS") & 
+                                                                                      !is.na(OffresPE_2020$contractDuration_value), ]$contractDuration_value))) %>% 
+      gt() %>%  
+      fmt_number(columns= 1:2, sep_mark = " ", decimals = 0) %>% 
+      tab_header(title=md("Nombre et durée des contrats de travail (CDD ou intérim) proposés dans les offres d'emploi de Pôle emploi en 2020 sur Paris et sa petite couronne"))
+  })
+
+
+  output$barplot <- renderPlot({
+  OffresPE_2020 %>% 
+      filter(contractType %in% c("CDD", "MIS") & !is.na(contractDuration_value) & 
+               entrepriseSecteur_NAF21!="U" & 
+               mois_publication == input$mois & location_departement==input$dept) %>% 
+      group_by(secteurs) %>% 
+      summarise(moy_duree = round(mean(contractDuration_value))) %>% 
+      arrange(desc(moy_duree)) %>% slice(1:5) %>% 
+      ggplot() + aes(x = moy_duree, y = fct_reorder(secteurs, moy_duree))  + 
+      geom_bar(stat="identity", fill="darkgoldenrod1")  +
+      geom_text(aes(label=moy_duree), position = position_stack(vjust=0.5), size=4.5) +
+      labs(title=paste("Top 5 des secteurs d'activité ayant des offres d'emploi en CDD \net missions d'intérim avec les durées moyennes en jours les \nplus élevées",
+                       "en", input$mois, "dans le", input$dept), 
+           x = "", y = " ", caption="Source : Base 'JOCAS', offres d'emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020.") +
+      theme_classic() +
+      theme(legend.position = "none", plot.title=element_text(size=16),
+            plot.caption=element_text(size=11),
+            axis.text.y = element_text(size=12.5),
+            axis.text.x = element_text(size=11),
+            )
+
+  })
+  
+}
+
+
+shinyApp(ui = ui, server = server)
+```
+
+Par rapport aux exemples précédents déjà réalisés sur Shiny, nous n'avons pas beaucoup ajouté de choses nouvelles : un peu de langage html (`br()`) pour insérer des espaces entre le tableau et le graphique, ou le titre général et le reste des éléments de l'application ; puis une fonction de condition à l'intérieur du `labs()` de **`Ggplot`** et avec la fonction `paste()` pour, d'une part, que le titre change selon le mois choisi et le déartement choisi par l'utilisateur.
+
+On va maintenant rendre le tableau réactif selon le département choisi.
+
+```{r eval=FALSE}
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Caractéristiques des offres d'emplois en CDD et intérim en 2020 sur Paris et sa petite couronne"),
+  
+  br(),
+  
+  # Définition du Widget
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(inputId = "mois", 
+                  label = "Choix du mois de publication de l'offre", 
+                  choices = levels(OffresPE_2020$mois_publication),
+                  selected = "janvier"),
+      radioButtons(inputId = "dept", 
+                   label = "Choix du département",
+                   choices = levels(OffresPE_2020$location_departement),
+                   selected = "75")
+
+      ),
+    
+    # Tableau et graphe montré à l'utilisateur
+    mainPanel(
+      gt_output("tab"),
+
+      br(),
+      br(),
+      
+      plotOutput("barplot")    
+    )
+  )
+)
+
+
+server <- function(input, output) {
+  
+  output$tab <- render_gt({
+  OffresPE_2020 %>% 
+      filter(contractType %in% c("CDD", "MIS") & !is.na(contractDuration_value) & 
+               entrepriseSecteur_NAF21!="U" & location_departement==input$dept) %>% 
+      count(contractType) %>% 
+      pivot_wider(names_from = contractType, values_from = n) %>% 
+      rename("Nombre de missions d'intérim"="MIS",
+             "Nombre de CDD"="CDD") %>% 
+      add_column("Durée moyenne des contrats, en jours" = round(mean(OffresPE_2020[OffresPE_2020$contractType %in% c("CDD", "MIS") & 
+                                                                                     !is.na(OffresPE_2020$contractDuration_value) &
+                                                                       OffresPE_2020$location_departement==input$dept, ]$contractDuration_value )),
+                 "Durée médiane des contrats, en jours" = round(median(OffresPE_2020[OffresPE_2020$contractType %in% c("CDD", "MIS") & 
+                                                                                       !is.na(OffresPE_2020$contractDuration_value) &
+                                                                       OffresPE_2020$location_departement==input$dept, ]$contractDuration_value))) %>% 
+      gt() %>%  
+      fmt_number(columns= 1:2, sep_mark = " ", decimals = 0) %>% 
+      tab_header(title=paste("Nombre et durée des contrats de travail (CDD ou intérim) proposés dans les offres d'emploi de Pôle emploi en 2020 dans le", input$dept))
+  })
+
+
+  output$barplot <- renderPlot({
+  OffresPE_2020 %>% 
+      filter(contractType %in% c("CDD", "MIS") & !is.na(contractDuration_value) & 
+               entrepriseSecteur_NAF21!="U" & 
+               mois_publication == input$mois & location_departement==input$dept) %>% 
+      group_by(secteurs) %>% 
+      summarise(moy_duree = round(mean(contractDuration_value))) %>% 
+      arrange(desc(moy_duree)) %>% slice(1:5) %>% 
+      ggplot() + aes(x = moy_duree, y = fct_reorder(secteurs, moy_duree))  + 
+      geom_bar(stat="identity", fill="darkgoldenrod1")  +
+      geom_text(aes(label=moy_duree), position = position_stack(vjust=0.5), size=4.5) +
+      labs(title=paste("Top 5 des secteurs d'activité ayant des offres d'emploi en CDD \net missions d'intérim avec les durées moyennes en jours les \nplus élevées",
+                       "en", input$mois, "dans le", input$dept), 
+           x = "", y = " ", caption="Source : Base 'JOCAS', offres d'emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020.") +
+      theme_classic() +
+      theme(legend.position = "none", plot.title=element_text(size=16),
+            plot.caption=element_text(size=11),
+            axis.text.y = element_text(size=12.5),
+            axis.text.x = element_text(size=11))
+
+  })
+  
+}
+
+
+shinyApp(ui = ui, server = server)
+```
+
+## Introduction d'une réactivité appliquée à la table de données
+
+On peut rendre maintenant la base de données réactive avec la fonction `reactive({})`. On l'avait vu, la fonction `reactive()` permet de créer un objet réactif qui est à la fois une entrée réactive et une sortie réactive, l’objet va donc se mettre à jour automatiquement si les entrées qu’il utilise changent, et il va automatiquement déclencher la mise à jour des sorties où il est utilisé.\
+La fonction permet techniquement de décomposer du code réactif et est utile lorsque certaines parties du code sont utilisées par plusieurs outputs car elle va permettre alors d'éviter des redondances. Cela peut être le cas lorsqu'on doit filtrer et/ou sélectionner des mêmes variables en input pour plusieurs outputs.\
+Ici, on va décomposer la partie 'data' du code précédent de la partie construction du graphique ; le rendu sera strictement le même ; mais cela peut être plus efficace en cas de long code et d'application complexe car en gros on va exécuter qu'une seule fois l'opération 'data' réalisée ici.\
+Attention, la base réactive créée est une fonction, il faut donc l'appeler avec des parenthèses !
+
+```{r eval=FALSE}
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Caractéristiques des offres d'emplois en CDD et intérim en 2020 sur Paris et sa petite couronne"),
+  
+  br(),
+  
+  # Définition du Widget
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(inputId = "mois", 
+                  label = "Choix du mois de publication de l'offre", 
+                  choices = levels(OffresPE_2020$mois_publication),
+                  selected = "janvier"),
+      radioButtons(inputId = "dept", 
+                   label = "Choix du département",
+                   choices = levels(OffresPE_2020$location_departement),
+                   selected = "75")
+
+      ),
+    
+    # Tableau et graphe montré à l'utilisateur
+    mainPanel(
+      gt_output("tab"),
+
+      br(),
+      br(),
+      
+      plotOutput("barplot")    
+    )
+  )
+)
+
+
+server <- function(input, output) {
+  
+  output$tab <- render_gt({
+  OffresPE_2020 %>% 
+      filter(contractType %in% c("CDD", "MIS") & !is.na(contractDuration_value & 
+           !entrepriseSecteur_NAF21=="U" & location_departement==input$dept)) %>% 
+      count(contractType) %>% 
+      pivot_wider(names_from = contractType, values_from = n) %>% 
+      rename("Nombre de missions d'intérim"="MIS",
+             "Nombre de CDD"="CDD") %>% 
+      add_column("Durée moyenne des contrats, en jours" = round(mean(OffresPE_2020[OffresPE_2020$contractType %in% c("CDD", "MIS") & 
+                                                                                     !is.na(OffresPE_2020$contractDuration_value) &
+                                                                       OffresPE_2020$location_departement==input$dept, ]$contractDuration_value )),
+                 "Durée médiane des contrats, en jours" = round(median(OffresPE_2020[OffresPE_2020$contractType %in% c("CDD", "MIS") & 
+                                                                                       !is.na(OffresPE_2020$contractDuration_value) &
+                                                                       OffresPE_2020$location_departement==input$dept, ]$contractDuration_value))) %>% 
+      gt() %>%  
+      fmt_number(columns= 1:2, sep_mark = " ", decimals = 0) %>% 
+      tab_header(title=paste("Nombre et durée des contrats de travail (CDD ou intérim) proposés dans les offres d'emploi de Pôle emploi en 2020 dans le", input$dept))
+  })
+
+   OffresPE_2020_react <- reactive({
+    OffresPE_2020 %>% 
+      filter(contractType %in% c("CDD", "MIS") & !is.na(contractDuration_value) & 
+               !entrepriseSecteur_NAF21=="U" & 
+               mois_publication == input$mois & location_departement==input$dept) %>% 
+      group_by(secteurs) %>%  
+      summarise(moy_duree = round(mean(contractDuration_value))) %>% 
+      arrange(desc(moy_duree)) %>% slice(1:5)
+   })
+
+  output$barplot <- renderPlot({
+  OffresPE_2020_react() %>% 
+      ggplot() + aes(x = moy_duree, y = fct_reorder(secteurs, moy_duree))  + 
+      geom_bar(stat="identity", fill="darkgoldenrod1")  +
+      geom_text(aes(label=moy_duree), position = position_stack(vjust=0.5), size=4.5) +
+      labs(title=paste("Top 5 des secteurs d'activité ayant des offres d'emploi en CDD \net missions d'intérim avec les durées moyennes en jours les \nplus élevées",
+                       "en", input$mois, "dans le", input$dept), 
+           x = "", y = " ", caption="Source : Base 'JOCAS', offres d'emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020.") +
+      theme_classic() +
+      theme(legend.position = "none", plot.title=element_text(size=16),
+            plot.caption=element_text(size=11),
+            axis.text.y = element_text(size=12.5),
+            axis.text.x = element_text(size=11))
+
+  })
+  
+}
+
+
+shinyApp(ui = ui, server = server)
+```
+
+## Introduction d'une réactivité sur les inputs (contexte réactif)
+
+On va maintenant introduire un contexte réactif.\
+Pour cela, on va repartir de la base du RP, puisqu'on peut y distinguer les départements et les communes, en s'intéressant à la répartition de la population de 15-64 ans selon le type d'activité, et donc par département et commune. On va de façon comparable à ce qu'on a fait précédemment, créer en haut un tableau qui donnera cette répartition pour le département ; puis en-dessous un graphique qui montrera cette répartition pour une des communes de ce département. On aura donc deux widgets, un pour le choix du département et un pour le choix de la commune. On veut que lorsqu'on choisit Paris en département par exemple, le widget de la commune ne nous montre que les arrondissements de Paris (et non toutes les communes des 4 départements de notre champ), etc.
+
+On peut pour cela utiliser la fonction `observe()` : on l'utilise donc quand un input change.\
+Il va falloir ici utiliser à l'intérieur de la fonction `observe()` une condition `if ... else ...` : on part du principe qu'on affiche d'abord automatiquement le département "75", lorsque l'utilisateur appuie sur le bouton du choix de département du widget `radioButtons`, le widget `selectInput` doit être actualisé en permettant les seuls choix de communes de Paris donc les arrondissements ; de même pour les autres départements.
+
+Il faut donc utiliser la fonction `observe()`, une condition `if ... else ...` et une actualisation des widgets avec la fonction `updateSelectInput()`.
+
+L'image suivante vous donne un aperçu de ce qu'on devrait avoir pour Paris :
+
+![](images/Ex.2_Shiny.png)
+
+```{r eval=FALSE}
+
+# On corrige les codes communes avec la table de passage suivante
+tab_passage <- readRDS(file = "F:/Enseignements/Enseignements Univ. Paris Cite 2020-xx/Data Mining_M2 PISE/Cours 2023-2025/Tables passage géo/zip_code_to_com_code.RDS")
+
+tab_passage %>% filter(!zip_code %in% c("13382", "13591", "28011", "59708", "69307"))
+
+OffresPE_2020 <- OffresPE_2020 %>% rename(zip_code = location_zipcode, zip_name=location_label) %>% 
+  mutate(zip_code = as.character(zip_code)) %>% 
+  left_join(tab_passage, by=c("zip_code", "zip_name"))
+
+
+# On crée une variable de contrat avec moins de modalités
+OffresPE_2020 <- OffresPE_2020 %>% 
+       mutate(type_contrat=as.factor(case_when(contractType=="MIS" ~ "Intérim",
+                                               contractType %in% c("CDS","SAI","TTI", "DDI") ~ "CDD",
+                                               contractType %in% c("CCE", "REP", "DIN") ~ "Autres types",
+                                               contractType %in% c("Independant", "Franchise") ~ "Indépendant ou franchise",
+                                               TRUE ~ contractType)),
+              com_code = as.factor(com_code))
+
+
+# Définition UI et Server de l'application Shiny
+ui <- fluidPage(
+  # Titre de l'application
+  titlePanel("Types de contrat de travail des offres d'emplois proposées par Pôle emploi en 2020 sur Paris et sa petite couronne"),
+  
+  br(),
+  
+  # Définition du Widget
+  sidebarLayout(
+    sidebarPanel(
+      radioButtons(inputId = "dept", 
+                   label = "Choix du département pour le tableau et le graphique",
+                   choices = levels(OffresPE_2020$location_departement),
+                   selected = "75"),
+      selectInput(inputId = "commune", 
+                  label = "Choix de la commune pour le graphique", 
+                  choices = unique(OffresPE_2020$com_code),
+                  selected = "75113")
+      ),
+
+    
+    # Tableau et graphe montré à l'utilisateur
+    mainPanel(
+      gt_output("tab"),
+
+      br(),
+      br(),
+      
+      plotOutput("barplot")    
+    )
+  )
+)
+
+
+server <- function(input, output) {
+
+   observe({
+     input$dept
+     if(input$dept == "75"){
+       updateSelectInput(inputId = "commune",
+                         choices = unique(OffresPE_2020[OffresPE_2020$location_departement=="75", ]$com_code),
+                         selected = "75113")
+      }
+     else {updateSelectInput(inputId = "commune",
+                            choices = unique(OffresPE_2020[OffresPE_2020$location_departement==input$dept, ]$com_code),
+                            selected = input$variable)
+    }
+  })
+   
+   
+  output$tab <- render_gt({
+  OffresPE_2020 %>% 
+      filter(location_departement==input$dept) %>% 
+      count(type_contrat) %>% 
+      mutate(Pourcentage=round(prop.table(n)*100,1)) %>% 
+      arrange(desc(Pourcentage)) %>% 
+      adorn_totals("row") %>% 
+      rename(Effectif=n, "Type de contrat"=type_contrat) %>% 
+      gt() %>% 
+      fmt_number(columns = 2, sep_mark = " ", decimals = 0) %>% 
+      tab_header(title = paste("Département affiché :", input$dept))
+
+  })
+
+    
+   OffresPE_2020_react <- reactive({
+    OffresPE_2020 %>% 
+       filter(location_departement==input$dept & com_code==input$commune)
+     
+   })
+
+  
+  output$barplot <- renderPlot({
+  OffresPE_2020_react() %>% 
+      filter(com_code==input$commune) %>% 
+      count(type_contrat) %>% 
+      mutate(Pourcentage=round(prop.table(n)*100,1)) %>% 
+      select(-n) %>%
+      ggplot() + aes(x=fct_reorder(type_contrat, desc(Pourcentage)), y=Pourcentage)  + 
+      geom_bar(stat="identity", fill="darkgoldenrod1")  +
+      geom_text(aes(label=Pourcentage), position = position_stack(vjust=0.5), size=4.5) +
+      labs(title=paste("Répartition des offres d'emploi par type de contrat de travail dans le", input$commune), 
+           x = "", y = " ", caption="Source : Base 'JOCAS', offres d'emploi émanant uniquement de Pôle emploi (auj. France Travail), 2020.") +
+      theme_classic() +
+      theme(legend.position = "none", plot.title=element_text(size=17),
+            plot.caption=element_text(size=11.5),
+            axis.text.y = element_text(size=11.5),
+            axis.text.x = element_text(size=11.5))
+
+  })
+  
+}
+
+
+shinyApp(ui = ui, server = server)
+```

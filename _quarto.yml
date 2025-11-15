@@ -1,0 +1,47 @@
+project:
+  type: book
+  output-dir: docs
+  
+
+book:
+  title: "Data Mining 2025"
+  author: "Camille Signoretto"
+  date: "Février-juin 2026"
+  subtitle: "Master Meci - Parcours PISE et CCESE - Option Data"
+  language: fr
+  search: true
+  repo-url: https://github.com/Camille-Sisi/Data-Mining-2025
+  sidebar: 
+    style: docked
+  chapters:
+    - index.qmd
+    - part: "Séance 1"
+      chapters:
+      - 01-Base-de-donnees.qmd
+      - 02-Manipulation-base.qmd
+      - 03-Manipulation-variables.qmd
+      - 04-Récapitulatif.qmd
+    - part: "Séance2"
+      chapters:
+      - 05-Questions-fouille-donnees.qmd
+      - 06-Fonctions.qmd
+    - part: "Séance 3"
+      chapters:
+      - 07-Ggplot-theorique.qmd
+      - 08-Ggplot-pratique.qmd
+    - part: "Séances 4 et 5"
+      chapters: 
+      - 09-Intro-a-Shiny-theorique.qmd
+      - 10-Intro-a-Shiny-exemples.qmd
+    - part: "Séance 6"
+      chapters: 
+      - 11-Clustering-theorique.qmd
+      - 12-Clustering-application.qmd
+
+format:
+  bookup-html:
+    toc: true
+    toc-title: "Sur cette page"
+    toc-depth: 3
+    
+    
