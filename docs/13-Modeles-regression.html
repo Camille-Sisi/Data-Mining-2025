@@ -1,0 +1,3676 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>13&nbsp; Modèles de régression : application sur les offres de Pôle emploi 2020 – Data Mining 2025</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./12-Clustering-application.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-03e2afb5cd7388593a0fdb3df1e9c110.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bcc59033a7e2c7a840f06155df22da50.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-03e2afb5cd7388593a0fdb3df1e9c110.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-18c4c02f2e0c35b6cc6a137a251bffe3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-98d67fd4a94d75c92ed86be1e8f4ff03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-18c4c02f2e0c35b6cc6a137a251bffe3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/bookup_fonts_gwf-0.0/fonts-embed.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13-Modeles-regression.html">Séance 7</a></li><li class="breadcrumb-item"><a href="./13-Modeles-regression.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles de régression : application sur les offres de Pôle emploi 2020</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Mining 2025</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Camille-Sisi/Data-Mining-2025" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Présentation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séance 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Base-de-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Récupération de la base de données</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Manipulation-base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manipulation de la base</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Manipulation-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulation des variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Récapitulatif.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Récapitulatif séance 1 - Data Wrangling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séance2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Questions-fouille-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quelles questions intéressantes pour une “fouille de données” sur la base des RP ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Systématiser nos procédures : construire une fonction</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séance 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Ggplot-theorique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Visualization et Ggplot2 : aspects théoriques</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Ggplot-pratique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Mining et Data Visualization en pratique</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séances 4 et 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-Intro-a-Shiny-theorique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Les applications interactives avec Shiny App</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Intro-a-Shiny-exemples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">La création d’une application Shiny “pas à pas” avec l’une de nos bases de données</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séance 6</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-Clustering-theorique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering : aspects théoriques</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Clustering-application.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Clustering : application sur le RP 2019</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séance 7</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Modeles-regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles de régression : application sur les offres de Pôle emploi 2020</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#la-création-des-bases-dapprentissage-et-de-test" id="toc-la-création-des-bases-dapprentissage-et-de-test" class="nav-link active" data-scroll-target="#la-création-des-bases-dapprentissage-et-de-test"><span class="header-section-number">13.1</span> La création des bases d’apprentissage et de test</a></li>
+  <li><a href="#un-modèle-à-visée-principale-explicative-la-régression-logistique" id="toc-un-modèle-à-visée-principale-explicative-la-régression-logistique" class="nav-link" data-scroll-target="#un-modèle-à-visée-principale-explicative-la-régression-logistique"><span class="header-section-number">13.2</span> Un modèle à visée principale explicative : la régression logistique</a>
+  <ul class="collapse">
+  <li><a href="#le-modèle-initial" id="toc-le-modèle-initial" class="nav-link" data-scroll-target="#le-modèle-initial"><span class="header-section-number">13.2.1</span> Le modèle initial</a></li>
+  <li><a href="#lévaluation-du-modèle-et-la-recherche-éventuelle-dun-meilleur-modèle" id="toc-lévaluation-du-modèle-et-la-recherche-éventuelle-dun-meilleur-modèle" class="nav-link" data-scroll-target="#lévaluation-du-modèle-et-la-recherche-éventuelle-dun-meilleur-modèle"><span class="header-section-number">13.2.2</span> L’évaluation du modèle et la recherche éventuelle d’un “meilleur” modèle</a></li>
+  <li><a href="#le-modèle-final-et-linterprétation-des-résultats" id="toc-le-modèle-final-et-linterprétation-des-résultats" class="nav-link" data-scroll-target="#le-modèle-final-et-linterprétation-des-résultats"><span class="header-section-number">13.2.3</span> Le modèle final et l’interprétation des résultats</a></li>
+  </ul></li>
+  <li><a href="#un-modèle-à-visée-principale-prédictive-labre-de-décision" id="toc-un-modèle-à-visée-principale-prédictive-labre-de-décision" class="nav-link" data-scroll-target="#un-modèle-à-visée-principale-prédictive-labre-de-décision"><span class="header-section-number">13.3</span> Un modèle à visée principale prédictive : l’abre de décision</a>
+  <ul class="collapse">
+  <li><a href="#le-modèle-initial-1" id="toc-le-modèle-initial-1" class="nav-link" data-scroll-target="#le-modèle-initial-1"><span class="header-section-number">13.3.1</span> Le modèle initial</a></li>
+  <li><a href="#lévaluation-du-modèle" id="toc-lévaluation-du-modèle" class="nav-link" data-scroll-target="#lévaluation-du-modèle"><span class="header-section-number">13.3.2</span> L’évaluation du modèle</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13-Modeles-regression.html">Séance 7</a></li><li class="breadcrumb-item"><a href="./13-Modeles-regression.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles de régression : application sur les offres de Pôle emploi 2020</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-Modeles-regression" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles de régression : application sur les offres de Pôle emploi 2020</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>On cherche maintenant à expliquer un phénomène ou une variable par rapport à d’autres. On va ici s’intéresser au fait qu’une offre de Pôle emploi corresponde à un CDI ou non.<br>
+On va repartir de la base <code>OffresPE_2020</code> en réduisant le champ pour améliorer les temps de calcul, par exemple en ne s’intéressant qu’à Paris, puis en retravaillant un peu les variables avant de lancer les modèles de régression.</p>
+<section id="la-création-des-bases-dapprentissage-et-de-test" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="la-création-des-bases-dapprentissage-et-de-test"><span class="header-section-number">13.1</span> La création des bases d’apprentissage et de test</h2>
+<p>On crée notre base de travail en ne prenant que les variables qui nous intéressent, dont certaines retravaillées avant (création de variables catégorielles plus pertinentes dans une régression logistique). La fonction <code>relevel()</code> permet d’indiquer la modalité de référence que l’on veut dans les régressions futures, ici pour la régression logistique.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fancycut)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>OffresPE_2020 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/OffresPE_2020.Rdata"</span>) </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>OffresPE_2020<span class="sc">$</span>salary_cat <span class="ot">&lt;-</span> <span class="fu">fancycut</span>(OffresPE_2020<span class="sc">$</span>salary_hourly_mean,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Entre 0 et moins que le SMIC (10€)"</span> <span class="ot">=</span> <span class="st">"(0, 10]"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Entre le SMIC et le Q1(11,6€)"</span> <span class="ot">=</span> <span class="st">"(10, 11.6]"</span>, </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Entre le Q1 et la moyenne (20,1€)"</span> <span class="ot">=</span> <span class="st">"(11.6, 20.1]"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Entre la moyenne et le D9 observée en France(15€)"</span> <span class="ot">=</span> <span class="st">"(20.1, 28]"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Entre le D9 et le maximum (40200€)"</span> <span class="ot">=</span> <span class="st">"(28, 40200)"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">na.bucket =</span> <span class="st">"Manquant"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>OffresPE_2020 <span class="sc">%&gt;%</span>  <span class="fu">tabyl</span>(salary_cat) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                        salary_cat      n percent
+                Entre 0 et moins que le SMIC (10€)   3489    0.8%
+                     Entre le SMIC et le Q1(11,6€)  21857    5.2%
+                 Entre le Q1 et la moyenne (20,1€)  46964   11.2%
+ Entre la moyenne et le D9 observée en France(15€)  17356    4.1%
+                Entre le D9 et le maximum (40200€)  10933    2.6%
+                                          Manquant 319923   76.1%
+                                              &lt;NA&gt;      1    0.0%</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>OffresPE_reg <span class="ot">&lt;-</span> OffresPE_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(location_departement<span class="sc">==</span><span class="st">"75"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mois_publication=</span><span class="fu">months</span>(date_sitePublicationDay, <span class="at">abbreviate =</span> T),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mois_publication=</span> <span class="fu">factor</span>(mois_publication,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"janv."</span>, <span class="st">"févr."</span>, <span class="st">"mars"</span>, <span class="st">"avr."</span>, <span class="st">"mai"</span>, <span class="st">"juin"</span>, <span class="st">"juil."</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">"août"</span>, <span class="st">"sept."</span>, <span class="st">"oct."</span>, <span class="st">"nov."</span>, <span class="st">"déc."</span>)),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">secteurs=</span><span class="fu">as.factor</span>(<span class="fu">case_when</span>(entrepriseSecteur_NAF21 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>) <span class="sc">~</span> <span class="st">"Industrie"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"F"</span> <span class="sc">~</span> <span class="st">"Construction"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"G"</span> <span class="sc">~</span> <span class="st">"Commerce"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"H"</span> <span class="sc">~</span> <span class="st">"Transports"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"I"</span> <span class="sc">~</span> <span class="st">"Hébergement/restauration"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"J"</span> <span class="sc">~</span> <span class="st">"Info/com"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"L"</span>) <span class="sc">~</span> <span class="st">"Activités fi et immo"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"M"</span> <span class="sc">~</span> <span class="st">"Activités spé, scientifiques et techniques"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"N"</span> <span class="sc">~</span> <span class="st">"Activités services administratifs et soutien"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"O"</span> <span class="sc">~</span> <span class="st">"Administration publique"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"P"</span> <span class="sc">~</span> <span class="st">"Enseignement"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"Q"</span> <span class="sc">~</span> <span class="st">"Santé humaine et action sociale"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"R"</span> <span class="sc">~</span> <span class="st">"Arts, spectacles et activités récréatives"</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"S"</span> <span class="sc">~</span> <span class="st">"Autres activités de service"</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                                      entrepriseSecteur_NAF21 <span class="sc">==</span><span class="st">"T"</span> <span class="sc">~</span> <span class="st">"Activités des ménages en tant qu'employeurs"</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                                      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Manquant ou U"</span>)),</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">CDI =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(contractType <span class="sc">==</span> <span class="st">"CDI"</span> <span class="sc">~</span>  <span class="st">"Oui"</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Non"</span>)),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">salary_cat=</span><span class="fu">relevel</span>(salary_cat, <span class="at">ref=</span><span class="st">"Entre le D9 et le maximum (40200€)"</span>),</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">secteurs=</span><span class="fu">relevel</span>(secteurs, <span class="at">ref=</span><span class="st">"Construction"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mois_publication, salary_cat, CDI, secteurs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>De manière traditionnelle, dans les modèles de prédiction ou <em>machine learning</em>, on n’applique pas le modèle sur l’ensemble de la base de données mais d’abord sur un échantillon dit d’apprentissage puis on le “teste” sur l’échantillon restant. On va donc ici suivre ce schéma et diviser notre base de données en deux pour avoir un échantillon d’apprentissage ou d’entraînement, et un autre test.<br>
+<br>
+On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions existent) en lui spécifiant la façon de diviser la base avec l’argument <code>prob=</code> : ici on choisit de diviser notre base selon un rapport 70% <em>vs</em> 30%, autrement dit notre base d’apprentissage comprendra 70% des données de la base initiale, alors que la base de test comprendra les 30% restants. On pourrait procéder à un rapport du type 80% <em>vs</em> 20%, ou 75% <em>vs</em> 25%, etc.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On choisit la façon de diviser notre base et on l'applique en créant 2 bases</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="fu">nrow</span>(OffresPE_reg), <span class="at">replace=</span><span class="cn">TRUE</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.70</span>,<span class="fl">0.3</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>OffresPE_train <span class="ot">&lt;-</span> OffresPE_reg[sample, ]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>OffresPE_test  <span class="ot">&lt;-</span> OffresPE_reg[<span class="sc">!</span>sample, ]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># On regarde quelle est la taille de nos deux bases</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(OffresPE_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 122721      4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(OffresPE_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 53056     4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On vérifie que les proportions de notre variable d'intérêt sont assez proches</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># entre les deux bases</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>OffresPE_train <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(CDI) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="pfnxehhluu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pfnxehhluu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pfnxehhluu thead, #pfnxehhluu tbody, #pfnxehhluu tfoot, #pfnxehhluu tr, #pfnxehhluu td, #pfnxehhluu th {
+  border-style: none;
+}
+
+#pfnxehhluu p {
+  margin: 0;
+  padding: 0;
+}
+
+#pfnxehhluu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pfnxehhluu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pfnxehhluu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pfnxehhluu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pfnxehhluu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pfnxehhluu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pfnxehhluu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pfnxehhluu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pfnxehhluu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pfnxehhluu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pfnxehhluu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pfnxehhluu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pfnxehhluu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pfnxehhluu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pfnxehhluu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pfnxehhluu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pfnxehhluu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pfnxehhluu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pfnxehhluu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pfnxehhluu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pfnxehhluu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pfnxehhluu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pfnxehhluu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pfnxehhluu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pfnxehhluu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pfnxehhluu .gt_left {
+  text-align: left;
+}
+
+#pfnxehhluu .gt_center {
+  text-align: center;
+}
+
+#pfnxehhluu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pfnxehhluu .gt_font_normal {
+  font-weight: normal;
+}
+
+#pfnxehhluu .gt_font_bold {
+  font-weight: bold;
+}
+
+#pfnxehhluu .gt_font_italic {
+  font-style: italic;
+}
+
+#pfnxehhluu .gt_super {
+  font-size: 65%;
+}
+
+#pfnxehhluu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pfnxehhluu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pfnxehhluu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pfnxehhluu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pfnxehhluu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pfnxehhluu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pfnxehhluu .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pfnxehhluu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pfnxehhluu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="CDI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CDI</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">n</th>
+<th id="percent" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">percent</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="CDI">Non</td>
+<td class="gt_row gt_right" headers="n">26870</td>
+<td class="gt_row gt_right" headers="percent">21.9%</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="CDI">Oui</td>
+<td class="gt_row gt_right" headers="n">95851</td>
+<td class="gt_row gt_right" headers="percent">78.1%</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="CDI">Total</td>
+<td class="gt_row gt_right" headers="n">122721</td>
+<td class="gt_row gt_right" headers="percent">-</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>OffresPE_test <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(CDI) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="zjnkycyunc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zjnkycyunc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#zjnkycyunc thead, #zjnkycyunc tbody, #zjnkycyunc tfoot, #zjnkycyunc tr, #zjnkycyunc td, #zjnkycyunc th {
+  border-style: none;
+}
+
+#zjnkycyunc p {
+  margin: 0;
+  padding: 0;
+}
+
+#zjnkycyunc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#zjnkycyunc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zjnkycyunc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zjnkycyunc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zjnkycyunc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zjnkycyunc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zjnkycyunc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zjnkycyunc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zjnkycyunc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#zjnkycyunc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#zjnkycyunc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zjnkycyunc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zjnkycyunc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zjnkycyunc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zjnkycyunc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zjnkycyunc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zjnkycyunc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zjnkycyunc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#zjnkycyunc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zjnkycyunc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zjnkycyunc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zjnkycyunc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zjnkycyunc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zjnkycyunc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zjnkycyunc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zjnkycyunc .gt_left {
+  text-align: left;
+}
+
+#zjnkycyunc .gt_center {
+  text-align: center;
+}
+
+#zjnkycyunc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zjnkycyunc .gt_font_normal {
+  font-weight: normal;
+}
+
+#zjnkycyunc .gt_font_bold {
+  font-weight: bold;
+}
+
+#zjnkycyunc .gt_font_italic {
+  font-style: italic;
+}
+
+#zjnkycyunc .gt_super {
+  font-size: 65%;
+}
+
+#zjnkycyunc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#zjnkycyunc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zjnkycyunc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#zjnkycyunc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#zjnkycyunc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#zjnkycyunc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#zjnkycyunc .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#zjnkycyunc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#zjnkycyunc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="CDI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CDI</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">n</th>
+<th id="percent" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">percent</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="CDI">Non</td>
+<td class="gt_row gt_right" headers="n">11708</td>
+<td class="gt_row gt_right" headers="percent">22.1%</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="CDI">Oui</td>
+<td class="gt_row gt_right" headers="n">41348</td>
+<td class="gt_row gt_right" headers="percent">77.9%</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="CDI">Total</td>
+<td class="gt_row gt_right" headers="n">53056</td>
+<td class="gt_row gt_right" headers="percent">-</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Les deux bases présentent une répartition CDI/pas CDI très proche : dans le 75, environ 78% des offres d’emploi émises sur le site de Pôle emploi sont en CDI.</p>
+</section>
+<section id="un-modèle-à-visée-principale-explicative-la-régression-logistique" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="un-modèle-à-visée-principale-explicative-la-régression-logistique"><span class="header-section-number">13.2</span> Un modèle à visée principale explicative : la régression logistique</h2>
+<p>La fonction <code>glm</code> du package <strong><code>stats</code></strong> (à installer avant appel dans la librarie) est principalement utilisée pour modéliser différents types de régression : l’argument <code>family=binomial("logit")</code> permet d’utiliser un modèle logit.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("stats")</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="le-modèle-initial" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="le-modèle-initial"><span class="header-section-number">13.2.1</span> Le modèle initial</h3>
+<p>On crée le modèle en spécifiant la variable d’intérêt puis les variables explicatives ou l’ensemble des variables présentes dans la base si nous avons déjà procédé à une sélection des variables : c’est le cas ici donc c’est pour cela que l’on indique juste un “.” après le “~”, sinon on devrait écrire les variables une par une, ou les sctoker dans une liste et appeler la liste.</p>
+<p>Même si ce type modèle doit permettre essentiellement d’expliquer un phénomène, ici qu’une offre d’emploi soit en CDI ou non, on peut l’utiliser aussi pour prédire les données. C’est pourquoi nous appliquons d’abord le logit sur la base (réduite) d’apprentissage.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>logit_1 <span class="ot">&lt;-</span> <span class="fu">glm</span> (CDI <span class="sc">~</span> ., </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span>OffresPE_train, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">"logit"</span>))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logit_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = CDI ~ ., family = binomial("logit"), data = OffresPE_train)
+
+Coefficients:
+                                                            Estimate Std. Error
+(Intercept)                                                  3.25121    0.13833
+mois_publicationfévr.                                       -0.24326    0.03369
+mois_publicationmars                                        -0.08301    0.03615
+mois_publicationavr.                                        -0.13230    0.04179
+mois_publicationmai                                         -0.42510    0.04019
+mois_publicationjuin                                        -0.59124    0.03512
+mois_publicationjuil.                                       -0.51631    0.03425
+mois_publicationaoût                                        -0.25396    0.03608
+mois_publicationsept.                                       -0.04728    0.03525
+mois_publicationoct.                                         0.05072    0.03560
+mois_publicationnov.                                         0.11835    0.04289
+mois_publicationdéc.                                        -0.09063    0.04338
+salary_catEntre 0 et moins que le SMIC (10€)                -3.00999    0.10293
+salary_catEntre le SMIC et le Q1(11,6€)                     -1.98207    0.07720
+salary_catEntre le Q1 et la moyenne (20,1€)                 -1.52066    0.07126
+salary_catEntre la moyenne et le D9 observée en France(15€) -0.62506    0.07817
+salary_catManquant                                          -2.02500    0.07021
+secteursActivités des ménages en tant qu'employeurs         -5.46553    0.20280
+secteursActivités fi et immo                                 0.08410    0.13630
+secteursActivités services administratifs et soutien        -1.89332    0.12052
+secteursActivités spé, scientifiques et techniques           0.05586    0.12496
+secteursAdministration publique                             -2.40557    0.15038
+secteursArts, spectacles et activités récréatives           -1.56473    0.18364
+secteursAutres activités de service                         -0.74113    0.13080
+secteursCommerce                                            -0.02899    0.13274
+secteursEnseignement                                        -2.63228    0.13206
+secteursHébergement/restauration                             0.22845    0.14255
+secteursIndustrie                                            0.11582    0.14846
+secteursInfo/com                                             1.07413    0.14245
+secteursManquant ou U                                        0.78993    0.12090
+secteursSanté humaine et action sociale                     -0.74112    0.12422
+secteursTransports                                          -0.25463    0.19726
+                                                            z value Pr(&gt;|z|)
+(Intercept)                                                  23.503  &lt; 2e-16
+mois_publicationfévr.                                        -7.222 5.14e-13
+mois_publicationmars                                         -2.296  0.02167
+mois_publicationavr.                                         -3.166  0.00155
+mois_publicationmai                                         -10.576  &lt; 2e-16
+mois_publicationjuin                                        -16.833  &lt; 2e-16
+mois_publicationjuil.                                       -15.076  &lt; 2e-16
+mois_publicationaoût                                         -7.038 1.95e-12
+mois_publicationsept.                                        -1.341  0.17983
+mois_publicationoct.                                          1.425  0.15423
+mois_publicationnov.                                          2.760  0.00579
+mois_publicationdéc.                                         -2.089  0.03669
+salary_catEntre 0 et moins que le SMIC (10€)                -29.244  &lt; 2e-16
+salary_catEntre le SMIC et le Q1(11,6€)                     -25.673  &lt; 2e-16
+salary_catEntre le Q1 et la moyenne (20,1€)                 -21.339  &lt; 2e-16
+salary_catEntre la moyenne et le D9 observée en France(15€)  -7.997 1.28e-15
+salary_catManquant                                          -28.843  &lt; 2e-16
+secteursActivités des ménages en tant qu'employeurs         -26.951  &lt; 2e-16
+secteursActivités fi et immo                                  0.617  0.53724
+secteursActivités services administratifs et soutien        -15.709  &lt; 2e-16
+secteursActivités spé, scientifiques et techniques            0.447  0.65487
+secteursAdministration publique                             -15.996  &lt; 2e-16
+secteursArts, spectacles et activités récréatives            -8.521  &lt; 2e-16
+secteursAutres activités de service                          -5.666 1.46e-08
+secteursCommerce                                             -0.218  0.82712
+secteursEnseignement                                        -19.932  &lt; 2e-16
+secteursHébergement/restauration                              1.603  0.10901
+secteursIndustrie                                             0.780  0.43533
+secteursInfo/com                                              7.540 4.70e-14
+secteursManquant ou U                                         6.534 6.42e-11
+secteursSanté humaine et action sociale                      -5.966 2.43e-09
+secteursTransports                                           -1.291  0.19678
+                                                               
+(Intercept)                                                 ***
+mois_publicationfévr.                                       ***
+mois_publicationmars                                        *  
+mois_publicationavr.                                        ** 
+mois_publicationmai                                         ***
+mois_publicationjuin                                        ***
+mois_publicationjuil.                                       ***
+mois_publicationaoût                                        ***
+mois_publicationsept.                                          
+mois_publicationoct.                                           
+mois_publicationnov.                                        ** 
+mois_publicationdéc.                                        *  
+salary_catEntre 0 et moins que le SMIC (10€)                ***
+salary_catEntre le SMIC et le Q1(11,6€)                     ***
+salary_catEntre le Q1 et la moyenne (20,1€)                 ***
+salary_catEntre la moyenne et le D9 observée en France(15€) ***
+salary_catManquant                                          ***
+secteursActivités des ménages en tant qu'employeurs         ***
+secteursActivités fi et immo                                   
+secteursActivités services administratifs et soutien        ***
+secteursActivités spé, scientifiques et techniques             
+secteursAdministration publique                             ***
+secteursArts, spectacles et activités récréatives           ***
+secteursAutres activités de service                         ***
+secteursCommerce                                               
+secteursEnseignement                                        ***
+secteursHébergement/restauration                               
+secteursIndustrie                                              
+secteursInfo/com                                            ***
+secteursManquant ou U                                       ***
+secteursSanté humaine et action sociale                     ***
+secteursTransports                                             
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 128999  on 122720  degrees of freedom
+Residual deviance: 102623  on 122689  degrees of freedom
+AIC: 102687
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
+</div>
+<p>Certaines modalités des variables ne sont pas significatives (voir les étoiles), mais la grande majorité le sont.</p>
+<!--On peut ensuite évaluer la significativité globale du modèle, : -->
+<p>On va donc l’appliquer maintenant à la base test, en créant des indicateurs mesurant le taux de prédiction ou au contraire d’erreur.</p>
+<p>Le modèle <code>predict</code> permet d’abord d’abord de calculer la probabilité qu’une offre d’emploi soit en CDI pour chaque offre, l’argument <code>type="response"</code> permettant d’appliquer le modèle logistique. Il est plus intéressant d’avoir la probabilité d’une variable de type qualitative, “oui”/“non” comme la variable d’intérêt du modèle, il faut donc procéder à une transformation aboutissant à une nouvelle variable (on considère alors que si la probabilité est strictement supérieure à 0.50 alors cela équivaut à une modalité “oui”). Enfin, on crée une matrice de confusion qui est en réalité un tableau croisé entre les valeurs observées et les prédicitions du modèle ; et on calcule un taux d’erreur en rapportant la somme des éléments hors diagonale principale à la somme des observations totales (de la matrice donc).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modèle de prédiction pour récupérer les probabilités individuelles d'être en couple</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pred.proba <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_1, <span class="at">newdata =</span> OffresPE_test, <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># On transforme les probas en variable qualitative</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>pred.moda <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">case_when</span>(pred.proba<span class="sc">&gt;</span><span class="fl">0.5</span> <span class="sc">~</span> <span class="st">"oui"</span>, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"non"</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># On crée la matrice de confusion</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>matrice_conf <span class="ot">&lt;-</span> <span class="fu">table</span>(OffresPE_test<span class="sc">$</span>CDI, pred.moda)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>matrice_conf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     pred.moda
+        non   oui
+  Non  4564  7144
+  Oui  1607 39741</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On calcule le taux d'erreur</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>tx_erreur <span class="ot">&lt;-</span> (matrice_conf[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">+</span>matrice_conf[<span class="dv">1</span>,<span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(matrice_conf)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>tx_erreur <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16.49389</code></pre>
+</div>
+</div>
+<p>On voit que parmi la modalité observée “Oui” de la base de données, le modèle prédit environ 39 000 oui soit 96% de cette modalité, c’est la grande majorité ; la prédiction est moins bonne si on regarde la modalité “Non”, puisque environ 4 500 observations, soit 39% de cette modalité, se retrouvent bien en “non”. Le taux d’erreur de 16,3% montre bien néanmoins que le modèle prédit plutôt bien.<br>
+<br>
+</p>
+<p>Une autre façon de faire est d’ajouter, après les deux premières étapes réécrites ici, la variable de prédiction à la table initiale et de créer une nouvelle variable qui indique si on a bien une correspondance entre les modalités des deux variables : l’initiale et celle prédite. Cela nous donne donc le taux d’erreur calculé au-dessus, on retrouve bien 16,3% de correspondances inexactes.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modèle de prédiction pour récupérer les probabilités individuelles d'être en couple</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#pred.proba &lt;- predict(logit_1, newdata = OffresPE_test, type="response")</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># On transforme les probas en variable qualitative</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#pred.moda &lt;- factor(case_when(pred.proba&gt;0.5 ~ "oui", TRUE ~ "non"))</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># On ajoute la variable de prédiction dans la table test initiale</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>OffresPE_test_bis <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(OffresPE_test, <span class="at">var_predict=</span>pred.moda)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># et on créer une variable indiquant ou non la correspondance entre</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># les modalités des deux variables</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>OffresPE_test_bis <span class="sc">%&gt;%</span> </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predict_OK=</span><span class="fu">as.factor</span>(<span class="fu">case_when</span>(CDI<span class="sc">==</span><span class="st">"Oui"</span> <span class="sc">&amp;</span> var_predict<span class="sc">==</span><span class="st">"oui"</span> <span class="sc">~</span> <span class="st">"oui"</span>, </span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                                        CDI<span class="sc">==</span><span class="st">"Non"</span> <span class="sc">&amp;</span> var_predict<span class="sc">==</span><span class="st">"non"</span> <span class="sc">~</span> <span class="st">"oui"</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                                        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"non"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(predict_OK) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> <span class="fu">adorn_totals</span>(<span class="st">"row"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> predict_OK     n percent
+        non  8751   16.5%
+        oui 44305   83.5%
+      Total 53056       -</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On supprime la table créée en test</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(OffresPE_test_bis)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="lévaluation-du-modèle-et-la-recherche-éventuelle-dun-meilleur-modèle" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="lévaluation-du-modèle-et-la-recherche-éventuelle-dun-meilleur-modèle"><span class="header-section-number">13.2.2</span> L’évaluation du modèle et la recherche éventuelle d’un “meilleur” modèle</h3>
+<p>On peut améliorer le modèle en recherchant celui qui est le “meilleur” en faisant une sélection sur les variables, plus précisément en demandant au modèle de choisir les variables les plus explicatives, car peut-être que certaines ne sont pas nécessaires à l’explication du modèle (dans notre cas, nous avons néanmoins vu que toutes les variables étaient significatives donc a priori utiles dans le modèle).</p>
+<p>Pour une sélection “pas à pas”, il faut utiliser le package <strong><code>MASS</code></strong> et la fonction <code>stepAIC</code> car c’est à travers le critère AIC (“Akaike Information Criterion”,) que le modèle va chercher à être “meilleur” : plus il sera faible, meilleur il sera. On va d’abord faire cette sélection de façon “descendante” c’est-à-dire en partant du modèle initial “logit_1” ici : on part du modèle avec l’ensemble des variables et on en supprime une au fur et à mesure pour voir si le modèle est “meilleur”.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("MASS)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>logit_backward <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(logit_1, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span><span class="st">"CDI ~ 1"</span>, </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">upper=</span><span class="st">"CDI ~ mois_publication + secteurs + salary_cat"</span>),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">direction=</span><span class="st">"backward"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=102687.3
+CDI ~ mois_publication + salary_cat + secteurs
+
+                   Df Deviance    AIC
+&lt;none&gt;                  102623 102687
+- mois_publication 11   103374 103416
+- salary_cat        5   104932 104986
+- secteurs         15   125159 125193</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>logit_backward</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:  glm(formula = CDI ~ mois_publication + salary_cat + secteurs, 
+    family = binomial("logit"), data = OffresPE_train)
+
+Coefficients:
+                                                (Intercept)  
+                                                    3.25121  
+                                      mois_publicationfévr.  
+                                                   -0.24326  
+                                       mois_publicationmars  
+                                                   -0.08301  
+                                       mois_publicationavr.  
+                                                   -0.13230  
+                                        mois_publicationmai  
+                                                   -0.42510  
+                                       mois_publicationjuin  
+                                                   -0.59124  
+                                      mois_publicationjuil.  
+                                                   -0.51631  
+                                       mois_publicationaoût  
+                                                   -0.25396  
+                                      mois_publicationsept.  
+                                                   -0.04728  
+                                       mois_publicationoct.  
+                                                    0.05072  
+                                       mois_publicationnov.  
+                                                    0.11835  
+                                       mois_publicationdéc.  
+                                                   -0.09063  
+               salary_catEntre 0 et moins que le SMIC (10€)  
+                                                   -3.00999  
+                    salary_catEntre le SMIC et le Q1(11,6€)  
+                                                   -1.98207  
+                salary_catEntre le Q1 et la moyenne (20,1€)  
+                                                   -1.52066  
+salary_catEntre la moyenne et le D9 observée en France(15€)  
+                                                   -0.62506  
+                                         salary_catManquant  
+                                                   -2.02500  
+        secteursActivités des ménages en tant qu'employeurs  
+                                                   -5.46553  
+                               secteursActivités fi et immo  
+                                                    0.08410  
+       secteursActivités services administratifs et soutien  
+                                                   -1.89332  
+         secteursActivités spé, scientifiques et techniques  
+                                                    0.05586  
+                            secteursAdministration publique  
+                                                   -2.40557  
+          secteursArts, spectacles et activités récréatives  
+                                                   -1.56473  
+                        secteursAutres activités de service  
+                                                   -0.74113  
+                                           secteursCommerce  
+                                                   -0.02899  
+                                       secteursEnseignement  
+                                                   -2.63228  
+                           secteursHébergement/restauration  
+                                                    0.22845  
+                                          secteursIndustrie  
+                                                    0.11582  
+                                           secteursInfo/com  
+                                                    1.07413  
+                                      secteursManquant ou U  
+                                                    0.78993  
+                    secteursSanté humaine et action sociale  
+                                                   -0.74112  
+                                         secteursTransports  
+                                                   -0.25463  
+
+Degrees of Freedom: 122720 Total (i.e. Null);  122689 Residual
+Null Deviance:      129000 
+Residual Deviance: 102600   AIC: 102700</code></pre>
+</div>
+</div>
+<p>La sortie n’affiche que le “meilleur” modèle, et c’est donc bien celui qu’on avait mis avec l’ensemble des variables.</p>
+<p>Pour une sélection des variables de façon “ascendante”, en partant d’un modèle sans variable puis on ajoute une à une les variables. On utilise la même fonction mais en changeant les paramètres et en créant un modèle “vide” avant :</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>logit_0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(CDI <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>OffresPE_train, <span class="at">family=</span><span class="fu">binomial</span>(<span class="st">"logit"</span>))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>logit_forward <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(logit_0, </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span><span class="st">"CDI ~ 1"</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">upper=</span><span class="st">"CDI ~ mois_publication + secteurs + salary_cat"</span>),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">direction=</span><span class="st">"forward"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=129001
+CDI ~ 1
+
+                   Df Deviance    AIC
++ secteurs         15   105699 105731
++ salary_cat        5   125685 125697
++ mois_publication 11   128400 128424
+&lt;none&gt;                  128999 129001
+
+Step:  AIC=105731.4
+CDI ~ secteurs
+
+                   Df Deviance    AIC
++ salary_cat        5   103374 103416
++ mois_publication 11   104932 104986
+&lt;none&gt;                  105699 105731
+
+Step:  AIC=103415.6
+CDI ~ secteurs + salary_cat
+
+                   Df Deviance    AIC
++ mois_publication 11   102623 102687
+&lt;none&gt;                  103374 103416
+
+Step:  AIC=102687.3
+CDI ~ secteurs + salary_cat + mois_publication</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>logit_forward</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:  glm(formula = CDI ~ secteurs + salary_cat + mois_publication, 
+    family = binomial("logit"), data = OffresPE_train)
+
+Coefficients:
+                                                (Intercept)  
+                                                    3.25121  
+        secteursActivités des ménages en tant qu'employeurs  
+                                                   -5.46553  
+                               secteursActivités fi et immo  
+                                                    0.08410  
+       secteursActivités services administratifs et soutien  
+                                                   -1.89332  
+         secteursActivités spé, scientifiques et techniques  
+                                                    0.05586  
+                            secteursAdministration publique  
+                                                   -2.40557  
+          secteursArts, spectacles et activités récréatives  
+                                                   -1.56473  
+                        secteursAutres activités de service  
+                                                   -0.74113  
+                                           secteursCommerce  
+                                                   -0.02899  
+                                       secteursEnseignement  
+                                                   -2.63228  
+                           secteursHébergement/restauration  
+                                                    0.22845  
+                                          secteursIndustrie  
+                                                    0.11582  
+                                           secteursInfo/com  
+                                                    1.07413  
+                                      secteursManquant ou U  
+                                                    0.78993  
+                    secteursSanté humaine et action sociale  
+                                                   -0.74112  
+                                         secteursTransports  
+                                                   -0.25463  
+               salary_catEntre 0 et moins que le SMIC (10€)  
+                                                   -3.00999  
+                    salary_catEntre le SMIC et le Q1(11,6€)  
+                                                   -1.98207  
+                salary_catEntre le Q1 et la moyenne (20,1€)  
+                                                   -1.52066  
+salary_catEntre la moyenne et le D9 observée en France(15€)  
+                                                   -0.62506  
+                                         salary_catManquant  
+                                                   -2.02500  
+                                      mois_publicationfévr.  
+                                                   -0.24326  
+                                       mois_publicationmars  
+                                                   -0.08301  
+                                       mois_publicationavr.  
+                                                   -0.13230  
+                                        mois_publicationmai  
+                                                   -0.42510  
+                                       mois_publicationjuin  
+                                                   -0.59124  
+                                      mois_publicationjuil.  
+                                                   -0.51631  
+                                       mois_publicationaoût  
+                                                   -0.25396  
+                                      mois_publicationsept.  
+                                                   -0.04728  
+                                       mois_publicationoct.  
+                                                    0.05072  
+                                       mois_publicationnov.  
+                                                    0.11835  
+                                       mois_publicationdéc.  
+                                                   -0.09063  
+
+Degrees of Freedom: 122720 Total (i.e. Null);  122689 Residual
+Null Deviance:      129000 
+Residual Deviance: 102600   AIC: 102700</code></pre>
+</div>
+</div>
+<p>Le taux d’AIC diminue à chaque variable ajoutée donc le meilleur modèle est bien celui avec l’ensemble des variables explicatives mises dans le modèle initial.</p>
+</section>
+<section id="le-modèle-final-et-linterprétation-des-résultats" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="le-modèle-final-et-linterprétation-des-résultats"><span class="header-section-number">13.2.3</span> Le modèle final et l’interprétation des résultats</h3>
+<p>Finalement, dans une visée plus explicative que prédictive, on peut estimer notre modèle sur l’ensemble de la base et étudier plus précisément les résultats avec les <em>odds-ratios</em> ou rapports des côtes par exemple pour commenter plus directement les coefficients. Ces <em>odds-ratios</em> correspondent à l’exponentiel des coefficients initiaux de la régression. Ils se lisent par rapport à 1 : il est égale à 1 si les deux côtes sont identiques donc s’il n’y a pas de différence de probabilité d’être en couple selon qu’on est une femme ou un homme, il est supérieur à 1 si ici la femme a une probabilité supérieure à celle de l’homme d’être en couple, et il est inférieur à 1 si la femme a une probabilité inférieure à celle de l’homme d’être en couple.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>logit_VF <span class="ot">&lt;-</span> <span class="fu">glm</span> (CDI <span class="sc">~</span> mois_publication <span class="sc">+</span> secteurs <span class="sc">+</span> salary_cat,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data=</span>OffresPE_reg, </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">"logit"</span>))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logit_VF)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = CDI ~ mois_publication + secteurs + salary_cat, 
+    family = binomial("logit"), data = OffresPE_reg)
+
+Coefficients:
+                                                            Estimate Std. Error
+(Intercept)                                                  3.30724    0.11585
+mois_publicationfévr.                                       -0.24882    0.02816
+mois_publicationmars                                        -0.08493    0.03020
+mois_publicationavr.                                        -0.14604    0.03481
+mois_publicationmai                                         -0.44965    0.03356
+mois_publicationjuin                                        -0.60217    0.02931
+mois_publicationjuil.                                       -0.51310    0.02866
+mois_publicationaoût                                        -0.24978    0.03016
+mois_publicationsept.                                       -0.03594    0.02952
+mois_publicationoct.                                         0.03782    0.02966
+mois_publicationnov.                                         0.12515    0.03592
+mois_publicationdéc.                                        -0.11433    0.03625
+secteursActivités des ménages en tant qu'employeurs         -5.48375    0.16835
+secteursActivités fi et immo                                 0.05077    0.11449
+secteursActivités services administratifs et soutien        -1.93861    0.10133
+secteursActivités spé, scientifiques et techniques          -0.01373    0.10501
+secteursAdministration publique                             -2.44177    0.12610
+secteursArts, spectacles et activités récréatives           -1.55451    0.15528
+secteursAutres activités de service                         -0.77534    0.11004
+secteursCommerce                                            -0.07397    0.11182
+secteursEnseignement                                        -2.68917    0.11107
+secteursHébergement/restauration                             0.21455    0.12019
+secteursIndustrie                                            0.09091    0.12411
+secteursInfo/com                                             0.98187    0.11908
+secteursManquant ou U                                        0.74847    0.10171
+secteursSanté humaine et action sociale                     -0.77013    0.10452
+secteursTransports                                          -0.36407    0.16240
+salary_catEntre 0 et moins que le SMIC (10€)                -3.01931    0.08534
+salary_catEntre le SMIC et le Q1(11,6€)                     -1.98949    0.06406
+salary_catEntre le Q1 et la moyenne (20,1€)                 -1.52587    0.05904
+salary_catEntre la moyenne et le D9 observée en France(15€) -0.60596    0.06488
+salary_catManquant                                          -2.03906    0.05817
+                                                            z value Pr(&gt;|z|)
+(Intercept)                                                  28.547  &lt; 2e-16
+mois_publicationfévr.                                        -8.837  &lt; 2e-16
+mois_publicationmars                                         -2.812 0.004919
+mois_publicationavr.                                         -4.195 2.72e-05
+mois_publicationmai                                         -13.397  &lt; 2e-16
+mois_publicationjuin                                        -20.547  &lt; 2e-16
+mois_publicationjuil.                                       -17.900  &lt; 2e-16
+mois_publicationaoût                                         -8.282  &lt; 2e-16
+mois_publicationsept.                                        -1.217 0.223428
+mois_publicationoct.                                          1.275 0.202174
+mois_publicationnov.                                          3.485 0.000493
+mois_publicationdéc.                                         -3.154 0.001610
+secteursActivités des ménages en tant qu'employeurs         -32.573  &lt; 2e-16
+secteursActivités fi et immo                                  0.443 0.657406
+secteursActivités services administratifs et soutien        -19.131  &lt; 2e-16
+secteursActivités spé, scientifiques et techniques           -0.131 0.895944
+secteursAdministration publique                             -19.363  &lt; 2e-16
+secteursArts, spectacles et activités récréatives           -10.011  &lt; 2e-16
+secteursAutres activités de service                          -7.046 1.84e-12
+secteursCommerce                                             -0.661 0.508325
+secteursEnseignement                                        -24.211  &lt; 2e-16
+secteursHébergement/restauration                              1.785 0.074251
+secteursIndustrie                                             0.733 0.463861
+secteursInfo/com                                              8.246  &lt; 2e-16
+secteursManquant ou U                                         7.359 1.86e-13
+secteursSanté humaine et action sociale                      -7.368 1.73e-13
+secteursTransports                                           -2.242 0.024972
+salary_catEntre 0 et moins que le SMIC (10€)                -35.378  &lt; 2e-16
+salary_catEntre le SMIC et le Q1(11,6€)                     -31.057  &lt; 2e-16
+salary_catEntre le Q1 et la moyenne (20,1€)                 -25.844  &lt; 2e-16
+salary_catEntre la moyenne et le D9 observée en France(15€)  -9.340  &lt; 2e-16
+salary_catManquant                                          -35.052  &lt; 2e-16
+                                                               
+(Intercept)                                                 ***
+mois_publicationfévr.                                       ***
+mois_publicationmars                                        ** 
+mois_publicationavr.                                        ***
+mois_publicationmai                                         ***
+mois_publicationjuin                                        ***
+mois_publicationjuil.                                       ***
+mois_publicationaoût                                        ***
+mois_publicationsept.                                          
+mois_publicationoct.                                           
+mois_publicationnov.                                        ***
+mois_publicationdéc.                                        ** 
+secteursActivités des ménages en tant qu'employeurs         ***
+secteursActivités fi et immo                                   
+secteursActivités services administratifs et soutien        ***
+secteursActivités spé, scientifiques et techniques             
+secteursAdministration publique                             ***
+secteursArts, spectacles et activités récréatives           ***
+secteursAutres activités de service                         ***
+secteursCommerce                                               
+secteursEnseignement                                        ***
+secteursHébergement/restauration                            .  
+secteursIndustrie                                              
+secteursInfo/com                                            ***
+secteursManquant ou U                                       ***
+secteursSanté humaine et action sociale                     ***
+secteursTransports                                          *  
+salary_catEntre 0 et moins que le SMIC (10€)                ***
+salary_catEntre le SMIC et le Q1(11,6€)                     ***
+salary_catEntre le Q1 et la moyenne (20,1€)                 ***
+salary_catEntre la moyenne et le D9 observée en France(15€) ***
+salary_catManquant                                          ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 185001  on 175776  degrees of freedom
+Residual deviance: 147194  on 175745  degrees of freedom
+AIC: 147258
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Résumé des résultats sous forme de tableau avec les odds-ratio</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># avec la librairie "questionr" d'abord</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(questionr)</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(questionr)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">odds.ratio</span>(logit_VF)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                                    OR
+(Intercept)                                                 27.3097637
+mois_publicationfévr.                                        0.7797184
+mois_publicationmars                                         0.9185751
+mois_publicationavr.                                         0.8641212
+mois_publicationmai                                          0.6378516
+mois_publicationjuin                                         0.5476211
+mois_publicationjuil.                                        0.5986356
+mois_publicationaoût                                         0.7789698
+mois_publicationsept.                                        0.9647007
+mois_publicationoct.                                         1.0385477
+mois_publicationnov.                                         1.1333210
+mois_publicationdéc.                                         0.8919606
+secteursActivités des ménages en tant qu'employeurs          0.0041537
+secteursActivités fi et immo                                 1.0520854
+secteursActivités services administratifs et soutien         0.1439036
+secteursActivités spé, scientifiques et techniques           0.9863594
+secteursAdministration publique                              0.0870065
+secteursArts, spectacles et activités récréatives            0.2112921
+secteursAutres activités de service                          0.4605475
+secteursCommerce                                             0.9287039
+secteursEnseignement                                         0.0679374
+secteursHébergement/restauration                             1.2392996
+secteursIndustrie                                            1.0951743
+secteursInfo/com                                             2.6694362
+secteursManquant ou U                                        2.1137596
+secteursSanté humaine et action sociale                      0.4629528
+secteursTransports                                           0.6948414
+salary_catEntre 0 et moins que le SMIC (10€)                 0.0488349
+salary_catEntre le SMIC et le Q1(11,6€)                      0.1367656
+salary_catEntre le Q1 et la moyenne (20,1€)                  0.2174313
+salary_catEntre la moyenne et le D9 observée en France(15€)  0.5455530
+salary_catManquant                                           0.1301509
+                                                                 2.5 %  97.5 %
+(Intercept)                                                 21.8301319 34.3862
+mois_publicationfévr.                                        0.7378481  0.8240
+mois_publicationmars                                         0.8658132  0.9746
+mois_publicationavr.                                         0.8072490  0.9253
+mois_publicationmai                                          0.5972947  0.6813
+mois_publicationjuin                                         0.5170505  0.5800
+mois_publicationjuil.                                        0.5659256  0.6332
+mois_publicationaoût                                         0.7342813  0.8264
+mois_publicationsept.                                        0.9104943  1.0222
+mois_publicationoct.                                         0.9799306  1.1007
+mois_publicationnov.                                         1.0564530  1.2162
+mois_publicationdéc.                                         0.8309011  0.9578
+secteursActivités des ménages en tant qu'employeurs          0.0029590  0.0057
+secteursActivités fi et immo                                 0.8382415  1.3134
+secteursActivités services administratifs et soutien         0.1175189  0.1749
+secteursActivités spé, scientifiques et techniques           0.7999653  1.2078
+secteursAdministration publique                              0.0677434  0.1111
+secteursArts, spectacles et activités récréatives            0.1555374  0.2860
+secteursAutres activités de service                          0.3699870  0.5697
+secteursCommerce                                             0.7436415  1.1531
+secteursEnseignement                                         0.0544604  0.0842
+secteursHébergement/restauration                             0.9769527  1.5654
+secteursIndustrie                                            0.8570178  1.3945
+secteursInfo/com                                             2.1089431  3.3646
+secteursManquant ou U                                        1.7250020  2.5709
+secteursSanté humaine et action sociale                      0.3758147  0.5663
+secteursTransports                                           0.5059636  0.9569
+salary_catEntre 0 et moins que le SMIC (10€)                 0.0412884  0.0577
+salary_catEntre le SMIC et le Q1(11,6€)                      0.1205062  0.1549
+salary_catEntre le Q1 et la moyenne (20,1€)                  0.1934430  0.2438
+salary_catEntre la moyenne et le D9 observée en France(15€)  0.4799834  0.6190
+salary_catManquant                                           0.1159809  0.1457
+                                                                    p    
+(Intercept)                                                 &lt; 2.2e-16 ***
+mois_publicationfévr.                                       &lt; 2.2e-16 ***
+mois_publicationmars                                        0.0049192 ** 
+mois_publicationavr.                                        2.724e-05 ***
+mois_publicationmai                                         &lt; 2.2e-16 ***
+mois_publicationjuin                                        &lt; 2.2e-16 ***
+mois_publicationjuil.                                       &lt; 2.2e-16 ***
+mois_publicationaoût                                        &lt; 2.2e-16 ***
+mois_publicationsept.                                       0.2234285    
+mois_publicationoct.                                        0.2021744    
+mois_publicationnov.                                        0.0004929 ***
+mois_publicationdéc.                                        0.0016096 ** 
+secteursActivités des ménages en tant qu'employeurs         &lt; 2.2e-16 ***
+secteursActivités fi et immo                                0.6574059    
+secteursActivités services administratifs et soutien        &lt; 2.2e-16 ***
+secteursActivités spé, scientifiques et techniques          0.8959441    
+secteursAdministration publique                             &lt; 2.2e-16 ***
+secteursArts, spectacles et activités récréatives           &lt; 2.2e-16 ***
+secteursAutres activités de service                         1.843e-12 ***
+secteursCommerce                                            0.5083248    
+secteursEnseignement                                        &lt; 2.2e-16 ***
+secteursHébergement/restauration                            0.0742507 .  
+secteursIndustrie                                           0.4638614    
+secteursInfo/com                                            &lt; 2.2e-16 ***
+secteursManquant ou U                                       1.856e-13 ***
+secteursSanté humaine et action sociale                     1.728e-13 ***
+secteursTransports                                          0.0249718 *  
+salary_catEntre 0 et moins que le SMIC (10€)                &lt; 2.2e-16 ***
+salary_catEntre le SMIC et le Q1(11,6€)                     &lt; 2.2e-16 ***
+salary_catEntre le Q1 et la moyenne (20,1€)                 &lt; 2.2e-16 ***
+salary_catEntre la moyenne et le D9 observée en France(15€) &lt; 2.2e-16 ***
+salary_catManquant                                          &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<!-- ![ ](images/Graphique_Odds-ratio.png) -->
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># puis avec la librarie "forestmodel" pour avoir un meilleur rendu</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("forestmodel")</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forestmodel)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">forest_model</span>(logit_VF, </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">format_options =</span> <span class="fu">forest_model_format_options</span>(<span class="at">point_size=</span><span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">7</span>, <span class="at">face=</span><span class="st">"bold"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13-Modeles-regression_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<!-- ![ ](images/Graphique_Forest_model.png) -->
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ou encore avec "gt_summary" pour avoir un autre rendu</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_gtsummary_language</span>(<span class="st">"fr"</span>, <span class="at">decimal.mark =</span> <span class="st">","</span>, <span class="at">big.mark=</span><span class="st">" "</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>logit_VF <span class="sc">%&gt;%</span> </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_global_p</span>(<span class="at">keep=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(label <span class="sc">~</span> <span class="st">"**Variable**"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_caption</span>(<span class="st">"**Tableau de résultats. Variables expliquant le fait qu'une offre d'emploi soit en CDI dans le 75**"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="xobpwymxaf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xobpwymxaf table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xobpwymxaf thead, #xobpwymxaf tbody, #xobpwymxaf tfoot, #xobpwymxaf tr, #xobpwymxaf td, #xobpwymxaf th {
+  border-style: none;
+}
+
+#xobpwymxaf p {
+  margin: 0;
+  padding: 0;
+}
+
+#xobpwymxaf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xobpwymxaf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xobpwymxaf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xobpwymxaf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xobpwymxaf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xobpwymxaf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xobpwymxaf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xobpwymxaf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xobpwymxaf .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xobpwymxaf .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xobpwymxaf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xobpwymxaf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xobpwymxaf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xobpwymxaf .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xobpwymxaf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xobpwymxaf .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xobpwymxaf .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xobpwymxaf .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xobpwymxaf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xobpwymxaf .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xobpwymxaf .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xobpwymxaf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xobpwymxaf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xobpwymxaf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xobpwymxaf .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xobpwymxaf .gt_left {
+  text-align: left;
+}
+
+#xobpwymxaf .gt_center {
+  text-align: center;
+}
+
+#xobpwymxaf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xobpwymxaf .gt_font_normal {
+  font-weight: normal;
+}
+
+#xobpwymxaf .gt_font_bold {
+  font-weight: bold;
+}
+
+#xobpwymxaf .gt_font_italic {
+  font-style: italic;
+}
+
+#xobpwymxaf .gt_super {
+  font-size: 65%;
+}
+
+#xobpwymxaf .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xobpwymxaf .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xobpwymxaf .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xobpwymxaf .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xobpwymxaf .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xobpwymxaf .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xobpwymxaf .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xobpwymxaf .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xobpwymxaf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<caption><strong>Tableau de résultats. Variables expliquant le fait qu’une offre d’emploi soit en CDI dans le 75</strong></caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Variable</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>OR</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% IC</strong></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-valeur</strong></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">mois_publication</td>
+<td class="gt_row gt_center" headers="estimate"><br>
+</td>
+<td class="gt_row gt_center" headers="conf.low"><br>
+</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;janv.</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;févr.</td>
+<td class="gt_row gt_center" headers="estimate">0,78</td>
+<td class="gt_row gt_center" headers="conf.low">0,74 – 0,82</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;mars</td>
+<td class="gt_row gt_center" headers="estimate">0,92</td>
+<td class="gt_row gt_center" headers="conf.low">0,87 – 0,97</td>
+<td class="gt_row gt_center" headers="p.value">0,005</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;avr.</td>
+<td class="gt_row gt_center" headers="estimate">0,86</td>
+<td class="gt_row gt_center" headers="conf.low">0,81 – 0,93</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;mai</td>
+<td class="gt_row gt_center" headers="estimate">0,64</td>
+<td class="gt_row gt_center" headers="conf.low">0,60 – 0,68</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;juin</td>
+<td class="gt_row gt_center" headers="estimate">0,55</td>
+<td class="gt_row gt_center" headers="conf.low">0,52 – 0,58</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;juil.</td>
+<td class="gt_row gt_center" headers="estimate">0,60</td>
+<td class="gt_row gt_center" headers="conf.low">0,57 – 0,63</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;août</td>
+<td class="gt_row gt_center" headers="estimate">0,78</td>
+<td class="gt_row gt_center" headers="conf.low">0,73 – 0,83</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;sept.</td>
+<td class="gt_row gt_center" headers="estimate">0,96</td>
+<td class="gt_row gt_center" headers="conf.low">0,91 – 1,02</td>
+<td class="gt_row gt_center" headers="p.value">0,2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;oct.</td>
+<td class="gt_row gt_center" headers="estimate">1,04</td>
+<td class="gt_row gt_center" headers="conf.low">0,98 – 1,10</td>
+<td class="gt_row gt_center" headers="p.value">0,2</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;nov.</td>
+<td class="gt_row gt_center" headers="estimate">1,13</td>
+<td class="gt_row gt_center" headers="conf.low">1,06 – 1,22</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;déc.</td>
+<td class="gt_row gt_center" headers="estimate">0,89</td>
+<td class="gt_row gt_center" headers="conf.low">0,83 – 0,96</td>
+<td class="gt_row gt_center" headers="p.value">0,002</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">secteurs</td>
+<td class="gt_row gt_center" headers="estimate"><br>
+</td>
+<td class="gt_row gt_center" headers="conf.low"><br>
+</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Construction</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Activités des ménages en tant qu'employeurs</td>
+<td class="gt_row gt_center" headers="estimate">0,00</td>
+<td class="gt_row gt_center" headers="conf.low">0,00 – 0,01</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Activités fi et immo</td>
+<td class="gt_row gt_center" headers="estimate">1,05</td>
+<td class="gt_row gt_center" headers="conf.low">0,84 – 1,31</td>
+<td class="gt_row gt_center" headers="p.value">0,7</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Activités services administratifs et soutien</td>
+<td class="gt_row gt_center" headers="estimate">0,14</td>
+<td class="gt_row gt_center" headers="conf.low">0,12 – 0,17</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Activités spé, scientifiques et techniques</td>
+<td class="gt_row gt_center" headers="estimate">0,99</td>
+<td class="gt_row gt_center" headers="conf.low">0,80 – 1,21</td>
+<td class="gt_row gt_center" headers="p.value">0,9</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Administration publique</td>
+<td class="gt_row gt_center" headers="estimate">0,09</td>
+<td class="gt_row gt_center" headers="conf.low">0,07 – 0,11</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Arts, spectacles et activités récréatives</td>
+<td class="gt_row gt_center" headers="estimate">0,21</td>
+<td class="gt_row gt_center" headers="conf.low">0,16 – 0,29</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Autres activités de service</td>
+<td class="gt_row gt_center" headers="estimate">0,46</td>
+<td class="gt_row gt_center" headers="conf.low">0,37 – 0,57</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Commerce</td>
+<td class="gt_row gt_center" headers="estimate">0,93</td>
+<td class="gt_row gt_center" headers="conf.low">0,74 – 1,15</td>
+<td class="gt_row gt_center" headers="p.value">0,5</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Enseignement</td>
+<td class="gt_row gt_center" headers="estimate">0,07</td>
+<td class="gt_row gt_center" headers="conf.low">0,05 – 0,08</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hébergement/restauration</td>
+<td class="gt_row gt_center" headers="estimate">1,24</td>
+<td class="gt_row gt_center" headers="conf.low">0,98 – 1,57</td>
+<td class="gt_row gt_center" headers="p.value">0,074</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Industrie</td>
+<td class="gt_row gt_center" headers="estimate">1,10</td>
+<td class="gt_row gt_center" headers="conf.low">0,86 – 1,39</td>
+<td class="gt_row gt_center" headers="p.value">0,5</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Info/com</td>
+<td class="gt_row gt_center" headers="estimate">2,67</td>
+<td class="gt_row gt_center" headers="conf.low">2,11 – 3,36</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Manquant ou U</td>
+<td class="gt_row gt_center" headers="estimate">2,11</td>
+<td class="gt_row gt_center" headers="conf.low">1,73 – 2,57</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Santé humaine et action sociale</td>
+<td class="gt_row gt_center" headers="estimate">0,46</td>
+<td class="gt_row gt_center" headers="conf.low">0,38 – 0,57</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Transports</td>
+<td class="gt_row gt_center" headers="estimate">0,69</td>
+<td class="gt_row gt_center" headers="conf.low">0,51 – 0,96</td>
+<td class="gt_row gt_center" headers="p.value">0,025</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">salary_cat</td>
+<td class="gt_row gt_center" headers="estimate"><br>
+</td>
+<td class="gt_row gt_center" headers="conf.low"><br>
+</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Entre le D9 et le maximum (40200€)</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Entre 0 et moins que le SMIC (10€)</td>
+<td class="gt_row gt_center" headers="estimate">0,05</td>
+<td class="gt_row gt_center" headers="conf.low">0,04 – 0,06</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Entre le SMIC et le Q1(11,6€)</td>
+<td class="gt_row gt_center" headers="estimate">0,14</td>
+<td class="gt_row gt_center" headers="conf.low">0,12 – 0,15</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Entre le Q1 et la moyenne (20,1€)</td>
+<td class="gt_row gt_center" headers="estimate">0,22</td>
+<td class="gt_row gt_center" headers="conf.low">0,19 – 0,24</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Entre la moyenne et le D9 observée en France(15€)</td>
+<td class="gt_row gt_center" headers="estimate">0,55</td>
+<td class="gt_row gt_center" headers="conf.low">0,48 – 0,62</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Manquant</td>
+<td class="gt_row gt_center" headers="estimate">0,13</td>
+<td class="gt_row gt_center" headers="conf.low">0,12 – 0,15</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0,001</td>
+</tr>
+</tbody><tfoot>
+<tr class="gt_sourcenotes odd">
+<td colspan="4" class="gt_sourcenote">Abréviations: IC = intervalle de confiance, OR = rapport de cotes</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+<p>On privilégiera plutôt les deux derniers types de tableaux : ainsi, on note que la probabilité qu’une offre d’emploi soit en CDI est 1,24 fois plus élevée si l’emploi est dans le secteur de l’hébergement/restauration et 2,67 fois plus élevée dans le secteur de l’information/communication. Concernant le salaire, par rapport à la référence “Entre le D9 et le maximum (40200€)”, si l’offre d’emploi se situe dans une tranche de salaire plus faible, alors la probabilité que cette offre soit en CDI est plus faible, de 0,05 fois à 0,55 fois, soit une baisse de 45% <code>((1-0,55)*100)</code> à 95% <code>((1-0,05)*100)</code>. Par rapport au mois de janvier, là aussi, la probabilité qu’une offre d’emploi soit en CDI est plus faible pour tous les autres mois sauf novembre, les odds-ratio étant toujours inférieurs à 1.</p>
+<p>On peut aussi vouloir visualiser ces résultats, on peut pour cela utiliser la librarie <strong><code>GGally</code></strong> et la fonction <code>ggcoef_model()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Résumé des résultats sous forme graphqiue</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoef_model</span>(logit_VF, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Variables expliquant le fait </span><span class="sc">\n</span><span class="st">qu'une offre d'emploi soit en </span><span class="sc">\n</span><span class="st">CDI dans le 75"</span>)<span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13-Modeles-regression_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>C’est peut-être le meilleur rendu…</p>
+</section>
+</section>
+<section id="un-modèle-à-visée-principale-prédictive-labre-de-décision" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="un-modèle-à-visée-principale-prédictive-labre-de-décision"><span class="header-section-number">13.3</span> Un modèle à visée principale prédictive : l’abre de décision</h2>
+<p>On va procéder à la même analyse en cherchant, cette fois, à prédire si une offre d’emploi sera en CDI ou non à partir des variables sélectionnées précédemment.<br>
+On repart donc des deux tables créées et on va utiliser un modèle dit d’apprentissage supervisé, l’abre de décision. Sa construction repose sur un partitionnement récursif des observations qui se fait à partir de noeuds coupés, ces coupures pourront répondre à des règles et des conditions à spécifier ou faire varier pour avoir un meilleur modèle.<br>
+Ici on va utiliser un arbre de classification puisque notre variable est qualitative (binaire).</p>
+<p>C’est le package <strong><code>rpart</code></strong> qui est spécialisé dans les modèles d’arbres de décision, à installer donc d’abord puis à appeler dans la librairie ; le package <strong><code>rpart.plot</code></strong> permet, lui, d’avoir un arbre plus esthétique et informatif.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("rpart")</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("rpart.plot")</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="le-modèle-initial-1" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="le-modèle-initial-1"><span class="header-section-number">13.3.1</span> Le modèle initial</h3>
+<p>La spécification du modèle est assez simple, on précise la variable d’intérêt, les éventuelles variables explicatives ou toutes celles qui sont dans la table avec le <code>.</code> (comme précédemment pour le modèle logit), la base de données sur laquelle appliquer le modèle, et dans l’argument <code>method=</code> on spécifie le type de modèle, soit “class” pour une variable d’intérêt qualitative ou binaire, soit “anova” pour une variable d’intérêt quantitative ou continue.</p>
+<p>On va d’abord appliquer le modèle sur notre échantillon d’apprentissage ou d’entraînement :</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>arbre_1 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(CDI <span class="sc">~</span> ., </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data=</span>OffresPE_train, </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method=</span><span class="st">"class"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>arbre_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n= 122721 
+
+node), split, n, loss, yval, (yprob)
+      * denotes terminal node
+
+ 1) root 122721 26870 Oui (0.2189519 0.7810481)  
+   2) secteurs=Activités des ménages en tant qu'employeurs,Activités services administratifs et soutien,Administration publique,Arts, spectacles et activités récréatives,Enseignement 16068  5144 Non (0.6798606 0.3201394)  
+     4) salary_cat=Entre 0 et moins que le SMIC (10€),Manquant 7846   912 Non (0.8837624 0.1162376) *
+     5) salary_cat=Entre le D9 et le maximum (40200€),Entre le SMIC et le Q1(11,6€),Entre le Q1 et la moyenne (20,1€),Entre la moyenne et le D9 observée en France(15€) 8222  3990 Oui (0.4852834 0.5147166)  
+      10) salary_cat=Entre le SMIC et le Q1(11,6€),Entre le Q1 et la moyenne (20,1€) 5576  2358 Non (0.5771162 0.4228838) *
+      11) salary_cat=Entre le D9 et le maximum (40200€),Entre la moyenne et le D9 observée en France(15€) 2646   772 Oui (0.2917611 0.7082389) *
+   3) secteurs=Construction,Activités fi et immo,Activités spé, scientifiques et techniques,Autres activités de service,Commerce,Hébergement/restauration,Industrie,Info/com,Manquant ou U,Santé humaine et action sociale,Transports 106653 15946 Oui (0.1495129 0.8504871) *</code></pre>
+</div>
+</div>
+<p>Le modèle nous donne d’abord les résultats en format texte, ce sont des indications sur les différentes “noeuds” puis “branches” de l’arbre, etc. : “node” pour noeud et son numéro, “split” pour la condition de coupure/le critère de décision, “n” pour le nombre total d’observations dans un noeud, “loss” le nombre d’observations qui n’appartient pas à la modalité prédite, “yval” la modalité prédite pour les individus présents à l’étape du noeud, et “yprob” la proportion d’observations pour les individus présents à l’étape du noeud qui prend la valeur prédite en seconde position. Le petit astérix “*” précise que le noeud est une feuille (“terminal”).</p>
+<p>Par exemple, ici le premier noeud indiqué “root” représente l’ensemble de l’échantillon (c’est la “racine” de l’arbre), soit environ 123 000 observations, et comme la modalité prédite est “Oui”, il y a 78% d’offres d’emploi qui sont en CDI, contre 22% qui le sont pas soit environ 27 000 observations (celles qu’on perd à cette étape donc). La première variable discriminante est le secteur d’activité : celles qui se situent dans les secteurs “Activités des ménages en tant qu’employeurs”, ou “Activités services administratifs et soutien”, ou “Administration publique”, ou “Arts, spectacles et activités récréatives”, ou encore “Enseignement” forment une première branche et un groupe d’offres qui ne sont pas en CDI, alors que les secteurs de la “Construction”, ou des “Activités fi et immo”, ou des “Activités spé, scientifiques et techniques”, ou des “Autres activités de service”, ou du “Commerce”, ou de l’“Hébergement/restauration”, ou de l’“Industrie”, ou de l’“Info/com”, ou “manquant ou U”, ou de la “Santé humaine et action sociale”, et enfin des “Transports” forment l’autre branche et un groupe d’offres en CDI. Ensuite, pour le premier groupe de secteurs, une autre division se forme selon le niveau de salaire : si l’offre propose un salaire “Entre 0 et moins que le SMIC (10€)” ou est manquant un autre groupe va se former qui ne sera pas en CDI, alors que si l’offre propose un salaire au-dessus du SMIC alors l’offre sera en CDI, ce dernier groupe se divisera lui-même encore en deux groupes selon d’autres modalités du salaire.</p>
+<p>On peut regarder quelles sont les variables les plus importantes dans le modèle par ordre :</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>arbre_1<span class="sc">$</span>variable.importance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        secteurs       salary_cat mois_publication 
+        8344.187         1567.222          102.660 </code></pre>
+</div>
+</div>
+<p>Le secteur d’activité est la variable la plus discriminante, comme on l’avait supposé puisque c’était la première variable qui divisait notre échantillon, ensuite vient le niveau de salaire et enfin le mois de publication de l’offre.<br>
+<br>
+</p>
+<p>On va mieux étudier cela avec le résultat visuel.<br>
+Pour avoir ainsi graphiquement l’arbre, il faut appeler la fonction <code>rpart.plot()</code> du même package, l’argument “extra” permettant de préciser le type de modèle : “106” pour des modèles en classes avec une variable qualitative et binaire, “104” pour des modèles en classes mais avec une variable d’intérêt qualitative avec plus de 2 modalités, et “100” pour les autres modèles.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On dessine l'arbre</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(arbre_1, <span class="at">extra=</span><span class="dv">106</span>,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">faclen =</span> <span class="dv">8</span>,  <span class="co"># abrège les modalités de variables</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">cex =</span> <span class="fl">0.75</span>)  <span class="co"># permet de réduire la taille du texte</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13-Modeles-regression_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ou avec la librarie `rattle`</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("rattle")</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rattle)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fancyRpartPlot</span>(arbre_1) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13-Modeles-regression_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Au sommet de l’arbre on a donc la racine (qui est le 1er noeud), puis il se divise en 2 branches pour aboutir à deux autres noeuds, etc.<br>
+On voit donc que la branche partant sur la gauche, c’est le cas où la variable de secteurs est égale aux modalités “Activités des ménages en tant qu’employeurs”, ou “Activités services administratifs et soutien”, ou “Administration publique”, ou “Arts, spectacles et activités récréatives”, ou “Enseignement” (on voit un “yes” qui est encadré ; ça sera le cas à chaque fois même si ce n’est pas de nouveau inscrit, autrement dit la branche partant sur la gauche sera la modalité “oui” de la variable).<br>
+Il y a chaque fois 3 données indiquées :</p>
+<ul>
+<li>d’abord, la modalité prédite par le modèle lorsqu’on est dans le groupe considéré, par exemple pour la feuille terminale à droite, donc pour les autres secteurs d’activité que ceux indiqués, la modalité prédite sera le “oui” donc une offre en CDI, on pourra vérifier dans les données en récupérant la modalité prédite pour chaque observation, c’est-à-dire pour toutes les offres se situant dans ces secteurs, la modalité prédite est bien “oui” ;</li>
+<li>ensuite, parmi les offres de ce groupe, 85% sont en CDI, ;</li>
+<li>et enfin, ces secteurs représentent 87% de la population (de notre base d’apprentissage).<br>
+Autrement dit, 87% des offres se situent dans ces secteurs avec une probabilité d’être en CDI de 85%.</li>
+</ul>
+<p>L’autre branche indique les offres qui prennent les modalités “Activités des ménages en tant qu’employeurs”, ou “Activités services administratifs et soutien”, ou “Administration publique”, ou “Arts, spectacles et activités récréatives”, ou encore “Enseignement” de la variable de secteurs, elles représentent 13% de la base et la probabilité prédite qu’elles soient en CDI sera de 32%.<br>
+Tout en bas, se trouvent les feuilles de l’arbre, c’est lorsqu’il n’y a plus aucune branche qui part du noeud en question.</p>
+<p>Ainsi, 5% de la base (d’apprentissage) représentent des offres d’emploi des secteurs “Activités des ménages en tant qu’employeurs”, ou “Activités services administratifs et soutien”, ou “Administration publique”, ou “Arts, spectacles et activités récréatives”, ou encore “Enseignement”, avec des niveaux de salaire “Entre le SMIC et le Q1(11,6€)” ou “Entre le Q1 et la moyenne (20,1€)”, qui ont une probabilité de 42% d’être en CDI.</p>
+</section>
+<section id="lévaluation-du-modèle" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2" class="anchored" data-anchor-id="lévaluation-du-modèle"><span class="header-section-number">13.3.2</span> L’évaluation du modèle</h3>
+<p>De la même façon que précédemment, on peut vérifier la bonne (ou non) prédiction du modèle en l’appliquant sur l’échantillon dit test, puis en comparant les proportions prédites avec celles effectivement observées dans la base dans la matrice de confusion et enfin en calculant un taux de concordance ou au contraire un taux d’erreur à partir de cette une matrice de confusion :</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modèle appliqué sur l'échantillon test</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>predict_test <span class="ot">&lt;-</span> <span class="fu">predict</span>(arbre_1, OffresPE_test, <span class="at">type=</span><span class="st">"class"</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparaison des résultats - Matrice de confusion</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>mat_confusion <span class="ot">&lt;-</span> <span class="fu">table</span>(OffresPE_test<span class="sc">$</span>CDI, predict_test)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>mat_confusion</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     predict_test
+        Non   Oui
+  Non  4451  7257
+  Oui  1441 39907</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taux de concordance : rapport entre la somme des éléments </span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># de la diagonale principale et la somme des observations </span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># totales (soit de la matrice)</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>tx_concordance <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(mat_confusion) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion))</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>tx_concordance <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 83.606</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taux d'erreur</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>tx_erreur <span class="ot">&lt;-</span> (mat_confusion[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>tx_erreur <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16.394</code></pre>
+</div>
+</div>
+<p>On peut regarder aussi ce que cela donne sur la base d’apprentissage.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>predict_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(arbre_1, OffresPE_train, <span class="at">type=</span><span class="st">"class"</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>mat_confusion_1 <span class="ot">&lt;-</span> <span class="fu">table</span>(OffresPE_train<span class="sc">$</span>CDI, predict_train)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>mat_confusion_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     predict_train
+        Non   Oui
+  Non 10152 16718
+  Oui  3270 92581</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>tx_erreur_1 <span class="ot">&lt;-</span> (mat_confusion_1[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion_1[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion_1)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>tx_erreur_1 <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16.28735</code></pre>
+</div>
+</div>
+<p>Dans les deux cas, les taux d’erreur sont relativement faible, d’environ 16%. Le modèle ne prédit pas trop mal. On peut noter qu’on a pratiquement le même taux d’erreur que le modèle logit réalisé précédemment…</p>
+<p>Vérifions si nous pouvons l’améliorer en modifiant les paramètres de construction de l’arbre, c’est-à-dire en jouant sur les conditions de coupure d’un noeud et sur les règles d’arrêt de ces coupures. On l’effectue avec la fonction <code>rpart.control()</code> avec les arguments suivants (règles d’arrêt principalement) : <code>minsplit=</code> donne le nombre minimum d’observations (individus) présentes à l’étape d’un noeud pour envisager une coupure ; <code>minbucket=</code> qui donne le nombre minimum d’observations/individus présentes à l’étape d’un noeud qu’engendrerait la coupure du noeud parent ; <code>maxdepth</code> qui donne la profondeur de l’arbre ; et <code>cp=</code> qui est un paramètre de complexité (plus il est petit, plus grand est l’arbre de régression).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition des règles de décision</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>ajust_param <span class="ot">&lt;-</span> <span class="fu">rpart.control</span>(<span class="at">minsplit =</span> <span class="dv">50</span>, <span class="at">minbucket =</span> <span class="dv">50</span>, <span class="at">maxdepth =</span> <span class="dv">10</span>, <span class="at">cp=</span><span class="dv">0</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustement du modèle en indiquant le paramètre "control"</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>arbre_2 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(CDI <span class="sc">~</span> mois_publication <span class="sc">+</span> secteurs <span class="sc">+</span> salary_cat, </span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data=</span>OffresPE_train, <span class="at">method=</span><span class="st">"class"</span>, </span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">control =</span> ajust_param)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="co"># On étudie de nouveau la matrice de confusion et </span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="co"># le taux d'erreur associé au nouveau modèle sur la base test</span></span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>predict_test_1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(arbre_2, OffresPE_test, <span class="at">type=</span><span class="st">"class"</span>)</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>mat_confusion_ajust <span class="ot">&lt;-</span> <span class="fu">table</span>(OffresPE_test<span class="sc">$</span>CDI, predict_test_1)</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>mat_confusion_ajust</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     predict_test_1
+        Non   Oui
+  Non  4438  7270
+  Oui  1293 40055</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>tx_erreur_1 <span class="ot">&lt;-</span> (mat_confusion_ajust[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion_ajust[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion_ajust) <span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>tx_erreur_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16.13955</code></pre>
+</div>
+</div>
+<p>On peut l’appliquer de même à l’échantillon d’apprentissage :</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modèle appliqué sur l'échantillon test</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>predict_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(arbre_2, OffresPE_train, <span class="at">type=</span><span class="st">"class"</span>)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparaison des résultats - Matrice de confusion</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>mat_confusion_ajust1 <span class="ot">&lt;-</span> <span class="fu">table</span>(OffresPE_train<span class="sc">$</span>CDI, predict_train)</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>mat_confusion_ajust1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     predict_train
+        Non   Oui
+  Non 10246 16624
+  Oui  2785 93066</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taux d'erreur</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>tx_erreur_2 <span class="ot">&lt;-</span> (mat_confusion_ajust1[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion_ajust1[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion_ajust1)<span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>tx_erreur_2 </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.81555</code></pre>
+</div>
+</div>
+<p>Le taux d’erreur est un peu plus faible, la différence est légère, mais c’est toujours ça de pris !</p>
+<p>L’arbre correspondant est le suivant:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(arbre_2, <span class="at">extra=</span><span class="dv">106</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: labs do not fit even at cex 0.15, there may be some overplotting</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13-Modeles-regression_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>On voit qu’il n’est absolument pas lisible car plus profond, mais il prédit mieux (mais peut-être trop bien - cf.&nbsp;risque de surapprentissage en <em>matching learning</em>).</p>
+<!--Enfin, on peut chercher à minimiser l'erreur de prédiction de l'arbre afin de définir le niveau d'élagage optimal permettant ensuite de simplifier l'arbre.
+
+::: {.cell}
+
+```{.r .cell-code}
+# 2 fonctions liées à l'argument "cp=" de notre modèle
+printcp(arbre_1)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+Classification tree:
+rpart(formula = CDI ~ ., data = OffresPE_train, method = "class")
+
+Variables actually used in tree construction:
+[1] salary_cat secteurs  
+
+Root node error: 26870/122721 = 0.21895
+
+n= 122721 
+
+        CP nsplit rel error  xerror      xstd
+1 0.215110      0   1.00000 1.00000 0.0053914
+2 0.020506      1   0.78489 0.78489 0.0049184
+3 0.010000      3   0.74388 0.74388 0.0048141
+```
+
+
+:::
+
+```{.r .cell-code}
+plotcp(arbre_1)
+```
+
+::: {.cell-output-display}
+![](13-Modeles-regression_files/figure-html/unnamed-chunk-25-1.png){width=672}
+:::
+:::
+
+Ici il faut donc indiquer la valeur 0.010 dans l'argument `cp=` pour minimiser l'erreur relative, c'est notre nouvelle règle d'arrêt. On va par conséquent reconstruire l'abre à partir de la fonction `prune()` en indiquant cette valeur optimale pour l'élaguer :  
+
+::: {.cell}
+
+```{.r .cell-code}
+min(arbre_1$cptable[, "xerror"]) + (1*arbre_1$cptable[ which.min(arbre_1$cptable[, "xerror"]), "xstd"])
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 0.748692
+```
+
+
+:::
+
+```{.r .cell-code}
+opt <- which.min(arbre_1$cptable[, "xerror"])
+opt
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+3 
+3 
+```
+
+
+:::
+
+```{.r .cell-code}
+cp <- arbre_1$cptable[opt, "CP"]
+
+arbre_VF <- prune(arbre_1, cp=cp)
+rpart.plot(arbre_VF)
+```
+
+::: {.cell-output-display}
+![](13-Modeles-regression_files/figure-html/unnamed-chunk-26-1.png){width=672}
+:::
+:::
+
+Cela ne change en réalité rien ici ! -->
+<p>Vous pouvez réitérer l’exercice en introduisant d’autres variables dans l’analyse, en changeant la variable cible, etc.</p>
+<p>Pour aller plus loin, on utilise maintenant beaucoup en analyse prédictive les forêts d’arbre de décision, qui constituent comme son nom l’indique, un ensemble d’arbres de régression, ce qui permet d’avoir un taux d’erreur global moindre, car la principale critique de l’arbre de décision est son potentiel d’erreur.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./12-Clustering-application.html" class="pagination-link" aria-label="Clustering : application sur le RP 2019">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Clustering : application sur le RP 2019</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

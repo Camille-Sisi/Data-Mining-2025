@@ -1,0 +1,15 @@
+{
+  "hash": "51322ea36e1227a0765672f7d5fd6124",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Récapitulatif séance 1 - Data Wrangling {#sec-recapitulatif}\n\n## Ce qu'on a appris\nCette séance sur la préparation et nettoyage d'une base de données - phase appelée aussi Data Wrangling - nous a permis d'apprendre à : \n\n- charger des bases de données, y compris dans le cas d'un fichier lourd avec la fonction `fread()` du package **`data.table`** ; \n- repérer les informations intéressantes contenues dans cette base, notamment en allant voir le fichier \"annexe\", celui des métadonneés (ou dictionnaire des codes) ; mais ce type de fichier n'est pas toujours disponible, si vous avez des données d'une entreprise, peut-être que l'information décrivant cette base est plus informelle, ou même si vous \"aspirez\" des données *via* le web  vous n'aurez alors pas du tout d'information décrivant la base... :\n- manipuler la base de données : en identifiant d'abord le format des données, en sélectionnant un champ différent (moins de lignes/d'observations), et/ou des variables spécifiques (moins de colonnes/d'informations), avec les fonctions `filter()`, `select()`, `subset()`, `pivot_wider()`, `pivot_longer()`, `unique()`, `arrange()`, etc.; \n- manipuler des variables : en identifiant le format des variables, en les mettant dans le bon format, en (re)travaillant les modalités d'une variable qualitative (avec notamment les fonctions `mutate()`, `case_when()`, `as.factor()`, ou encore celles du package **`factors`**), en détectant/visualisant/gérant les valeurs manquantes d'une variable quantitative avec entre autres le package **`naniar`**, en détectant/visualiant/gérant les valeurs aberrantes d'une variable quantitative à partir en particulier des statistiques de la \"boîte à moustaches\" (fonction `geom_boxplot()` à utiliser avec `ggplot()`, fonction `boxplot.stats()`), et enfin, en transformant une variable quantitative en variable qualitative (avec la fonction `cut()`).\n\nL'usage pour cette phase du langage `dplyr` ou plus généralement du `tidyverse` est particulièrement conseillée, cela permet d'\"enchaîner\" des fonctions en une seule instruction.\n\n  \n## Enregistrement des tables \nEt voilà, on a bien \"trituré\" ces deux bases de données, maintenant on peut les enregistrer dans notre projet pour pouvoir les réutiliser lors de la prochaine séance.\n\n::: {.cell}\n\n```{.r .cell-code}\n# On enregistre les tables de données pour les utiliser ultérieurement\nsaveRDS(object = RP_final,  file = \"data/RP_final.Rdata\")\nsaveRDS(object = meta,  file = \"data/meta.Rdata\")\nsaveRDS(object = OffresPE_2020, file = \"data/OffresPE_2020.Rdata\") \n```\n:::\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

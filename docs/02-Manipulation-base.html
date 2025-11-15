@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Manipulation de la base – Data Mining 2025</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03-Manipulation-variables.html" rel="next">
+<link href="./01-Base-de-donnees.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-03e2afb5cd7388593a0fdb3df1e9c110.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bcc59033a7e2c7a840f06155df22da50.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-03e2afb5cd7388593a0fdb3df1e9c110.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-18c4c02f2e0c35b6cc6a137a251bffe3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-98d67fd4a94d75c92ed86be1e8f4ff03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-18c4c02f2e0c35b6cc6a137a251bffe3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/bookup_fonts_gwf-0.0/fonts-embed.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-Base-de-donnees.html">Séance 1</a></li><li class="breadcrumb-item"><a href="./02-Manipulation-base.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manipulation de la base</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Mining 2025</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Camille-Sisi/Data-Mining-2025" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Présentation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séance 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Base-de-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Récupération de la base de données</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Manipulation-base.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manipulation de la base</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Manipulation-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulation des variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Récapitulatif.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Récapitulatif séance 1 - Data Wrangling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séance2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Questions-fouille-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quelles questions intéressantes pour une “fouille de données” sur la base des RP ?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-Fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Systématiser nos procédures : construire une fonction</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séance 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-Ggplot-theorique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Visualization et Ggplot2 : aspects théoriques</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-Ggplot-pratique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Mining et Data Visualization en pratique</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séances 4 et 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-Intro-a-Shiny-theorique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Les applications interactives avec Shiny App</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Intro-a-Shiny-exemples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">La création d’une application Shiny “pas à pas” avec l’une de nos bases de données</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séance 6</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-Clustering-theorique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering : aspects théoriques</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Clustering-application.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Clustering : application sur le RP 2019</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Séance 7</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Modeles-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles de régression : application sur les offres de Pôle emploi 2020</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#format-des-données---wide-ou-long" id="toc-format-des-données---wide-ou-long" class="nav-link active" data-scroll-target="#format-des-données---wide-ou-long"><span class="header-section-number">2.1</span> Format des données - WIDE ou LONG</a></li>
+  <li><a href="#sélectionner-un-champ-réduit-de-la-base-séparer-les-données" id="toc-sélectionner-un-champ-réduit-de-la-base-séparer-les-données" class="nav-link" data-scroll-target="#sélectionner-un-champ-réduit-de-la-base-séparer-les-données"><span class="header-section-number">2.2</span> Sélectionner un champ réduit de la base, séparer les données</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-Base-de-donnees.html">Séance 1</a></li><li class="breadcrumb-item"><a href="./02-Manipulation-base.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manipulation de la base</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-manipulation-base" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manipulation de la base</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>On peut maintenant regarder à quoi ressemble la table principale, celle des données.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>RP <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="yfzlsxbnwk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yfzlsxbnwk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#yfzlsxbnwk thead, #yfzlsxbnwk tbody, #yfzlsxbnwk tfoot, #yfzlsxbnwk tr, #yfzlsxbnwk td, #yfzlsxbnwk th {
+  border-style: none;
+}
+
+#yfzlsxbnwk p {
+  margin: 0;
+  padding: 0;
+}
+
+#yfzlsxbnwk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#yfzlsxbnwk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#yfzlsxbnwk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#yfzlsxbnwk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#yfzlsxbnwk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#yfzlsxbnwk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#yfzlsxbnwk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#yfzlsxbnwk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#yfzlsxbnwk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#yfzlsxbnwk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#yfzlsxbnwk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yfzlsxbnwk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#yfzlsxbnwk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#yfzlsxbnwk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#yfzlsxbnwk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yfzlsxbnwk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#yfzlsxbnwk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#yfzlsxbnwk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#yfzlsxbnwk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yfzlsxbnwk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#yfzlsxbnwk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yfzlsxbnwk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#yfzlsxbnwk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yfzlsxbnwk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yfzlsxbnwk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yfzlsxbnwk .gt_left {
+  text-align: left;
+}
+
+#yfzlsxbnwk .gt_center {
+  text-align: center;
+}
+
+#yfzlsxbnwk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#yfzlsxbnwk .gt_font_normal {
+  font-weight: normal;
+}
+
+#yfzlsxbnwk .gt_font_bold {
+  font-weight: bold;
+}
+
+#yfzlsxbnwk .gt_font_italic {
+  font-style: italic;
+}
+
+#yfzlsxbnwk .gt_super {
+  font-size: 65%;
+}
+
+#yfzlsxbnwk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#yfzlsxbnwk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#yfzlsxbnwk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#yfzlsxbnwk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#yfzlsxbnwk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#yfzlsxbnwk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#yfzlsxbnwk .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#yfzlsxbnwk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#yfzlsxbnwk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="CANTVILLE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CANTVILLE</th>
+<th id="NUMMI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NUMMI</th>
+<th id="ACHLR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ACHLR</th>
+<th id="AEMMR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">AEMMR</th>
+<th id="AGED" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AGED</th>
+<th id="AGER20" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AGER20</th>
+<th id="AGEREV" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AGEREV</th>
+<th id="AGEREVQ" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AGEREVQ</th>
+<th id="ANAI" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ANAI</th>
+<th id="ANEMR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ANEMR</th>
+<th id="APAF" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">APAF</th>
+<th id="ARM" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ARM</th>
+<th id="ASCEN" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ASCEN</th>
+<th id="BAIN" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">BAIN</th>
+<th id="BATI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">BATI</th>
+<th id="CATIRIS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CATIRIS</th>
+<th id="CATL" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CATL</th>
+<th id="CATPC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CATPC</th>
+<th id="CHAU" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CHAU</th>
+<th id="CHFL" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CHFL</th>
+<th id="CHOS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CHOS</th>
+<th id="CLIM" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CLIM</th>
+<th id="CMBL" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CMBL</th>
+<th id="COUPLE" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">COUPLE</th>
+<th id="CS1" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CS1</th>
+<th id="CUIS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">CUIS</th>
+<th id="DEPT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">DEPT</th>
+<th id="DEROU" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">DEROU</th>
+<th id="DIPL" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">DIPL</th>
+<th id="DNAI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">DNAI</th>
+<th id="EAU" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">EAU</th>
+<th id="EGOUL" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">EGOUL</th>
+<th id="ELEC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ELEC</th>
+<th id="EMPL" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">EMPL</th>
+<th id="ETUD" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ETUD</th>
+<th id="GARL" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">GARL</th>
+<th id="HLML" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">HLML</th>
+<th id="ILETUD" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ILETUD</th>
+<th id="ILT" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ILT</th>
+<th id="IMMI" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">IMMI</th>
+<th id="INAI" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">INAI</th>
+<th id="INATC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">INATC</th>
+<th id="INFAM" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">INFAM</th>
+<th id="INPER" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">INPER</th>
+<th id="INPERF" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">INPERF</th>
+<th id="IPONDI" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">IPONDI</th>
+<th id="IRAN" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">IRAN</th>
+<th id="IRIS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">IRIS</th>
+<th id="LIENF" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">LIENF</th>
+<th id="LPRF" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">LPRF</th>
+<th id="LPRM" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">LPRM</th>
+<th id="METRODOM" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">METRODOM</th>
+<th id="MOCO" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">MOCO</th>
+<th id="MODV" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">MODV</th>
+<th id="NA17" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NA17</th>
+<th id="NA5" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NA5</th>
+<th id="NAIDT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">NAIDT</th>
+<th id="NBPI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NBPI</th>
+<th id="NE17FR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NE17FR</th>
+<th id="NE24FR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NE24FR</th>
+<th id="NE3FR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NE3FR</th>
+<th id="NE5FR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NE5FR</th>
+<th id="NENFR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NENFR</th>
+<th id="NPERR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NPERR</th>
+<th id="NUMF" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">NUMF</th>
+<th id="ORIDT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ORIDT</th>
+<th id="RECH" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">RECH</th>
+<th id="REGION" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">REGION</th>
+<th id="SANI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">SANI</th>
+<th id="SANIDOM" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">SANIDOM</th>
+<th id="SEXE" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SEXE</th>
+<th id="SFM" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">SFM</th>
+<th id="STAT_CONJ" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">STAT_CONJ</th>
+<th id="STATR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">STATR</th>
+<th id="STOCD" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">STOCD</th>
+<th id="SURF" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">SURF</th>
+<th id="TACT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TACT</th>
+<th id="TACTD16" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TACTD16</th>
+<th id="TP" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">TP</th>
+<th id="TRANS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">TRANS</th>
+<th id="TRIRIS" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">TRIRIS</th>
+<th id="TYPC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">TYPC</th>
+<th id="TYPFC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">TYPFC</th>
+<th id="TYPL" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">TYPL</th>
+<th id="TYPMC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">TYPMC</th>
+<th id="TYPMR" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">TYPMR</th>
+<th id="VOIT" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">VOIT</th>
+<th id="WC" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">WC</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="CANTVILLE">75ZZ</td>
+<td class="gt_row gt_center" headers="NUMMI">1</td>
+<td class="gt_row gt_center" headers="ACHLR">1</td>
+<td class="gt_row gt_center" headers="AEMMR">9</td>
+<td class="gt_row gt_right" headers="AGED">72</td>
+<td class="gt_row gt_right" headers="AGER20">79</td>
+<td class="gt_row gt_right" headers="AGEREV">72</td>
+<td class="gt_row gt_right" headers="AGEREVQ">70</td>
+<td class="gt_row gt_right" headers="ANAI">1944</td>
+<td class="gt_row gt_center" headers="ANEMR">02</td>
+<td class="gt_row gt_center" headers="APAF">0</td>
+<td class="gt_row gt_center" headers="ARM">75115</td>
+<td class="gt_row gt_center" headers="ASCEN">1</td>
+<td class="gt_row gt_center" headers="BAIN">Z</td>
+<td class="gt_row gt_center" headers="BATI">Z</td>
+<td class="gt_row gt_center" headers="CATIRIS">H</td>
+<td class="gt_row gt_center" headers="CATL">1</td>
+<td class="gt_row gt_right" headers="CATPC">0</td>
+<td class="gt_row gt_center" headers="CHAU">Z</td>
+<td class="gt_row gt_center" headers="CHFL">2</td>
+<td class="gt_row gt_center" headers="CHOS">Z</td>
+<td class="gt_row gt_center" headers="CLIM">Z</td>
+<td class="gt_row gt_center" headers="CMBL">2</td>
+<td class="gt_row gt_right" headers="COUPLE">2</td>
+<td class="gt_row gt_right" headers="CS1">7</td>
+<td class="gt_row gt_center" headers="CUIS">Z</td>
+<td class="gt_row gt_right" headers="DEPT">75</td>
+<td class="gt_row gt_center" headers="DEROU">Z</td>
+<td class="gt_row gt_center" headers="DIPL">19</td>
+<td class="gt_row gt_center" headers="DNAI">2B</td>
+<td class="gt_row gt_center" headers="EAU">Z</td>
+<td class="gt_row gt_center" headers="EGOUL">Z</td>
+<td class="gt_row gt_center" headers="ELEC">Z</td>
+<td class="gt_row gt_center" headers="EMPL">ZZ</td>
+<td class="gt_row gt_right" headers="ETUD">2</td>
+<td class="gt_row gt_center" headers="GARL">1</td>
+<td class="gt_row gt_center" headers="HLML">2</td>
+<td class="gt_row gt_center" headers="ILETUD">Z</td>
+<td class="gt_row gt_center" headers="ILT">Z</td>
+<td class="gt_row gt_right" headers="IMMI">2</td>
+<td class="gt_row gt_right" headers="INAI">3</td>
+<td class="gt_row gt_right" headers="INATC">1</td>
+<td class="gt_row gt_center" headers="INFAM">0</td>
+<td class="gt_row gt_center" headers="INPER">1</td>
+<td class="gt_row gt_center" headers="INPERF">Z</td>
+<td class="gt_row gt_right" headers="IPONDI">3.360730</td>
+<td class="gt_row gt_center" headers="IRAN">1</td>
+<td class="gt_row gt_center" headers="IRIS">751155817</td>
+<td class="gt_row gt_center" headers="LIENF">0</td>
+<td class="gt_row gt_center" headers="LPRF">0</td>
+<td class="gt_row gt_center" headers="LPRM">1</td>
+<td class="gt_row gt_center" headers="METRODOM">M</td>
+<td class="gt_row gt_right" headers="MOCO">32</td>
+<td class="gt_row gt_right" headers="MODV">50</td>
+<td class="gt_row gt_center" headers="NA17">ZZ</td>
+<td class="gt_row gt_center" headers="NA5">ZZ</td>
+<td class="gt_row gt_right" headers="NAIDT">0</td>
+<td class="gt_row gt_center" headers="NBPI">04</td>
+<td class="gt_row gt_center" headers="NE17FR">Z</td>
+<td class="gt_row gt_center" headers="NE24FR">Z</td>
+<td class="gt_row gt_center" headers="NE3FR">Z</td>
+<td class="gt_row gt_center" headers="NE5FR">Z</td>
+<td class="gt_row gt_center" headers="NENFR">Z</td>
+<td class="gt_row gt_center" headers="NPERR">1</td>
+<td class="gt_row gt_center" headers="NUMF">Z</td>
+<td class="gt_row gt_right" headers="ORIDT">0</td>
+<td class="gt_row gt_center" headers="RECH">0</td>
+<td class="gt_row gt_right" headers="REGION">11</td>
+<td class="gt_row gt_center" headers="SANI">2</td>
+<td class="gt_row gt_center" headers="SANIDOM">ZZ</td>
+<td class="gt_row gt_right" headers="SEXE">2</td>
+<td class="gt_row gt_center" headers="SFM">12</td>
+<td class="gt_row gt_right" headers="STAT_CONJ">6</td>
+<td class="gt_row gt_center" headers="STATR">Z</td>
+<td class="gt_row gt_center" headers="STOCD">10</td>
+<td class="gt_row gt_center" headers="SURF">4</td>
+<td class="gt_row gt_right" headers="TACT">21</td>
+<td class="gt_row gt_right" headers="TACTD16">210</td>
+<td class="gt_row gt_center" headers="TP">Z</td>
+<td class="gt_row gt_center" headers="TRANS">Z</td>
+<td class="gt_row gt_center" headers="TRIRIS">751501</td>
+<td class="gt_row gt_center" headers="TYPC">3</td>
+<td class="gt_row gt_center" headers="TYPFC">Z</td>
+<td class="gt_row gt_center" headers="TYPL">1</td>
+<td class="gt_row gt_center" headers="TYPMC">1</td>
+<td class="gt_row gt_center" headers="TYPMR">12</td>
+<td class="gt_row gt_center" headers="VOIT">1</td>
+<td class="gt_row gt_center" headers="WC">Z</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="CANTVILLE">75ZZ</td>
+<td class="gt_row gt_center" headers="NUMMI">2</td>
+<td class="gt_row gt_center" headers="ACHLR">2</td>
+<td class="gt_row gt_center" headers="AEMMR">9</td>
+<td class="gt_row gt_right" headers="AGED">59</td>
+<td class="gt_row gt_right" headers="AGER20">64</td>
+<td class="gt_row gt_right" headers="AGEREV">58</td>
+<td class="gt_row gt_right" headers="AGEREVQ">55</td>
+<td class="gt_row gt_right" headers="ANAI">1958</td>
+<td class="gt_row gt_center" headers="ANEMR">03</td>
+<td class="gt_row gt_center" headers="APAF">1</td>
+<td class="gt_row gt_center" headers="ARM">75112</td>
+<td class="gt_row gt_center" headers="ASCEN">2</td>
+<td class="gt_row gt_center" headers="BAIN">Z</td>
+<td class="gt_row gt_center" headers="BATI">Z</td>
+<td class="gt_row gt_center" headers="CATIRIS">H</td>
+<td class="gt_row gt_center" headers="CATL">1</td>
+<td class="gt_row gt_right" headers="CATPC">0</td>
+<td class="gt_row gt_center" headers="CHAU">Z</td>
+<td class="gt_row gt_center" headers="CHFL">3</td>
+<td class="gt_row gt_center" headers="CHOS">Z</td>
+<td class="gt_row gt_center" headers="CLIM">Z</td>
+<td class="gt_row gt_center" headers="CMBL">4</td>
+<td class="gt_row gt_right" headers="COUPLE">1</td>
+<td class="gt_row gt_right" headers="CS1">3</td>
+<td class="gt_row gt_center" headers="CUIS">Z</td>
+<td class="gt_row gt_right" headers="DEPT">75</td>
+<td class="gt_row gt_center" headers="DEROU">Z</td>
+<td class="gt_row gt_center" headers="DIPL">17</td>
+<td class="gt_row gt_center" headers="DNAI">99</td>
+<td class="gt_row gt_center" headers="EAU">Z</td>
+<td class="gt_row gt_center" headers="EGOUL">Z</td>
+<td class="gt_row gt_center" headers="ELEC">Z</td>
+<td class="gt_row gt_center" headers="EMPL">21</td>
+<td class="gt_row gt_right" headers="ETUD">2</td>
+<td class="gt_row gt_center" headers="GARL">2</td>
+<td class="gt_row gt_center" headers="HLML">2</td>
+<td class="gt_row gt_center" headers="ILETUD">Z</td>
+<td class="gt_row gt_center" headers="ILT">1</td>
+<td class="gt_row gt_right" headers="IMMI">1</td>
+<td class="gt_row gt_right" headers="INAI">6</td>
+<td class="gt_row gt_right" headers="INATC">1</td>
+<td class="gt_row gt_center" headers="INFAM">1</td>
+<td class="gt_row gt_center" headers="INPER">2</td>
+<td class="gt_row gt_center" headers="INPERF">2</td>
+<td class="gt_row gt_right" headers="IPONDI">3.668459</td>
+<td class="gt_row gt_center" headers="IRAN">1</td>
+<td class="gt_row gt_center" headers="IRIS">751124512</td>
+<td class="gt_row gt_center" headers="LIENF">1</td>
+<td class="gt_row gt_center" headers="LPRF">1</td>
+<td class="gt_row gt_center" headers="LPRM">1</td>
+<td class="gt_row gt_center" headers="METRODOM">M</td>
+<td class="gt_row gt_right" headers="MOCO">21</td>
+<td class="gt_row gt_right" headers="MODV">40</td>
+<td class="gt_row gt_center" headers="NA17">FZ</td>
+<td class="gt_row gt_center" headers="NA5">FZ</td>
+<td class="gt_row gt_right" headers="NAIDT">30</td>
+<td class="gt_row gt_center" headers="NBPI">01</td>
+<td class="gt_row gt_center" headers="NE17FR">0</td>
+<td class="gt_row gt_center" headers="NE24FR">0</td>
+<td class="gt_row gt_center" headers="NE3FR">0</td>
+<td class="gt_row gt_center" headers="NE5FR">0</td>
+<td class="gt_row gt_center" headers="NENFR">0</td>
+<td class="gt_row gt_center" headers="NPERR">2</td>
+<td class="gt_row gt_center" headers="NUMF">1</td>
+<td class="gt_row gt_right" headers="ORIDT">0</td>
+<td class="gt_row gt_center" headers="RECH">Z</td>
+<td class="gt_row gt_right" headers="REGION">11</td>
+<td class="gt_row gt_center" headers="SANI">1</td>
+<td class="gt_row gt_center" headers="SANIDOM">ZZ</td>
+<td class="gt_row gt_right" headers="SEXE">1</td>
+<td class="gt_row gt_center" headers="SFM">30</td>
+<td class="gt_row gt_right" headers="STAT_CONJ">3</td>
+<td class="gt_row gt_center" headers="STATR">2</td>
+<td class="gt_row gt_center" headers="STOCD">21</td>
+<td class="gt_row gt_center" headers="SURF">1</td>
+<td class="gt_row gt_right" headers="TACT">11</td>
+<td class="gt_row gt_right" headers="TACTD16">116</td>
+<td class="gt_row gt_center" headers="TP">1</td>
+<td class="gt_row gt_center" headers="TRANS">5</td>
+<td class="gt_row gt_center" headers="TRIRIS">750901</td>
+<td class="gt_row gt_center" headers="TYPC">3</td>
+<td class="gt_row gt_center" headers="TYPFC">2</td>
+<td class="gt_row gt_center" headers="TYPL">6</td>
+<td class="gt_row gt_center" headers="TYPMC">4</td>
+<td class="gt_row gt_center" headers="TYPMR">41</td>
+<td class="gt_row gt_center" headers="VOIT">0</td>
+<td class="gt_row gt_center" headers="WC">Z</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="CANTVILLE">75ZZ</td>
+<td class="gt_row gt_center" headers="NUMMI">2</td>
+<td class="gt_row gt_center" headers="ACHLR">2</td>
+<td class="gt_row gt_center" headers="AEMMR">9</td>
+<td class="gt_row gt_right" headers="AGED">30</td>
+<td class="gt_row gt_right" headers="AGER20">29</td>
+<td class="gt_row gt_right" headers="AGEREV">29</td>
+<td class="gt_row gt_right" headers="AGEREVQ">25</td>
+<td class="gt_row gt_right" headers="ANAI">1987</td>
+<td class="gt_row gt_center" headers="ANEMR">03</td>
+<td class="gt_row gt_center" headers="APAF">1</td>
+<td class="gt_row gt_center" headers="ARM">75112</td>
+<td class="gt_row gt_center" headers="ASCEN">2</td>
+<td class="gt_row gt_center" headers="BAIN">Z</td>
+<td class="gt_row gt_center" headers="BATI">Z</td>
+<td class="gt_row gt_center" headers="CATIRIS">H</td>
+<td class="gt_row gt_center" headers="CATL">1</td>
+<td class="gt_row gt_right" headers="CATPC">0</td>
+<td class="gt_row gt_center" headers="CHAU">Z</td>
+<td class="gt_row gt_center" headers="CHFL">3</td>
+<td class="gt_row gt_center" headers="CHOS">Z</td>
+<td class="gt_row gt_center" headers="CLIM">Z</td>
+<td class="gt_row gt_center" headers="CMBL">4</td>
+<td class="gt_row gt_right" headers="COUPLE">1</td>
+<td class="gt_row gt_right" headers="CS1">3</td>
+<td class="gt_row gt_center" headers="CUIS">Z</td>
+<td class="gt_row gt_right" headers="DEPT">75</td>
+<td class="gt_row gt_center" headers="DEROU">Z</td>
+<td class="gt_row gt_center" headers="DIPL">16</td>
+<td class="gt_row gt_center" headers="DNAI">99</td>
+<td class="gt_row gt_center" headers="EAU">Z</td>
+<td class="gt_row gt_center" headers="EGOUL">Z</td>
+<td class="gt_row gt_center" headers="ELEC">Z</td>
+<td class="gt_row gt_center" headers="EMPL">21</td>
+<td class="gt_row gt_right" headers="ETUD">2</td>
+<td class="gt_row gt_center" headers="GARL">2</td>
+<td class="gt_row gt_center" headers="HLML">2</td>
+<td class="gt_row gt_center" headers="ILETUD">Z</td>
+<td class="gt_row gt_center" headers="ILT">3</td>
+<td class="gt_row gt_right" headers="IMMI">1</td>
+<td class="gt_row gt_right" headers="INAI">6</td>
+<td class="gt_row gt_right" headers="INATC">2</td>
+<td class="gt_row gt_center" headers="INFAM">1</td>
+<td class="gt_row gt_center" headers="INPER">2</td>
+<td class="gt_row gt_center" headers="INPERF">2</td>
+<td class="gt_row gt_right" headers="IPONDI">3.668459</td>
+<td class="gt_row gt_center" headers="IRAN">1</td>
+<td class="gt_row gt_center" headers="IRIS">751124512</td>
+<td class="gt_row gt_center" headers="LIENF">1</td>
+<td class="gt_row gt_center" headers="LPRF">2</td>
+<td class="gt_row gt_center" headers="LPRM">2</td>
+<td class="gt_row gt_center" headers="METRODOM">M</td>
+<td class="gt_row gt_right" headers="MOCO">21</td>
+<td class="gt_row gt_right" headers="MODV">31</td>
+<td class="gt_row gt_center" headers="NA17">MN</td>
+<td class="gt_row gt_center" headers="NA5">GU</td>
+<td class="gt_row gt_right" headers="NAIDT">30</td>
+<td class="gt_row gt_center" headers="NBPI">01</td>
+<td class="gt_row gt_center" headers="NE17FR">0</td>
+<td class="gt_row gt_center" headers="NE24FR">0</td>
+<td class="gt_row gt_center" headers="NE3FR">0</td>
+<td class="gt_row gt_center" headers="NE5FR">0</td>
+<td class="gt_row gt_center" headers="NENFR">0</td>
+<td class="gt_row gt_center" headers="NPERR">2</td>
+<td class="gt_row gt_center" headers="NUMF">1</td>
+<td class="gt_row gt_right" headers="ORIDT">0</td>
+<td class="gt_row gt_center" headers="RECH">Z</td>
+<td class="gt_row gt_right" headers="REGION">11</td>
+<td class="gt_row gt_center" headers="SANI">1</td>
+<td class="gt_row gt_center" headers="SANIDOM">ZZ</td>
+<td class="gt_row gt_right" headers="SEXE">1</td>
+<td class="gt_row gt_center" headers="SFM">30</td>
+<td class="gt_row gt_right" headers="STAT_CONJ">3</td>
+<td class="gt_row gt_center" headers="STATR">2</td>
+<td class="gt_row gt_center" headers="STOCD">21</td>
+<td class="gt_row gt_center" headers="SURF">1</td>
+<td class="gt_row gt_right" headers="TACT">11</td>
+<td class="gt_row gt_right" headers="TACTD16">111</td>
+<td class="gt_row gt_center" headers="TP">1</td>
+<td class="gt_row gt_center" headers="TRANS">6</td>
+<td class="gt_row gt_center" headers="TRIRIS">750901</td>
+<td class="gt_row gt_center" headers="TYPC">3</td>
+<td class="gt_row gt_center" headers="TYPFC">2</td>
+<td class="gt_row gt_center" headers="TYPL">6</td>
+<td class="gt_row gt_center" headers="TYPMC">4</td>
+<td class="gt_row gt_center" headers="TYPMR">41</td>
+<td class="gt_row gt_center" headers="VOIT">0</td>
+<td class="gt_row gt_center" headers="WC">Z</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="CANTVILLE">75ZZ</td>
+<td class="gt_row gt_center" headers="NUMMI">3</td>
+<td class="gt_row gt_center" headers="ACHLR">1</td>
+<td class="gt_row gt_center" headers="AEMMR">7</td>
+<td class="gt_row gt_right" headers="AGED">82</td>
+<td class="gt_row gt_right" headers="AGER20">80</td>
+<td class="gt_row gt_right" headers="AGEREV">81</td>
+<td class="gt_row gt_right" headers="AGEREVQ">80</td>
+<td class="gt_row gt_right" headers="ANAI">1938</td>
+<td class="gt_row gt_center" headers="ANEMR">05</td>
+<td class="gt_row gt_center" headers="APAF">2</td>
+<td class="gt_row gt_center" headers="ARM">75115</td>
+<td class="gt_row gt_center" headers="ASCEN">1</td>
+<td class="gt_row gt_center" headers="BAIN">Z</td>
+<td class="gt_row gt_center" headers="BATI">Z</td>
+<td class="gt_row gt_center" headers="CATIRIS">H</td>
+<td class="gt_row gt_center" headers="CATL">1</td>
+<td class="gt_row gt_right" headers="CATPC">0</td>
+<td class="gt_row gt_center" headers="CHAU">Z</td>
+<td class="gt_row gt_center" headers="CHFL">2</td>
+<td class="gt_row gt_center" headers="CHOS">Z</td>
+<td class="gt_row gt_center" headers="CLIM">Z</td>
+<td class="gt_row gt_center" headers="CMBL">2</td>
+<td class="gt_row gt_right" headers="COUPLE">1</td>
+<td class="gt_row gt_right" headers="CS1">7</td>
+<td class="gt_row gt_center" headers="CUIS">Z</td>
+<td class="gt_row gt_right" headers="DEPT">75</td>
+<td class="gt_row gt_center" headers="DEROU">Z</td>
+<td class="gt_row gt_center" headers="DIPL">14</td>
+<td class="gt_row gt_center" headers="DNAI">92</td>
+<td class="gt_row gt_center" headers="EAU">Z</td>
+<td class="gt_row gt_center" headers="EGOUL">Z</td>
+<td class="gt_row gt_center" headers="ELEC">Z</td>
+<td class="gt_row gt_center" headers="EMPL">ZZ</td>
+<td class="gt_row gt_right" headers="ETUD">2</td>
+<td class="gt_row gt_center" headers="GARL">1</td>
+<td class="gt_row gt_center" headers="HLML">2</td>
+<td class="gt_row gt_center" headers="ILETUD">Z</td>
+<td class="gt_row gt_center" headers="ILT">Z</td>
+<td class="gt_row gt_right" headers="IMMI">2</td>
+<td class="gt_row gt_right" headers="INAI">2</td>
+<td class="gt_row gt_right" headers="INATC">1</td>
+<td class="gt_row gt_center" headers="INFAM">1</td>
+<td class="gt_row gt_center" headers="INPER">2</td>
+<td class="gt_row gt_center" headers="INPERF">2</td>
+<td class="gt_row gt_right" headers="IPONDI">3.478821</td>
+<td class="gt_row gt_center" headers="IRAN">1</td>
+<td class="gt_row gt_center" headers="IRIS">751155907</td>
+<td class="gt_row gt_center" headers="LIENF">2</td>
+<td class="gt_row gt_center" headers="LPRF">2</td>
+<td class="gt_row gt_center" headers="LPRM">2</td>
+<td class="gt_row gt_center" headers="METRODOM">M</td>
+<td class="gt_row gt_right" headers="MOCO">21</td>
+<td class="gt_row gt_right" headers="MODV">40</td>
+<td class="gt_row gt_center" headers="NA17">ZZ</td>
+<td class="gt_row gt_center" headers="NA5">ZZ</td>
+<td class="gt_row gt_right" headers="NAIDT">0</td>
+<td class="gt_row gt_center" headers="NBPI">03</td>
+<td class="gt_row gt_center" headers="NE17FR">0</td>
+<td class="gt_row gt_center" headers="NE24FR">0</td>
+<td class="gt_row gt_center" headers="NE3FR">0</td>
+<td class="gt_row gt_center" headers="NE5FR">0</td>
+<td class="gt_row gt_center" headers="NENFR">0</td>
+<td class="gt_row gt_center" headers="NPERR">2</td>
+<td class="gt_row gt_center" headers="NUMF">1</td>
+<td class="gt_row gt_right" headers="ORIDT">0</td>
+<td class="gt_row gt_center" headers="RECH">9</td>
+<td class="gt_row gt_right" headers="REGION">11</td>
+<td class="gt_row gt_center" headers="SANI">2</td>
+<td class="gt_row gt_center" headers="SANIDOM">ZZ</td>
+<td class="gt_row gt_right" headers="SEXE">2</td>
+<td class="gt_row gt_center" headers="SFM">30</td>
+<td class="gt_row gt_right" headers="STAT_CONJ">1</td>
+<td class="gt_row gt_center" headers="STATR">Z</td>
+<td class="gt_row gt_center" headers="STOCD">10</td>
+<td class="gt_row gt_center" headers="SURF">4</td>
+<td class="gt_row gt_right" headers="TACT">21</td>
+<td class="gt_row gt_right" headers="TACTD16">210</td>
+<td class="gt_row gt_center" headers="TP">Z</td>
+<td class="gt_row gt_center" headers="TRANS">Z</td>
+<td class="gt_row gt_center" headers="TRIRIS">751431</td>
+<td class="gt_row gt_center" headers="TYPC">3</td>
+<td class="gt_row gt_center" headers="TYPFC">2</td>
+<td class="gt_row gt_center" headers="TYPL">2</td>
+<td class="gt_row gt_center" headers="TYPMC">4</td>
+<td class="gt_row gt_center" headers="TYPMR">44</td>
+<td class="gt_row gt_center" headers="VOIT">1</td>
+<td class="gt_row gt_center" headers="WC">Z</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="CANTVILLE">75ZZ</td>
+<td class="gt_row gt_center" headers="NUMMI">3</td>
+<td class="gt_row gt_center" headers="ACHLR">1</td>
+<td class="gt_row gt_center" headers="AEMMR">7</td>
+<td class="gt_row gt_right" headers="AGED">86</td>
+<td class="gt_row gt_right" headers="AGER20">80</td>
+<td class="gt_row gt_right" headers="AGEREV">85</td>
+<td class="gt_row gt_right" headers="AGEREVQ">85</td>
+<td class="gt_row gt_right" headers="ANAI">1934</td>
+<td class="gt_row gt_center" headers="ANEMR">05</td>
+<td class="gt_row gt_center" headers="APAF">1</td>
+<td class="gt_row gt_center" headers="ARM">75115</td>
+<td class="gt_row gt_center" headers="ASCEN">1</td>
+<td class="gt_row gt_center" headers="BAIN">Z</td>
+<td class="gt_row gt_center" headers="BATI">Z</td>
+<td class="gt_row gt_center" headers="CATIRIS">H</td>
+<td class="gt_row gt_center" headers="CATL">1</td>
+<td class="gt_row gt_right" headers="CATPC">0</td>
+<td class="gt_row gt_center" headers="CHAU">Z</td>
+<td class="gt_row gt_center" headers="CHFL">2</td>
+<td class="gt_row gt_center" headers="CHOS">Z</td>
+<td class="gt_row gt_center" headers="CLIM">Z</td>
+<td class="gt_row gt_center" headers="CMBL">2</td>
+<td class="gt_row gt_right" headers="COUPLE">1</td>
+<td class="gt_row gt_right" headers="CS1">7</td>
+<td class="gt_row gt_center" headers="CUIS">Z</td>
+<td class="gt_row gt_right" headers="DEPT">75</td>
+<td class="gt_row gt_center" headers="DEROU">Z</td>
+<td class="gt_row gt_center" headers="DIPL">14</td>
+<td class="gt_row gt_center" headers="DNAI">75</td>
+<td class="gt_row gt_center" headers="EAU">Z</td>
+<td class="gt_row gt_center" headers="EGOUL">Z</td>
+<td class="gt_row gt_center" headers="ELEC">Z</td>
+<td class="gt_row gt_center" headers="EMPL">ZZ</td>
+<td class="gt_row gt_right" headers="ETUD">2</td>
+<td class="gt_row gt_center" headers="GARL">1</td>
+<td class="gt_row gt_center" headers="HLML">2</td>
+<td class="gt_row gt_center" headers="ILETUD">Z</td>
+<td class="gt_row gt_center" headers="ILT">Z</td>
+<td class="gt_row gt_right" headers="IMMI">2</td>
+<td class="gt_row gt_right" headers="INAI">1</td>
+<td class="gt_row gt_right" headers="INATC">1</td>
+<td class="gt_row gt_center" headers="INFAM">1</td>
+<td class="gt_row gt_center" headers="INPER">2</td>
+<td class="gt_row gt_center" headers="INPERF">2</td>
+<td class="gt_row gt_right" headers="IPONDI">3.478821</td>
+<td class="gt_row gt_center" headers="IRAN">1</td>
+<td class="gt_row gt_center" headers="IRIS">751155907</td>
+<td class="gt_row gt_center" headers="LIENF">1</td>
+<td class="gt_row gt_center" headers="LPRF">1</td>
+<td class="gt_row gt_center" headers="LPRM">1</td>
+<td class="gt_row gt_center" headers="METRODOM">M</td>
+<td class="gt_row gt_right" headers="MOCO">21</td>
+<td class="gt_row gt_right" headers="MODV">40</td>
+<td class="gt_row gt_center" headers="NA17">ZZ</td>
+<td class="gt_row gt_center" headers="NA5">ZZ</td>
+<td class="gt_row gt_right" headers="NAIDT">0</td>
+<td class="gt_row gt_center" headers="NBPI">03</td>
+<td class="gt_row gt_center" headers="NE17FR">0</td>
+<td class="gt_row gt_center" headers="NE24FR">0</td>
+<td class="gt_row gt_center" headers="NE3FR">0</td>
+<td class="gt_row gt_center" headers="NE5FR">0</td>
+<td class="gt_row gt_center" headers="NENFR">0</td>
+<td class="gt_row gt_center" headers="NPERR">2</td>
+<td class="gt_row gt_center" headers="NUMF">1</td>
+<td class="gt_row gt_right" headers="ORIDT">0</td>
+<td class="gt_row gt_center" headers="RECH">9</td>
+<td class="gt_row gt_right" headers="REGION">11</td>
+<td class="gt_row gt_center" headers="SANI">2</td>
+<td class="gt_row gt_center" headers="SANIDOM">ZZ</td>
+<td class="gt_row gt_right" headers="SEXE">1</td>
+<td class="gt_row gt_center" headers="SFM">30</td>
+<td class="gt_row gt_right" headers="STAT_CONJ">1</td>
+<td class="gt_row gt_center" headers="STATR">Z</td>
+<td class="gt_row gt_center" headers="STOCD">10</td>
+<td class="gt_row gt_center" headers="SURF">4</td>
+<td class="gt_row gt_right" headers="TACT">21</td>
+<td class="gt_row gt_right" headers="TACTD16">210</td>
+<td class="gt_row gt_center" headers="TP">Z</td>
+<td class="gt_row gt_center" headers="TRANS">Z</td>
+<td class="gt_row gt_center" headers="TRIRIS">751431</td>
+<td class="gt_row gt_center" headers="TYPC">3</td>
+<td class="gt_row gt_center" headers="TYPFC">2</td>
+<td class="gt_row gt_center" headers="TYPL">2</td>
+<td class="gt_row gt_center" headers="TYPMC">4</td>
+<td class="gt_row gt_center" headers="TYPMR">44</td>
+<td class="gt_row gt_center" headers="VOIT">1</td>
+<td class="gt_row gt_center" headers="WC">Z</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="CANTVILLE">75ZZ</td>
+<td class="gt_row gt_center" headers="NUMMI">4</td>
+<td class="gt_row gt_center" headers="ACHLR">2</td>
+<td class="gt_row gt_center" headers="AEMMR">9</td>
+<td class="gt_row gt_right" headers="AGED">1</td>
+<td class="gt_row gt_right" headers="AGER20">2</td>
+<td class="gt_row gt_right" headers="AGEREV">0</td>
+<td class="gt_row gt_right" headers="AGEREVQ">0</td>
+<td class="gt_row gt_right" headers="ANAI">2019</td>
+<td class="gt_row gt_center" headers="ANEMR">01</td>
+<td class="gt_row gt_center" headers="APAF">3</td>
+<td class="gt_row gt_center" headers="ARM">75116</td>
+<td class="gt_row gt_center" headers="ASCEN">1</td>
+<td class="gt_row gt_center" headers="BAIN">Z</td>
+<td class="gt_row gt_center" headers="BATI">Z</td>
+<td class="gt_row gt_center" headers="CATIRIS">H</td>
+<td class="gt_row gt_center" headers="CATL">1</td>
+<td class="gt_row gt_right" headers="CATPC">0</td>
+<td class="gt_row gt_center" headers="CHAU">Z</td>
+<td class="gt_row gt_center" headers="CHFL">2</td>
+<td class="gt_row gt_center" headers="CHOS">Z</td>
+<td class="gt_row gt_center" headers="CLIM">Z</td>
+<td class="gt_row gt_center" headers="CMBL">2</td>
+<td class="gt_row gt_right" headers="COUPLE">2</td>
+<td class="gt_row gt_right" headers="CS1">8</td>
+<td class="gt_row gt_center" headers="CUIS">Z</td>
+<td class="gt_row gt_right" headers="DEPT">75</td>
+<td class="gt_row gt_center" headers="DEROU">Z</td>
+<td class="gt_row gt_center" headers="DIPL">ZZ</td>
+<td class="gt_row gt_center" headers="DNAI">92</td>
+<td class="gt_row gt_center" headers="EAU">Z</td>
+<td class="gt_row gt_center" headers="EGOUL">Z</td>
+<td class="gt_row gt_center" headers="ELEC">Z</td>
+<td class="gt_row gt_center" headers="EMPL">ZZ</td>
+<td class="gt_row gt_right" headers="ETUD">2</td>
+<td class="gt_row gt_center" headers="GARL">1</td>
+<td class="gt_row gt_center" headers="HLML">2</td>
+<td class="gt_row gt_center" headers="ILETUD">Z</td>
+<td class="gt_row gt_center" headers="ILT">Z</td>
+<td class="gt_row gt_right" headers="IMMI">2</td>
+<td class="gt_row gt_right" headers="INAI">2</td>
+<td class="gt_row gt_right" headers="INATC">1</td>
+<td class="gt_row gt_center" headers="INFAM">1</td>
+<td class="gt_row gt_center" headers="INPER">3</td>
+<td class="gt_row gt_center" headers="INPERF">3</td>
+<td class="gt_row gt_right" headers="IPONDI">2.776887</td>
+<td class="gt_row gt_center" headers="IRAN">Z</td>
+<td class="gt_row gt_center" headers="IRIS">751166301</td>
+<td class="gt_row gt_center" headers="LIENF">3</td>
+<td class="gt_row gt_center" headers="LPRF">3</td>
+<td class="gt_row gt_center" headers="LPRM">3</td>
+<td class="gt_row gt_center" headers="METRODOM">M</td>
+<td class="gt_row gt_right" headers="MOCO">12</td>
+<td class="gt_row gt_right" headers="MODV">12</td>
+<td class="gt_row gt_center" headers="NA17">ZZ</td>
+<td class="gt_row gt_center" headers="NA5">ZZ</td>
+<td class="gt_row gt_right" headers="NAIDT">0</td>
+<td class="gt_row gt_center" headers="NBPI">04</td>
+<td class="gt_row gt_center" headers="NE17FR">2</td>
+<td class="gt_row gt_center" headers="NE24FR">2</td>
+<td class="gt_row gt_center" headers="NE3FR">2</td>
+<td class="gt_row gt_center" headers="NE5FR">2</td>
+<td class="gt_row gt_center" headers="NENFR">2</td>
+<td class="gt_row gt_center" headers="NPERR">3</td>
+<td class="gt_row gt_center" headers="NUMF">1</td>
+<td class="gt_row gt_right" headers="ORIDT">0</td>
+<td class="gt_row gt_center" headers="RECH">Z</td>
+<td class="gt_row gt_right" headers="REGION">11</td>
+<td class="gt_row gt_center" headers="SANI">2</td>
+<td class="gt_row gt_center" headers="SANIDOM">ZZ</td>
+<td class="gt_row gt_right" headers="SEXE">1</td>
+<td class="gt_row gt_center" headers="SFM">22</td>
+<td class="gt_row gt_right" headers="STAT_CONJ">6</td>
+<td class="gt_row gt_center" headers="STATR">Z</td>
+<td class="gt_row gt_center" headers="STOCD">30</td>
+<td class="gt_row gt_center" headers="SURF">6</td>
+<td class="gt_row gt_right" headers="TACT">23</td>
+<td class="gt_row gt_right" headers="TACTD16">230</td>
+<td class="gt_row gt_center" headers="TP">Z</td>
+<td class="gt_row gt_center" headers="TRANS">Z</td>
+<td class="gt_row gt_center" headers="TRIRIS">751741</td>
+<td class="gt_row gt_center" headers="TYPC">3</td>
+<td class="gt_row gt_center" headers="TYPFC">1</td>
+<td class="gt_row gt_center" headers="TYPL">2</td>
+<td class="gt_row gt_center" headers="TYPMC">3</td>
+<td class="gt_row gt_center" headers="TYPMR">32</td>
+<td class="gt_row gt_center" headers="VOIT">1</td>
+<td class="gt_row gt_center" headers="WC">Z</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>La fonction <code>str()</code> ou son équivalent en langage <code>dplyr</code> la fonction <code>glimpse</code> nous donne la liste des variables avec cette fois leur format et leurs modalités (les premières seulement s’il y en a beaucoup).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># str(RP)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>RP <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 4,354,518
+Columns: 88
+$ CANTVILLE &lt;fct&gt; 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, 75ZZ, …
+$ NUMMI     &lt;fct&gt; 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 7, 7, 7, 7, 8, 9, 10, 10, 1…
+$ ACHLR     &lt;fct&gt; 1, 2, 2, 1, 1, 2, 2, 2, 1, 1, 4, 3, 3, 3, 3, 4, 3, 4, 4, 4, …
+$ AEMMR     &lt;fct&gt; 9, 9, 9, 7, 7, 9, 9, 9, 6, 6, 9, 9, 9, 9, 9, 7, 6, 9, 9, 9, …
+$ AGED      &lt;int&gt; 72, 59, 30, 82, 86, 1, 34, 3, 67, 67, 34, 51, 48, 17, 13, 82…
+$ AGER20    &lt;int&gt; 79, 64, 29, 80, 80, 2, 39, 2, 79, 79, 39, 54, 54, 17, 14, 80…
+$ AGEREV    &lt;int&gt; 72, 58, 29, 81, 85, 0, 33, 2, 67, 66, 33, 50, 47, 16, 12, 81…
+$ AGEREVQ   &lt;int&gt; 70, 55, 25, 80, 85, 0, 30, 0, 65, 65, 30, 50, 45, 15, 10, 80…
+$ ANAI      &lt;int&gt; 1944, 1958, 1987, 1938, 1934, 2019, 1986, 2017, 1950, 1950, …
+$ ANEMR     &lt;fct&gt; 02, 03, 03, 05, 05, 01, 01, 01, 06, 06, 01, 03, 03, 03, 03, …
+$ APAF      &lt;fct&gt; 0, 1, 1, 2, 1, 3, 2, 3, 1, 2, 0, 1, 2, 3, 3, 0, 0, 3, 2, 3, …
+$ ARM       &lt;fct&gt; 75115, 75112, 75112, 75115, 75115, 75116, 75116, 75116, 7511…
+$ ASCEN     &lt;fct&gt; 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, …
+$ BAIN      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ BATI      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ CATIRIS   &lt;fct&gt; H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, H, …
+$ CATL      &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ CATPC     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ CHAU      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ CHFL      &lt;fct&gt; 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, …
+$ CHOS      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ CLIM      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ CMBL      &lt;fct&gt; 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 1, 1, 1, 1, …
+$ COUPLE    &lt;int&gt; 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, …
+$ CS1       &lt;int&gt; 7, 3, 3, 7, 7, 8, 8, 8, 7, 7, 3, 5, 5, 8, 8, 7, 7, 5, 4, 4, …
+$ CUIS      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ DEPT      &lt;int&gt; 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, …
+$ DEROU     &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ DIPL      &lt;fct&gt; 19, 17, 16, 14, 14, ZZ, 18, ZZ, 17, 16, 18, 03, 13, 03, ZZ, …
+$ DNAI      &lt;fct&gt; 2B, 99, 99, 92, 75, 92, 92, 92, 92, 92, 49, 99, 99, 93, 75, …
+$ EAU       &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ EGOUL     &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ ELEC      &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …
+$ EMPL      &lt;fct&gt; ZZ, 21, 21, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, 16, 16, 16, ZZ, ZZ, …
+$ ETUD      &lt;int&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, …
+$ GARL      &lt;fct&gt; 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, …
+$ HLML      &lt;fct&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, …
+$ ILETUD    &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, 1, 1, Z, Z, Z, Z, Z, …
+$ ILT       &lt;fct&gt; Z, 1, 3, Z, Z, Z, Z, Z, Z, Z, 3, 1, 1, Z, Z, Z, Z, 1, 1, Z, …
+$ IMMI      &lt;int&gt; 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, …
+$ INAI      &lt;int&gt; 3, 6, 6, 2, 1, 2, 2, 2, 2, 2, 3, 6, 6, 2, 1, 1, 2, 3, 3, 3, …
+$ INATC     &lt;int&gt; 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ INFAM     &lt;fct&gt; 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, …
+$ INPER     &lt;fct&gt; 1, 2, 2, 2, 2, 3, 3, 3, 2, 2, 1, 4, 4, 4, 4, 1, 1, 3, 3, 3, …
+$ INPERF    &lt;fct&gt; Z, 2, 2, 2, 2, 3, 3, 3, 2, 2, Z, 4, 4, 4, 4, Z, Z, 3, 3, 3, …
+$ IPONDI    &lt;dbl&gt; 3.360730, 3.668459, 3.668459, 3.478821, 3.478821, 2.776887, …
+$ IRAN      &lt;fct&gt; 1, 1, 1, 1, 1, Z, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ IRIS      &lt;fct&gt; 751155817, 751124512, 751124512, 751155907, 751155907, 75116…
+$ LIENF     &lt;fct&gt; 0, 1, 1, 2, 1, 3, 2, 3, 1, 2, 0, 1, 2, 3, 3, 0, 0, 3, 2, 3, …
+$ LPRF      &lt;fct&gt; 0, 1, 2, 2, 1, 3, 1, 3, 1, 2, 0, 1, 2, 3, 3, 0, 0, 3, 1, 3, …
+$ LPRM      &lt;fct&gt; 1, 1, 2, 2, 1, 3, 1, 3, 1, 2, 1, 1, 2, 3, 3, 1, 1, 3, 1, 3, …
+$ METRODOM  &lt;fct&gt; M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, …
+$ MOCO      &lt;int&gt; 32, 21, 21, 21, 21, 12, 23, 12, 21, 21, 32, 22, 22, 11, 11, …
+$ MODV      &lt;int&gt; 50, 40, 31, 40, 40, 12, 33, 12, 40, 40, 20, 32, 32, 11, 11, …
+$ NA17      &lt;fct&gt; ZZ, FZ, MN, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, OQ, MN, MN, ZZ, ZZ, …
+$ NA5       &lt;fct&gt; ZZ, FZ, GU, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, OQ, GU, GU, ZZ, ZZ, …
+$ NAIDT     &lt;int&gt; 0, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 0, 0,…
+$ NBPI      &lt;fct&gt; 04, 01, 01, 03, 03, 04, 04, 04, 08, 08, 01, 03, 03, 03, 03, …
+$ NE17FR    &lt;fct&gt; Z, 0, 0, 0, 0, 2, 2, 2, 0, 0, Z, 2, 2, 2, 2, Z, Z, 0, 0, 0, …
+$ NE24FR    &lt;fct&gt; Z, 0, 0, 0, 0, 2, 2, 2, 0, 0, Z, 2, 2, 2, 2, Z, Z, 1, 1, 1, …
+$ NE3FR     &lt;fct&gt; Z, 0, 0, 0, 0, 2, 2, 2, 0, 0, Z, 0, 0, 0, 0, Z, Z, 0, 0, 0, …
+$ NE5FR     &lt;fct&gt; Z, 0, 0, 0, 0, 2, 2, 2, 0, 0, Z, 0, 0, 0, 0, Z, Z, 0, 0, 0, …
+$ NENFR     &lt;fct&gt; Z, 0, 0, 0, 0, 2, 2, 2, 0, 0, Z, 2, 2, 2, 2, Z, Z, 2, 2, 2, …
+$ NPERR     &lt;fct&gt; 1, 2, 2, 2, 2, 3, 3, 3, 2, 2, 1, 4, 4, 4, 4, 1, 1, 3, 3, 3, …
+$ NUMF      &lt;fct&gt; Z, 1, 1, 1, 1, 1, 1, 1, 1, 1, Z, 1, 1, 1, 1, Z, Z, 1, 1, 1, …
+$ ORIDT     &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ RECH      &lt;fct&gt; 0, Z, Z, 9, 9, Z, 0, Z, 0, 0, Z, Z, Z, 0, Z, 9, 0, Z, Z, 1, …
+$ REGION    &lt;int&gt; 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, …
+$ SANI      &lt;fct&gt; 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+$ SANIDOM   &lt;fct&gt; ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, …
+$ SEXE      &lt;int&gt; 2, 1, 1, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, …
+$ SFM       &lt;fct&gt; 12, 30, 30, 30, 30, 22, 22, 22, 30, 30, 12, 32, 32, 32, 32, …
+$ STAT_CONJ &lt;int&gt; 6, 3, 3, 1, 1, 6, 1, 6, 1, 1, 6, 3, 3, 6, 6, 4, 5, 6, 6, 6, …
+$ STATR     &lt;fct&gt; Z, 2, 2, Z, Z, Z, Z, Z, Z, Z, 1, 1, 1, Z, Z, Z, Z, 1, 1, Z, …
+$ STOCD     &lt;fct&gt; 10, 21, 21, 10, 10, 30, 30, 30, 10, 10, 21, 30, 30, 30, 30, …
+$ SURF      &lt;fct&gt; 4, 1, 1, 4, 4, 6, 6, 6, 7, 7, 1, 4, 4, 4, 4, 3, 3, 6, 6, 6, …
+$ TACT      &lt;int&gt; 21, 11, 11, 21, 21, 23, 24, 23, 21, 21, 11, 11, 11, 22, 23, …
+$ TACTD16   &lt;int&gt; 210, 116, 111, 210, 210, 230, 240, 230, 210, 210, 111, 111, …
+$ TP        &lt;fct&gt; Z, 1, 1, Z, Z, Z, Z, Z, Z, Z, 2, 1, 1, Z, Z, Z, Z, 1, 1, Z, …
+$ TRANS     &lt;fct&gt; Z, 5, 6, Z, Z, Z, Z, Z, Z, Z, 6, 6, 6, Z, Z, Z, Z, 6, 1, Z, …
+$ TRIRIS    &lt;fct&gt; 751501, 750901, 750901, 751431, 751431, 751741, 751741, 7517…
+$ TYPC      &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, …
+$ TYPFC     &lt;fct&gt; Z, 2, 2, 2, 2, 1, 1, 1, 2, 2, Z, 2, 2, 2, 2, Z, Z, 1, 1, 1, …
+$ TYPL      &lt;fct&gt; 1, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+$ TYPMC     &lt;fct&gt; 1, 4, 4, 4, 4, 3, 3, 3, 4, 4, 1, 4, 4, 4, 4, 1, 1, 3, 3, 3, …
+$ TYPMR     &lt;fct&gt; 12, 41, 41, 44, 44, 32, 32, 32, 44, 44, 12, 41, 41, 41, 41, …
+$ VOIT      &lt;fct&gt; 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, …
+$ WC        &lt;fct&gt; Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, Z, …</code></pre>
+</div>
+</div>
+<p>Les variables sont en format, soit ‘int’ (“integer” - nombres entiers), soit ‘fct’ (“factor”), ou encore ‘dbl’ (“double” - nombres réels).&nbsp; On remarque que la plupart des variables ont des modalités en chiffres et/ou lettres, ce qui signifie qu’il faudra probablement recoder ces modalités pour leur donner des libellés dans nos analyses descriptives (tableaux ou graphiques).</p>
+<p>Par ailleurs, certaines variables ont été laissées en format ‘integer’ bien que l’on avait mis l’option <code>stringsAsFactors=TRUE</code> lors du chargement des données, or ces chiffres correspondent bien à des modalités d’une variable catégorielle, il faudra donc le corriger ultérieurement.</p>
+<p>Dernière remarque, si on avait eu des valeurs manquantes sur certaines variables, elles se seraient ici affichées avec la modalité <code>NA</code>, cela ne semble pas le cas, à vérifier par la suite. En revanche, on voit parfois des modalités “z” ou “zz”, il faudra vérifier ce qu’elles indiquent.</p>
+<section id="format-des-données---wide-ou-long" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="format-des-données---wide-ou-long"><span class="header-section-number">2.1</span> Format des données - WIDE ou LONG</h2>
+<p>La question du <strong>format de la table de données</strong> est importante, on distingue généralement le format <em>wide</em> du format <em>long</em> :</p>
+<ul>
+<li>le premier renvoie au cas où chaque ligne correspond a un et un seul individu (ou autre niveau de l’analyse : une entreprise, un ménage, un logement, etc.), et toutes les informations le concernant sont données en colonnes (ce qui peut augmenter rapidement le nombre de colonnes), c’est l’exemple d’une information que l’on a sur plusieurs années, chaque colonne correspondant à l’information de l’année en question ;</li>
+<li>le second, au contraire, multiplie les lignes pour un seul individu, mais il y a alors moins de colonnes, à partir du même exemple précédent, il y aura cette fois une colonne indiquant l’année et une colonne contenant l’information.</li>
+</ul>
+<p>Ici, chaque ligne correspond à un <strong>individu</strong> auquel est associé un <strong>logement</strong>, un <strong>ménage</strong> ou encore une <strong>famille</strong> ; on est bien dans un format <code>wide</code>. L’unité statistique de base est donc l’individu, mais on peut vouloir choisir de se mettre au niveau logement ou ménage ou famille, pour étudier les caractéristiques de ces unités. Autre exemple, on peut aussi considérer que notre niveau d’analyse est la commune, on verra alors qu’on dispose de plusieurs lignes par commune et si l’on veut garder quelques informations à ce niveau en n’ayant plus qu’une ligne par commune, il faudra sommer ces informations.</p>
+<p>Le package <code>tidyverse</code> contient deux fonctions qui permettent de passer d’un format à un autre : <code>pivot_longer()</code> et <code>pivot_wider()</code> présentés en détails <a href="https://tidyr.tidyverse.org/articles/pivot.html" target="_blank">ici</a>. Nous aurons l’occasion de les utiliser ultérieurement dans ce cours.</p>
+</section>
+<section id="sélectionner-un-champ-réduit-de-la-base-séparer-les-données" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sélectionner-un-champ-réduit-de-la-base-séparer-les-données"><span class="header-section-number">2.2</span> Sélectionner un champ réduit de la base, séparer les données</h2>
+<p>Manipuler une base de données, c’est aussi travailler ou créer une table réduite, surtout quand on a des données volumineuses comme ici : c’est donc choisir un champ particulier de la base.</p>
+<p>On peut par exemple choisir un champ géographique plus réduit au sein de l’Île-de-France, à partir de la commune : Paris et sa petite couronne.</p>
+<p>On peut aussi choisir de séparer les données en créant 2 tables selon l’unité statistique : l’individu ; ou le logement avec la seule personne de référence du ménage.</p>
+<p>Comme vous le savez très probablement, dans le langage <code>tidyverse</code>, pour faire des sélections sur les lignes ou observations dans une table de données, on utilise la fonction <code>filter()</code> ; pour faire des sélections sur les colonnes ou variables, on utilise la fonction <code>select()</code> ; pour supprimer des variables, on utilise également <code>select()</code> avec un “-” devant la (ou les) variable(s) à supprimer (dans le langage <code>R</code> de base, on peut aussi utiliser la fonction <code>subset()</code>).</p>
+<p><strong>EXERCICES</strong> :&nbsp; Créer trois nouvelles bases selon les indications suivantes :</p>
+<ul>
+<li>la première que vous nommerez “RP_Paris” et qui rassemblera les données pour le seul département de Paris ;</li>
+<li>la deuxième que nous nommerez “RP_indiv” et qui comprendra les données pour les seules variables décrivant l’individu (et ce sera celle de la personne de référence du ménage) ;</li>
+<li>la troisième que vous nommerez “RP_final”, qui rassemblera les données pour les départements de Paris et de sa petite couronne, et qui comprendra toutes les variables décrivant l’individu, le logement et enfin les variables géographiques.</li>
+</ul>
+<!-- Les premières lignes de ces trois tables devront ressembler à cela : -->
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>RP_Paris <span class="ot">&lt;-</span> RP <span class="sc">%&gt;%</span> <span class="fu">filter</span>(DEPT <span class="sc">==</span> <span class="st">"75"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>RP_indiv <span class="ot">&lt;-</span> RP <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">"AEMMR"</span>, <span class="st">"AGED"</span>, <span class="st">"AGER20"</span>, <span class="st">"AGEREV"</span>,<span class="st">"AGEREVQ"</span>,<span class="st">"ANAI"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"ANEMR"</span>,<span class="st">"APAF"</span>,<span class="st">"COUPLE"</span>,<span class="st">"CS1"</span>,<span class="st">"DIPL"</span>,<span class="st">"DNAI"</span>,<span class="st">"EMPL"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"ETUD"</span>,<span class="st">"ILETUD"</span>,<span class="st">"ILT"</span>,<span class="st">"IMMI"</span>,<span class="st">"INAI"</span>,<span class="st">"INATC"</span>,<span class="st">"IPONDI"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"IRAN"</span>,<span class="st">"LPRF"</span>,<span class="st">"LPRM"</span>,<span class="st">"MOCO"</span>,<span class="st">"MODV"</span>,<span class="st">"NA17"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"NA5"</span>,<span class="st">"NAIDT"</span>,<span class="st">"ORIDT"</span>,<span class="st">"RECH"</span>,<span class="st">"SEXE"</span>,<span class="st">"STAT_CONJ"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"STATR"</span>,<span class="st">"TACT"</span>,<span class="st">"TACTD16"</span>,<span class="st">"TP"</span>,<span class="st">"TRANS"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>RP_final  <span class="ot">&lt;-</span> RP <span class="sc">%&gt;%</span> <span class="fu">filter</span>(DEPT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"75"</span>,<span class="st">"92"</span>,<span class="st">"93"</span>,<span class="st">"94"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">"NUMMI"</span>,<span class="st">"INPERF"</span>,<span class="st">"DEROU"</span>,<span class="st">"LIENF"</span>,<span class="st">"INFAM"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"NE17FR"</span>,<span class="st">"INPER"</span>, <span class="st">"NE24FR"</span>,<span class="st">"NPERR"</span>,   <span class="st">"NE3FR"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"SFM"</span>,    <span class="st">"NE5FR"</span>, <span class="st">"TYPMC"</span>,   <span class="st">"NENFR"</span>,<span class="st">"TYPMR"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"NUMF"</span>,<span class="st">"VOIT"</span>,    <span class="st">"TYPFC"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>On va dorénavant travailler sur cette dernière table <code>RP_final</code>, on l’enregistre donc dans notre dossier “data”, ainsi que le fichier <code>meta</code> que nous avons modifié précédemments :</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Enregistrement des fichiers</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> RP_final , <span class="at">file =</span> <span class="st">"data/RP_final.Rdata"</span>) </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> meta, <span class="at">file =</span> <span class="st">"data/meta.Rdata"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-Base-de-donnees.html" class="pagination-link" aria-label="Récupération de la base de données">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Récupération de la base de données</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03-Manipulation-variables.html" class="pagination-link" aria-label="Manipulation des variables">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulation des variables</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

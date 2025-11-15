@@ -1,0 +1,68 @@
+{
+  "01-Base-de-donnees.qmd": {
+    "01-Base-de-donnees.html": "9ce2512b"
+  },
+  "index.md": {
+    "index.html": "08195fcd"
+  },
+  "00-Presentation.qmd": {
+    "00-Presentation.html": "073c66b5"
+  },
+  "02-Manipulation-base.qmd": {
+    "02-Manipulation-base.html": "d5621cc1"
+  },
+  "03-Manipulation-variables.qmd": {
+    "03-Manipulation-variables.html": "93572948"
+  },
+  "index.qmd": {
+    "index.html": "2c021db3"
+  },
+  "01-seance1.qmd": {
+    "01-seance1.html": "8d560527"
+  },
+  "02-seance2.qmd": {
+    "02-seance2.html": "6dfdb898"
+  },
+  "seance1.qmd": {
+    "seance1.html": "81ee8b9c"
+  },
+  "04-Récapitulatif.qmd": {
+    "04-Récapitulatif.html": "257eb6aa"
+  },
+  "05-seance2.qmd": {
+    "05-seance2.html": "28f8ae45"
+  },
+  "05-Questions-fouille-donnees.qmd": {
+    "05-Questions-fouille-donnees.html": "b34c200d"
+  },
+  "seance2.qmd": {
+    "seance2.html": "0ac5bc89"
+  },
+  "06-Fonctions.qmd": {
+    "06-Fonctions.html": "ee304cde"
+  },
+  "seance3.qmd": {
+    "seance3.html": "c602adbb"
+  },
+  "07-Ggplot-theorique.qmd": {
+    "07-Ggplot-theorique.html": "825f6f6d"
+  },
+  "08-Ggplot-pratique.qmd": {
+    "08-Ggplot-pratique.html": "8a33f30b"
+  },
+  "09-Intro-a-Shiny-theorique.qmd": {
+    "09-Intro-a-Shiny-theorique.html": "956a05f8"
+  },
+  "10-Intro-a-Shiny-exemples.qmd": {
+    "10-Intro-a-Shiny-exemples.html": "f54d3dc9"
+  },
+  "11-Clustering-theorique.qmd": {
+    "11-Clustering-theorique.html": "ee776e0e"
+  },
+  "12-Clustering-application.qmd": {
+    "12-Clustering-application.html": "90eefa72"
+  },
+  "13-Modeles-regression.qmd": {
+    "13-Modeles-regression.html": "3837800a"
+  }
+}
