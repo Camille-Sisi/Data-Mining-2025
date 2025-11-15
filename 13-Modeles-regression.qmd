@@ -1,0 +1,426 @@
+# Modèles de régression : application sur les offres de Pôle emploi 2020 {#sec-Modeles-regression}
+
+On cherche maintenant à expliquer un phénomène ou une variable par rapport à d'autres. On va ici s'intéresser au fait qu'une offre de Pôle emploi corresponde à un CDI ou non.\
+On va repartir de la base `OffresPE_2020` en réduisant le champ pour améliorer les temps de calcul, par exemple en ne s'intéressant qu'à Paris, puis en retravaillant un peu les variables avant de lancer les modèles de régression.
+
+## La création des bases d'apprentissage et de test
+
+On crée notre base de travail en ne prenant que les variables qui nous intéressent, dont certaines retravaillées avant (création de variables catégorielles plus pertinentes dans une régression logistique). La fonction `relevel()` permet d'indiquer la modalité de référence que l'on veut dans les régressions futures, ici pour la régression logistique.
+
+```{r warning=FALSE, message=FALSE}
+library(fancycut)
+library(janitor)
+library(tidyverse)
+
+OffresPE_2020 <- readRDS("data/OffresPE_2020.Rdata") 
+
+OffresPE_2020$salary_cat <- fancycut(OffresPE_2020$salary_hourly_mean,
+                                    "Entre 0 et moins que le SMIC (10€)" = "(0, 10]",
+                                    "Entre le SMIC et le Q1(11,6€)" = "(10, 11.6]", 
+                                    "Entre le Q1 et la moyenne (20,1€)" = "(11.6, 20.1]",
+                                    "Entre la moyenne et le D9 observée en France(15€)" = "(20.1, 28]",
+                                    "Entre le D9 et le maximum (40200€)" = "(28, 40200)",
+                                    na.bucket = "Manquant")
+OffresPE_2020 %>%  tabyl(salary_cat) %>% adorn_pct_formatting()
+
+OffresPE_reg <- OffresPE_2020 %>% 
+  filter(location_departement=="75") %>% 
+  mutate(mois_publication=months(date_sitePublicationDay, abbreviate = T),
+         mois_publication= factor(mois_publication,
+                                  levels = c("janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", 
+                                             "août", "sept.", "oct.", "nov.", "déc.")),
+         secteurs=as.factor(case_when(entrepriseSecteur_NAF21 %in% c("C", "D", "E") ~ "Industrie",
+                                      entrepriseSecteur_NAF21 =="F" ~ "Construction",
+                                      entrepriseSecteur_NAF21 =="G" ~ "Commerce",
+                                      entrepriseSecteur_NAF21 =="H" ~ "Transports",
+                                      entrepriseSecteur_NAF21 =="I" ~ "Hébergement/restauration",
+                                      entrepriseSecteur_NAF21 =="J" ~ "Info/com",
+                                      entrepriseSecteur_NAF21 %in% c("K", "L") ~ "Activités fi et immo",
+                                      entrepriseSecteur_NAF21 =="M" ~ "Activités spé, scientifiques et techniques",
+                                      entrepriseSecteur_NAF21 =="N" ~ "Activités services administratifs et soutien",
+                                      entrepriseSecteur_NAF21 =="O" ~ "Administration publique",
+                                      entrepriseSecteur_NAF21 =="P" ~ "Enseignement",
+                                      entrepriseSecteur_NAF21 =="Q" ~ "Santé humaine et action sociale",
+                                      entrepriseSecteur_NAF21 =="R" ~ "Arts, spectacles et activités récréatives",
+                                      entrepriseSecteur_NAF21 =="S" ~ "Autres activités de service",
+                                      entrepriseSecteur_NAF21 =="T" ~ "Activités des ménages en tant qu'employeurs",
+                                      TRUE ~ "Manquant ou U")),
+         CDI = as.factor(case_when(contractType == "CDI" ~  "Oui",
+                                 TRUE ~ "Non")),
+         salary_cat=relevel(salary_cat, ref="Entre le D9 et le maximum (40200€)"),
+         secteurs=relevel(secteurs, ref="Construction")) %>% 
+  select(mois_publication, salary_cat, CDI, secteurs)
+```
+
+De manière traditionnelle, dans les modèles de prédiction ou *machine learning*, on n'applique pas le modèle sur l'ensemble de la base de données mais d'abord sur un échantillon dit d'apprentissage puis on le "teste" sur l'échantillon restant. On va donc ici suivre ce schéma et diviser notre base de données en deux pour avoir un échantillon d'apprentissage ou d'entraînement, et un autre test.\
+\
+On utilise pour cela la fonction `sample` (mais d'autres fonctions existent) en lui spécifiant la façon de diviser la base avec l'argument `prob=` : ici on choisit de diviser notre base selon un rapport 70% *vs* 30%, autrement dit notre base d'apprentissage comprendra 70% des données de la base initiale, alors que la base de test comprendra les 30% restants. On pourrait procéder à un rapport du type 80% *vs* 20%, ou 75% *vs* 25%, etc.
+
+```{r}
+# On choisit la façon de diviser notre base et on l'applique en créant 2 bases
+sample <- sample(c(TRUE, FALSE), nrow(OffresPE_reg), replace=TRUE, prob=c(0.70,0.3))
+OffresPE_train <- OffresPE_reg[sample, ]
+OffresPE_test  <- OffresPE_reg[!sample, ]
+
+# On regarde quelle est la taille de nos deux bases
+dim(OffresPE_train)
+dim(OffresPE_test)
+
+# On vérifie que les proportions de notre variable d'intérêt sont assez proches
+# entre les deux bases
+library(gt)
+OffresPE_train %>% tabyl(CDI) %>% adorn_pct_formatting() %>% 
+  adorn_totals("row") %>% gt()
+OffresPE_test %>% tabyl(CDI) %>% adorn_pct_formatting() %>% 
+  adorn_totals("row") %>% gt()
+```
+
+Les deux bases présentent une répartition CDI/pas CDI très proche : dans le 75, environ 78% des offres d'emploi émises sur le site de Pôle emploi sont en CDI.
+
+## Un modèle à visée principale explicative : la régression logistique
+
+La fonction `glm` du package **`stats`** (à installer avant appel dans la librarie) est principalement utilisée pour modéliser différents types de régression : l'argument `family=binomial("logit")` permet d'utiliser un modèle logit.
+
+```{r}
+# install.packages("stats")
+library(stats)
+```
+
+### Le modèle initial
+
+On crée le modèle en spécifiant la variable d'intérêt puis les variables explicatives ou l'ensemble des variables présentes dans la base si nous avons déjà procédé à une sélection des variables : c'est le cas ici donc c'est pour cela que l'on indique juste un "." après le "\~", sinon on devrait écrire les variables une par une, ou les sctoker dans une liste et appeler la liste.
+
+Même si ce type modèle doit permettre essentiellement d'expliquer un phénomène, ici qu'une offre d'emploi soit en CDI ou non, on peut l'utiliser aussi pour prédire les données. C'est pourquoi nous appliquons d'abord le logit sur la base (réduite) d'apprentissage.
+
+```{r}
+logit_1 <- glm (CDI ~ ., 
+                data=OffresPE_train, 
+                family = binomial("logit"))
+summary(logit_1)
+```
+
+Certaines modalités des variables ne sont pas significatives (voir les étoiles), mais la grande majorité le sont.
+
+<!--On peut ensuite évaluer la significativité globale du modèle, : -->
+
+```{r eval=FALSE, include=FALSE}
+chi2 <- logit_1$null.deviance - logit_1$deviance
+ddl <- logit_1$df.null - logit_1$df.residual
+pvalue <- pchisq(chi2, ddl, lower.tail = F)
+chi2
+ddl
+pvalue
+```
+
+On va donc l'appliquer maintenant à la base test, en créant des indicateurs mesurant le taux de prédiction ou au contraire d'erreur.
+
+Le modèle `predict` permet d'abord d'abord de calculer la probabilité qu'une offre d'emploi soit en CDI pour chaque offre, l'argument `type="response"` permettant d'appliquer le modèle logistique. Il est plus intéressant d'avoir la probabilité d'une variable de type qualitative, "oui"/"non" comme la variable d'intérêt du modèle, il faut donc procéder à une transformation aboutissant à une nouvelle variable (on considère alors que si la probabilité est strictement supérieure à 0.50 alors cela équivaut à une modalité "oui"). Enfin, on crée une matrice de confusion qui est en réalité un tableau croisé entre les valeurs observées et les prédicitions du modèle ; et on calcule un taux d'erreur en rapportant la somme des éléments hors diagonale principale à la somme des observations totales (de la matrice donc).
+
+```{r}
+# Modèle de prédiction pour récupérer les probabilités individuelles d'être en couple
+pred.proba <- predict(logit_1, newdata = OffresPE_test, type="response")
+
+# On transforme les probas en variable qualitative
+pred.moda <- factor(case_when(pred.proba>0.5 ~ "oui", TRUE ~ "non"))
+
+# On crée la matrice de confusion
+matrice_conf <- table(OffresPE_test$CDI, pred.moda)
+matrice_conf
+
+# On calcule le taux d'erreur
+tx_erreur <- (matrice_conf[2,1]+matrice_conf[1,2])/sum(matrice_conf)
+tx_erreur * 100
+```
+
+On voit que parmi la modalité observée "Oui" de la base de données, le modèle prédit environ 39 000 oui soit 96% de cette modalité, c'est la grande majorité ; la prédiction est moins bonne si on regarde la modalité "Non", puisque environ 4 500 observations, soit 39% de cette modalité, se retrouvent bien en "non". Le taux d'erreur de 16,3% montre bien néanmoins que le modèle prédit plutôt bien.\
+\
+
+Une autre façon de faire est d'ajouter, après les deux premières étapes réécrites ici, la variable de prédiction à la table initiale et de créer une nouvelle variable qui indique si on a bien une correspondance entre les modalités des deux variables : l'initiale et celle prédite. Cela nous donne donc le taux d'erreur calculé au-dessus, on retrouve bien 16,3% de correspondances inexactes.
+
+```{r}
+# Modèle de prédiction pour récupérer les probabilités individuelles d'être en couple
+#pred.proba <- predict(logit_1, newdata = OffresPE_test, type="response")
+
+# On transforme les probas en variable qualitative
+#pred.moda <- factor(case_when(pred.proba>0.5 ~ "oui", TRUE ~ "non"))
+
+# On ajoute la variable de prédiction dans la table test initiale
+OffresPE_test_bis <- cbind.data.frame(OffresPE_test, var_predict=pred.moda)
+# et on créer une variable indiquant ou non la correspondance entre
+# les modalités des deux variables
+OffresPE_test_bis %>% 
+  mutate(predict_OK=as.factor(case_when(CDI=="Oui" & var_predict=="oui" ~ "oui", 
+                                        CDI=="Non" & var_predict=="non" ~ "oui",
+                                        TRUE ~ "non"))) %>% 
+  tabyl(predict_OK) %>% adorn_pct_formatting() %>% adorn_totals("row")
+
+# On supprime la table créée en test
+rm(OffresPE_test_bis)
+```
+
+### L'évaluation du modèle et la recherche éventuelle d'un "meilleur" modèle
+
+On peut améliorer le modèle en recherchant celui qui est le "meilleur" en faisant une sélection sur les variables, plus précisément en demandant au modèle de choisir les variables les plus explicatives, car peut-être que certaines ne sont pas nécessaires à l'explication du modèle (dans notre cas, nous avons néanmoins vu que toutes les variables étaient significatives donc a priori utiles dans le modèle).
+
+Pour une sélection "pas à pas", il faut utiliser le package **`MASS`** et la fonction `stepAIC` car c'est à travers le critère AIC ("Akaike Information Criterion",) que le modèle va chercher à être "meilleur" : plus il sera faible, meilleur il sera. On va d'abord faire cette sélection de façon "descendante" c'est-à-dire en partant du modèle initial "logit_1" ici : on part du modèle avec l'ensemble des variables et on en supprime une au fur et à mesure pour voir si le modèle est "meilleur".
+
+```{r warning=FALSE, message=FALSE}
+# install.packages("MASS)
+library(MASS)
+logit_backward <- stepAIC(logit_1, 
+                          scope=list(lower="CDI ~ 1", 
+                          upper="CDI ~ mois_publication + secteurs + salary_cat"),
+                          direction="backward")
+logit_backward
+```
+
+La sortie n'affiche que le "meilleur" modèle, et c'est donc bien celui qu'on avait mis avec l'ensemble des variables.
+
+Pour une sélection des variables de façon "ascendante", en partant d'un modèle sans variable puis on ajoute une à une les variables. On utilise la même fonction mais en changeant les paramètres et en créant un modèle "vide" avant :
+
+```{r}
+logit_0 <- glm(CDI ~ 1, data=OffresPE_train, family=binomial("logit"))
+logit_forward <- stepAIC(logit_0, 
+                         scope=list(lower="CDI ~ 1", 
+                         upper="CDI ~ mois_publication + secteurs + salary_cat"),
+                         direction="forward")
+logit_forward
+```
+
+Le taux d'AIC diminue à chaque variable ajoutée donc le meilleur modèle est bien celui avec l'ensemble des variables explicatives mises dans le modèle initial.
+
+```{r eval=FALSE, include=FALSE}
+# Autre façon de tester le modèle avec la fonction drop1:
+drop1(logit_1, test="Chisq")
+```
+
+### Le modèle final et l'interprétation des résultats
+
+Finalement, dans une visée plus explicative que prédictive, on peut estimer notre modèle sur l'ensemble de la base et étudier plus précisément les résultats avec les *odds-ratios* ou rapports des côtes par exemple pour commenter plus directement les coefficients. Ces *odds-ratios* correspondent à l’exponentiel des coefficients initiaux de la régression. Ils se lisent par rapport à 1 : il est égale à 1 si les deux côtes sont identiques donc s'il n'y a pas de différence de probabilité d'être en couple selon qu'on est une femme ou un homme, il est supérieur à 1 si ici la femme a une probabilité supérieure à celle de l'homme d'être en couple, et il est inférieur à 1 si la femme a une probabilité inférieure à celle de l'homme d'être en couple.
+
+```{r warning=FALSE, message=FALSE}
+logit_VF <- glm (CDI ~ mois_publication + secteurs + salary_cat,
+                 data=OffresPE_reg, 
+                 family = binomial("logit"))
+summary(logit_VF)
+```
+
+```{r message=FALSE, warning=FALSE}
+# Résumé des résultats sous forme de tableau avec les odds-ratio
+# avec la librairie "questionr" d'abord
+#install.packages(questionr)
+library(questionr)
+odds.ratio(logit_VF)
+```
+
+<!-- ![ ](images/Graphique_Odds-ratio.png) -->
+
+```{r warning=FALSE, message=FALSE}
+# puis avec la librarie "forestmodel" pour avoir un meilleur rendu
+#install.packages("forestmodel")
+library(forestmodel)
+forest_model(logit_VF, 
+             format_options = forest_model_format_options(point_size=2)) +
+  theme(axis.text.x = element_text(size=7, face="bold"))
+```
+
+<!-- ![ ](images/Graphique_Forest_model.png) -->
+
+```{r message=FALSE, warning=FALSE}
+# ou encore avec "gt_summary" pour avoir un autre rendu
+library(gtsummary)
+theme_gtsummary_language("fr", decimal.mark = ",", big.mark=" ")
+logit_VF %>% 
+  tbl_regression(exponentiate = TRUE) %>% 
+  add_global_p(keep=TRUE) %>% 
+  modify_header(label ~ "**Variable**") %>% 
+  modify_caption("**Tableau de résultats. Variables expliquant le fait qu'une offre d'emploi soit en CDI dans le 75**")
+```
+
+On privilégiera plutôt les deux derniers types de tableaux : ainsi, on note que la probabilité qu'une offre d'emploi soit en CDI est 1,24 fois plus élevée si l'emploi est dans le secteur de l'hébergement/restauration et 2,67 fois plus élevée dans le secteur de l'information/communication. Concernant le salaire, par rapport à la référence "Entre le D9 et le maximum (40200€)", si l'offre d'emploi se situe dans une tranche de salaire plus faible, alors la probabilité que cette offre soit en CDI est plus faible, de 0,05 fois à 0,55 fois, soit une baisse de 45% `((1-0,55)*100)` à 95% `((1-0,05)*100)`. Par rapport au mois de janvier, là aussi, la probabilité qu'une offre d'emploi soit en CDI est plus faible pour tous les autres mois sauf novembre, les odds-ratio étant toujours inférieurs à 1.
+
+On peut aussi vouloir visualiser ces résultats, on peut pour cela utiliser la librarie **`GGally`** et la fonction `ggcoef_model()`.
+
+```{R message=FALSE}
+# Résumé des résultats sous forme graphqiue
+library(GGally)
+ggcoef_model(logit_VF, exponentiate = TRUE) +
+  ggtitle("Variables expliquant le fait \nqu'une offre d'emploi soit en \nCDI dans le 75")+
+  theme(plot.title = element_text(size=10))
+```
+
+C'est peut-être le meilleur rendu...
+
+## Un modèle à visée principale prédictive : l'abre de décision
+
+On va procéder à la même analyse en cherchant, cette fois, à prédire si une offre d'emploi sera en CDI ou non à partir des variables sélectionnées précédemment.\
+On repart donc des deux tables créées et on va utiliser un modèle dit d'apprentissage supervisé, l'abre de décision. Sa construction repose sur un partitionnement récursif des observations qui se fait à partir de noeuds coupés, ces coupures pourront répondre à des règles et des conditions à spécifier ou faire varier pour avoir un meilleur modèle.\
+Ici on va utiliser un arbre de classification puisque notre variable est qualitative (binaire).
+
+C'est le package **`rpart`** qui est spécialisé dans les modèles d'arbres de décision, à installer donc d'abord puis à appeler dans la librairie ; le package **`rpart.plot`** permet, lui, d'avoir un arbre plus esthétique et informatif.
+
+```{r warning=FALSE, message=FALSE}
+# install.packages("rpart")
+# install.packages("rpart.plot")
+library(rpart)
+library(rpart.plot)
+```
+
+### Le modèle initial
+
+La spécification du modèle est assez simple, on précise la variable d'intérêt, les éventuelles variables explicatives ou toutes celles qui sont dans la table avec le `.` (comme précédemment pour le modèle logit), la base de données sur laquelle appliquer le modèle, et dans l'argument `method=` on spécifie le type de modèle, soit "class" pour une variable d'intérêt qualitative ou binaire, soit "anova" pour une variable d'intérêt quantitative ou continue.
+
+On va d'abord appliquer le modèle sur notre échantillon d'apprentissage ou d'entraînement :
+
+```{r}
+arbre_1 <- rpart(CDI ~ ., 
+                 data=OffresPE_train, 
+                 method="class")
+arbre_1
+```
+
+Le modèle nous donne d'abord les résultats en format texte, ce sont des indications sur les différentes "noeuds" puis "branches" de l'arbre, etc. : "node" pour noeud et son numéro, "split" pour la condition de coupure/le critère de décision, "n" pour le nombre total d'observations dans un noeud, "loss" le nombre d'observations qui n'appartient pas à la modalité prédite, "yval" la modalité prédite pour les individus présents à l'étape du noeud, et "yprob" la proportion d'observations pour les individus présents à l'étape du noeud qui prend la valeur prédite en seconde position. Le petit astérix "\*" précise que le noeud est une feuille ("terminal").
+
+Par exemple, ici le premier noeud indiqué "root" représente l'ensemble de l'échantillon (c'est la "racine" de l'arbre), soit environ 123 000 observations, et comme la modalité prédite est "Oui", il y a 78% d'offres d'emploi qui sont en CDI, contre 22% qui le sont pas soit environ 27 000 observations (celles qu'on perd à cette étape donc). La première variable discriminante est le secteur d'activité : celles qui se situent dans les secteurs "Activités des ménages en tant qu'employeurs", ou "Activités services administratifs et soutien", ou "Administration publique", ou "Arts, spectacles et activités récréatives", ou encore "Enseignement" forment une première branche et un groupe d'offres qui ne sont pas en CDI, alors que les secteurs de la "Construction", ou des "Activités fi et immo", ou des "Activités spé, scientifiques et techniques", ou des "Autres activités de service", ou du "Commerce", ou de l'"Hébergement/restauration", ou de l'"Industrie", ou de l'"Info/com", ou "manquant ou U", ou de la "Santé humaine et action sociale", et enfin des "Transports" forment l'autre branche et un groupe d'offres en CDI. Ensuite, pour le premier groupe de secteurs, une autre division se forme selon le niveau de salaire : si l'offre propose un salaire "Entre 0 et moins que le SMIC (10€)" ou est manquant un autre groupe va se former qui ne sera pas en CDI, alors que si l'offre propose un salaire au-dessus du SMIC alors l'offre sera en CDI, ce dernier groupe se divisera lui-même encore en deux groupes selon d'autres modalités du salaire.
+
+On peut regarder quelles sont les variables les plus importantes dans le modèle par ordre :
+
+```{r}
+arbre_1$variable.importance
+```
+
+Le secteur d'activité est la variable la plus discriminante, comme on l'avait supposé puisque c'était la première variable qui divisait notre échantillon, ensuite vient le niveau de salaire et enfin le mois de publication de l'offre.\
+\
+
+On va mieux étudier cela avec le résultat visuel.\
+Pour avoir ainsi graphiquement l'arbre, il faut appeler la fonction `rpart.plot()` du même package, l'argument "extra" permettant de préciser le type de modèle : "106" pour des modèles en classes avec une variable qualitative et binaire, "104" pour des modèles en classes mais avec une variable d'intérêt qualitative avec plus de 2 modalités, et "100" pour les autres modèles.
+
+```{r message=FALSE, warning=FALSE}
+# On dessine l'arbre
+rpart.plot(arbre_1, extra=106,
+           faclen = 8,  # abrège les modalités de variables
+           cex = 0.75)  # permet de réduire la taille du texte
+
+# ou avec la librarie `rattle`
+#install.packages("rattle")
+library(rattle)
+fancyRpartPlot(arbre_1) 
+```
+
+Au sommet de l'arbre on a donc la racine (qui est le 1er noeud), puis il se divise en 2 branches pour aboutir à deux autres noeuds, etc.\
+On voit donc que la branche partant sur la gauche, c'est le cas où la variable de secteurs est égale aux modalités "Activités des ménages en tant qu'employeurs", ou "Activités services administratifs et soutien", ou "Administration publique", ou "Arts, spectacles et activités récréatives", ou "Enseignement" (on voit un "yes" qui est encadré ; ça sera le cas à chaque fois même si ce n'est pas de nouveau inscrit, autrement dit la branche partant sur la gauche sera la modalité "oui" de la variable).\
+Il y a chaque fois 3 données indiquées :
+
+-   d'abord, la modalité prédite par le modèle lorsqu'on est dans le groupe considéré, par exemple pour la feuille terminale à droite, donc pour les autres secteurs d'activité que ceux indiqués, la modalité prédite sera le "oui" donc une offre en CDI, on pourra vérifier dans les données en récupérant la modalité prédite pour chaque observation, c'est-à-dire pour toutes les offres se situant dans ces secteurs, la modalité prédite est bien "oui" ;
+-   ensuite, parmi les offres de ce groupe, 85% sont en CDI, ;
+-   et enfin, ces secteurs représentent 87% de la population (de notre base d'apprentissage).\
+    Autrement dit, 87% des offres se situent dans ces secteurs avec une probabilité d'être en CDI de 85%.
+
+L'autre branche indique les offres qui prennent les modalités "Activités des ménages en tant qu'employeurs", ou "Activités services administratifs et soutien", ou "Administration publique", ou "Arts, spectacles et activités récréatives", ou encore "Enseignement" de la variable de secteurs, elles représentent 13% de la base et la probabilité prédite qu'elles soient en CDI sera de 32%.\
+Tout en bas, se trouvent les feuilles de l'arbre, c'est lorsqu'il n'y a plus aucune branche qui part du noeud en question.
+
+Ainsi, 5% de la base (d'apprentissage) représentent des offres d'emploi des secteurs "Activités des ménages en tant qu'employeurs", ou "Activités services administratifs et soutien", ou "Administration publique", ou "Arts, spectacles et activités récréatives", ou encore "Enseignement", avec des niveaux de salaire "Entre le SMIC et le Q1(11,6€)" ou "Entre le Q1 et la moyenne (20,1€)", qui ont une probabilité de 42% d'être en CDI.
+
+### L'évaluation du modèle
+
+De la même façon que précédemment, on peut vérifier la bonne (ou non) prédiction du modèle en l'appliquant sur l'échantillon dit test, puis en comparant les proportions prédites avec celles effectivement observées dans la base dans la matrice de confusion et enfin en calculant un taux de concordance ou au contraire un taux d'erreur à partir de cette une matrice de confusion :
+
+```{r}
+# Modèle appliqué sur l'échantillon test
+predict_test <- predict(arbre_1, OffresPE_test, type="class")
+
+# Comparaison des résultats - Matrice de confusion
+mat_confusion <- table(OffresPE_test$CDI, predict_test)
+mat_confusion
+
+# Taux de concordance : rapport entre la somme des éléments 
+# de la diagonale principale et la somme des observations 
+# totales (soit de la matrice)
+tx_concordance <- sum(diag(mat_confusion) / sum(mat_confusion))
+tx_concordance * 100
+# Taux d'erreur
+tx_erreur <- (mat_confusion[2,1] + mat_confusion[1, 2]) / sum(mat_confusion)
+tx_erreur * 100
+```
+
+On peut regarder aussi ce que cela donne sur la base d'apprentissage.
+
+```{r}
+predict_train <- predict(arbre_1, OffresPE_train, type="class")
+mat_confusion_1 <- table(OffresPE_train$CDI, predict_train)
+mat_confusion_1
+tx_erreur_1 <- (mat_confusion_1[2,1] + mat_confusion_1[1, 2]) / sum(mat_confusion_1)
+tx_erreur_1 * 100
+```
+
+Dans les deux cas, les taux d'erreur sont relativement faible, d'environ 16%. Le modèle ne prédit pas trop mal. On peut noter qu'on a pratiquement le même taux d'erreur que le modèle logit réalisé précédemment...
+
+Vérifions si nous pouvons l'améliorer en modifiant les paramètres de construction de l'arbre, c'est-à-dire en jouant sur les conditions de coupure d'un noeud et sur les règles d'arrêt de ces coupures. On l'effectue avec la fonction `rpart.control()` avec les arguments suivants (règles d'arrêt principalement) : `minsplit=` donne le nombre minimum d'observations (individus) présentes à l'étape d'un noeud pour envisager une coupure ; `minbucket=` qui donne le nombre minimum d'observations/individus présentes à l'étape d'un noeud qu'engendrerait la coupure du noeud parent ; `maxdepth` qui donne la profondeur de l'arbre ; et `cp=` qui est un paramètre de complexité (plus il est petit, plus grand est l'arbre de régression).
+
+```{r}
+# Définition des règles de décision
+ajust_param <- rpart.control(minsplit = 50, minbucket = 50, maxdepth = 10, cp=0)
+
+# Ajustement du modèle en indiquant le paramètre "control"
+arbre_2 <- rpart(CDI ~ mois_publication + secteurs + salary_cat, 
+                 data=OffresPE_train, method="class", 
+                 control = ajust_param)
+
+# On étudie de nouveau la matrice de confusion et 
+# le taux d'erreur associé au nouveau modèle sur la base test
+predict_test_1 <- predict(arbre_2, OffresPE_test, type="class")
+mat_confusion_ajust <- table(OffresPE_test$CDI, predict_test_1)
+mat_confusion_ajust
+tx_erreur_1 <- (mat_confusion_ajust[2,1] + mat_confusion_ajust[1, 2]) / sum(mat_confusion_ajust) *100
+tx_erreur_1
+```
+
+On peut l'appliquer de même à l'échantillon d'apprentissage :
+
+```{r}
+# Modèle appliqué sur l'échantillon test
+predict_train <- predict(arbre_2, OffresPE_train, type="class")
+
+# Comparaison des résultats - Matrice de confusion
+mat_confusion_ajust1 <- table(OffresPE_train$CDI, predict_train)
+mat_confusion_ajust1
+
+# Taux d'erreur
+tx_erreur_2 <- (mat_confusion_ajust1[2,1] + mat_confusion_ajust1[1, 2]) / sum(mat_confusion_ajust1)* 100
+tx_erreur_2 
+```
+
+Le taux d'erreur est un peu plus faible, la différence est légère, mais c'est toujours ça de pris !
+
+L'arbre correspondant est le suivant:
+
+```{r}
+rpart.plot(arbre_2, extra=106)
+```
+
+On voit qu'il n'est absolument pas lisible car plus profond, mais il prédit mieux (mais peut-être trop bien - cf. risque de surapprentissage en *matching learning*).
+
+````{=html}
+<!--Enfin, on peut chercher à minimiser l'erreur de prédiction de l'arbre afin de définir le niveau d'élagage optimal permettant ensuite de simplifier l'arbre.
+``` {R}
+# 2 fonctions liées à l'argument "cp=" de notre modèle
+printcp(arbre_1)
+plotcp(arbre_1)
+
+```
+Ici il faut donc indiquer la valeur 0.010 dans l'argument `cp=` pour minimiser l'erreur relative, c'est notre nouvelle règle d'arrêt. On va par conséquent reconstruire l'abre à partir de la fonction `prune()` en indiquant cette valeur optimale pour l'élaguer :  
+```{r}
+min(arbre_1$cptable[, "xerror"]) + (1*arbre_1$cptable[ which.min(arbre_1$cptable[, "xerror"]), "xstd"])
+opt <- which.min(arbre_1$cptable[, "xerror"])
+opt
+cp <- arbre_1$cptable[opt, "CP"]
+
+arbre_VF <- prune(arbre_1, cp=cp)
+rpart.plot(arbre_VF)
+```
+Cela ne change en réalité rien ici ! -->
+````
+
+Vous pouvez réitérer l'exercice en introduisant d'autres variables dans l'analyse, en changeant la variable cible, etc.
+
+Pour aller plus loin, on utilise maintenant beaucoup en analyse prédictive les forêts d'arbre de décision, qui constituent comme son nom l'indique, un ensemble d'arbres de régression, ce qui permet d'avoir un taux d'erreur global moindre, car la principale critique de l'arbre de décision est son potentiel d'erreur.

@@ -1,6 +1,6 @@
 # Systématiser nos procédures : construire une fonction {#sec-Fonctions}
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE}
 # Chargement des librairies
 library(tidyverse)
 library(gt)

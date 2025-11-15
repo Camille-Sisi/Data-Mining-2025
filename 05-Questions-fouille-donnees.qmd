@@ -18,10 +18,6 @@ Pour manipuler cette base et répondre à quelques-unes de ces questions, nous a
 
 Avant cela, si les tables de données ("RP_final" et "meta") ne sont plus dans votre environnement local, il faut de nouveau les importer à partir de l'enregistrement précédemment effectué dans le dossier 'data' de votre projet. Pour cela, il faut utiliser la fonction `readRDS()`, comme ci-dessous :
 
-```{r eval=FALSE, include=FALSE}
-RP_final <- readRDS(file = "data/RP_final.Rdata")
-meta <- readRDS(file = "data/meta.Rdata")
-```
 
 ## Caractéristiques de la population résidant à Paris
 
@@ -31,7 +27,7 @@ Comme déjà vu lors de la 1ère séance, l'application de la pondération pour 
 
 A partir de ces indications, afficher le tableau suivant à partir d'un code utilisant le langage **tidyverse** et en une seule procédure (sans créer de table dans votre environnement) :
 
-```{r echo=FALSE, warning=FALSE}
+```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(janitor)
 library(gt)

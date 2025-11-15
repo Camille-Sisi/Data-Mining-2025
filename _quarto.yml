@@ -37,6 +37,9 @@ book:
       chapters: 
       - 11-Clustering-theorique.qmd
       - 12-Clustering-application.qmd
+    - part: "Séance 7"
+      chapters: 
+      - 13-Modeles-regression.qmd
 
 format:
   bookup-html:

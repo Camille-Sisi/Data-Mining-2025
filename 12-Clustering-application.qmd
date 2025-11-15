@@ -86,7 +86,7 @@ On va rajouter le nom des communes comme identifiant dans le tableau, c'est-à-d
 
 ```{r Row_names}
 cat_soc <- cat_soc %>% column_to_rownames(var = "COM")
-cat_soc
+cat_soc %>% head(10)
 ```
 
 ## La méthode de la CAH appliquée à nos données
