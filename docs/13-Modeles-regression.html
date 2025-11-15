@@ -581,11 +581,11 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># On regarde quelle est la taille de nos deux bases</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(OffresPE_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 123008      4</code></pre>
+<pre><code>[1] 123001      4</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(OffresPE_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 52769     4</code></pre>
+<pre><code>[1] 52776     4</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On vérifie que les proportions de notre variable d'intérêt sont assez proches</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># entre les deux bases</span></span>
@@ -593,23 +593,23 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>OffresPE_train <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(CDI) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="trrwbagxph" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#trrwbagxph table {
+<div id="uhzaygecqx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uhzaygecqx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#trrwbagxph thead, #trrwbagxph tbody, #trrwbagxph tfoot, #trrwbagxph tr, #trrwbagxph td, #trrwbagxph th {
+#uhzaygecqx thead, #uhzaygecqx tbody, #uhzaygecqx tfoot, #uhzaygecqx tr, #uhzaygecqx td, #uhzaygecqx th {
   border-style: none;
 }
 
-#trrwbagxph p {
+#uhzaygecqx p {
   margin: 0;
   padding: 0;
 }
 
-#trrwbagxph .gt_table {
+#uhzaygecqx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -635,12 +635,12 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-left-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_caption {
+#uhzaygecqx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#trrwbagxph .gt_title {
+#uhzaygecqx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -652,7 +652,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-bottom-width: 0;
 }
 
-#trrwbagxph .gt_subtitle {
+#uhzaygecqx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -664,7 +664,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-top-width: 0;
 }
 
-#trrwbagxph .gt_heading {
+#uhzaygecqx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -676,13 +676,13 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-right-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_bottom_border {
+#uhzaygecqx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_col_headings {
+#uhzaygecqx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -697,7 +697,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-right-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_col_heading {
+#uhzaygecqx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -717,7 +717,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   overflow-x: hidden;
 }
 
-#trrwbagxph .gt_column_spanner_outer {
+#uhzaygecqx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -729,15 +729,15 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 4px;
 }
 
-#trrwbagxph .gt_column_spanner_outer:first-child {
+#uhzaygecqx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#trrwbagxph .gt_column_spanner_outer:last-child {
+#uhzaygecqx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#trrwbagxph .gt_column_spanner {
+#uhzaygecqx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -749,11 +749,11 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   width: 100%;
 }
 
-#trrwbagxph .gt_spanner_row {
+#uhzaygecqx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#trrwbagxph .gt_group_heading {
+#uhzaygecqx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -779,7 +779,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   text-align: left;
 }
 
-#trrwbagxph .gt_empty_group_heading {
+#uhzaygecqx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -794,15 +794,15 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   vertical-align: middle;
 }
 
-#trrwbagxph .gt_from_md > :first-child {
+#uhzaygecqx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#trrwbagxph .gt_from_md > :last-child {
+#uhzaygecqx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#trrwbagxph .gt_row {
+#uhzaygecqx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -821,7 +821,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   overflow-x: hidden;
 }
 
-#trrwbagxph .gt_stub {
+#uhzaygecqx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -834,7 +834,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 5px;
 }
 
-#trrwbagxph .gt_stub_row_group {
+#uhzaygecqx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -848,15 +848,15 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   vertical-align: top;
 }
 
-#trrwbagxph .gt_row_group_first td {
+#uhzaygecqx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#trrwbagxph .gt_row_group_first th {
+#uhzaygecqx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#trrwbagxph .gt_summary_row {
+#uhzaygecqx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -866,16 +866,16 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 5px;
 }
 
-#trrwbagxph .gt_first_summary_row {
+#uhzaygecqx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_first_summary_row.thick {
+#uhzaygecqx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#trrwbagxph .gt_last_summary_row {
+#uhzaygecqx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -885,7 +885,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-bottom-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_grand_summary_row {
+#uhzaygecqx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -895,7 +895,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 5px;
 }
 
-#trrwbagxph .gt_first_grand_summary_row {
+#uhzaygecqx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -905,7 +905,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-top-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_last_grand_summary_row_top {
+#uhzaygecqx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -915,11 +915,11 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-bottom-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_striped {
+#uhzaygecqx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#trrwbagxph .gt_table_body {
+#uhzaygecqx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -928,7 +928,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-bottom-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_footnotes {
+#uhzaygecqx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -942,7 +942,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-right-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_footnote {
+#uhzaygecqx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -951,7 +951,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 5px;
 }
 
-#trrwbagxph .gt_sourcenotes {
+#uhzaygecqx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -965,7 +965,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-right-color: #D3D3D3;
 }
 
-#trrwbagxph .gt_sourcenote {
+#uhzaygecqx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -973,72 +973,72 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 5px;
 }
 
-#trrwbagxph .gt_left {
+#uhzaygecqx .gt_left {
   text-align: left;
 }
 
-#trrwbagxph .gt_center {
+#uhzaygecqx .gt_center {
   text-align: center;
 }
 
-#trrwbagxph .gt_right {
+#uhzaygecqx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#trrwbagxph .gt_font_normal {
+#uhzaygecqx .gt_font_normal {
   font-weight: normal;
 }
 
-#trrwbagxph .gt_font_bold {
+#uhzaygecqx .gt_font_bold {
   font-weight: bold;
 }
 
-#trrwbagxph .gt_font_italic {
+#uhzaygecqx .gt_font_italic {
   font-style: italic;
 }
 
-#trrwbagxph .gt_super {
+#uhzaygecqx .gt_super {
   font-size: 65%;
 }
 
-#trrwbagxph .gt_footnote_marks {
+#uhzaygecqx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#trrwbagxph .gt_asterisk {
+#uhzaygecqx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#trrwbagxph .gt_indent_1 {
+#uhzaygecqx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#trrwbagxph .gt_indent_2 {
+#uhzaygecqx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#trrwbagxph .gt_indent_3 {
+#uhzaygecqx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#trrwbagxph .gt_indent_4 {
+#uhzaygecqx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#trrwbagxph .gt_indent_5 {
+#uhzaygecqx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#trrwbagxph .katex-display {
+#uhzaygecqx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#trrwbagxph div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#uhzaygecqx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1054,17 +1054,17 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_center" headers="CDI">Non</td>
-<td class="gt_row gt_right" headers="n">26908</td>
+<td class="gt_row gt_right" headers="n">26978</td>
 <td class="gt_row gt_right" headers="percent">21.9%</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="CDI">Oui</td>
-<td class="gt_row gt_right" headers="n">96100</td>
+<td class="gt_row gt_right" headers="n">96023</td>
 <td class="gt_row gt_right" headers="percent">78.1%</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="CDI">Total</td>
-<td class="gt_row gt_right" headers="n">123008</td>
+<td class="gt_row gt_right" headers="n">123001</td>
 <td class="gt_row gt_right" headers="percent">-</td>
 </tr>
 </tbody>
@@ -1075,23 +1075,23 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>OffresPE_test <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(CDI) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="umkgdkfanx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#umkgdkfanx table {
+<div id="ineumacexj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ineumacexj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#umkgdkfanx thead, #umkgdkfanx tbody, #umkgdkfanx tfoot, #umkgdkfanx tr, #umkgdkfanx td, #umkgdkfanx th {
+#ineumacexj thead, #ineumacexj tbody, #ineumacexj tfoot, #ineumacexj tr, #ineumacexj td, #ineumacexj th {
   border-style: none;
 }
 
-#umkgdkfanx p {
+#ineumacexj p {
   margin: 0;
   padding: 0;
 }
 
-#umkgdkfanx .gt_table {
+#ineumacexj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1117,12 +1117,12 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-left-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_caption {
+#ineumacexj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#umkgdkfanx .gt_title {
+#ineumacexj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1134,7 +1134,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-bottom-width: 0;
 }
 
-#umkgdkfanx .gt_subtitle {
+#ineumacexj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1146,7 +1146,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-top-width: 0;
 }
 
-#umkgdkfanx .gt_heading {
+#ineumacexj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1158,13 +1158,13 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-right-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_bottom_border {
+#ineumacexj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_col_headings {
+#ineumacexj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1179,7 +1179,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-right-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_col_heading {
+#ineumacexj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1199,7 +1199,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   overflow-x: hidden;
 }
 
-#umkgdkfanx .gt_column_spanner_outer {
+#ineumacexj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1211,15 +1211,15 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 4px;
 }
 
-#umkgdkfanx .gt_column_spanner_outer:first-child {
+#ineumacexj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#umkgdkfanx .gt_column_spanner_outer:last-child {
+#ineumacexj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#umkgdkfanx .gt_column_spanner {
+#ineumacexj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1231,11 +1231,11 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   width: 100%;
 }
 
-#umkgdkfanx .gt_spanner_row {
+#ineumacexj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#umkgdkfanx .gt_group_heading {
+#ineumacexj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1261,7 +1261,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   text-align: left;
 }
 
-#umkgdkfanx .gt_empty_group_heading {
+#ineumacexj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1276,15 +1276,15 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   vertical-align: middle;
 }
 
-#umkgdkfanx .gt_from_md > :first-child {
+#ineumacexj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#umkgdkfanx .gt_from_md > :last-child {
+#ineumacexj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#umkgdkfanx .gt_row {
+#ineumacexj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1303,7 +1303,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   overflow-x: hidden;
 }
 
-#umkgdkfanx .gt_stub {
+#ineumacexj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1316,7 +1316,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 5px;
 }
 
-#umkgdkfanx .gt_stub_row_group {
+#ineumacexj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1330,15 +1330,15 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   vertical-align: top;
 }
 
-#umkgdkfanx .gt_row_group_first td {
+#ineumacexj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#umkgdkfanx .gt_row_group_first th {
+#ineumacexj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#umkgdkfanx .gt_summary_row {
+#ineumacexj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1348,16 +1348,16 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 5px;
 }
 
-#umkgdkfanx .gt_first_summary_row {
+#ineumacexj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_first_summary_row.thick {
+#ineumacexj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#umkgdkfanx .gt_last_summary_row {
+#ineumacexj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1367,7 +1367,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-bottom-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_grand_summary_row {
+#ineumacexj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1377,7 +1377,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 5px;
 }
 
-#umkgdkfanx .gt_first_grand_summary_row {
+#ineumacexj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1387,7 +1387,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-top-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_last_grand_summary_row_top {
+#ineumacexj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1397,11 +1397,11 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-bottom-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_striped {
+#ineumacexj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#umkgdkfanx .gt_table_body {
+#ineumacexj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1410,7 +1410,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-bottom-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_footnotes {
+#ineumacexj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1424,7 +1424,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-right-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_footnote {
+#ineumacexj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1433,7 +1433,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 5px;
 }
 
-#umkgdkfanx .gt_sourcenotes {
+#ineumacexj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1447,7 +1447,7 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   border-right-color: #D3D3D3;
 }
 
-#umkgdkfanx .gt_sourcenote {
+#ineumacexj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1455,72 +1455,72 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
   padding-right: 5px;
 }
 
-#umkgdkfanx .gt_left {
+#ineumacexj .gt_left {
   text-align: left;
 }
 
-#umkgdkfanx .gt_center {
+#ineumacexj .gt_center {
   text-align: center;
 }
 
-#umkgdkfanx .gt_right {
+#ineumacexj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#umkgdkfanx .gt_font_normal {
+#ineumacexj .gt_font_normal {
   font-weight: normal;
 }
 
-#umkgdkfanx .gt_font_bold {
+#ineumacexj .gt_font_bold {
   font-weight: bold;
 }
 
-#umkgdkfanx .gt_font_italic {
+#ineumacexj .gt_font_italic {
   font-style: italic;
 }
 
-#umkgdkfanx .gt_super {
+#ineumacexj .gt_super {
   font-size: 65%;
 }
 
-#umkgdkfanx .gt_footnote_marks {
+#ineumacexj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#umkgdkfanx .gt_asterisk {
+#ineumacexj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#umkgdkfanx .gt_indent_1 {
+#ineumacexj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#umkgdkfanx .gt_indent_2 {
+#ineumacexj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#umkgdkfanx .gt_indent_3 {
+#ineumacexj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#umkgdkfanx .gt_indent_4 {
+#ineumacexj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#umkgdkfanx .gt_indent_5 {
+#ineumacexj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#umkgdkfanx .katex-display {
+#ineumacexj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#umkgdkfanx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ineumacexj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1536,17 +1536,17 @@ On utilise pour cela la fonction <code>sample</code> (mais d’autres fonctions 
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_center" headers="CDI">Non</td>
-<td class="gt_row gt_right" headers="n">11670</td>
-<td class="gt_row gt_right" headers="percent">22.1%</td>
+<td class="gt_row gt_right" headers="n">11600</td>
+<td class="gt_row gt_right" headers="percent">22.0%</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="CDI">Oui</td>
-<td class="gt_row gt_right" headers="n">41099</td>
-<td class="gt_row gt_right" headers="percent">77.9%</td>
+<td class="gt_row gt_right" headers="n">41176</td>
+<td class="gt_row gt_right" headers="percent">78.0%</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="CDI">Total</td>
-<td class="gt_row gt_right" headers="n">52769</td>
+<td class="gt_row gt_right" headers="n">52776</td>
 <td class="gt_row gt_right" headers="percent">-</td>
 </tr>
 </tbody>
@@ -1579,113 +1579,113 @@ Call:
 glm(formula = CDI ~ ., family = binomial("logit"), data = OffresPE_train)
 
 Coefficients:
-                                                             Estimate
-(Intercept)                                                  3.317992
-mois_publicationfévr.                                       -0.254771
-mois_publicationmars                                        -0.065913
-mois_publicationavr.                                        -0.114595
-mois_publicationmai                                         -0.413980
-mois_publicationjuin                                        -0.602573
-mois_publicationjuil.                                       -0.488606
-mois_publicationaoût                                        -0.235788
-mois_publicationsept.                                       -0.022989
-mois_publicationoct.                                         0.045417
-mois_publicationnov.                                         0.184077
-mois_publicationdéc.                                        -0.077525
-salary_catEntre 0 et moins que le SMIC (10€)                -2.994267
-salary_catEntre le SMIC et le Q1(11,6€)                     -1.988778
-salary_catEntre le Q1 et la moyenne (20,1€)                 -1.508541
-salary_catEntre la moyenne et le D9 observée en France(15€) -0.550997
-salary_catManquant                                          -2.029324
-secteursActivités des ménages en tant qu'employeurs         -5.551243
-secteursActivités fi et immo                                -0.002512
-secteursActivités services administratifs et soutien        -1.965045
-secteursActivités spé, scientifiques et techniques          -0.024905
-secteursAdministration publique                             -2.479553
-secteursArts, spectacles et activités récréatives           -1.560948
-secteursAutres activités de service                         -0.796736
-secteursCommerce                                            -0.079622
-secteursEnseignement                                        -2.687911
-secteursHébergement/restauration                             0.185856
-secteursIndustrie                                            0.081683
-secteursInfo/com                                             0.930045
-secteursManquant ou U                                        0.706231
-secteursSanté humaine et action sociale                     -0.794446
-secteursTransports                                          -0.493648
-                                                            Std. Error z value
-(Intercept)                                                   0.139288  23.821
-mois_publicationfévr.                                         0.033535  -7.597
-mois_publicationmars                                          0.036128  -1.824
-mois_publicationavr.                                          0.041648  -2.752
-mois_publicationmai                                           0.040193 -10.300
-mois_publicationjuin                                          0.034820 -17.306
-mois_publicationjuil.                                         0.034229 -14.275
-mois_publicationaoût                                          0.036087  -6.534
-mois_publicationsept.                                         0.035202  -0.653
-mois_publicationoct.                                          0.035400   1.283
-mois_publicationnov.                                          0.043153   4.266
-mois_publicationdéc.                                          0.043472  -1.783
-salary_catEntre 0 et moins que le SMIC (10€)                  0.102690 -29.158
-salary_catEntre le SMIC et le Q1(11,6€)                       0.076990 -25.832
-salary_catEntre le Q1 et la moyenne (20,1€)                   0.071038 -21.236
-salary_catEntre la moyenne et le D9 observée en France(15€)   0.078285  -7.038
-salary_catManquant                                            0.069952 -29.010
-secteursActivités des ménages en tant qu'employeurs           0.203613 -27.264
-secteursActivités fi et immo                                  0.137649  -0.018
-secteursActivités services administratifs et soutien          0.121852 -16.126
-secteursActivités spé, scientifiques et techniques            0.126331  -0.197
-secteursAdministration publique                               0.151153 -16.404
-secteursArts, spectacles et activités récréatives             0.187551  -8.323
-secteursAutres activités de service                           0.132460  -6.015
-secteursCommerce                                              0.134598  -0.592
-secteursEnseignement                                          0.133279 -20.167
-secteursHébergement/restauration                              0.143864   1.292
-secteursIndustrie                                             0.149576   0.546
-secteursInfo/com                                              0.142408   6.531
-secteursManquant ou U                                         0.122276   5.776
-secteursSanté humaine et action sociale                       0.125624  -6.324
-secteursTransports                                            0.192541  -2.564
-                                                            Pr(&gt;|z|)    
-(Intercept)                                                  &lt; 2e-16 ***
-mois_publicationfévr.                                       3.02e-14 ***
-mois_publicationmars                                         0.06809 .  
-mois_publicationavr.                                         0.00593 ** 
-mois_publicationmai                                          &lt; 2e-16 ***
-mois_publicationjuin                                         &lt; 2e-16 ***
-mois_publicationjuil.                                        &lt; 2e-16 ***
-mois_publicationaoût                                        6.41e-11 ***
-mois_publicationsept.                                        0.51372    
-mois_publicationoct.                                         0.19949    
-mois_publicationnov.                                        1.99e-05 ***
-mois_publicationdéc.                                         0.07453 .  
-salary_catEntre 0 et moins que le SMIC (10€)                 &lt; 2e-16 ***
-salary_catEntre le SMIC et le Q1(11,6€)                      &lt; 2e-16 ***
-salary_catEntre le Q1 et la moyenne (20,1€)                  &lt; 2e-16 ***
-salary_catEntre la moyenne et le D9 observée en France(15€) 1.95e-12 ***
-salary_catManquant                                           &lt; 2e-16 ***
-secteursActivités des ménages en tant qu'employeurs          &lt; 2e-16 ***
-secteursActivités fi et immo                                 0.98544    
-secteursActivités services administratifs et soutien         &lt; 2e-16 ***
-secteursActivités spé, scientifiques et techniques           0.84372    
-secteursAdministration publique                              &lt; 2e-16 ***
-secteursArts, spectacles et activités récréatives            &lt; 2e-16 ***
-secteursAutres activités de service                         1.80e-09 ***
-secteursCommerce                                             0.55415    
-secteursEnseignement                                         &lt; 2e-16 ***
-secteursHébergement/restauration                             0.19640    
-secteursIndustrie                                            0.58500    
-secteursInfo/com                                            6.54e-11 ***
-secteursManquant ou U                                       7.66e-09 ***
-secteursSanté humaine et action sociale                     2.55e-10 ***
-secteursTransports                                           0.01035 *  
+                                                            Estimate Std. Error
+(Intercept)                                                  3.27373    0.13719
+mois_publicationfévr.                                       -0.22543    0.03378
+mois_publicationmars                                        -0.10924    0.03597
+mois_publicationavr.                                        -0.14919    0.04153
+mois_publicationmai                                         -0.43544    0.04018
+mois_publicationjuin                                        -0.61434    0.03497
+mois_publicationjuil.                                       -0.51075    0.03425
+mois_publicationaoût                                        -0.23853    0.03619
+mois_publicationsept.                                       -0.02645    0.03529
+mois_publicationoct.                                         0.04782    0.03552
+mois_publicationnov.                                         0.14958    0.04306
+mois_publicationdéc.                                        -0.11556    0.04333
+salary_catEntre 0 et moins que le SMIC (10€)                -2.96759    0.10223
+salary_catEntre le SMIC et le Q1(11,6€)                     -2.02360    0.07640
+salary_catEntre le Q1 et la moyenne (20,1€)                 -1.53534    0.07035
+salary_catEntre la moyenne et le D9 observée en France(15€) -0.59678    0.07744
+salary_catManquant                                          -2.04154    0.06932
+secteursActivités des ménages en tant qu'employeurs         -5.48796    0.20239
+secteursActivités fi et immo                                 0.07118    0.13547
+secteursActivités services administratifs et soutien        -1.91104    0.11978
+secteursActivités spé, scientifiques et techniques           0.03982    0.12428
+secteursAdministration publique                             -2.44398    0.15029
+secteursArts, spectacles et activités récréatives           -1.53449    0.18196
+secteursAutres activités de service                         -0.72274    0.13014
+secteursCommerce                                            -0.05877    0.13218
+secteursEnseignement                                        -2.66608    0.13162
+secteursHébergement/restauration                             0.23749    0.14226
+secteursIndustrie                                            0.17396    0.14799
+secteursInfo/com                                             1.05299    0.14188
+secteursManquant ou U                                        0.78044    0.12022
+secteursSanté humaine et action sociale                     -0.73513    0.12354
+secteursTransports                                          -0.23062    0.19335
+                                                            z value Pr(&gt;|z|)
+(Intercept)                                                  23.862  &lt; 2e-16
+mois_publicationfévr.                                        -6.673 2.50e-11
+mois_publicationmars                                         -3.037 0.002388
+mois_publicationavr.                                         -3.592 0.000328
+mois_publicationmai                                         -10.836  &lt; 2e-16
+mois_publicationjuin                                        -17.566  &lt; 2e-16
+mois_publicationjuil.                                       -14.912  &lt; 2e-16
+mois_publicationaoût                                         -6.592 4.35e-11
+mois_publicationsept.                                        -0.749 0.453609
+mois_publicationoct.                                          1.347 0.178126
+mois_publicationnov.                                          3.474 0.000513
+mois_publicationdéc.                                         -2.667 0.007656
+salary_catEntre 0 et moins que le SMIC (10€)                -29.028  &lt; 2e-16
+salary_catEntre le SMIC et le Q1(11,6€)                     -26.487  &lt; 2e-16
+salary_catEntre le Q1 et la moyenne (20,1€)                 -21.825  &lt; 2e-16
+salary_catEntre la moyenne et le D9 observée en France(15€)  -7.706 1.30e-14
+salary_catManquant                                          -29.453  &lt; 2e-16
+secteursActivités des ménages en tant qu'employeurs         -27.116  &lt; 2e-16
+secteursActivités fi et immo                                  0.525 0.599268
+secteursActivités services administratifs et soutien        -15.955  &lt; 2e-16
+secteursActivités spé, scientifiques et techniques            0.320 0.748661
+secteursAdministration publique                             -16.261  &lt; 2e-16
+secteursArts, spectacles et activités récréatives            -8.433  &lt; 2e-16
+secteursAutres activités de service                          -5.553 2.80e-08
+secteursCommerce                                             -0.445 0.656569
+secteursEnseignement                                        -20.256  &lt; 2e-16
+secteursHébergement/restauration                              1.669 0.095041
+secteursIndustrie                                             1.175 0.239807
+secteursInfo/com                                              7.422 1.15e-13
+secteursManquant ou U                                         6.492 8.47e-11
+secteursSanté humaine et action sociale                      -5.950 2.68e-09
+secteursTransports                                           -1.193 0.232970
+                                                               
+(Intercept)                                                 ***
+mois_publicationfévr.                                       ***
+mois_publicationmars                                        ** 
+mois_publicationavr.                                        ***
+mois_publicationmai                                         ***
+mois_publicationjuin                                        ***
+mois_publicationjuil.                                       ***
+mois_publicationaoût                                        ***
+mois_publicationsept.                                          
+mois_publicationoct.                                           
+mois_publicationnov.                                        ***
+mois_publicationdéc.                                        ** 
+salary_catEntre 0 et moins que le SMIC (10€)                ***
+salary_catEntre le SMIC et le Q1(11,6€)                     ***
+salary_catEntre le Q1 et la moyenne (20,1€)                 ***
+salary_catEntre la moyenne et le D9 observée en France(15€) ***
+salary_catManquant                                          ***
+secteursActivités des ménages en tant qu'employeurs         ***
+secteursActivités fi et immo                                   
+secteursActivités services administratifs et soutien        ***
+secteursActivités spé, scientifiques et techniques             
+secteursAdministration publique                             ***
+secteursArts, spectacles et activités récréatives           ***
+secteursAutres activités de service                         ***
+secteursCommerce                                               
+secteursEnseignement                                        ***
+secteursHébergement/restauration                            .  
+secteursIndustrie                                              
+secteursInfo/com                                            ***
+secteursManquant ou U                                       ***
+secteursSanté humaine et action sociale                     ***
+secteursTransports                                             
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 129237  on 123007  degrees of freedom
-Residual deviance: 103084  on 122976  degrees of freedom
-AIC: 103148
+    Null deviance: 129412  on 123000  degrees of freedom
+Residual deviance: 102848  on 122969  degrees of freedom
+AIC: 102912
 
 Number of Fisher Scoring iterations: 6</code></pre>
 </div>
@@ -1707,14 +1707,14 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>     pred.moda
         non   oui
-  Non  4518  7152
-  Oui  1497 39602</code></pre>
+  Non  4495  7105
+  Oui  1585 39591</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On calcule le taux d'erreur</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>tx_erreur <span class="ot">&lt;-</span> (matrice_conf[<span class="dv">2</span>,<span class="dv">1</span>]<span class="sc">+</span>matrice_conf[<span class="dv">1</span>,<span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(matrice_conf)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>tx_erreur <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.3903</code></pre>
+<pre><code>[1] 16.46582</code></pre>
 </div>
 </div>
 <p>On voit que parmi la modalité observée “Oui” de la base de données, le modèle prédit environ 39 000 oui soit 96% de cette modalité, c’est la grande majorité ; la prédiction est moins bonne si on regarde la modalité “Non”, puisque environ 4 500 observations, soit 39% de cette modalité, se retrouvent bien en “non”. Le taux d’erreur de 16,3% montre bien néanmoins que le modèle prédit plutôt bien.<br>
@@ -1739,9 +1739,9 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(predict_OK) <span class="sc">%&gt;%</span> <span class="fu">adorn_pct_formatting</span>() <span class="sc">%&gt;%</span> <span class="fu">adorn_totals</span>(<span class="st">"row"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> predict_OK     n percent
-        non  8649   16.4%
-        oui 44120   83.6%
-      Total 52769       -</code></pre>
+        non  8690   16.5%
+        oui 44086   83.5%
+      Total 52776       -</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On supprime la table créée en test</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(OffresPE_test_bis)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1759,14 +1759,14 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">upper=</span><span class="st">"CDI ~ mois_publication + secteurs + salary_cat"</span>),</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">direction=</span><span class="st">"backward"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=103147.8
+<pre><code>Start:  AIC=102912.5
 CDI ~ mois_publication + salary_cat + secteurs
 
                    Df Deviance    AIC
-&lt;none&gt;                  103084 103148
-- mois_publication 11   103875 103917
-- salary_cat        5   105500 105554
-- secteurs         15   125478 125512</code></pre>
+&lt;none&gt;                  102848 102912
+- mois_publication 11   103637 103679
+- salary_cat        5   105242 105296
+- secteurs         15   125563 125597</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>logit_backward</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1776,73 +1776,73 @@ Call:  glm(formula = CDI ~ mois_publication + salary_cat + secteurs,
 
 Coefficients:
                                                 (Intercept)  
-                                                   3.317992  
+                                                    3.27373  
                                       mois_publicationfévr.  
-                                                  -0.254771  
+                                                   -0.22543  
                                        mois_publicationmars  
-                                                  -0.065913  
+                                                   -0.10924  
                                        mois_publicationavr.  
-                                                  -0.114595  
+                                                   -0.14919  
                                         mois_publicationmai  
-                                                  -0.413980  
+                                                   -0.43544  
                                        mois_publicationjuin  
-                                                  -0.602573  
+                                                   -0.61434  
                                       mois_publicationjuil.  
-                                                  -0.488606  
+                                                   -0.51075  
                                        mois_publicationaoût  
-                                                  -0.235788  
+                                                   -0.23853  
                                       mois_publicationsept.  
-                                                  -0.022989  
+                                                   -0.02645  
                                        mois_publicationoct.  
-                                                   0.045417  
+                                                    0.04782  
                                        mois_publicationnov.  
-                                                   0.184077  
+                                                    0.14958  
                                        mois_publicationdéc.  
-                                                  -0.077525  
+                                                   -0.11556  
                salary_catEntre 0 et moins que le SMIC (10€)  
-                                                  -2.994267  
+                                                   -2.96759  
                     salary_catEntre le SMIC et le Q1(11,6€)  
-                                                  -1.988778  
+                                                   -2.02360  
                 salary_catEntre le Q1 et la moyenne (20,1€)  
-                                                  -1.508541  
+                                                   -1.53534  
 salary_catEntre la moyenne et le D9 observée en France(15€)  
-                                                  -0.550997  
+                                                   -0.59678  
                                          salary_catManquant  
-                                                  -2.029324  
+                                                   -2.04154  
         secteursActivités des ménages en tant qu'employeurs  
-                                                  -5.551243  
+                                                   -5.48796  
                                secteursActivités fi et immo  
-                                                  -0.002512  
+                                                    0.07118  
        secteursActivités services administratifs et soutien  
-                                                  -1.965045  
+                                                   -1.91104  
          secteursActivités spé, scientifiques et techniques  
-                                                  -0.024905  
+                                                    0.03982  
                             secteursAdministration publique  
-                                                  -2.479553  
+                                                   -2.44398  
           secteursArts, spectacles et activités récréatives  
-                                                  -1.560948  
+                                                   -1.53449  
                         secteursAutres activités de service  
-                                                  -0.796736  
+                                                   -0.72274  
                                            secteursCommerce  
-                                                  -0.079622  
+                                                   -0.05877  
                                        secteursEnseignement  
-                                                  -2.687911  
+                                                   -2.66608  
                            secteursHébergement/restauration  
-                                                   0.185856  
+                                                    0.23749  
                                           secteursIndustrie  
-                                                   0.081683  
+                                                    0.17396  
                                            secteursInfo/com  
-                                                   0.930045  
+                                                    1.05299  
                                       secteursManquant ou U  
-                                                   0.706231  
+                                                    0.78044  
                     secteursSanté humaine et action sociale  
-                                                  -0.794446  
+                                                   -0.73513  
                                          secteursTransports  
-                                                  -0.493648  
+                                                   -0.23062  
 
-Degrees of Freedom: 123007 Total (i.e. Null);  122976 Residual
-Null Deviance:      129200 
-Residual Deviance: 103100   AIC: 103100</code></pre>
+Degrees of Freedom: 123000 Total (i.e. Null);  122969 Residual
+Null Deviance:      129400 
+Residual Deviance: 102800   AIC: 102900</code></pre>
 </div>
 </div>
 <p>La sortie n’affiche que le “meilleur” modèle, et c’est donc bien celui qu’on avait mis avec l’ensemble des variables.</p>
@@ -1854,31 +1854,31 @@ Residual Deviance: 103100   AIC: 103100</code></pre>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">upper=</span><span class="st">"CDI ~ mois_publication + secteurs + salary_cat"</span>),</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">direction=</span><span class="st">"forward"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=129239.4
+<pre><code>Start:  AIC=129414
 CDI ~ 1
 
                    Df Deviance    AIC
-+ secteurs         15   106295 106327
-+ salary_cat        5   126029 126041
-+ mois_publication 11   128618 128642
-&lt;none&gt;                  129237 129239
++ secteurs         15   106039 106071
++ salary_cat        5   126104 126116
++ mois_publication 11   128795 128819
+&lt;none&gt;                  129412 129414
 
-Step:  AIC=106327.2
+Step:  AIC=106071
 CDI ~ secteurs
 
                    Df Deviance    AIC
-+ salary_cat        5   103875 103917
-+ mois_publication 11   105500 105554
-&lt;none&gt;                  106295 106327
++ salary_cat        5   103637 103679
++ mois_publication 11   105242 105296
+&lt;none&gt;                  106039 106071
 
-Step:  AIC=103917.1
+Step:  AIC=103678.6
 CDI ~ secteurs + salary_cat
 
                    Df Deviance    AIC
-+ mois_publication 11   103084 103148
-&lt;none&gt;                  103875 103917
++ mois_publication 11   102848 102912
+&lt;none&gt;                  103637 103679
 
-Step:  AIC=103147.8
+Step:  AIC=102912.5
 CDI ~ secteurs + salary_cat + mois_publication</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>logit_forward</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1889,73 +1889,73 @@ Call:  glm(formula = CDI ~ secteurs + salary_cat + mois_publication,
 
 Coefficients:
                                                 (Intercept)  
-                                                   3.317992  
+                                                    3.27373  
         secteursActivités des ménages en tant qu'employeurs  
-                                                  -5.551243  
+                                                   -5.48796  
                                secteursActivités fi et immo  
-                                                  -0.002512  
+                                                    0.07118  
        secteursActivités services administratifs et soutien  
-                                                  -1.965045  
+                                                   -1.91104  
          secteursActivités spé, scientifiques et techniques  
-                                                  -0.024905  
+                                                    0.03982  
                             secteursAdministration publique  
-                                                  -2.479553  
+                                                   -2.44398  
           secteursArts, spectacles et activités récréatives  
-                                                  -1.560948  
+                                                   -1.53449  
                         secteursAutres activités de service  
-                                                  -0.796736  
+                                                   -0.72274  
                                            secteursCommerce  
-                                                  -0.079622  
+                                                   -0.05877  
                                        secteursEnseignement  
-                                                  -2.687911  
+                                                   -2.66608  
                            secteursHébergement/restauration  
-                                                   0.185856  
+                                                    0.23749  
                                           secteursIndustrie  
-                                                   0.081683  
+                                                    0.17396  
                                            secteursInfo/com  
-                                                   0.930045  
+                                                    1.05299  
                                       secteursManquant ou U  
-                                                   0.706231  
+                                                    0.78044  
                     secteursSanté humaine et action sociale  
-                                                  -0.794446  
+                                                   -0.73513  
                                          secteursTransports  
-                                                  -0.493648  
+                                                   -0.23062  
                salary_catEntre 0 et moins que le SMIC (10€)  
-                                                  -2.994267  
+                                                   -2.96759  
                     salary_catEntre le SMIC et le Q1(11,6€)  
-                                                  -1.988778  
+                                                   -2.02360  
                 salary_catEntre le Q1 et la moyenne (20,1€)  
-                                                  -1.508541  
+                                                   -1.53534  
 salary_catEntre la moyenne et le D9 observée en France(15€)  
-                                                  -0.550997  
+                                                   -0.59678  
                                          salary_catManquant  
-                                                  -2.029324  
+                                                   -2.04154  
                                       mois_publicationfévr.  
-                                                  -0.254771  
+                                                   -0.22543  
                                        mois_publicationmars  
-                                                  -0.065913  
+                                                   -0.10924  
                                        mois_publicationavr.  
-                                                  -0.114595  
+                                                   -0.14919  
                                         mois_publicationmai  
-                                                  -0.413980  
+                                                   -0.43544  
                                        mois_publicationjuin  
-                                                  -0.602573  
+                                                   -0.61434  
                                       mois_publicationjuil.  
-                                                  -0.488606  
+                                                   -0.51075  
                                        mois_publicationaoût  
-                                                  -0.235788  
+                                                   -0.23853  
                                       mois_publicationsept.  
-                                                  -0.022989  
+                                                   -0.02645  
                                        mois_publicationoct.  
-                                                   0.045417  
+                                                    0.04782  
                                        mois_publicationnov.  
-                                                   0.184077  
+                                                    0.14958  
                                        mois_publicationdéc.  
-                                                  -0.077525  
+                                                   -0.11556  
 
-Degrees of Freedom: 123007 Total (i.e. Null);  122976 Residual
-Null Deviance:      129200 
-Residual Deviance: 103100   AIC: 103100</code></pre>
+Degrees of Freedom: 123000 Total (i.e. Null);  122969 Residual
+Null Deviance:      129400 
+Residual Deviance: 102800   AIC: 102900</code></pre>
 </div>
 </div>
 <p>Le taux d’AIC diminue à chaque variable ajoutée donc le meilleur modèle est bien celui avec l’ensemble des variables explicatives mises dans le modèle initial.</p>
@@ -2223,23 +2223,23 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(label <span class="sc">~</span> <span class="st">"**Variable**"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_caption</span>(<span class="st">"**Tableau de résultats. Variables expliquant le fait qu'une offre d'emploi soit en CDI dans le 75**"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="wejeeikajw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wejeeikajw table {
+<div id="qdlhsdfrdw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qdlhsdfrdw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wejeeikajw thead, #wejeeikajw tbody, #wejeeikajw tfoot, #wejeeikajw tr, #wejeeikajw td, #wejeeikajw th {
+#qdlhsdfrdw thead, #qdlhsdfrdw tbody, #qdlhsdfrdw tfoot, #qdlhsdfrdw tr, #qdlhsdfrdw td, #qdlhsdfrdw th {
   border-style: none;
 }
 
-#wejeeikajw p {
+#qdlhsdfrdw p {
   margin: 0;
   padding: 0;
 }
 
-#wejeeikajw .gt_table {
+#qdlhsdfrdw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2265,12 +2265,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_caption {
+#qdlhsdfrdw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wejeeikajw .gt_title {
+#qdlhsdfrdw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2282,7 +2282,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-width: 0;
 }
 
-#wejeeikajw .gt_subtitle {
+#qdlhsdfrdw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2294,7 +2294,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-top-width: 0;
 }
 
-#wejeeikajw .gt_heading {
+#qdlhsdfrdw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2306,13 +2306,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_bottom_border {
+#qdlhsdfrdw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_col_headings {
+#qdlhsdfrdw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2327,7 +2327,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_col_heading {
+#qdlhsdfrdw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2347,7 +2347,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   overflow-x: hidden;
 }
 
-#wejeeikajw .gt_column_spanner_outer {
+#qdlhsdfrdw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2359,15 +2359,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 4px;
 }
 
-#wejeeikajw .gt_column_spanner_outer:first-child {
+#qdlhsdfrdw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wejeeikajw .gt_column_spanner_outer:last-child {
+#qdlhsdfrdw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wejeeikajw .gt_column_spanner {
+#qdlhsdfrdw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2379,11 +2379,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   width: 100%;
 }
 
-#wejeeikajw .gt_spanner_row {
+#qdlhsdfrdw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wejeeikajw .gt_group_heading {
+#qdlhsdfrdw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2409,7 +2409,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   text-align: left;
 }
 
-#wejeeikajw .gt_empty_group_heading {
+#qdlhsdfrdw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2424,15 +2424,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   vertical-align: middle;
 }
 
-#wejeeikajw .gt_from_md > :first-child {
+#qdlhsdfrdw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wejeeikajw .gt_from_md > :last-child {
+#qdlhsdfrdw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wejeeikajw .gt_row {
+#qdlhsdfrdw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2451,7 +2451,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   overflow-x: hidden;
 }
 
-#wejeeikajw .gt_stub {
+#qdlhsdfrdw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2464,7 +2464,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#wejeeikajw .gt_stub_row_group {
+#qdlhsdfrdw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2478,15 +2478,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   vertical-align: top;
 }
 
-#wejeeikajw .gt_row_group_first td {
+#qdlhsdfrdw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wejeeikajw .gt_row_group_first th {
+#qdlhsdfrdw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wejeeikajw .gt_summary_row {
+#qdlhsdfrdw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2496,16 +2496,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#wejeeikajw .gt_first_summary_row {
+#qdlhsdfrdw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_first_summary_row.thick {
+#qdlhsdfrdw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wejeeikajw .gt_last_summary_row {
+#qdlhsdfrdw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2515,7 +2515,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_grand_summary_row {
+#qdlhsdfrdw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2525,7 +2525,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#wejeeikajw .gt_first_grand_summary_row {
+#qdlhsdfrdw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2535,7 +2535,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_last_grand_summary_row_top {
+#qdlhsdfrdw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2545,11 +2545,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_striped {
+#qdlhsdfrdw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wejeeikajw .gt_table_body {
+#qdlhsdfrdw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2558,7 +2558,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_footnotes {
+#qdlhsdfrdw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2572,7 +2572,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_footnote {
+#qdlhsdfrdw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2581,7 +2581,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#wejeeikajw .gt_sourcenotes {
+#qdlhsdfrdw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2595,7 +2595,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wejeeikajw .gt_sourcenote {
+#qdlhsdfrdw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2603,72 +2603,72 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#wejeeikajw .gt_left {
+#qdlhsdfrdw .gt_left {
   text-align: left;
 }
 
-#wejeeikajw .gt_center {
+#qdlhsdfrdw .gt_center {
   text-align: center;
 }
 
-#wejeeikajw .gt_right {
+#qdlhsdfrdw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wejeeikajw .gt_font_normal {
+#qdlhsdfrdw .gt_font_normal {
   font-weight: normal;
 }
 
-#wejeeikajw .gt_font_bold {
+#qdlhsdfrdw .gt_font_bold {
   font-weight: bold;
 }
 
-#wejeeikajw .gt_font_italic {
+#qdlhsdfrdw .gt_font_italic {
   font-style: italic;
 }
 
-#wejeeikajw .gt_super {
+#qdlhsdfrdw .gt_super {
   font-size: 65%;
 }
 
-#wejeeikajw .gt_footnote_marks {
+#qdlhsdfrdw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wejeeikajw .gt_asterisk {
+#qdlhsdfrdw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wejeeikajw .gt_indent_1 {
+#qdlhsdfrdw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wejeeikajw .gt_indent_2 {
+#qdlhsdfrdw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wejeeikajw .gt_indent_3 {
+#qdlhsdfrdw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wejeeikajw .gt_indent_4 {
+#qdlhsdfrdw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wejeeikajw .gt_indent_5 {
+#qdlhsdfrdw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wejeeikajw .katex-display {
+#qdlhsdfrdw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wejeeikajw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qdlhsdfrdw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2973,18 +2973,18 @@ Ici on va utiliser un arbre de classification puisque notre variable est qualita
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method=</span><span class="st">"class"</span>)</span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>arbre_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>n= 123008 
+<pre><code>n= 123001 
 
 node), split, n, loss, yval, (yprob)
       * denotes terminal node
 
- 1) root 123008 26908 Oui (0.2187500 0.7812500)  
-   2) secteurs=Activités des ménages en tant qu'employeurs,Activités services administratifs et soutien,Administration publique,Arts, spectacles et activités récréatives,Enseignement 16072  5205 Non (0.6761448 0.3238552)  
-     4) salary_cat=Entre 0 et moins que le SMIC (10€),Manquant 7859   881 Non (0.8878992 0.1121008) *
-     5) salary_cat=Entre le D9 et le maximum (40200€),Entre le SMIC et le Q1(11,6€),Entre le Q1 et la moyenne (20,1€),Entre la moyenne et le D9 observée en France(15€) 8213  3889 Oui (0.4735176 0.5264824)  
-      10) salary_cat=Entre le SMIC et le Q1(11,6€),Entre le Q1 et la moyenne (20,1€) 5556  2415 Non (0.5653348 0.4346652) *
-      11) salary_cat=Entre le D9 et le maximum (40200€),Entre la moyenne et le D9 observée en France(15€) 2657   748 Oui (0.2815205 0.7184795) *
-   3) secteurs=Construction,Activités fi et immo,Activités spé, scientifiques et techniques,Autres activités de service,Commerce,Hébergement/restauration,Industrie,Info/com,Manquant ou U,Santé humaine et action sociale,Transports 106936 16041 Oui (0.1500056 0.8499944) *</code></pre>
+ 1) root 123001 26978 Oui (0.2193316 0.7806684)  
+   2) secteurs=Activités des ménages en tant qu'employeurs,Activités services administratifs et soutien,Administration publique,Arts, spectacles et activités récréatives,Enseignement 16148  5162 Non (0.6803319 0.3196681)  
+     4) salary_cat=Entre 0 et moins que le SMIC (10€),Manquant 7877   902 Non (0.8854894 0.1145106) *
+     5) salary_cat=Entre le D9 et le maximum (40200€),Entre le SMIC et le Q1(11,6€),Entre le Q1 et la moyenne (20,1€),Entre la moyenne et le D9 observée en France(15€) 8271  4011 Oui (0.4849474 0.5150526)  
+      10) salary_cat=Entre le SMIC et le Q1(11,6€),Entre le Q1 et la moyenne (20,1€) 5592  2361 Non (0.5777897 0.4222103) *
+      11) salary_cat=Entre le D9 et le maximum (40200€),Entre la moyenne et le D9 observée en France(15€) 2679   780 Oui (0.2911534 0.7088466) *
+   3) secteurs=Construction,Activités fi et immo,Activités spé, scientifiques et techniques,Autres activités de service,Commerce,Hébergement/restauration,Industrie,Info/com,Manquant ou U,Santé humaine et action sociale,Transports 106853 15992 Oui (0.1496636 0.8503364) *</code></pre>
 </div>
 </div>
 <p>Le modèle nous donne d’abord les résultats en format texte, ce sont des indications sur les différentes “noeuds” puis “branches” de l’arbre, etc. : “node” pour noeud et son numéro, “split” pour la condition de coupure/le critère de décision, “n” pour le nombre total d’observations dans un noeud, “loss” le nombre d’observations qui n’appartient pas à la modalité prédite, “yval” la modalité prédite pour les individus présents à l’étape du noeud, et “yprob” la proportion d’observations pour les individus présents à l’étape du noeud qui prend la valeur prédite en seconde position. Le petit astérix “*” précise que le noeud est une feuille (“terminal”).</p>
@@ -2994,7 +2994,7 @@ node), split, n, loss, yval, (yprob)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>arbre_1<span class="sc">$</span>variable.importance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        secteurs       salary_cat mois_publication 
-       8264.5018        1668.7772         114.5921 </code></pre>
+       8399.1435        1592.2003         101.5921 </code></pre>
 </div>
 </div>
 <p>Le secteur d’activité est la variable la plus discriminante, comme on l’avait supposé puisque c’était la première variable qui divisait notre échantillon, ensuite vient le niveau de salaire et enfin le mois de publication de l’offre.<br>
@@ -3052,8 +3052,8 @@ Tout en bas, se trouvent les feuilles de l’arbre, c’est lorsqu’il n’y a 
 <div class="cell-output cell-output-stdout">
 <pre><code>     predict_test
         Non   Oui
-  Non  4484  7186
-  Oui  1415 39684</code></pre>
+  Non  4397  7203
+  Oui  1448 39728</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taux de concordance : rapport entre la somme des éléments </span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># de la diagonale principale et la somme des observations </span></span>
@@ -3061,13 +3061,13 @@ Tout en bas, se trouvent les feuilles de l’arbre, c’est lorsqu’il n’y a 
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>tx_concordance <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(mat_confusion) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion))</span>
 <span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>tx_concordance <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 83.70066</code></pre>
+<pre><code>[1] 83.60808</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taux d'erreur</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>tx_erreur <span class="ot">&lt;-</span> (mat_confusion[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion)</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>tx_erreur <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.29934</code></pre>
+<pre><code>[1] 16.39192</code></pre>
 </div>
 </div>
 <p>On peut regarder aussi ce que cela donne sur la base d’apprentissage.</p>
@@ -3078,13 +3078,13 @@ Tout en bas, se trouvent les feuilles de l’arbre, c’est lorsqu’il n’y a 
 <div class="cell-output cell-output-stdout">
 <pre><code>     predict_train
         Non   Oui
-  Non 10119 16789
-  Oui  3296 92804</code></pre>
+  Non 10206 16772
+  Oui  3263 92760</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>tx_erreur_1 <span class="ot">&lt;-</span> (mat_confusion_1[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion_1[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion_1)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>tx_erreur_1 <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.32821</code></pre>
+<pre><code>[1] 16.28849</code></pre>
 </div>
 </div>
 <p>Dans les deux cas, les taux d’erreur sont relativement faible, d’environ 16%. Le modèle ne prédit pas trop mal. On peut noter qu’on a pratiquement le même taux d’erreur que le modèle logit réalisé précédemment…</p>
@@ -3106,13 +3106,13 @@ Tout en bas, se trouvent les feuilles de l’arbre, c’est lorsqu’il n’y a 
 <div class="cell-output cell-output-stdout">
 <pre><code>     predict_test_1
         Non   Oui
-  Non  4358  7312
-  Oui  1139 39960</code></pre>
+  Non  4388  7212
+  Oui  1232 39944</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>tx_erreur_1 <span class="ot">&lt;-</span> (mat_confusion_ajust[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion_ajust[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion_ajust) <span class="sc">*</span><span class="dv">100</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>tx_erreur_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.01508</code></pre>
+<pre><code>[1] 15.9997</code></pre>
 </div>
 </div>
 <p>On peut l’appliquer de même à l’échantillon d’apprentissage :</p>
@@ -3126,14 +3126,14 @@ Tout en bas, se trouvent les feuilles de l’arbre, c’est lorsqu’il n’y a 
 <div class="cell-output cell-output-stdout">
 <pre><code>     predict_train
         Non   Oui
-  Non  9956 16952
-  Oui  2544 93556</code></pre>
+  Non 10250 16728
+  Oui  2746 93277</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taux d'erreur</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>tx_erreur_2 <span class="ot">&lt;-</span> (mat_confusion_ajust1[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> mat_confusion_ajust1[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sum</span>(mat_confusion_ajust1)<span class="sc">*</span> <span class="dv">100</span></span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>tx_erreur_2 </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.84938</code></pre>
+<pre><code>[1] 15.83239</code></pre>
 </div>
 </div>
 <p>Le taux d’erreur est un peu plus faible, la différence est légère, mais c’est toujours ça de pris !</p>
@@ -3171,14 +3171,14 @@ rpart(formula = CDI ~ ., data = OffresPE_train, method = "class")
 Variables actually used in tree construction:
 [1] salary_cat secteurs  
 
-Root node error: 26908/123008 = 0.21875
+Root node error: 26978/123001 = 0.21933
 
-n= 123008 
+n= 123001 
 
         CP nsplit rel error  xerror      xstd
-1 0.210421      0   1.00000 1.00000 0.0053883
-2 0.021574      1   0.78958 0.78958 0.0049270
-3 0.010000      3   0.74643 0.74643 0.0048177
+1 0.215880      0   1.00000 1.00000 0.0053793
+2 0.020739      1   0.78412 0.78412 0.0049058
+3 0.010000      3   0.74264 0.74264 0.0048004
 ```
 
 
@@ -3204,7 +3204,7 @@ min(arbre_1$cptable[, "xerror"]) + (1*arbre_1$cptable[ which.min(arbre_1$cptable
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] 0.75125
+[1] 0.7474426
 ```
 
 

@@ -6,7 +6,7 @@ project:
 book:
   title: "Data Mining 2025"
   author: "Camille Signoretto"
-  date: "Février-juin 2025"
+  date: "`Février-juin 2025`"
   subtitle: "Master Meci - Parcours PISE et CCESE - Option Data"
   language: fr
   search: true

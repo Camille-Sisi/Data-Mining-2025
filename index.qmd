@@ -13,7 +13,7 @@ knitr::opts_chunk$set(cache = TRUE,
 
 ## À propos de ce document {.unnumbered}
 
-Ce document est la version 2025 du cours de Data Mining dispensé aux étudiants de deuxième année de l’option Data du master MECI parcours PISE et CCESE. Ce cours est partagé avec [Claude Grasland](https://claudegrasland.github.io).
+Ce document est la version 2025 du cours de Data Mining dispensé aux étudiants de deuxième année de l’option Data du master MECI parcours PISE et CCESE. Ce cours est partagé avec [Claude Grasland](https://github.com/ClaudeGrasland).
 
 Ce document est régulièrement corrigé et mis à jour. La version de référence est disponible en ligne à l’adresse suivante :
 
